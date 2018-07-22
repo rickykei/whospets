@@ -1,0 +1,106 @@
+firebase-profile-page{
+  .error-message
+ 	{
+   	color: red;
+ 	}
+  .settings-content
+	{
+		background-color: color($colors, background, base);
+
+		.user-image-content
+		{
+			padding: 16px;
+			margin-bottom: 20px;
+			background-color: $white;
+			@include element-shadow();
+
+			.user-image-row
+			{
+				justify-content: center;
+
+				.user-image
+				{
+					border-radius: 50%;
+				}
+			}
+
+			.image-action-button
+			{
+				margin: 10px 0px 0px;
+				border-radius: 6px;
+				background-color: color($colors, button-alt, contrast);
+				color: color($colors, button-alt, base);
+				border-color: color($colors, button-alt, base);
+				font-weight: 500;
+			}
+		}
+
+		.user-data-content
+		{
+			padding: 0px;
+			margin-bottom: 20px;
+
+			ion-item {
+				@include basic-select-style(color($colors, background, base), $theme-color-3, $white-d);
+
+				border: none !important;
+				padding: 0px 20px;
+				@include element-shadow();
+
+				.item-inner
+				{
+					border: none;
+					padding: 0px;
+
+					ion-label {
+						margin: 6px 0px 4px;
+						font-size: 1.1rem;
+						line-height: 1.2;
+						letter-spacing: 0.5px;
+						color: $white-d;
+					}
+
+					ion-input input,
+					ion-textarea textarea {
+						margin: 0px;
+						margin-bottom: 8px;
+						padding: 0px;
+						width: 100%;
+						font-size: 1.6rem;
+						line-height: 1.4;
+						color: $theme-color-3;
+					}
+				}
+			}
+		}
+
+
+
+		.alt-button
+		{
+			margin: 0px;
+			background-color: $white;
+			font-size: 1.4rem;
+			letter-spacing: 0.2px;
+			color: red;
+
+			@include element-shadow();
+		}
+
+		.logout-button
+		{
+			margin: 14px 0px 20px;
+			padding: 0px 20px;
+
+			.button-inner
+			{
+				justify-content: flex-start;
+			}
+
+			ion-icon {
+			  font-size: 1.8em;
+			}
+		}
+
+	}
+}

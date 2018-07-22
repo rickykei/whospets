@@ -1,0 +1,78 @@
+firebase-details-page{
+
+  ion-header {
+		@include header-styles(color($colors, header-alt, base), color($colors, header-alt, contrast));
+	}
+
+  .user-details-content
+	{
+		background-color: color($colors, background, base);
+
+
+		.user-image-content
+		{
+			padding: 16px;
+			margin-bottom: 20px;
+			background-color: $white;
+			@include element-shadow();
+
+			.user-image-row
+			{
+				justify-content: center;
+
+				.user-image
+				{
+					border-radius: 50%;
+				}
+			}
+
+			.image-action-button
+			{
+				margin: 10px 0px 0px;
+				border-radius: 6px;
+				background-color: color($colors, button-alt, contrast);
+				color: color($colors, button-alt, base);
+				border-color: color($colors, button-alt, base);
+				font-weight: 500;
+			}
+		}
+	}
+
+  .edit-user-form
+	{
+		background-color: color($colors, background, base);
+		ion-item {
+			@include basic-input-style(color($colors, background, base), $theme-color-3, $white-d);
+			@include basic-select-style(color($colors, background, base), $theme-color-3, $white-d);
+
+			&.item
+			{
+				margin-top: 14px;
+
+				&.item-label-floating
+				{
+					margin-top: 0px;
+
+					ion-label {
+						color: $white-d;
+					}
+				}
+
+				.item-inner
+				{
+					ion-icon {
+						color: $theme-color-2;
+					}
+				}
+			}
+		}
+
+    .form-action-button
+    {
+      margin: 0px;
+      margin-top: 20px;
+
+      @include call-to-action-button-styles(color($colors, button, base), color($colors, button, contrast));
+    }
+  }
+}

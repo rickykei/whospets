@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Firebase</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openNewUserModal()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-searchbar
+    [(ngModel)]="searchValue"
+    (ionInput)="onInputChange($event)"
+    placeholder="Search by first name..."
+    debounce=1000>
+  </ion-searchbar>
+  <form [formGroup]="rangeForm">
+    <ion-list class="range-list">
+      <ion-item class="range-item">
+        <ion-label>
+          <h3 class="range-value">{{rangeForm.controls.dual.value.lower}}</h3>
+          <h2 class="range-label">Filter by Age</h2>
+          <h3 class="range-value">{{rangeForm.controls.dual.value.upper}}</h3>
+        </ion-label>
+        <ion-range dualKnobs="true" debounce=1000 formControlName="dual" (ionChange)="rangeChange($event)" min="1" max="99" step="1" snaps="true" pin="false"></ion-range>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-header>
+<ion-content class="list-mini-content">
+  <div class="list-mini">
+    <ion-list>
+      <button class="list-item" ion-item *ngFor="let item of items" (click)="viewDetails(item)">
+        <ion-row no-padding class="content-row one-line">
+          <ion-col no-padding width-18 class="item-avatar">
+            <preload-image class="avatar-image" [ratio]="{w:1, h:1}" [src]="item.payload.doc.data().avatar"></preload-image>
+          </ion-col>
+          <ion-col no-padding width-72 class="item-content">
+            <h3 class="item-title">{{item.payload.doc.data().name}} {{item.payload.doc.data().surname}}</h3>
+            <p class="item-description">{{item.payload.doc.data().age}} years old</p>
+          </ion-col>
+          <ion-col no-padding width-10 class="item-icon">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </button>
+    </ion-list>
+  </div>
+</ion-content>

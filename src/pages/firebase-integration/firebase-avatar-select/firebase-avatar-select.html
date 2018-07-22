@@ -1,0 +1,7 @@
+<ion-row>
+  <ion-col width-50 *ngFor="let avatar of avatars">
+    <div (click)="close(avatar)">
+      <img [src]=avatar.link>
+    </div>
+  </ion-col>
+</ion-row>

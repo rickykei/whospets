@@ -1,0 +1,21 @@
+firebase-signup-page {
+	.error-message
+ 	{
+   	color: red;
+ 	}
+	.signup-content
+	{
+		.legal-stuff
+		{
+			color: $white-d;
+			text-align: center;
+			margin: 10px 12px;
+
+			.legal-action
+			{
+				font-weight: 500;
+				color: $theme-color-2;
+			}
+		}
+	}
+}

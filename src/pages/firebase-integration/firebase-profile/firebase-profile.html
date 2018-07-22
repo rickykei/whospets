@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'SETTINGS' | translate }}</ion-title>
+    <ion-buttons end [hidden]="!profile_form.dirty || !profile_form.valid">
+      <button ion-button (click)="saveFormValues(profile_form.value)">
+        {{ 'SAVE' | translate }}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="settings-content">
+  <div class="user-image-content">
+    <ion-row no-padding class="user-image-row">
+      <ion-col no-padding width-40>
+        <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="user.image" alt="this is the image" title="IMAGE!"></preload-image>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding class="user-image-row">
+      <ion-col no-padding width-60>
+        <button class="image-action-button" ion-button outline block small (click)="openImagePicker()">{{ 'CHANGE_PROFILE_PICTURE' | translate}}</button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <form [formGroup]="profile_form" class="settings-form">
+    <ion-list class="user-data-content">
+      <ion-item>
+        <ion-label stacked>{{ 'NAME' | translate }}</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.name">
+          <div class="error-message" *ngIf="profile_form.get('name').hasError(validation.type) && (profile_form.get('name').dirty || profile_form.get('name').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label stacked>{{ 'DESCRIPTION' | translate }}</ion-label>
+        <ion-textarea formControlName="description" disabled rows="5"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </form>
+
+  <button class="alt-button logout-button" ion-button full icon-start (click)="logout()">
+    <ion-icon name="log-out"></ion-icon>
+    {{'LOG_OUT' | translate }}
+  </button>
+</ion-content>

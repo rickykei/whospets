@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      User Details
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="!details_form.dirty && !changeAvatar" (click)="onSubmit(details_form.value)">
+        Save
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="user-details-content">
+  <div class="user-image-content">
+    <ion-row no-padding class="user-image-row">
+      <ion-col no-padding width-40>
+        <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="avatar" alt="this is the image" title="IMAGE!"></preload-image>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding class="user-image-row">
+      <ion-col no-padding width-60>
+        <button class="image-action-button" ion-button outline block small (click)="openImagePicker()">Change picture</button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <form class="edit-user-form" [formGroup]="details_form" >
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" formControlName="name" class="form-controll" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Surname</ion-label>
+      <ion-input type="text" formControlName="surname" class="form-controll" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Age</ion-label>
+      <ion-input type="number" formControlName="age" class="form-controll" required></ion-input>
+    </ion-item>
+  </form>
+  <button class="form-action-button" ion-button block color='danger' (click)="delete()" type="submit">Delete User</button>
+</ion-content>

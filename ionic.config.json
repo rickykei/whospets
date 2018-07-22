@@ -1,0 +1,8 @@
+{
+  "name": "whospets app",
+  "app_id": "3ba2b534",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

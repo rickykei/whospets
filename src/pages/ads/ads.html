@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Ads</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h2 class="ads-heading">Earn money displaying ads in your app</h2>
+  <div class="ad-button-outer" (click)="showInterstitial()">
+    <ion-row class="ad-button-row">
+      <ion-col class="illustration-col" no-padding col-5>
+        <preload-image class="interstitial-illustration" [ratio]="{w:60, h:71}" src="./assets/images/ads/instertitial-illustration.png" alt="interstitial illustration" title="interstitial illustration"></preload-image>
+      </ion-col>
+      <ion-col class="text-col" col-7>
+        <h3 class="ad-button-text">{{'SHOW_INTERSTITIAL' | translate}}</h3>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="ad-button-outer" (click)="showBanner()">
+    <ion-row class="ad-button-row" no-padding>
+      <ion-col class="text-col" col-7>
+        <h3 class="ad-button-text">{{'SHOW_BANNER' | translate}}</h3>
+      </ion-col>
+      <ion-col class="illustration-col" no-padding col-5>
+        <preload-image class="banner-illustration" [ratio]="{w:60, h:71}" src="./assets/images/ads/banner-illustration.png" alt="banner illustration" title="banner illustration"></preload-image>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+
+<ion-footer class="ads-footer">
+  <ion-toolbar>
+    <button class="remove-ad-button" ion-button block (click)="removeBanner()">{{'REMOVE_BANNER' | translate}}</button>
+  </ion-toolbar>
+</ion-footer>

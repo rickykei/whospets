@@ -1,0 +1,49 @@
+<ion-header class="twitter-header">
+  <ion-navbar>
+    <ion-title>{{'TWITTER' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="twitter-integration-content" [ngClass]="{connected: user.userId}">
+
+  <div *ngIf="!user.userId">
+    <h1 class="no-connection-message">{{'NOT_LOGGED_TWITTER' | translate}}</h1>
+    <ion-row class="actions-row twitter-connect-row">
+      <ion-col no-padding width-100>
+        <button ion-button block class="auth-action-button twitter-auth-button" (click)="doTwitterLogin()">{{'CONNECT_WITH_TWITTER' | translate}}</button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="user.userId">
+    <ion-row class="main-user-data-row">
+      <ion-col no-padding width-100>
+        <preload-image class="twitter-user-image" [ratio]="{w:1, h:1}" [src]="user.image" alt="twitter user image" title="twitter user image"></preload-image>
+      </ion-col>
+      <ion-col class="social-connections-col" no-padding width-50>
+        <span class="connection-type">Followers</span>
+        <h2 class="connection-number">{{ user.followers }}</h2>
+      </ion-col>
+      <ion-col class="social-connections-col" no-padding width-50>
+        <span class="connection-type">Following</span>
+        <h2 class="connection-number">{{ user.following }}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="user-extended-data-row">
+      <ion-col no-padding width-100>
+        <h2 class="user-display-name">{{ user.name }}</h2>
+        <h3 class="user-username">@{{ user.screenName }}</h3>
+        <p class="user-description">{{ user.description }}</p>
+        <div class="user-location">
+          <ion-icon class="location-icon" name="ios-pin-outline"></ion-icon>
+          <span class="location-name">{{ user.location }}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="actions-row">
+      <ion-col no-padding width-100>
+        <button ion-button block class="auth-action-button logout-button" (click)="doTwitterLogout()">{{'LOG_OUT' | translate}}</button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

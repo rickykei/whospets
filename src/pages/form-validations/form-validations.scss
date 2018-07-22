@@ -1,0 +1,141 @@
+form-validations-page {
+  ion-header {
+		@include header-styles(color($colors, header-alt, base), color($colors, header-alt, contrast));
+	}
+
+  .forms-validations-content
+	{
+		background-color: color($colors, background, base);
+
+    .sample-form
+		{
+			.form-section
+			{
+				padding: 0px 14px;
+
+				.item:first-child
+				{
+					margin-top: 20px;
+				}
+			}
+
+			ion-item {
+				@include basic-input-style(color($colors, background, base), $theme-color-3, $white-d);
+				@include basic-select-style(color($colors, background, base), $theme-color-3, $white-d);
+
+				&.item
+				{
+					margin-top: 14px;
+
+					&.item-label-floating
+					{
+						margin-top: 0px;
+
+						ion-label {
+							color: $white-d;
+						}
+					}
+
+					.item-inner
+					{
+						ion-icon {
+							color: $theme-color-2;
+						}
+					}
+				}
+
+				&:first-of-type {
+					margin-top: 0px;
+				}
+			}
+
+			.section-title
+			{
+				font-size: 1.8rem;
+				line-height: 1.2;
+				letter-spacing: 1.1px;
+				text-align: center;
+				color: $theme-color-2;
+				font-weight: 400;
+				margin: 0px;
+			}
+
+			.form-action-button
+			{
+				margin: 0px;
+				margin-top: 20px;
+
+				@include call-to-action-button-styles(color($colors, button, base), color($colors, button, contrast));
+			}
+		}
+
+    // End generic styles
+
+    .validations-form
+    {
+      .form-section
+      {
+        &:not(:first-child)
+        {
+          margin-top: 40px;
+        }
+
+        &:last-of-type
+        {
+          margin-bottom: 40px;
+        }
+
+        .section-title
+        {
+          margin-bottom: 20px;
+        }
+      }
+
+      .terms-item
+      {
+        .item-inner
+        {
+          border-bottom: none;
+
+          ion-label {
+            white-space: normal;
+            color: $white-d;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .validation-errors
+      {
+        .error-message
+        {
+          color: color($colors, danger);
+          font-size: 12px;
+        	font-weight: 500;
+          line-height: 1.6rem;
+          position: relative;
+          padding-left: 22px;
+          margin-bottom: 10px;
+
+          &:first-child
+          {
+            margin-top: 10px;
+          }
+
+          &::before
+          {
+            font-family: "Ionicons";
+            content: "\f19f";
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+            text-align: center;
+            position: absolute;
+            left: 0px;
+          }
+        }
+      }
+
+    }
+  }
+}

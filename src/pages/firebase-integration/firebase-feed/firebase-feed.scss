@@ -1,0 +1,47 @@
+firebase-feed-page{
+
+  .range-list
+	{
+		@include range-item-styles($white-d, $black-d, $theme-color-1);
+    .range-item
+    {
+      @include range-item-md-styles($theme-color-1);
+    }
+	}
+
+  .list-mini-content
+	{
+		background-color: color($colors, background, base);
+
+		.list-mini
+		{
+			@include layout-list-styles($theme-color-2, $white-d);
+
+			ion-list {
+				.list-item
+				{
+					.content-row
+					{
+						.item-title{
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+						}
+
+						&.one-line
+						{
+							align-items: center;
+
+							.item-description
+							{
+								overflow: hidden;
+								text-overflow: ellipsis;
+								white-space: nowrap;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
