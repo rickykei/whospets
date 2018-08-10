@@ -67,6 +67,15 @@ export class FacebookLoginService {
           .then((res) => {
             resolve(res);
           });
+
+          this.nativeStorage.setItem('email_user',
+          {       
+            email: user.email,
+          })
+          .then(
+            () =>  console.log('Stored item!'),
+            error => console.error('Error storing item')
+          );
         })
       }, (err) => {
         reject(err);

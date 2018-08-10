@@ -63,24 +63,29 @@ export class LoginPage {
       this.success = data2.success;
       console.log(this.success);
 
-      if(this.success)
+      if(this.success==true)
       {
-        this.setEmailUser();
+        console.log('inside true');
+
+        this.setEmailUser(this.email.value, this.password.value);
         this.nav.setRoot(ProfilePage);    
       }
       else
       {
+        console.log('inside false');
+
+        this.setEmailUser('nil', '');
         this.nav.setRoot(SignupPage);    
       }
     });
   }
 
-  setEmailUser()
+  setEmailUser(_email :string, _password:string)
   {
     this.nativeStorage.setItem('email_user',
     {       
-      email: this.email.value,
-      password: this.password.value
+      email: _email,
+      password: _password
     })
     .then(
       () =>  console.log('Stored item!'),
@@ -97,6 +102,8 @@ export class LoginPage {
     this.facebookLoginService.getFacebookUser()
     .then((data) => {
        // user is previously logged with FB and we have his data we will let him access the app
+      console.log(data.email);
+       this.setEmailUser(data.email, '');
       this.nav.setRoot(this.main_page.component);
     }, (error) => {
       //we don't have the user data so we will ask him to log in

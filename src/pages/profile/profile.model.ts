@@ -1,11 +1,11 @@
 export class UserModel {
-  image: string;
+  image: string = './assets/images/slide-2-img.png';
   status: boolean;
   message: string;
   id: number = 0;
   tc: number =0;
   user_id = 0;
-  lastname : string;
+  lastname : string = 'lastname';
   firstname :string;
   email:string;
   street:string;
