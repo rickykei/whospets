@@ -27,7 +27,7 @@ export class LoginPage {
 
   email : AbstractControl;
   password : AbstractControl;
- success: string;
+ success: boolean;
  
   constructor(
     public nav: NavController,
@@ -57,8 +57,13 @@ export class LoginPage {
     console.log(url);
 	 
 	 this.http.get(url).map(res => res.json()).subscribe(data2 => {
+
+    console.log(data2.success);
+
       this.success = data2.success;
-      if(this.success=='true')
+      console.log(this.success);
+
+      if(this.success)
       {
         this.setEmailUser();
         this.nav.setRoot(ProfilePage);    

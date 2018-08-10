@@ -90,7 +90,29 @@ export class TabsNavigationPage {
     console.log('1'+ email);
      console.log('1' + password);
 
-    this.tabsNavigationService
+     if(password=='')
+     {
+      this.tabsNavigationService
+      .getFBData(email)
+      .then(data2 => {
+        console.log(data2.success);
+        this.posts.success = data2.success;
+      if(this.posts.success=='true')
+      {
+
+      }
+      else
+      {
+        this.nav.setRoot(LoginPage);
+      }  
+      }, error =>
+      {
+        console.log(error);
+      });
+     }
+    else
+    {
+      this.tabsNavigationService
       .getData(email, password)
       .then(data2 => {
         console.log(data2.success);
@@ -106,8 +128,9 @@ export class TabsNavigationPage {
       }, error =>
       {
         console.log(error);
-        return false;
       });
+    }
+    
     }
 
 

@@ -9,7 +9,7 @@ export class TabsNavigationService {
   constructor(public http: Http) {}
 
   getData(email: string, password:string): Promise<LoginModel> {
-      var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + email + '&login&password='+password ;
+      var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + email + '&password='+password ;
     console.log(url);
     
     return this.http.get(url)
@@ -18,6 +18,16 @@ export class TabsNavigationService {
      .catch(this.handleError);
   }
 
+
+  getFBData(email: string): Promise<LoginModel> {
+    var url = 'http://api.whospets.com/api/users/login.php?logintype=fb&username=' + email  ;
+  console.log(url);
+  
+  return this.http.get(url)
+   .toPromise()
+   .then(response => response.json() as LoginModel)
+   .catch(this.handleError);
+}
   // getData(): Promise<LoginModel> {
   //   //    var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + email + '&login&password='+password ;
   //   //  console.log(url);
