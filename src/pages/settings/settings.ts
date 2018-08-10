@@ -70,8 +70,8 @@ export class SettingsPage {
       let currentLang = this.translate.currentLang;
 
       this.settingsForm.patchValue({
-        name: data.user.name,
-        location: data.user.location,
+        name: data.user.lastname,
+        location: data.user.city,
         description: data.user.about,
         currency: 'dollar',
         weather: 'fahrenheit',

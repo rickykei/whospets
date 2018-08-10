@@ -13,7 +13,8 @@ export class ProfileService {
   ) {}
 
   getData(): Promise<ProfileModel> {
-    return this.http.get('./assets/example_data/profile.json')
+    var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username=rickykei@yahoo.com.hk';
+    return this.http.get(url) //('./assets/example_data/profile.json')
      .toPromise()
      .then(response => response.json() as ProfileModel)
      .catch(this.handleError);

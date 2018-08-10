@@ -1,8 +1,8 @@
 {
-  "name": "whospets app",
-  "app_id": "3ba2b534",
+  "name": "ion2-fullapp-ELITE",
   "integrations": {
     "cordova": {}
   },
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "pro_id": "066dd7ce"
 }
