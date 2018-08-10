@@ -23,7 +23,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { SignupPage } from '../pages/signup/signup';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { SchedulePage } from '../pages/schedule/schedule';
-import { AdsPage } from '../pages/ads/ads';
+//import { AdsPage } from '../pages/ads/ads';
 import { List1Page } from '../pages/list-1/list-1';
 import { List2Page } from '../pages/list-2/list-2';
 import { GridPage } from '../pages/grid/grid';
@@ -35,8 +35,8 @@ import { FormValidationsPage } from '../pages/form-validations/form-validations'
 import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
 import { MapsPage } from '../pages/maps/maps';
 import { FacebookLoginPage } from '../pages/facebook-login/facebook-login';
-import { GoogleLoginPage } from '../pages/google-login/google-login';
-import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
+//import { GoogleLoginPage } from '../pages/google-login/google-login';
+//import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
 import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
 
@@ -143,10 +143,10 @@ export function createTranslateLoader(http: HttpClient) {
     MapsPage,
     FunctionalitiesPage,
     FacebookLoginPage,
-    GoogleLoginPage,
+    //GoogleLoginPage,
     ContactCardPage,
-    TwitterLoginPage,
-		AdsPage,
+    //TwitterLoginPage,
+		//AdsPage,
 		FormValidationsPage,
 		VideoPlaylistPage,
 
@@ -229,10 +229,10 @@ export function createTranslateLoader(http: HttpClient) {
     MapsPage,
     FunctionalitiesPage,
     FacebookLoginPage,
-    GoogleLoginPage,
+    //GoogleLoginPage,
     ContactCardPage,
-    TwitterLoginPage,
-		AdsPage,
+    //TwitterLoginPage,
+		//AdsPage,
 		FormValidationsPage,
 		VideoPlaylistPage,
     //firebase integration

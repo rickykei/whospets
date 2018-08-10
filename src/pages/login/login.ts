@@ -7,8 +7,9 @@ import { SignupPage } from '../signup/signup';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
-import { GoogleLoginService } from '../google-login/google-login.service';
-import { TwitterLoginService } from '../twitter-login/twitter-login.service';
+import {Http} from '@angular/http';
+import 'rxjs/add/operator/map';
+
 
 @Component({
   selector: 'login-page',
@@ -18,24 +19,42 @@ export class LoginPage {
   login: FormGroup;
   main_page: { component: any };
   loading: any;
-
+ message: string;
 
   constructor(
     public nav: NavController,
     public facebookLoginService: FacebookLoginService,
-    public googleLoginService: GoogleLoginService,
-    public twitterLoginService: TwitterLoginService,
+   // public googleLoginService: GoogleLoginService,
+    //public twitterLoginService: TwitterLoginService,
+	 private http: Http,
     public loadingCtrl: LoadingController
   ) {
+	  
+	   
     this.main_page = { component: TabsNavigationPage };
 
+	  
     this.login = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('test', Validators.required)
+      email: new FormControl('rickykei@yahoo.com', Validators.required),
+      password: new FormControl('1234', Validators.required)
     });
   }
 
   doLogin(){
+	  let data = this.login.value;
+ 
+   console.log('-------------------doLogin');
+    var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password ;
+    console.log(url);
+	 
+	 this.http.get(url).map(res => res.json()).subscribe(data2 => {
+     
+		console.log(data2.data);
+		console.log(data2.success);
+    });
+	
+	
+	
     this.nav.setRoot(this.main_page.component);
   }
 
@@ -60,7 +79,7 @@ export class LoginPage {
       });
     });
   }
-
+/*
   doGoogleLogin() {
     this.loading = this.loadingCtrl.create();
 
@@ -101,7 +120,7 @@ export class LoginPage {
         console.log("Twitter Login error", err);
       });
     });
-  }
+  }*/
 
   goToSignup() {
     this.nav.push(SignupPage);

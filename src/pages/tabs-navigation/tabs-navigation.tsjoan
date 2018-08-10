@@ -38,6 +38,7 @@ export class TabsNavigationPage {
 
    // 1st log into this page, check is it logged user before
    ionViewWillEnter() {    
+    console.log('a');
     if(!this.isLogged()){
       this.nav.setRoot(LoginPage);
     }
