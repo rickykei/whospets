@@ -27,7 +27,7 @@ export class LoginPage {
 
   email : AbstractControl;
   password : AbstractControl;
- success: boolean;
+ success: string;
  
   constructor(
     public nav: NavController,
@@ -63,7 +63,7 @@ export class LoginPage {
       this.success = data2.success;
       console.log(this.success);
 
-      if(this.success==true)
+      if(this.success=='true')
       {
         console.log('inside true');
 
