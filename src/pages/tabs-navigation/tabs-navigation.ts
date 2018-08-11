@@ -75,9 +75,10 @@ export class TabsNavigationPage {
 
       this.logindata.email = data.email;
       this.logindata.password = data.password;
+      this.logindata.uid = data.uid;
       console.log('thislogindata : ' + this.logindata.email);
 
-      this.checkNormalLogin(this.logindata.email, this.logindata.password );
+      this.checkNormalLogin(this.logindata.email, this.logindata.password , this.logindata.uid);
      }, error =>
      {
        console.log(error);
@@ -85,15 +86,16 @@ export class TabsNavigationPage {
       });
   }
 
-  checkNormalLogin(email :string, password: string) {
+  checkNormalLogin(email :string, password: string, uid :string) {
 
     console.log('1'+ email);
      console.log('1' + password);
+     console.log('1' + uid);
 
      if(password=='')
      {
       this.tabsNavigationService
-      .getFBData(email)
+      .getFBData(email, uid)
       .then(data2 => {
         console.log(data2.success);
         this.posts.success = data2.success;

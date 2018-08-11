@@ -19,8 +19,8 @@ export class TabsNavigationService {
   }
 
 
-  getFBData(email: string): Promise<LoginModel> {
-    var url = 'http://api.whospets.com/api/users/login.php?logintype=fb&username=' + email  ;
+  getFBData(email: string, uid:string): Promise<LoginModel> {
+    var url = 'http://api.whospets.com/api/users/login.php?logintype=fb&username=' + email  +'&fb_uid=' + uid;
   console.log(url);
   
   return this.http.get(url)

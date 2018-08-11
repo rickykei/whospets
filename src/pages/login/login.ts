@@ -67,25 +67,30 @@ export class LoginPage {
       {
         console.log('inside true');
 
-        this.setEmailUser(this.email.value, this.password.value);
+        this.setEmailUser(this.email.value, this.password.value, '');
         this.nav.setRoot(ProfilePage);    
       }
       else
       {
         console.log('inside false');
 
-        this.setEmailUser('nil', '');
+        this.removeEmailUser();
         this.nav.setRoot(SignupPage);    
       }
     });
   }
 
-  setEmailUser(_email :string, _password:string)
+  removeEmailUser(){
+    this.nativeStorage.remove('email_user');
+  }
+
+  setEmailUser(_email :string, _password:string, _uid : string)
   {
     this.nativeStorage.setItem('email_user',
     {       
       email: _email,
-      password: _password
+      password: _password,
+      uid : _uid
     })
     .then(
       () =>  console.log('Stored item!'),
@@ -102,8 +107,11 @@ export class LoginPage {
     this.facebookLoginService.getFacebookUser()
     .then((data) => {
        // user is previously logged with FB and we have his data we will let him access the app
-      console.log(data.email);
-       this.setEmailUser(data.email, '');
+      console.log("data.email:"+data.email);
+      console.log("data.userid:"+data.userId);
+      console.log("data.name:"+data.name);
+
+       this.setEmailUser(data.email, '', data.userId);
       this.nav.setRoot(this.main_page.component);
     }, (error) => {
       //we don't have the user data so we will ask him to log in
