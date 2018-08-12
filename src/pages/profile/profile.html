@@ -8,10 +8,12 @@
   <div class="user-details">
     <ion-row class="user-main-data-row">
       <ion-col no-padding width-33>
-        <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.user.image" alt="profile.user.name" title="profile.user.name"></preload-image>
+        <!-- <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.user.image" alt="profile.user.firstname" title="profile.user.firstname"></preload-image> -->
+        <preload-image [ratio]="{w:1, h:1}" [src]="profile.user.image" title="profile.user.firstname"></preload-image>
+
       </ion-col>
       <ion-col no-padding>
-        <ion-row class="social-presence-row">
+        <!-- <ion-row class="social-presence-row">
           <ion-col width-50 class="social-presence-item">
             <a (click)="goToFollowersList()">
               <h2 class="social-presence-value">{{profile.followers.length}}</h2>
@@ -24,7 +26,7 @@
               <h4 class="social-presence-title">{{'FOLLOWING' | translate }}</h4>
             </a>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
         <ion-row class="profile-action-row">
           <ion-col no-padding>
             <button ion-button block small (click)="goToSettings()">
@@ -36,10 +38,10 @@
     </ion-row>
     <ion-row wrap class="user-bio-row">
       <ion-col no-padding width-50>
-        <h2 class="user-name">{{profile.user.name}}</h2>
+        <h2 class="user-name">{{profile.user.firstname}}</h2>
       </ion-col>
       <ion-col no-padding width-50>
-        <span class="user-location">{{profile.user.location}}</span>
+        <span class="user-location">{{profile.user.city}}</span>
       </ion-col>
       <ion-col no-padding width-100>
         <p class="user-description">

@@ -1,4 +1,4 @@
-<ion-header class="listing-header">
+ <ion-header class="listing-header">
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -12,13 +12,15 @@
 </ion-header>
 
 <ion-content class="listing-content">
-  <background-image class="image-heading" [src]="listing.banner_image">
+ <!-- <background-image class="image-heading" [src]="listing.banner_image"> -->
     <ion-row class="heading-row">
       <ion-col no-padding offset-100>
-        <h2 class="main-title">{{listing.banner_title}}</h2>
+        <!-- <h2 class="main-title">{{listing.banner_title}}</h2> -->
+        <ion-searchbar [(ngModel)]="searchTerm"></ion-searchbar>
       </ion-col>
     </ion-row>
-  </background-image>
+  <!-- </background-image>  -->
+
   <h4 class="categories-title">{{'POPULAR' | translate}}</h4>
   <ion-scroll scrollX="true" class="horizontal-categories">
     <ion-row class="categories-row">

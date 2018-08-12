@@ -30,27 +30,24 @@ export class ProfilePage {
     this.profileService.getData()
       .then(data => {
         this.profile.user = data.user;
-        this.profile.following = data.following;
-        this.profile.followers = data.followers;
-        this.profile.posts = data.posts;
       });
   }
 
-  goToFollowersList() {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    this.app.getRootNav().push(FollowersPage, {
-      list: this.profile.followers
-    });
-  }
+  // goToFollowersList() {
+  //   // close the menu when clicking a link from the menu
+  //   this.menu.close();
+  //   this.app.getRootNav().push(FollowersPage, {
+  //     list: this.profile.followers
+  //   });
+  // }
 
-  goToFollowingList() {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    this.app.getRootNav().push(FollowersPage, {
-      list: this.profile.following
-    });
-  }
+  // goToFollowingList() {
+  //   // close the menu when clicking a link from the menu
+  //   this.menu.close();
+  //   this.app.getRootNav().push(FollowersPage, {
+  //     list: this.profile.following
+  //   });
+  // }
 
   goToSettings() {
     // close the menu when clicking a link from the menu

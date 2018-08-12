@@ -5,15 +5,20 @@ import 'rxjs/add/operator/toPromise';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { ProfileModel } from './profile.model';
 
+import { FacebookLoginService } from '../facebook-login/facebook-login.service';
+
+
 @Injectable()
 export class ProfileService {
   constructor(
     public http: Http,
+    public facebookLoginService: FacebookLoginService,
     public nativeStorage: NativeStorage
   ) {}
 
   getData(): Promise<ProfileModel> {
-    return this.http.get('./assets/example_data/profile.json')
+    var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username=rickykei@yahoo.com.hk';
+    return this.http.get(url) //('./assets/example_data/profile.json')
      .toPromise()
      .then(response => response.json() as ProfileModel)
      .catch(this.handleError);
@@ -27,6 +32,7 @@ export class ProfileService {
   getUserImage(){
     return this.nativeStorage.getItem('profileImage');
   }
+  
 
   setUserImage(newImage){
     this.nativeStorage.setItem('profileImage', newImage);

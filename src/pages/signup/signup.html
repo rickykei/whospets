@@ -7,6 +7,9 @@
 <ion-content class="signup-content auth-content">
   <h2 class="auth-title">{{'CREATE_AN_ACCOUNT' | translate}}</h2>
   <form class="signup-form auth-form" [formGroup]="signup" (ngSubmit)="doSignup()">
+      <ion-item>
+          <ion-input type="text" placeholder="Username" formControlName="username"></ion-input>
+        </ion-item>
     <ion-item>
       <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
     </ion-item>
@@ -26,8 +29,8 @@
     Or
   </p>
   <button ion-button block class="facebook-auth-button" (click)="doFacebookSignup()">{{'SIGN_UP_WITH_FACEBOOK' | translate}}</button>
-  <button ion-button block class="google-auth-button" (click)="doGoogleSignup()">{{'SIGN_UP_WITH_GOOGLE' | translate}}</button>
-  <button ion-button block class="twitter-auth-button" (click)="doTwitterSignup()">{{'SIGN_UP_WITH_TWITTER' | translate}}</button>
+  <!-- <button ion-button block class="google-auth-button" (click)="doGoogleSignup()">{{'SIGN_UP_WITH_GOOGLE' | translate}}</button>
+  <button ion-button block class="twitter-auth-button" (click)="doTwitterSignup()">{{'SIGN_UP_WITH_TWITTER' | translate}}</button> -->
   <p class="legal-stuff">
     {{'AGREEMENT_TEXT' | translate}} <a class="legal-action" (click)="showPrivacyModal()">{{'PRIVACY_POLICY' | translate}}</a> {{'AND' | translate}} <a class="legal-action" (click)="showTermsModal()">{{'TERMS_OF_USE' | translate}}</a>
   </p>

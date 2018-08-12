@@ -78,6 +78,7 @@ import { NotificationsService } from '../pages/notifications/notifications.servi
 import { List1Service } from '../pages/list-1/list-1.service';
 import { List2Service } from '../pages/list-2/list-2.service';
 import { ScheduleService } from '../pages/schedule/schedule.service';
+import { TabsNavigationService} from '../pages/tabs-navigation/tabs-navigation.service';
 import { FacebookLoginService } from '../pages/facebook-login/facebook-login.service';
 import { GoogleLoginService } from '../pages/google-login/google-login.service';
 import { TwitterLoginService } from '../pages/twitter-login/twitter-login.service';
@@ -261,6 +262,7 @@ export function createTranslateLoader(http: HttpClient) {
     List1Service,
     List2Service,
     ScheduleService,
+    TabsNavigationService,
     //functionalities
     FacebookLoginService,
     GoogleLoginService,

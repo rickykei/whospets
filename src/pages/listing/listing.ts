@@ -7,7 +7,6 @@ import 'rxjs/Rx';
 import { ListingModel } from './listing.model';
 import { ListingService } from './listing.service';
 
-
 @Component({
   selector: 'listing-page',
   templateUrl: 'listing.html',
@@ -19,7 +18,7 @@ export class ListingPage {
     public nav: NavController,
     public listingService: ListingService
   ) {}
-
+ 
   ionViewDidLoad() {
     this.listingService
       .getData()
@@ -30,7 +29,6 @@ export class ListingPage {
         this.listing.categories = data.categories;
       });
   }
-
 
   goToFeed(category: any) {
     console.log("Clicked goToFeed", category);

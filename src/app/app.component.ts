@@ -7,13 +7,15 @@ import { Observable } from 'rxjs/Observable';
 import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
 import { FormsPage } from '../pages/forms/forms';
 import { LayoutsPage } from '../pages/layouts/layouts';
-import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
+//import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SettingsPage } from '../pages/settings/settings';
 import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
 import { FirebaseLoginPage } from '../pages/firebase-integration/firebase-login/firebase-login';
 import { WordpressMenuPage } from '../pages/wordpress-integration/wordpress-menu/wordpress-menu';
 
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { LoginPage } from '../pages/login/login';
+//import { LoginPage } from '../pages/login/login';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +26,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make WalkthroughPage the root (or first) page
-  rootPage: any = WalkthroughPage;
-  // rootPage: any = TabsNavigationPage;
+  //rootPage: any = LoginPage;
+    rootPage: any = TabsNavigationPage;
   textDir: string = "ltr";
 
   pages: Array<{title: any, icon: string, component: any}>;

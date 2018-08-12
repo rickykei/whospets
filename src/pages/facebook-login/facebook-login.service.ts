@@ -24,7 +24,7 @@ export class FacebookLoginService {
       //["public_profile"] is the array of permissions, you can add more if you need
       this.fb.login(["public_profile"]).then((response) => {
         //Getting name and gender properties
-        this.fb.api("/me?fields=name,gender", [])
+        this.fb.api("/me?fields=name,gender,email", [])
         .then((user) => {
           this.setFacebookUserFirebase(user)
           .then((res) => {
@@ -46,6 +46,7 @@ export class FacebookLoginService {
           userId: user.id,
           name: user.name,
           gender: user.gender,
+          email: user.email,
           image: "https://graph.facebook.com/" + user.id + "/picture?type=large",
           friends: data.friends,
           photos: data.photos
@@ -58,14 +59,14 @@ export class FacebookLoginService {
   {
     return new Promise<FacebookUserModel>((resolve, reject) => {
       //["public_profile"] is the array of permissions, you can add more if you need
-      this.fb.login(["public_profile"]).then((response) => {
+      this.fb.login(["public_profile", 'user_friends', "email"]).then((response) => {
         //Getting name and gender properties
-        this.fb.api("/me?fields=name,gender,email", [])
+        this.fb.api("/me?fields=name,gender,email", ['public_profile', 'user_friends', 'email'])
         .then((user) => {
           //now we have the users info, let's save it in the NativeStorage
           this.setFacebookUser(user)
           .then((res) => {
-            resolve(res);
+              resolve(res);
           });
         })
       }, (err) => {
@@ -95,6 +96,17 @@ export class FacebookLoginService {
 
   setFacebookUser(user: any)
   {
+    this.nativeStorage.setItem('email_user',
+    {       
+      email: user.name,
+      password: '',
+      uid : user.id
+    })
+    .then(
+      () =>  console.log('Stored item!'),
+      error => console.error('Error storing item')
+    );
+
     return new Promise<FacebookUserModel>((resolve, reject) => {
       this.getFriendsFakeData()
       .then(data => {
@@ -102,7 +114,7 @@ export class FacebookLoginService {
           {
             userId: user.id,
             name: user.name,
-			email: user.email,
+	          email: user.email,
             gender: user.gender,
             image: "https://graph.facebook.com/" + user.id + "/picture?type=large",
             friends: data.friends,
@@ -110,6 +122,7 @@ export class FacebookLoginService {
           })
         );
       });
+
     });
   }
 
