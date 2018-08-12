@@ -7,20 +7,18 @@ import { SignupPage } from '../signup/signup';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
-<<<<<<< HEAD
+
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-=======
+
 // import { GoogleLoginService } from '../google-login/google-login.service';
 // import { TwitterLoginService } from '../twitter-login/twitter-login.service';
 
 import { NativeStorage } from '@ionic-native/native-storage';
 
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
 import { ProfilePage } from '../profile/profile';
->>>>>>> joanne-v0.01
+
 
 @Component({
   selector: 'login-page',
@@ -30,29 +28,18 @@ export class LoginPage {
   login: FormGroup;
   main_page: { component: any };
   loading: any;
-<<<<<<< HEAD
+  email : AbstractControl;
+  password : AbstractControl;
+ success: string;
  message: string;
 
   constructor(
     public nav: NavController,
     public facebookLoginService: FacebookLoginService,
-   // public googleLoginService: GoogleLoginService,
+	public nativeStorage:NativeStorage,
+    //public googleLoginService: GoogleLoginService,
     //public twitterLoginService: TwitterLoginService,
-	 private http: Http,
-=======
-
-  email : AbstractControl;
-  password : AbstractControl;
- success: string;
- 
-  constructor(
-    public nav: NavController,
-    public facebookLoginService: FacebookLoginService,
-    // public googleLoginService: GoogleLoginService,
-    // public twitterLoginService: TwitterLoginService,
-    public nativeStorage:NativeStorage,
-     private http: Http,
->>>>>>> joanne-v0.01
+	private http: Http, 
     public loadingCtrl: LoadingController
   ) {
 	  
@@ -77,16 +64,7 @@ export class LoginPage {
     console.log(url);
 	 
 	 this.http.get(url).map(res => res.json()).subscribe(data2 => {
-<<<<<<< HEAD
-     
-		console.log(data2.data);
-		console.log(data2.success);
-    });
-	
-	
-	
-    this.nav.setRoot(this.main_page.component);
-=======
+ 
 
     console.log(data2.success);
 
@@ -126,7 +104,7 @@ export class LoginPage {
       () =>  console.log('Stored item!'),
       error => console.error('Error storing item')
     );
->>>>>>> joanne-v0.01
+ 
   }
 
   doFacebookLogin() {
@@ -155,94 +133,8 @@ export class LoginPage {
       });
     });
   }
-<<<<<<< HEAD
-/*
-  doGoogleLogin() {
-    this.loading = this.loadingCtrl.create();
-
-    // Here we will check if the user is already logged in because we don't want to ask users to log in each time they open the app
-
-    this.googleLoginService.trySilentLogin()
-    .then((data) => {
-       // user is previously logged with Google and we have his data we will let him access the app
-      this.nav.setRoot(this.main_page.component);
-    }, (error) => {
-      //we don't have the user data so we will ask him to log in
-      this.googleLoginService.doGoogleLogin()
-      .then((res) => {
-        this.loading.dismiss();
-        this.nav.setRoot(this.main_page.component);
-      }, (err) => {
-        console.log("Google Login error", err);
-      });
-    });
-  }
-
-  doTwitterLogin(){
-    this.loading = this.loadingCtrl.create();
-
-    // Here we will check if the user is already logged in because we don't want to ask users to log in each time they open the app
-
-    this.twitterLoginService.getTwitterUser()
-    .then((data) => {
-       // user is previously logged with FB and we have his data we will let him access the app
-      this.nav.setRoot(this.main_page.component);
-    }, (error) => {
-      //we don't have the user data so we will ask him to log in
-      this.twitterLoginService.doTwitterLogin()
-      .then((res) => {
-        this.loading.dismiss();
-        this.nav.setRoot(this.main_page.component);
-      }, (err) => {
-        console.log("Twitter Login error", err);
-      });
-    });
-  }*/
-=======
-
-  // doGoogleLogin() {
-  //   this.loading = this.loadingCtrl.create();
-
-  //   // Here we will check if the user is already logged in because we don't want to ask users to log in each time they open the app
-
-  //   this.googleLoginService.trySilentLogin()
-  //   .then((data) => {
-  //      // user is previously logged with Google and we have his data we will let him access the app
-  //     this.nav.setRoot(this.main_page.component);
-  //   }, (error) => {
-  //     //we don't have the user data so we will ask him to log in
-  //     this.googleLoginService.doGoogleLogin()
-  //     .then((res) => {
-  //       this.loading.dismiss();
-  //       this.nav.setRoot(this.main_page.component);
-  //     }, (err) => {
-  //       console.log("Google Login error", err);
-  //     });
-  //   });
-  // }
-
-  // doTwitterLogin(){
-  //   this.loading = this.loadingCtrl.create();
-
-  //   // Here we will check if the user is already logged in because we don't want to ask users to log in each time they open the app
-
-  //   this.twitterLoginService.getTwitterUser()
-  //   .then((data) => {
-  //      // user is previously logged with FB and we have his data we will let him access the app
-  //     this.nav.setRoot(this.main_page.component);
-  //   }, (error) => {
-  //     //we don't have the user data so we will ask him to log in
-  //     this.twitterLoginService.doTwitterLogin()
-  //     .then((res) => {
-  //       this.loading.dismiss();
-  //       this.nav.setRoot(this.main_page.component);
-  //     }, (err) => {
-  //       console.log("Twitter Login error", err);
-  //     });
-  //   });
-  // }
->>>>>>> joanne-v0.01
-
+ 
+ 
   goToSignup() {
     this.nav.push(SignupPage);
   }

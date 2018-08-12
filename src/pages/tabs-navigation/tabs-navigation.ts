@@ -8,13 +8,7 @@ import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { LoginPage } from '../login/login';
 import { NavController } from 'ionic-angular';
-
-<<<<<<< HEAD
-import { Http } from '@angular/http';
-
-import 'rxjs/add/operator/map';
-
-=======
+ 
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -25,8 +19,7 @@ import 'rxjs/Rx';
 import { WalkthroughPage } from '../walkthrough/walkthrough';
 
 
->>>>>>> joanne-v0.01
-
+ 
 @Component({
   selector: 'tabs-navigation',
   templateUrl: 'tabs-navigation.html'
@@ -36,14 +29,7 @@ export class TabsNavigationPage {
   tab2Root: any;
   tab3Root: any;
 
-<<<<<<< HEAD
-  posts : any;
-
-  constructor(    
-    public nav: NavController,
-    public nativeStorage:NativeStorage,
-    public http: Http,
-=======
+ 
   posts: LoginModel = new LoginModel();
   logindata : LoginContentModel = new LoginContentModel();
 
@@ -53,16 +39,15 @@ export class TabsNavigationPage {
     public nav: NavController,
     public tabsNavigationService: TabsNavigationService,
     public nativeStorage:NativeStorage,
->>>>>>> joanne-v0.01
     public facebookLoginService: FacebookLoginService
-  ) {
+    ) {
     this.tab1Root = ListingPage;
     this.tab2Root = ProfilePage;
     this.tab3Root = NotificationsPage;
 
   }
 
-<<<<<<< HEAD
+ 
    // 1st log into this page, check is it logged user before
    ionViewWillEnter() {    
     if(!this.isLogged()){
@@ -92,7 +77,7 @@ export class TabsNavigationPage {
     return false;
   });
   }
-=======
+ 
   ionViewDidLoad() {
 
     this.nativeStorage.getItem('1stLogin')
@@ -240,7 +225,7 @@ export class TabsNavigationPage {
   //   return false;
   // });
   // }
->>>>>>> joanne-v0.01
+ 
 }
   
 
