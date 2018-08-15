@@ -8,12 +8,10 @@
   <div class="user-details">
     <ion-row class="user-main-data-row">
       <ion-col no-padding width-33>
-        <!-- <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.user.image" alt="profile.user.firstname" title="profile.user.firstname"></preload-image> -->
-        <preload-image [ratio]="{w:1, h:1}" [src]="profile.user.image" title="profile.user.firstname"></preload-image>
-
+        <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.data.image" alt="profile.data.lastname" title="profile.data.lastname"></preload-image>
       </ion-col>
       <ion-col no-padding>
-        <!-- <ion-row class="social-presence-row">
+       <!-- <ion-row class="social-presence-row">
           <ion-col width-50 class="social-presence-item">
             <a (click)="goToFollowersList()">
               <h2 class="social-presence-value">{{profile.followers.length}}</h2>
@@ -38,10 +36,10 @@
     </ion-row>
     <ion-row wrap class="user-bio-row">
       <ion-col no-padding width-50>
-        <h2 class="user-name">{{profile.user.firstname}}</h2>
+        <h2 class="user-name">{{profile.data.lastname}}</h2>
       </ion-col>
       <ion-col no-padding width-50>
-        <span class="user-location">{{profile.user.city}}</span>
+        <span class="user-location">{{profile.data.city}}</span>
       </ion-col>
       <ion-col no-padding width-100>
         <p class="user-description">

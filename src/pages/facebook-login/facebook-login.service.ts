@@ -82,6 +82,8 @@ export class FacebookLoginService {
       .then((res) => {
         //user logged out so we will remove him from the NativeStorage
         this.nativeStorage.remove('facebook_user');
+        this.nativeStorage.remove('email_user');
+
         resolve();
       }, (err) => {
         reject();
@@ -98,12 +100,12 @@ export class FacebookLoginService {
   {
     this.nativeStorage.setItem('email_user',
     {       
-      email: user.name,
+      email: user.email,
       password: '',
       uid : user.id
     })
     .then(
-      () =>  console.log('Stored item!'),
+      () =>  console.log(' what Stored item!, '+ user.email ),
       error => console.error('Error storing item')
     );
 

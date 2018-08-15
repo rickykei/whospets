@@ -1,11 +1,13 @@
+
+
 export class UserModel {
-  image: string = './assets/images/slide-2-img.png';
-  status: boolean;
+  image: string;
+  status: string;
   message: string;
   id: number = 0;
   tc: number =0;
   user_id = 0;
-  lastname : string = 'lastname';
+  lastname : string;
   firstname :string;
   email:string;
   street:string;
@@ -47,9 +49,40 @@ export class UserModel {
   "sub_country_id":"307"}}
 */
 
-export class ProfileModel {
+/*export class ProfileModel {
 
   success : boolean;
   user: UserModel = new UserModel();
   
+}*/
+
+/*
+export class UserModel {
+  image: string;
+  location: string;
+  about: string;
+  email: string;
+  phone: string;
+  name: string;
+  website: string;
+}
+
+*/
+
+/*
+export class ProfilePostModel {
+  date: Date;
+	image: string;
+	description: string;
+	likes: number = 0;
+	comments: number = 0;
+	liked: boolean = false;
+}*/
+
+export class ProfileModel {
+  success : string;
+  data: UserModel = new UserModel();
+  // following: Array<UserModel> = [];
+  // followers: Array<UserModel> = [];
+  // posts: Array<ProfilePostModel> = [];
 }
