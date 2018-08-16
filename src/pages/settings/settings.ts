@@ -19,6 +19,9 @@ import { AppRate } from '@ionic-native/app-rate';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 
+import { NativeStorage } from '@ionic-native/native-storage';
+
+
 @Component({
   selector: 'settings-page',
   templateUrl: 'settings.html'
@@ -42,8 +45,10 @@ export class SettingsPage {
     public appRate: AppRate,
     public imagePicker: ImagePicker,
     public cropService: Crop,
+    public nativeStorage:NativeStorage,
     public platform: Platform
   ) {
+
     this.loading = this.loadingCtrl.create();
 
     this.languages = this.languageService.getLanguages();
@@ -60,31 +65,53 @@ export class SettingsPage {
   }
 
   ionViewDidLoad() {
-    this.loading.present();
-    this.profileService.getData().then(data => {
-      this.profile.user = data.user;
-      // setValue: With setValue, you assign every form control value at once by passing in a data object whose properties exactly match the form model behind the FormGroup.
-      // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
-      // More info: https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#populate-the-form-model-with-_setvalue_-and-_patchvalue_
 
-      let currentLang = this.translate.currentLang;
+    this.nativeStorage.getItem('email_user')
+    .then(data => {
+      // if(data.password!='')
+      // {
+      //   // normal
+      //  url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;
+      // }
+      // else{
+      //   //fb
+      //  url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
+      // }
 
-      this.settingsForm.patchValue({
-        name: data.user.lastname,
-        location: data.user.city,
-        description: data.user.about,
-        currency: 'dollar',
-        weather: 'fahrenheit',
-        notifications: true,
-        language: this.languages.filter(x => x.code == currentLang)
+      var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
+
+      this.loading.present();
+      this.profileService.getData(url).then(data2 => {
+        this.profile.data = data2.data;
+        // setValue: With setValue, you assign every form control value at once by passing in a data object whose properties exactly match the form model behind the FormGroup.
+        // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
+        // More info: https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#populate-the-form-model-with-_setvalue_-and-_patchvalue_
+  
+        let currentLang = this.translate.currentLang;
+  
+        this.settingsForm.patchValue({
+          name: data2.data.lastname,
+          location: data2.data.city,
+          description: data2.data.about,
+          currency: 'dollar',
+          weather: 'fahrenheit',
+          notifications: true,
+          language: this.languages.filter(x => x.code == currentLang)
+        });
+  
+        this.loading.dismiss();
+  
+        this.settingsForm.get('language').valueChanges.subscribe((lang) => {
+          this.setLanguage(lang);
+        });
       });
 
-      this.loading.dismiss();
-
-      this.settingsForm.get('language').valueChanges.subscribe((lang) => {
-        this.setLanguage(lang);
-      });
+    }, error => {
+      console.log('error : '+ error);
     });
+
+
+   
   }
 
   logout() {
@@ -143,7 +170,7 @@ export class SettingsPage {
                    let image  = normalizeURL(newImage);
 
                    this.profileService.setUserImage(image);
-                   this.profile.user.image = image;
+                   this.profile.data.image = image;
                  },
                  error => console.error("Error cropping image", error)
                );

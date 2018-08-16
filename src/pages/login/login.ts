@@ -101,7 +101,7 @@ export class LoginPage {
       uid : _uid
     })
     .then(
-      () =>  console.log('Stored item!'),
+      () =>  console.log('EMAIL ： Stored item!'),
       error => console.error('Error storing item')
     );
  

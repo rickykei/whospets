@@ -26,7 +26,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make WalkthroughPage the root (or first) page
-  //rootPage: any = LoginPage;
+  //rootPage: any = SettingsPage;
     rootPage: any = TabsNavigationPage;
   textDir: string = "ltr";
 

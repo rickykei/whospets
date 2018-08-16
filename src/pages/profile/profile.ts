@@ -8,6 +8,9 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 
 import 'rxjs/Rx';
 
+import { NativeStorage } from '@ionic-native/native-storage';
+
+
 @Component({
   selector: 'profile-page',
   templateUrl: 'profile.html'
@@ -15,24 +18,102 @@ import 'rxjs/Rx';
 export class ProfilePage {
   display: string;
   profile: ProfileModel = new ProfileModel();
+  status:string;
 
   constructor(
     public menu: MenuController,
     public app: App,
     public navParams: NavParams,
     public profileService: ProfileService,
+    public nativeStorage:NativeStorage,
     public socialSharing: SocialSharing
   ) {
     this.display = "list";
   }
 
+
   ionViewDidLoad() {
-    this.profileService.getData()
-      .then(data => {
-        this.profile.user = data.user;
+
+  
+
+    this.nativeStorage.getItem('email_user')
+    .then(data => {
+      console.log('..data :'+ data.email);
+
+      
+      // if(data.password='')
+      // {
+      //   // normal
+      //  url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;
+      // }
+      // else{
+      //   //fb
+      //  url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
+      // }
+      var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
+      console.log('..url :'+ url);
+
+      this.profileService.getData(url)
+      .then(data2 => {
+        console.log('..data2 :'+ data2.success);
+        console.log('..data2 user :'+ data2.data);
+
+        this.status = data2.success;
+        this.profile.data = data2.data;
+
+        this.profile.data.email = data2.data.email;
+
+
+        console.log('..data2 email:'+ this.profile.data.email);
+
+        // this.profile.following = data.following;
+        // this.profile.followers = data.followers;
+        // this.profile.posts = data.posts;
       });
+
+    }, error => {
+      console.log('error : '+ error);
+    });
+    
+
+
+   
   }
 
+/*
+  ionViewDidLoad() {
+    console.log("ionViewDidLoad");
+
+    this.nativeStorage.getItem('email_user')
+    .then(data => {
+      if(data.password!='')
+      {
+        // normal
+       this.url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;
+      }
+      else{
+        //fb
+       this.url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
+      }
+    }, error => {
+      console.log('error : '+ error);
+    });
+    console.log(".."+ this.url);
+
+
+    this.profileService.getData()
+      .then(data => {
+        console.log(".."+ data.user);
+
+        this.profile.user = data.user;
+        console.log(".."+ this.profile.user.name);
+        console.log(".."+ this.profile.user.email);
+
+      }, error => {
+        console.log('error : '+ error);
+      });
+  }
+*/
   // goToFollowersList() {
   //   // close the menu when clicking a link from the menu
   //   this.menu.close();

@@ -93,7 +93,7 @@ export class TabsNavigationPage {
           login: true,
         })
         .then(
-          () =>  console.log('Stored item!'),
+          () =>  console.log('1sr login , Stored item!'),
           error => console.error('Error storing item')
         );
         });

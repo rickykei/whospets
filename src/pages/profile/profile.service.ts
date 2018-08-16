@@ -16,9 +16,8 @@ export class ProfileService {
     public nativeStorage: NativeStorage
   ) {}
 
-  getData(): Promise<ProfileModel> {
-    var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username=rickykei@yahoo.com.hk';
-    return this.http.get(url) //('./assets/example_data/profile.json')
+  getData(url:string): Promise<ProfileModel> {
+    return this.http.get(url)//('./assets/example_data/profile.json')
      .toPromise()
      .then(response => response.json() as ProfileModel)
      .catch(this.handleError);
@@ -32,7 +31,6 @@ export class ProfileService {
   getUserImage(){
     return this.nativeStorage.getItem('profileImage');
   }
-  
 
   setUserImage(newImage){
     this.nativeStorage.setItem('profileImage', newImage);
