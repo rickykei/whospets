@@ -15,6 +15,7 @@ import { WordpressMenuPage } from '../pages/wordpress-integration/wordpress-menu
 
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from '../pages/profile/profile';
 //import { LoginPage } from '../pages/login/login';
 
 @Component({
@@ -26,8 +27,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make WalkthroughPage the root (or first) page
-  //rootPage: any = SettingsPage;
-    rootPage: any = TabsNavigationPage;
+ rootPage: any = TabsNavigationPage;
   textDir: string = "ltr";
 
   pages: Array<{title: any, icon: string, component: any}>;
