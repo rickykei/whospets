@@ -31,6 +31,7 @@ export class SettingsPage {
   // make WalkthroughPage the root (or first) page
   rootPage: any = WalkthroughPage;
   loading: any;
+  status : string;
 
   profile: ProfileModel = new ProfileModel();
   languages: Array<LanguageModel>;
@@ -68,21 +69,42 @@ export class SettingsPage {
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
-      // if(data.password!='')
-      // {
-      //   // normal
-      //  url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;
-      // }
-      // else{
-      //   //fb
-      //  url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
-      // }
+      var url ;
+      if(data.password=='')
+      {   
+        // normal
+        url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
+     }
+      else{
+         //fb
+         url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;
+      
+          }
+     
+    // var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;;
 
-      var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
+    //  var url = './assets/example_data/profile.json';
+      console.log('..url :'+ url);
 
-      this.loading.present();
-      this.profileService.getData(url).then(data2 => {
-        this.profile.data = data2.data;
+      this.profileService.getData(url)
+      .then(data2 => {
+        console.log('..data2 :'+ data2.success);
+
+        this.status = data2.success;
+        if(this.status=='true')
+        {
+          this.profile.data.fb_uid = data2.data.fb_uid; //image
+          this.profile.data.email = data2.data.email;
+          this.profile.data.firstname = data2.data.firstname;
+          this.profile.data.lastname = data2.data.lastname;
+          this.profile.data.message = data2.data.message;
+          this.profile.data.street = data2.data.street;
+          this.profile.data.city = data2.data.city;
+          this.profile.data.about = data2.data.about;
+          this.profile.data.newsletter = data2.data.newsletter;
+          this.profile.data.seller = data2.data.seller;
+          this.profile.data.country_id = data2.data.country_id;
+          this.profile.data.sub_country_id = data2.data.sub_country_id;
         // setValue: With setValue, you assign every form control value at once by passing in a data object whose properties exactly match the form model behind the FormGroup.
         // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
         // More info: https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#populate-the-form-model-with-_setvalue_-and-_patchvalue_
@@ -90,26 +112,32 @@ export class SettingsPage {
         let currentLang = this.translate.currentLang;
   
         this.settingsForm.patchValue({
-          name: data2.data.lastname,
-          location: data2.data.city,
-          description: data2.data.about,
+          name: this.profile.data.lastname,
+          location: this.profile.data.city,
+          description: this.profile.data.about,
           currency: 'dollar',
           weather: 'fahrenheit',
           notifications: true,
           language: this.languages.filter(x => x.code == currentLang)
         });
   
-        this.loading.dismiss();
+        
   
         this.settingsForm.get('language').valueChanges.subscribe((lang) => {
           this.setLanguage(lang);
         });
-      });
+      }
+
+      
+    });
+
+    
 
     }, error => {
       console.log('error : '+ error);
     });
 
+    this.loading.dismiss();
 
    
   }
@@ -170,7 +198,7 @@ export class SettingsPage {
                    let image  = normalizeURL(newImage);
 
                    this.profileService.setUserImage(image);
-                   this.profile.data.image = image;
+                   this.profile.data.fb_uid = image;
                  },
                  error => console.error("Error cropping image", error)
                );

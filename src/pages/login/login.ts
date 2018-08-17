@@ -38,7 +38,7 @@ export class LoginPage {
      private http: Http,
     public loadingCtrl: LoadingController
   ) {
-    this.main_page = { component: TabsNavigationPage };
+    this.main_page = { component: ProfilePage }; //TabsNavigationPage };
 
     this.login = new FormGroup({
       email: new FormControl('rickykei@yahoo.com', Validators.required),
