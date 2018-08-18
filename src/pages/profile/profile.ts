@@ -41,7 +41,7 @@ export class ProfilePage {
       console.log('..data :'+ data.email);
 
       var url ;
-      if(data.password=='')
+      if(data.uid=='')
       {   
         // normal
         url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  

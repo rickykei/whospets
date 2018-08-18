@@ -70,7 +70,7 @@ export class SettingsPage {
     this.nativeStorage.getItem('email_user')
     .then(data => {
       var url ;
-      if(data.password=='')
+      if(data.uid=='')
       {   
         // normal
         url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
