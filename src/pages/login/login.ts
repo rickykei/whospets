@@ -42,9 +42,13 @@ export class LoginPage {
 	private http: Http, 
     public loadingCtrl: LoadingController
   ) {
+<<<<<<< HEAD
 	  
 	   
     this.main_page = { component: TabsNavigationPage };
+=======
+    this.main_page = { component: ProfilePage }; //TabsNavigationPage };
+>>>>>>> joanne-v0.01
 
 	  
     this.login = new FormGroup({

@@ -1,7 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
+<<<<<<< HEAD
 <widget id="com.whospets.aos" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>whospets</name>
     <description>whospets</description>
+=======
+<widget id="com.whopet.aos" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>whopet</name>
+    <description>whopet</description>
+>>>>>>> joanne-v0.01
     <author email="hi@ionicthemes.com" href="https://ionicthemes.com/">Ionic Themes</author>
     <content src="index.html" />
     <access origin="*" />
