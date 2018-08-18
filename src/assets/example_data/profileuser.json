@@ -1,0 +1,25 @@
+{
+    "success":"true", 
+    "data":
+    {
+        "status":"true",
+        "message":"Successfully Login!",
+        "id":"498","tc":"",
+        "user_id":"501",
+        "lastname":"",
+        "firstname":"",
+        "email":"wkying@yahoo.com.hk",
+        "street":"",
+        "city":"",
+        "about":"",
+        "newsletter":"",
+        "seller":"",
+        "notification":"",
+        "gender":"",
+        "birthday":"",
+        "bio":"",
+        "country_id":"",
+        "sub_country_id":""
+        
+    }
+}

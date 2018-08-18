@@ -8,7 +8,7 @@
   <div class="user-details">
     <ion-row class="user-main-data-row">
       <ion-col no-padding width-33>
-        <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.data.image" alt="profile.data.lastname" title="profile.data.lastname"></preload-image>
+        <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.data.image" alt="profile.data.firstname" title="profile.data.firstname"></preload-image>
       </ion-col>
       <ion-col no-padding>
        <!-- <ion-row class="social-presence-row">
@@ -36,14 +36,14 @@
     </ion-row>
     <ion-row wrap class="user-bio-row">
       <ion-col no-padding width-50>
-        <h2 class="user-name">{{profile.data.lastname}}</h2>
+        <h2 class="user-name">{{profile.data.firstname}}</h2>
       </ion-col>
       <ion-col no-padding width-50>
         <span class="user-location">{{profile.data.city}}</span>
       </ion-col>
       <ion-col no-padding width-100>
         <p class="user-description">
-          {{profile.user.about}}
+          {{profile.data.about}}
         </p>
       </ion-col>
     </ion-row>
@@ -59,7 +59,7 @@
   <div [ngSwitch]="display" class="user-content">
     <div *ngSwitchCase="'list'" class="list-view">
       <div class="list-item" *ngFor="let post of profile.posts">
-        <span class="item-date">{{post.date}}</span>
+        <span class="item-date">{{profile.data.email}}</span>
         <ion-card>
           <preload-image [ratio]="{w:1, h:1}" [src]="post.image" title=""></preload-image>
           <ion-card-content>

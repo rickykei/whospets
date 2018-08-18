@@ -1,7 +1,6 @@
 
 
 export class UserModel {
-  image: string;
   status: string;
   message: string;
   id: number = 0;
@@ -21,6 +20,8 @@ export class UserModel {
   bio:string;
   country_id:number =0;
   sub_country_id:number=0;
+  image: string;
+
 }
 
 

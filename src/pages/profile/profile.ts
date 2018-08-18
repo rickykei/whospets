@@ -50,20 +50,22 @@ export class ProfilePage {
       //   //fb
       //  url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
       // }
-      var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
+     
+     var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
+
+    //  var url = './assets/example_data/profile.json';
       console.log('..url :'+ url);
 
       this.profileService.getData(url)
       .then(data2 => {
         console.log('..data2 :'+ data2.success);
-        console.log('..data2 user :'+ data2.data);
 
         this.status = data2.success;
-        this.profile.data = data2.data;
+        this.profile.data.image = data2.data.image;
 
         this.profile.data.email = data2.data.email;
 
-
+        console.log('..data2 image :'+ this.profile.data.image);
         console.log('..data2 email:'+ this.profile.data.email);
 
         // this.profile.following = data.following;
