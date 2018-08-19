@@ -9,6 +9,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import 'rxjs/Rx';
 
 import { NativeStorage } from '@ionic-native/native-storage';
+import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 
 
 @Component({
@@ -93,10 +94,6 @@ export class ProfilePage {
     }, error => {
       console.log('error : '+ error);
     });
-    
-
-
-   
   }
 
 /*
@@ -153,6 +150,11 @@ export class ProfilePage {
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.app.getRootNav().push(SettingsPage);
+  }
+
+  backToMainPage()
+  {
+    this.app.getRootNav().push(TabsNavigationPage);
   }
 
   onSegmentChanged(segmentButton: SegmentButton) {

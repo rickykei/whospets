@@ -20,6 +20,11 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 
 import { NativeStorage } from '@ionic-native/native-storage';
+import { LoginPage } from '../login/login';
+import { FacebookUserModel } from '../facebook-login/facebook-user.model';
+import { FacebookLoginService } from '../facebook-login//facebook-login.service';
+
+
 
 
 @Component({
@@ -36,6 +41,9 @@ export class SettingsPage {
   profile: ProfileModel = new ProfileModel();
   languages: Array<LanguageModel>;
 
+  user: FacebookUserModel = new FacebookUserModel();
+
+
   constructor(
     public nav: NavController,
     public modal: ModalController,
@@ -47,6 +55,7 @@ export class SettingsPage {
     public imagePicker: ImagePicker,
     public cropService: Crop,
     public nativeStorage:NativeStorage,
+    public facebookLoginService: FacebookLoginService,
     public platform: Platform
   ) {
 
@@ -127,24 +136,24 @@ export class SettingsPage {
           this.setLanguage(lang);
         });
       }
-
-      
     });
-
-    
-
     }, error => {
       console.log('error : '+ error);
     });
 
     this.loading.dismiss();
 
-   
   }
 
   logout() {
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(this.rootPage);
+    this.facebookLoginService.doFacebookLogout()
+    .then((res) => {
+      this.user = new FacebookUserModel();
+    }, (error) => {
+      console.log("Facebook logout error", error);
+    });
+    this.nav.setRoot(LoginPage);
   }
 
   showTermsModal() {
