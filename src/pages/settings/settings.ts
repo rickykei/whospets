@@ -25,7 +25,8 @@ import { FacebookUserModel } from '../facebook-login/facebook-user.model';
 import { FacebookLoginService } from '../facebook-login//facebook-login.service';
 
 
-
+import {Http} from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'settings-page',
@@ -56,6 +57,7 @@ export class SettingsPage {
     public cropService: Crop,
     public nativeStorage:NativeStorage,
     public facebookLoginService: FacebookLoginService,
+    private http: Http,
     public platform: Platform
   ) {
 
@@ -64,13 +66,19 @@ export class SettingsPage {
     this.languages = this.languageService.getLanguages();
 
     this.settingsForm = new FormGroup({
-      name: new FormControl(),
-      location: new FormControl(),
-      description: new FormControl(),
-      currency: new FormControl(),
-      weather: new FormControl(),
+      username: new FormControl(),
+      firstname: new FormControl(),
+      lastname: new FormControl(),
+      email: new FormControl(),
+      city: new FormControl(),
+      street: new FormControl(),
       notifications: new FormControl(),
-      language: new FormControl()
+      about: new FormControl(),
+      language: new FormControl(),
+      newsletter: new FormControl(),
+      seller: new FormControl(),
+      gender: new FormControl()
+
     });
   }
 
@@ -121,13 +129,20 @@ export class SettingsPage {
         let currentLang = this.translate.currentLang;
   
         this.settingsForm.patchValue({
-          name: this.profile.data.lastname,
-          location: this.profile.data.city,
-          description: this.profile.data.about,
-          currency: 'dollar',
-          weather: 'fahrenheit',
+
+          username: this.profile.data.email,
+          firstname: this.profile.data.firstname,
+          lastname: this.profile.data.lastname,
+          email: this.profile.data.email,
+          city: this.profile.data.city,
+          street: this.profile.data.street,
+          about: this.profile.data.about,
           notifications: true,
+          newsletter: true,
+          seller: true,
+          gender: true,
           language: this.languages.filter(x => x.code == currentLang)
+
         });
   
         
@@ -143,6 +158,24 @@ export class SettingsPage {
 
     this.loading.dismiss();
 
+  }
+
+  saveProfile()
+  {
+    let data = this.settingsForm.value;
+ 
+    console.log('-------------------update profile');
+    //http://api.whospets.com/api/users/createprofile.php?username=rickykei@yahoo.com.hk&street=street
+     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + '&street='+data.street + '&about='+data.about + '&notification='+data.notifications     + '&newsletter='+data.newsletter + '&seller='+data.seller + '&gender='+data.gender       ;
+     console.log(url);
+    
+    this.http.get(url).map(res => res.json()).subscribe(data2 => {
+      console.log("success to update profile");
+
+     }, error => {
+      console.log("fail to update profile");
+
+     });
   }
 
   logout() {

@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ 'SETTINGS' | translate }}</ion-title>
     <ion-buttons end [hidden]="!settingsForm.dirty">
-      <button ion-button>
+      <button ion-button  (click)="saveProfile()">
         {{ 'SAVE' | translate }}
       </button>
     </ion-buttons>
@@ -25,21 +25,37 @@
 
   <form [formGroup]="settingsForm" class="settings-form">
     <ion-list class="user-data-content">
+        <ion-item>
+            <ion-label stacked>{{ 'USERNAME' | translate }}</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+          </ion-item>
       <ion-item>
-        <ion-label stacked>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" formControlName="name"></ion-input>
+        <ion-label stacked>{{ 'FIRSTNAME' | translate }}</ion-label>
+        <ion-input type="text" formControlName="firstname"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{ 'LOCATION' | translate }}</ion-label>
-        <ion-input type="text" formControlName="location"></ion-input>
+        <ion-label stacked>{{ 'LASTNAME' | translate }}</ion-label>
+        <ion-input type="text" formControlName="lastname"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{ 'DESCRIPTION' | translate }}</ion-label>
-        <ion-textarea formControlName="description" rows="5" placeholder="Your description here..."></ion-textarea>
+          <ion-label stacked>{{ 'EMAIL' | translate }}</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+      <ion-item>
+          <ion-label stacked>{{ 'CITY' | translate }}</ion-label>
+          <ion-input type="text" formControlName="city"></ion-input>
+        </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'STREET' | translate }}</ion-label>
+        <ion-input type="text" formControlName="street"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'ABOUT' | translate }}</ion-label>
+        <ion-textarea formControlName="about" rows="5" placeholder="Your description here..."></ion-textarea>
       </ion-item>
     </ion-list>
 
-    <ion-row class="user-preferences-row">
+    <!-- <ion-row class="user-preferences-row">
       <span class="radio-tags-label">{{'CURRENCY' | translate}}</span>
       <ion-list class="radio-tags" radio-group formControlName="currency">
         <ion-item class="radio-tag">
@@ -75,7 +91,7 @@
           <ion-radio value="fahrenheit"></ion-radio>
         </ion-item>
       </ion-list>
-    </ion-row>
+    </ion-row> -->
 
     <ion-list class="user-data-content">
     <!-- <ion-list class="user-preferences-row"> -->
@@ -93,6 +109,28 @@
         <ion-toggle formControlName="notifications"></ion-toggle>
       </ion-item>
     </ion-list>
+
+    <ion-list class="switchers-list">
+        <ion-item class="switcher-item">
+          <ion-label>{{'NEWSLETTER' | translate}}</ion-label>
+          <ion-toggle formControlName="newsletter"></ion-toggle>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="switchers-list">
+          <ion-item class="switcher-item">
+            <ion-label>{{'SELLER' | translate}}</ion-label>
+            <ion-toggle formControlName="seller"></ion-toggle>
+          </ion-item>
+        </ion-list>
+
+        <ion-list class="switchers-list">
+            <ion-item class="switcher-item">
+              <ion-label>{{'GENDER' | translate}}</ion-label>
+              <ion-toggle formControlName="gender"></ion-toggle>
+            </ion-item>
+          </ion-list>
+     
   </form>
 
   <button class="alt-button rate-app-button" ion-button full (click)="rateApp()">{{'RATE_APP' | translate}}</button>
