@@ -39,18 +39,14 @@ export class LoginPage {
 	public nativeStorage:NativeStorage,
     //public googleLoginService: GoogleLoginService,
     //public twitterLoginService: TwitterLoginService,
-	private http: Http, 
+	private http: Http,
     public loadingCtrl: LoadingController
   ) {
-<<<<<<< HEAD
-	  
-	   
-    this.main_page = { component: TabsNavigationPage };
-=======
-    this.main_page = { component: ProfilePage }; //TabsNavigationPage };
->>>>>>> joanne-v0.01
 
-	  
+    this.main_page = { component: ProfilePage }; //TabsNavigationPage };
+
+
+
     this.login = new FormGroup({
       email: new FormControl('rickykei@yahoo.com', Validators.required),
       password: new FormControl('1234', Validators.required)
@@ -62,13 +58,13 @@ export class LoginPage {
 
   doLogin(){
 	  let data = this.login.value;
- 
+
    console.log('-------------------doLogin');
     var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password ;
     console.log(url);
-	 
+
 	 this.http.get(url).map(res => res.json()).subscribe(data2 => {
- 
+
 
     console.log(data2.success);
 
@@ -80,14 +76,14 @@ export class LoginPage {
         console.log('inside true');
 
         this.setEmailUser(this.email.value, this.password.value, '');
-        this.nav.setRoot(ProfilePage);    
+        this.nav.setRoot(ProfilePage);
       }
       else
       {
         console.log('inside false');
 
         this.removeEmailUser();
-        this.nav.setRoot(SignupPage);    
+        this.nav.setRoot(SignupPage);
       }
     });
   }
@@ -99,7 +95,7 @@ export class LoginPage {
   setEmailUser(_email :string, _password:string, _uid : string)
   {
     this.nativeStorage.setItem('email_user',
-    {       
+    {
       email: _email,
       password: _password,
       uid : _uid
@@ -108,7 +104,7 @@ export class LoginPage {
       () =>  console.log('EMAIL ： Stored item!'),
       error => console.error('Error storing item')
     );
- 
+
   }
 
   doFacebookLogin() {
@@ -137,8 +133,8 @@ export class LoginPage {
       });
     });
   }
- 
- 
+
+
   goToSignup() {
     this.nav.push(SignupPage);
   }
