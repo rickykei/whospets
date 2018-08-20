@@ -12,12 +12,12 @@ export class UserModel {
   street:string;
   city:string;
   about:string;
-  newsletter:boolean;
-  seller:boolean;
-  notification:boolean;
+  newsletter: string;
+  seller:string;
+  notification:string;
   gender:string;
   birthday: Date;
-  bio:boolean;
+  bio:string;
   country_id:number =0;
   sub_country_id:number=0;
   fb_uid: string ='http://graph.facebook.com/100001704123828/picture';

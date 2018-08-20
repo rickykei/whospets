@@ -58,10 +58,7 @@
         <ion-datetime displayFormat="MM/DD/YYYY" formControlName="birthday"></ion-datetime>
       </ion-item>
     </ion-list>
-    <ion-item>
-      <ion-label stacked>{{ 'BIO' | translate }}</ion-label>
-      <ion-input type="text" formControlName="bio"></ion-input>
-    </ion-item>
+  
 
     <!-- <ion-row class="user-preferences-row">
       <span class="radio-tags-label">{{'CURRENCY' | translate}}</span>
@@ -110,6 +107,13 @@
         <ion-select formControlName="language" cancelText="{{ 'CANCEL' | translate }}" okText="{{ 'OK' | translate }}">
           <ion-option *ngFor="let language of languages" [value]="language">{{ language.name }}</ion-option>
         </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="switchers-list">
+      <ion-item class="switcher-item">
+        <ion-label>{{ 'BIO' | translate }}</ion-label>
+        <ion-toggle formControlName="bio"></ion-toggle>
       </ion-item>
     </ion-list>
 

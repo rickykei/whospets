@@ -122,11 +122,11 @@ export class SettingsPage {
           this.profile.data.street = data2.data.street;
           this.profile.data.city = data2.data.city;
           this.profile.data.about = data2.data.about;
-          this.profile.data.newsletter = data2.data.newsletter;
-          this.profile.data.seller = data2.data.seller;
-          this.profile.data.notification = data2.data.notification;
+          this.profile.data.newsletter = (data2.data.newsletter=='1'? 'true':'false');
+          this.profile.data.seller = (data2.data.seller=='1'? 'true':'false');
+          this.profile.data.notification = (data2.data.notification=='1'? 'true':'false');
           this.profile.data.gender = data2.data.gender;
-          this.profile.data.bio = data2.data.bio;
+          this.profile.data.bio = (data2.data.bio=='1'? 'true':'false');
           this.profile.data.birthday = data2.data.birthday;
           this.profile.data.country_id = data2.data.country_id;
           this.profile.data.sub_country_id = data2.data.sub_country_id;
@@ -174,10 +174,14 @@ export class SettingsPage {
   saveProfile()
   {
     let data = this.settingsForm.value;
+    
  
     console.log('-------------------update profile');
+
+    console.log('-----data notification' + data.notifications);
+
     //http://api.whospets.com/api/users/createprofile.php?username=rickykei@yahoo.com.hk&street=street
-     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + '&street='+data.street + '&about='+data.about + '&notification='+data.notifications     + '&newsletter='+data.newsletter + '&seller='+data.seller + '&gender='+data.gender   + '&birthday='+data.birthday+ '&bio='+data.bio  + '&country_id='+data.countryId + '&sub_country_id='+data.subCountryId   ;
+     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + '&street='+data.street + '&about='+data.about + '&notification='+ (data.notifications ==false?'0':'1' )    + '&newsletter='+ (data.newsletter ==false?'0':'1') + '&seller='+ (data.seller==false?'0':'1' ) + '&gender='+data.gender   + '&birthday='+data.birthday+ '&bio='+ (data.bio ==false?'0':'1') + '&country_id='+data.countryId + '&sub_country_id='+data.subCountryId   ;
      console.log(url);
     
     this.http.get(url).map(res => res.json()).subscribe(data2 => {
