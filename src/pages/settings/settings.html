@@ -27,7 +27,7 @@
     <ion-list class="user-data-content">
         <ion-item>
             <ion-label stacked>{{ 'USERNAME' | translate }}</ion-label>
-            <ion-input type="text" formControlName="username"></ion-input>
+            <ion-input type="text" readonly="{{isReadonly}}"  formControlName="username"></ion-input>
           </ion-item>
       <ion-item>
         <ion-label stacked>{{ 'FIRSTNAME' | translate }}</ion-label>
@@ -53,7 +53,15 @@
         <ion-label stacked>{{ 'ABOUT' | translate }}</ion-label>
         <ion-textarea formControlName="about" rows="5" placeholder="Your description here..."></ion-textarea>
       </ion-item>
+      <ion-item>
+        <ion-label>stacked>{{ 'BIRTHDAY' | translate }}</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" formControlName="birthday"></ion-datetime>
+      </ion-item>
     </ion-list>
+    <ion-item>
+      <ion-label stacked>{{ 'BIO' | translate }}</ion-label>
+      <ion-input type="text" formControlName="bio"></ion-input>
+    </ion-item>
 
     <!-- <ion-row class="user-preferences-row">
       <span class="radio-tags-label">{{'CURRENCY' | translate}}</span>
@@ -93,6 +101,8 @@
       </ion-list>
     </ion-row> -->
 
+    
+
     <ion-list class="user-data-content">
     <!-- <ion-list class="user-preferences-row"> -->
       <ion-item>
@@ -124,13 +134,38 @@
           </ion-item>
         </ion-list>
 
-        <ion-list class="switchers-list">
-            <ion-item class="switcher-item">
-              <ion-label>{{'GENDER' | translate}}</ion-label>
-              <ion-toggle formControlName="gender"></ion-toggle>
-            </ion-item>
-          </ion-list>
+          <ion-item>
+            <ion-label>{{'GENDER' | translate}}</ion-label>
+            <ion-select formControlName="gender">
+              <ion-option value="f">Female</ion-option>
+              <ion-option value="m">Male</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>{{'COUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="countryId" multiple="true">
+              <ion-option>Hong Kong</ion-option>
+              <ion-option>Black Olives</ion-option>
+              <ion-option>Extra Cheese</ion-option>
+              <ion-option>Mushrooms</ion-option>
+              <ion-option>Pepperoni</ion-option>
+              <ion-option>Sausage</ion-option>
+            </ion-select>
+          </ion-item>
      
+          <ion-item>
+            <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="subCountryId" multiple="true">
+              <ion-option>Hong Kong</ion-option>
+              <ion-option>Black Olives</ion-option>
+              <ion-option>Extra Cheese</ion-option>
+              <ion-option>Mushrooms</ion-option>
+              <ion-option>Pepperoni</ion-option>
+              <ion-option>Sausage</ion-option>
+            </ion-select>
+          </ion-item>
+
   </form>
 
   <button class="alt-button rate-app-button" ion-button full (click)="rateApp()">{{'RATE_APP' | translate}}</button>

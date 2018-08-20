@@ -64,24 +64,24 @@ export class MyApp {
         }
         Observable.forkJoin(
           this.translate.get('HOME'),
-          this.translate.get('FORMS'),
-          this.translate.get('FUNCTIONALITIES'),
-          this.translate.get('LAYOUTS'),
+          // this.translate.get('FORMS'),
+          // this.translate.get('FUNCTIONALITIES'),
+          // this.translate.get('LAYOUTS'),
           this.translate.get('SETTINGS'),
-          this.translate.get('WORDPRESS_INTEGRATION'),
-          this.translate.get('FIREBASE_INTEGRATION')
+          // this.translate.get('WORDPRESS_INTEGRATION'),
+          // this.translate.get('FIREBASE_INTEGRATION')
         ).subscribe(data => {
           this.pages = [
-            { title: data[0], icon: 'home', component: TabsNavigationPage },
-            { title: data[1], icon: 'create', component: FormsPage },
-            { title: data[2], icon: 'code', component: FunctionalitiesPage }
+            { title: data[0], icon: 'home', component: TabsNavigationPage }
+            // { title: data[1], icon: 'create', component: FormsPage },
+            // { title: data[2], icon: 'code', component: FunctionalitiesPage }
           ];
 
           this.pushPages = [
-            { title: data[3], icon: 'grid', component: LayoutsPage },
-            { title: data[4], icon: 'settings', component: SettingsPage },
-            { title: data[5], icon: 'logo-wordpress', component: WordpressMenuPage },
-            { title: data[6], icon: 'flame', component: FirebaseLoginPage }
+            // { title: data[3], icon: 'grid', component: LayoutsPage },
+            { title: data[1], icon: 'settings', component: SettingsPage }
+            // { title: data[5], icon: 'logo-wordpress', component: WordpressMenuPage },
+            // { title: data[6], icon: 'flame', component: FirebaseLoginPage }
           ];
         });
       });

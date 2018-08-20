@@ -77,7 +77,11 @@ export class SettingsPage {
       language: new FormControl(),
       newsletter: new FormControl(),
       seller: new FormControl(),
-      gender: new FormControl()
+      gender: new FormControl(),
+      bio: new FormControl(),
+      birthday: new FormControl(),
+      countryId: new FormControl(),
+      subCountryId: new FormControl()
 
     });
   }
@@ -120,6 +124,10 @@ export class SettingsPage {
           this.profile.data.about = data2.data.about;
           this.profile.data.newsletter = data2.data.newsletter;
           this.profile.data.seller = data2.data.seller;
+          this.profile.data.notification = data2.data.notification;
+          this.profile.data.gender = data2.data.gender;
+          this.profile.data.bio = data2.data.bio;
+          this.profile.data.birthday = data2.data.birthday;
           this.profile.data.country_id = data2.data.country_id;
           this.profile.data.sub_country_id = data2.data.sub_country_id;
         // setValue: With setValue, you assign every form control value at once by passing in a data object whose properties exactly match the form model behind the FormGroup.
@@ -137,12 +145,15 @@ export class SettingsPage {
           city: this.profile.data.city,
           street: this.profile.data.street,
           about: this.profile.data.about,
-          notifications: true,
-          newsletter: true,
-          seller: true,
-          gender: true,
-          language: this.languages.filter(x => x.code == currentLang)
-
+          notifications: this.profile.data.notification,
+          newsletter: this.profile.data.newsletter,
+          seller: this.profile.data.seller,
+          gender: this.profile.data.gender,
+          language: this.languages.filter(x => x.code == currentLang),
+          bio : this.profile.data.bio,
+          birthday : this.profile.data.birthday ,
+          countryId : this.profile.data.country_id ,
+          subCountryId : this.profile.data.sub_country_id ,
         });
   
         
@@ -166,7 +177,7 @@ export class SettingsPage {
  
     console.log('-------------------update profile');
     //http://api.whospets.com/api/users/createprofile.php?username=rickykei@yahoo.com.hk&street=street
-     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + '&street='+data.street + '&about='+data.about + '&notification='+data.notifications     + '&newsletter='+data.newsletter + '&seller='+data.seller + '&gender='+data.gender       ;
+     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + '&street='+data.street + '&about='+data.about + '&notification='+data.notifications     + '&newsletter='+data.newsletter + '&seller='+data.seller + '&gender='+data.gender   + '&birthday='+data.birthday+ '&bio='+data.bio  + '&country_id='+data.countryId + '&sub_country_id='+data.subCountryId   ;
      console.log(url);
     
     this.http.get(url).map(res => res.json()).subscribe(data2 => {
