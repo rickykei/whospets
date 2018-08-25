@@ -1,60 +1,39 @@
 {
     "banner_image": "./assets/images/listing/600x300banner1.png",
-    "banner_title": "Sports",
+    "banner_title": "Location",
     "populars": [
         {
-            "title": "Air Sports",
+            "title": "Shatin",
             "image": "./assets/images/listing/300x300AirSports.png"
-        },
-        {
-            "title": "Water Sports",
-            "image": "./assets/images/listing/300x300WaterSports.png"
-        },
-        {
-            "title": "Beach Sports",
-            "image": "./assets/images/listing/300x300BeachSports.png"
-        },
-        {
-            "title": "Extreme Sports",
-            "image": "./assets/images/listing/300x300ExtremeSports.png"
-        },
-        {
-            "title": "Athletic Sports",
-            "image": "./assets/images/listing/300x300AthleticSports.png"
-        },
-        {
-            "title": "Combat Sports",
-            "image": "./assets/images/listing/300x300CombatSports.png"
         }
     ],
     "categories": [
         {
-            "title": "BasketBall",
-            "image": "./assets/images/listing/200x200basquet.png"
+            "title": "Lost Pet",
+            "image": "./assets/images/listing/200x200basquet.png",
+			"catid": "1"
         },
         {
-            "title": "Boxing",
-            "image": "./assets/images/listing/200x200boxeo.png"
+            "title": "Adoption ",
+            "image": "./assets/images/listing/200x200boxeo.png",
+			"catid": "3"
         },
         {
-            "title": "Crossfit",
-            "image": "./assets/images/listing/200x200crossfit.png"
+            "title": "Pet Found",
+            "image": "./assets/images/listing/200x200crossfit.png",
+			"catid": "2"
         },
         {
-            "title": "Futbol",
+            "title": "Second Hand",
             "image": "./assets/images/listing/200x200futbol.png"
         },
         {
-            "title": "Running",
+            "title": "Q&A",
             "image": "./assets/images/listing/200x200running.png"
         },
         {
-            "title": "Swimming",
+            "title": "Lifestyle",
             "image": "./assets/images/listing/200x200swimming.png"
-        },
-        {
-            "title": "Yoga",
-            "image": "./assets/images/listing/200x200yoga.png"
         }
 
     ]

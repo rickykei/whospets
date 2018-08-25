@@ -8,4 +8,5 @@ export class ListingModel {
 export class ListingItemModel {
   title: string;
   image: string;
+  catid: string;
 }

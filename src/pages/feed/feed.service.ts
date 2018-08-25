@@ -3,16 +3,19 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { FeedPostModel } from './feed.model';
+import { FeedModel } from './feed.model';
 
 @Injectable()
 export class FeedService {
   constructor(public http: Http) {}
 
-  getPosts(): Promise<FeedPostModel[]> {
-    return this.http.get('./assets/example_data/feed.json')
+  getPosts(catid): Promise<FeedModel> {
+    //return this.http.get('./assets/example_data/feed.json')
+	console.log('http://api.whospets.com/api/categories/get_pets.php?pet_status='+catid);
+	  return this.http.get('http://api.whospets.com/api/categories/get_pets.php?pet_status='+catid)
                .toPromise()
-               .then(response => response.json().feed as FeedPostModel[])
+               .then(response =>
+			   response.json() as FeedModel)
                .catch(this.handleError);
   }
 

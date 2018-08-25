@@ -4,7 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import 'rxjs/Rx';
 
-import { FeedModel } from './feed.model';
+import { FeedModel, DataModel,FeedPostModel} from './feed.model';
 import { FeedService } from './feed.service';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -14,7 +14,9 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 })
 export class FeedPage {
   feed: FeedModel = new FeedModel();
-
+  feeddata : DataModel = new DataModel();
+  details: Array<FeedPostModel>;
+  
   constructor(
     public nav: NavController,
     public feedService: FeedService,
@@ -26,10 +28,18 @@ export class FeedPage {
 
 
   ionViewDidLoad() {
+  console.log('feed.ts');
     this.feedService
-      .getPosts()
+      .getPosts(this.feed.category.catid)
       .then(posts => {
-        this.feed.posts = posts;
+	   console.log('feed.ts.getpost');
+      //  this.feed.posts = posts;
+		this.feed.success =  posts.success;
+        this.feed.data = posts.data;
+        this.feeddata = posts.data;
+        this.details = posts.data.pets;
+
+        console.log('post :' + this.posts.success);
       });
   }
 
