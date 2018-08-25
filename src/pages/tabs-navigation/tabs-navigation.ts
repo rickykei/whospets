@@ -48,23 +48,23 @@ export class TabsNavigationPage {
 
   ionViewDidLoad() {
 
-    this.nativeStorage.getItem('1stLogin')
-      .then(data => {
-        // if there is not 1st login, do nothings
-        this.checkLogged();
-       }, error =>
-       {
-        this.nav.setRoot(WalkthroughPage);
+    // this.nativeStorage.getItem('1stLogin')
+    //   .then(data => {
+    //     // if there is not 1st login, do nothings
+    //     this.checkLogged();
+    //    }, error =>
+    //    {
+    //     this.nav.setRoot(WalkthroughPage);
   
-        this.nativeStorage.setItem('1stLogin',
-        {       
-          login: true,
-        })
-        .then(
-          () =>  console.log('1sr login , Stored item!'),
-          error => console.error('Error storing item')
-        );
-        });
+    //     this.nativeStorage.setItem('1stLogin',
+    //     {       
+    //       login: true,
+    //     })
+    //     .then(
+    //       () =>  console.log('1sr login , Stored item!'),
+    //       error => console.error('Error storing item')
+    //     );
+    //     });
   }
 
   checkLogged(){
