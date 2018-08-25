@@ -29,6 +29,7 @@ export class TabsNavigationPage {
   tab2Root: any;
   tab3Root: any;
 
+ 
   posts: LoginModel = new LoginModel();
   logindata : LoginContentModel = new LoginContentModel();
 
@@ -39,13 +40,44 @@ export class TabsNavigationPage {
     public tabsNavigationService: TabsNavigationService,
     public nativeStorage:NativeStorage,
     public facebookLoginService: FacebookLoginService
-  ) {
+    ) {
     this.tab1Root = ListingPage;
     this.tab2Root = ProfilePage;
     this.tab3Root = NotificationsPage;
 
   }
 
+ 
+   // 1st log into this page, check is it logged user before
+   ionViewWillEnter() {    
+    if(!this.isLogged()){
+      this.nav.setRoot(LoginPage);
+    }
+  }
+
+  isLogged(){
+
+    //debugging
+   // return true;      
+ 
+   this.nativeStorage.getItem('email_user')
+   .then(function (data) {
+       
+    console.log(data.email);
+    //http://api.whospets.com/api/users/login.php?username=rickykei@yahoo.com&logintype=normal&password=1234
+
+
+    var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
+    console.log(url);
+
+    this.http.get(url).subscribe(data => {
+      console.log(data);
+    });
+
+    return false;
+  });
+  }
+ 
   ionViewDidLoad() {
 
     // this.nativeStorage.getItem('1stLogin')
@@ -196,6 +228,7 @@ export class TabsNavigationPage {
   //   return false;
   // });
   // }
+ 
 }
   
 
