@@ -39,6 +39,7 @@ import { GoogleLoginPage } from '../pages/google-login/google-login';
 import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
 import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
+import { LostPetPage } from '../pages/lostpet/lostpet';
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -87,6 +88,7 @@ import { FirebaseService } from '../pages/firebase-integration/firebase-integrat
 import { FirebaseAuthService } from '../pages/firebase-integration/firebase-auth.service';
 import { WordpressService } from '../pages/wordpress-integration/wordpress-integration.service';
 import { LanguageService } from '../providers/language/language.service';
+import { LostPetServices} from '../pages/lostpet/lostpet.service';
 
 // Ionic Native Plugins
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -139,6 +141,7 @@ export function createTranslateLoader(http: HttpClient) {
     FiltersPage,
     TermsOfServicePage,
     PrivacyPolicyPage,
+    LostPetPage,
 
     //functionalities
     MapsPage,
@@ -235,7 +238,8 @@ export function createTranslateLoader(http: HttpClient) {
     TwitterLoginPage,
 		AdsPage,
 		FormValidationsPage,
-		VideoPlaylistPage,
+    VideoPlaylistPage,
+    LostPetPage,
     //firebase integration
     FirebaseFeedPage,
     FirebaseNewUserModalPage,
@@ -263,6 +267,7 @@ export function createTranslateLoader(http: HttpClient) {
     List2Service,
     ScheduleService,
     TabsNavigationService,
+    LostPetServices,
     //functionalities
     FacebookLoginService,
     GoogleLoginService,

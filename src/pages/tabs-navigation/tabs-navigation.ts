@@ -68,6 +68,7 @@ export class TabsNavigationPage {
   }
 
   checkLogged(){
+
     this.nativeStorage.getItem('email_user')
     .then(data => {
       console.log(data.email);
@@ -87,6 +88,8 @@ export class TabsNavigationPage {
   }
 
   checkNormalLogin(email :string, password: string, uid :string) {
+
+
 
     console.log('1'+ email);
      console.log('1' + password);

@@ -31,7 +31,30 @@
   </ion-scroll>
   <h4 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}</h4>
   <ion-row class="grid-categories">
-    <ion-col width-50 class="category-item" *ngFor="let category of listing.categories">
+  
+
+    <ion-col width-50 class="category-item" >
+        <background-image tappable class="category-heading" src="./assets/images/listing/200x200boxeo.png" (click)="goToLostPet()">
+          <ion-row class="heading-row">
+            <ion-col no-padding width-100>
+              <h2 class="category-title">LOST PET</h2>
+            </ion-col>
+          </ion-row>
+        </background-image>
+      </ion-col>
+
+
+    <ion-col width-50 class="category-item" >
+        <background-image tappable class="category-heading" src="./assets/images/listing/200x200boxeo.png" (click)="goToLostPet()">
+          <ion-row class="heading-row">
+            <ion-col no-padding width-100>
+              <h2 class="category-title">PETS</h2>
+            </ion-col>
+          </ion-row>
+        </background-image>
+      </ion-col>
+
+        <ion-col width-50 class="category-item" *ngFor="let category of listing.categories">
       <background-image tappable class="category-heading" [src]="category.image" (click)="goToFeed(category)">
         <ion-row class="heading-row">
           <ion-col no-padding width-100>

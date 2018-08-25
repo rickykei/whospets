@@ -6,6 +6,7 @@ import 'rxjs/Rx';
 
 import { ListingModel } from './listing.model';
 import { ListingService } from './listing.service';
+import { LostPetPage } from '../lostpet/lostpet';
 
 @Component({
   selector: 'listing-page',
@@ -30,9 +31,15 @@ export class ListingPage {
       });
   }
 
+  goToLostPet() {
+    // console.log("Clicked goToFeed", category);
+    // this.nav.push(FeedPage, { category: category });
+    this.nav.push(LostPetPage);
+  }
+
   goToFeed(category: any) {
     console.log("Clicked goToFeed", category);
-    this.nav.push(FeedPage, { category: category });
+     this.nav.push(FeedPage, { category: category });
   }
 
 }
