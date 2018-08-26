@@ -51,7 +51,7 @@ export class TabsNavigationPage {
    // 1st log into this page, check is it logged user before
    ionViewWillEnter() {    
     if(!this.isLogged()){
-      this.nav.setRoot(LoginPage);
+     // this.nav.setRoot(LoginPage);
     }
   }
 
@@ -74,7 +74,7 @@ export class TabsNavigationPage {
       console.log(data);
     });
 
-    return false;
+    return true;
   });
   }
  

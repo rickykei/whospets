@@ -4,36 +4,36 @@
     "populars": [
         {
             "title": "Shatin",
-            "image": "./assets/images/listing/300x300AirSports.png"
+            "image": "./assets/images/listing/district368.png"
         }
     ],
     "categories": [
         {
             "title": "Lost Pet",
-            "image": "./assets/images/listing/200x200basquet.png",
+            "image": "./assets/images/listing/200x200lostpet.png",
 			"catid": "1"
         },
         {
             "title": "Adoption ",
-            "image": "./assets/images/listing/200x200boxeo.png",
+            "image": "./assets/images/listing/200x200petadoption.png",
 			"catid": "3"
         },
         {
             "title": "Pet Found",
-            "image": "./assets/images/listing/200x200crossfit.png",
+            "image": "./assets/images/listing/200x200petfound.png",
 			"catid": "2"
         },
         {
             "title": "Second Hand",
-            "image": "./assets/images/listing/200x200futbol.png"
+            "image": "./assets/images/listing/200x200sell.png"
         },
         {
             "title": "Q&A",
-            "image": "./assets/images/listing/200x200running.png"
+            "image": "./assets/images/listing/200x200qna.png"
         },
         {
             "title": "Lifestyle",
-            "image": "./assets/images/listing/200x200swimming.png"
+            "image": "./assets/images/listing/200x200petlifestyle.png"
         }
 
     ]

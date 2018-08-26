@@ -51,9 +51,11 @@ export class FeedPostModel {
   message: string;
 	records: string;
 	pets: Array<FeedPostModel>;
+	
 }
 
 export class FeedModel {
   success: string;
   data: DataModel;
+  category: any;
 }

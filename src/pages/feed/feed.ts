@@ -16,7 +16,7 @@ export class FeedPage {
   feed: FeedModel = new FeedModel();
   feeddata : DataModel = new DataModel();
   details: Array<FeedPostModel>;
-  
+ 
   constructor(
     public nav: NavController,
     public feedService: FeedService,
@@ -24,6 +24,7 @@ export class FeedPage {
     public socialSharing: SocialSharing
   ) {
     this.feed.category = navParams.get('category');
+ 
   }
 
 
@@ -39,7 +40,7 @@ export class FeedPage {
         this.feeddata = posts.data;
         this.details = posts.data.pets;
 
-        console.log('post :' + this.posts.success);
+        console.log('post :' + this.feed.success);
       });
   }
 
