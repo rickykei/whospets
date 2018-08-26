@@ -4,6 +4,7 @@
 *~
 *.sw[mnpcod]
 *.log
+*.zip
 *.tmp
 *.tmp.*
 log.txt
