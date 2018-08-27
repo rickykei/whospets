@@ -9,7 +9,7 @@ import { WalkthroughPage } from '../walkthrough/walkthrough';
 
 import 'rxjs/Rx';
 
-import { ProfileModel } from '../profile/profile.model';
+import { ProfileModel, CountryIdModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -28,6 +28,8 @@ import { FacebookLoginService } from '../facebook-login//facebook-login.service'
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
+
+
 @Component({
   selector: 'settings-page',
   templateUrl: 'settings.html'
@@ -41,6 +43,8 @@ export class SettingsPage {
 
   profile: ProfileModel = new ProfileModel();
   languages: Array<LanguageModel>;
+
+  country: CountryIdModel = new CountryIdModel();
 
   user: FacebookUserModel = new FacebookUserModel();
 
@@ -87,6 +91,12 @@ export class SettingsPage {
   }
 
   ionViewDidLoad() {
+
+    this.profileService.getCountryCode()
+    .then(zone => {
+      this.country = zone;
+    });
+
 
     this.nativeStorage.getItem('email_user')
     .then(data => {

@@ -27,27 +27,27 @@ export class UserModel {
 
 /*
 
-{"success":"true", 
-"data":{
-  "status":"true",
-  "message":"Successfully Login!",
-  "id":"494",
-  "tc":"0",
-  "user_id":"494",
-  "lastname":"Ka",
-  "firstname":"Ricky",
-  "email":"rickykei@yahoo.com.hk",
-  "street":null,
-  "city":null,
-  "about":null,
-  "newsletter":null,
-  "seller":null,
-  "notification":null,
-  "gender":"M",
-  "birthday":null,
-  "bio":null,
-  "country_id":"1",
-  "sub_country_id":"307"}}
+{success:true, 
+data:{
+  status:true,
+  message:Successfully Login!,
+  id:494,
+  tc:0,
+  user_id:494,
+  lastname:Ka,
+  firstname:Ricky,
+  email:rickykei@yahoo.com.hk,
+  street:null,
+  city:null,
+  about:null,
+  newsletter:null,
+  seller:null,
+  notification:null,
+  gender:M,
+  birthday:null,
+  bio:null,
+  country_id:1,
+  sub_country_id:307}}
 */
 
 /*export class ProfileModel {
@@ -86,4 +86,17 @@ export class ProfileModel {
   // following: Array<UserModel> = [];
   // followers: Array<UserModel> = [];
   // posts: Array<ProfilePostModel> = [];
+}
+
+export class CountryIdModel{
+  zone:Array<ZoneModel>;
+}
+
+export class ZoneModel{
+  country_id: string;
+  parent_id: string;
+  title: string;
+  title_zh: string;
+  description: string;
+  language: string;
 }

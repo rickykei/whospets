@@ -148,26 +148,30 @@
 
           <ion-item>
             <ion-label>{{'COUNTRY' | translate}}</ion-label>
-            <ion-select formControlName="countryId" multiple="true">
+            <!-- <ion-select formControlName="countryId" multiple="true">
               <ion-option>Hong Kong</ion-option>
               <ion-option>Black Olives</ion-option>
               <ion-option>Extra Cheese</ion-option>
               <ion-option>Mushrooms</ion-option>
               <ion-option>Pepperoni</ion-option>
               <ion-option>Sausage</ion-option>
-            </ion-select>
+            </ion-select> -->
+            <ion-select> <ion-option *ngFor="let zone of country.zone">{{zone.title}}</ion-option> </ion-select>
+
           </ion-item>
      
           <ion-item>
             <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
-            <ion-select formControlName="subCountryId" multiple="true">
+            <!-- <ion-select formControlName="subCountryId" multiple="true">
               <ion-option>Hong Kong</ion-option>
               <ion-option>Black Olives</ion-option>
               <ion-option>Extra Cheese</ion-option>
               <ion-option>Mushrooms</ion-option>
               <ion-option>Pepperoni</ion-option>
               <ion-option>Sausage</ion-option>
-            </ion-select>
+            </ion-select> -->
+
+            <ion-select> <ion-option *ngFor="let zone of country.zone">{{zone.title}}</ion-option> </ion-select>
           </ion-item>
 
   </form>
