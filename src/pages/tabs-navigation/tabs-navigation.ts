@@ -64,9 +64,6 @@ export class TabsNavigationPage {
    .then(function (data) {
        
     console.log(data.email);
-    //http://api.whospets.com/api/users/login.php?username=rickykei@yahoo.com&logintype=normal&password=1234
-
-
     var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
     console.log(url);
 
@@ -80,23 +77,23 @@ export class TabsNavigationPage {
  
   ionViewDidLoad() {
 
-    // this.nativeStorage.getItem('1stLogin')
-    //   .then(data => {
-    //     // if there is not 1st login, do nothings
-    //     this.checkLogged();
-    //    }, error =>
-    //    {
-    //     this.nav.setRoot(WalkthroughPage);
+    this.nativeStorage.getItem('1stLogin')
+      .then(data => {
+        // if there is not 1st login, do nothings
+        this.checkLogged();
+       }, error =>
+       {
+        this.nav.setRoot(WalkthroughPage);
   
-    //     this.nativeStorage.setItem('1stLogin',
-    //     {       
-    //       login: true,
-    //     })
-    //     .then(
-    //       () =>  console.log('1sr login , Stored item!'),
-    //       error => console.error('Error storing item')
-    //     );
-    //     });
+        this.nativeStorage.setItem('1stLogin',
+        {       
+          login: true,
+        })
+        .then(
+          () =>  console.log('1sr login , Stored item!'),
+          error => console.error('Error storing item')
+        );
+        });
   }
 
   checkLogged(){

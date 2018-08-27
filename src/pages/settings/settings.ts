@@ -45,6 +45,7 @@ export class SettingsPage {
   languages: Array<LanguageModel>;
 
   country: CountryIdModel = new CountryIdModel();
+  subcountry: CountryIdModel = new CountryIdModel();
 
   user: FacebookUserModel = new FacebookUserModel();
 
@@ -97,6 +98,10 @@ export class SettingsPage {
       this.country = zone;
     });
 
+    this.profileService.getCountryCode()
+    .then(zone => {
+      this.subcountry = zone;
+    });
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
