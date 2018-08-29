@@ -39,7 +39,7 @@
       </ion-item>
       <ion-item>
           <ion-label stacked>{{ 'EMAIL' | translate }}</ion-label>
-          <ion-input type="text" formControlName="email"></ion-input>
+          <ion-input type="text" readonly="{{isReadonly}}" formControlName="email"></ion-input>
         </ion-item>
       <ion-item>
           <ion-label stacked>{{ 'CITY' | translate }}</ion-label>

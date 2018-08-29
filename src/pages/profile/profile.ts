@@ -86,7 +86,7 @@ export class ProfilePage {
         else{
           // go to create profile page
           this.app.getRootNav().push(SettingsPage);
-
+          
         }
        
       });

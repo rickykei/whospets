@@ -98,7 +98,7 @@ export class SettingsPage {
       this.country = zone;
     });
 
-    this.profileService.getCountryCode()
+    this.profileService.getSubCountryCode()
     .then(zone => {
       this.subcountry = zone;
     });
@@ -153,10 +153,10 @@ export class SettingsPage {
   
         this.settingsForm.patchValue({
 
-          username: this.profile.data.email,
+          username: data.email,
           firstname: this.profile.data.firstname,
           lastname: this.profile.data.lastname,
-          email: this.profile.data.email,
+          email: data.email,
           city: this.profile.data.city,
           street: this.profile.data.street,
           about: this.profile.data.about,
@@ -176,6 +176,14 @@ export class SettingsPage {
         this.settingsForm.get('language').valueChanges.subscribe((lang) => {
           this.setLanguage(lang);
         });
+      }
+      else{
+        this.settingsForm.patchValue({
+
+          username: data.email,
+          email: data.email,
+        });
+
       }
     });
     }, error => {
@@ -216,6 +224,7 @@ export class SettingsPage {
     }, (error) => {
       console.log("Facebook logout error", error);
     });
+    this.nativeStorage.remove('email_user');
     this.nav.setRoot(LoginPage);
   }
 

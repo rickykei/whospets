@@ -23,6 +23,14 @@ export class ProfileService {
      .catch(this.handleError);
   }
 
+  getSubCountryCode():Promise<CountryIdModel>
+  {
+    return this.http.get('./assets/example_data/subcountry.json')
+    .toPromise()
+    .then(response => response.json() as CountryIdModel)
+    .catch(this.handleError);
+  }
+
   getCountryCode():Promise<CountryIdModel>
   {
     return this.http.get('./assets/example_data/country.json')

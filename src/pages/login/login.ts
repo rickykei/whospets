@@ -45,8 +45,6 @@ export class LoginPage {
 
     this.main_page = { component: ProfilePage }; //TabsNavigationPage };
 
-
-
     this.login = new FormGroup({
       email: new FormControl('rickykei@yahoo.com', Validators.required),
       password: new FormControl('1234', Validators.required)
@@ -64,8 +62,6 @@ export class LoginPage {
     console.log(url);
 
 	 this.http.get(url).map(res => res.json()).subscribe(data2 => {
-
-
     console.log(data2.success);
 
       this.success = data2.success;
@@ -85,6 +81,12 @@ export class LoginPage {
         this.removeEmailUser();
         this.nav.setRoot(SignupPage);
       }
+    },
+  error => 
+    {
+      console.log('inside error : ' + error);
+
+      
     });
   }
 
