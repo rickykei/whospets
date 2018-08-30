@@ -1,3 +1,4 @@
+import { DateTime } from "ionic-angular";
 
 
 export class UserModel {
@@ -27,26 +28,26 @@ export class UserModel {
 
 /*
 
-{success:true, 
+{success:true; 
 data:{
-  status:true,
-  message:Successfully Login!,
-  id:494,
-  tc:0,
-  user_id:494,
-  lastname:Ka,
-  firstname:Ricky,
-  email:rickykei@yahoo.com.hk,
-  street:null,
-  city:null,
-  about:null,
-  newsletter:null,
-  seller:null,
-  notification:null,
-  gender:M,
-  birthday:null,
-  bio:null,
-  country_id:1,
+  status:true;
+  message:Successfully Login!;
+  id:494;
+  tc:0;
+  user_id:494;
+  lastname:Ka;
+  firstname:Ricky;
+  email:rickykei@yahoo.com.hk;
+  street:null;
+  city:null;
+  about:null;
+  newsletter:null;
+  seller:null;
+  notification:null;
+  gender:M;
+  birthday:null;
+  bio:null;
+  country_id:1;
   sub_country_id:307}}
 */
 
@@ -99,4 +100,56 @@ export class ZoneModel{
   title_zh: string;
   description: string;
   language: string;
+}
+
+export class PetModel{
+  success:string;
+  data:Array<PetDetailsModel>;
+}
+
+export class PetDetailsModel{
+
+  product_id:string;
+        category_id:string;
+        status:string;
+        store_id:string;
+        tax_id:string;
+        title:string;
+        description:string;
+        descriptionDisplay:string;
+        keywords:string;
+        price:number;
+        language:string;
+        specifications:string;
+        style_code:string;
+        color:string;
+        condition:string;
+        size:string;
+        quantity:number;
+        view:string;
+        created:DateTime;
+        feature_date:Date;
+        gallery_date:Date;
+        banner_a:string;
+        banner_b:string;
+        banner_c:string;
+        todays_deal:string;
+        discount:string;
+        date_lost:DateTime;
+        date_born:DateTime;
+        sub_category:number;
+        weight:number;
+        height:number;
+        name_of_pet:string;
+        country:string;
+        contact:string;
+        pet_status:0;
+        count_down_end_date:DateTime;
+        last_seen_appearance:string;
+        questions:string;
+        pet_id:string;
+        gender:string;
+        country_id:string;
+        sub_country_id:number;
+        image:string;
 }

@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { ProfileModel, CountryIdModel } from './profile.model';
+import { ProfileModel, CountryIdModel, PetModel } from './profile.model';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 
@@ -36,6 +36,14 @@ export class ProfileService {
     return this.http.get('./assets/example_data/country.json')
     .toPromise()
     .then(response => response.json() as CountryIdModel)
+    .catch(this.handleError);
+  }
+
+  getPet():Promise<PetModel>
+  {
+    return this.http.get('./assets/example_data/mypet.json')
+    .toPromise()
+    .then(response => response.json() as PetModel)
     .catch(this.handleError);
   }
 

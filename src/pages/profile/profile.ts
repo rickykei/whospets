@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuController, SegmentButton, App, NavParams } from 'ionic-angular';
 import { FollowersPage } from '../followers/followers';
 import { SettingsPage } from '../settings/settings';
-import { ProfileModel } from './profile.model';
+import { ProfileModel, PetModel } from './profile.model';
 import { ProfileService } from './profile.service';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -20,6 +20,8 @@ export class ProfilePage {
   display: string;
   profile: ProfileModel = new ProfileModel();
   status:string;
+  pet: PetModel = new PetModel();
+  petstatus:string;
 
   constructor(
     public menu: MenuController,
@@ -36,6 +38,7 @@ export class ProfilePage {
   ionViewDidLoad() {
 
   
+
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
@@ -93,6 +96,12 @@ export class ProfilePage {
 
     }, error => {
       console.log('error : '+ error);
+    });
+
+
+    this.profileService.getPet()
+    .then(response => {
+      this.pet = response;
     });
   }
 
