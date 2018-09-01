@@ -40,6 +40,8 @@ import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
 import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
 import { LostPetPage } from '../pages/lostpet/lostpet';
+import { PetinfoPage } from '../pages/petinfo/petinfo';
+
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -142,6 +144,7 @@ export function createTranslateLoader(http: HttpClient) {
     TermsOfServicePage,
     PrivacyPolicyPage,
     LostPetPage,
+    PetinfoPage,
 
     //functionalities
     MapsPage,
@@ -240,6 +243,7 @@ export function createTranslateLoader(http: HttpClient) {
 		FormValidationsPage,
     VideoPlaylistPage,
     LostPetPage,
+    PetinfoPage,
     //firebase integration
     FirebaseFeedPage,
     FirebaseNewUserModalPage,

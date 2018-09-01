@@ -107,7 +107,7 @@
         <!--  <preload-image [ratio]="{w:1, h:1}" [src]="http://whospets.com/images/product/thumb/{{pet.image}}" title="ion2FullApp"></preload-image>
         -->
         
-        <preload-image [ratio]="{w:1, h:1}" src="http://whospets.com/images/product/thumb/{{pet.image}}"  title="title"></preload-image>
+        <preload-image [ratio]="{w:1, h:1}" src="http://whospets.com/images/product/thumb/{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
 
         </ion-col>
       </ion-row>

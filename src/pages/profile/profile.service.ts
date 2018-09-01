@@ -39,12 +39,15 @@ export class ProfileService {
     .catch(this.handleError);
   }
 
-  getPet():Promise<PetModel>
+  getPet(_email:string):Promise<PetModel>
   {
-    return this.http.get('./assets/example_data/mypet.json')
-    .toPromise()
-    .then(response => response.json() as PetModel)
-    .catch(this.handleError);
+    //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
+   
+      return this.http.get('http://api.whospets.com/api/users/get_user_pets.php?username='+_email) //('./assets/example_data/mypet.json')
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+  
   }
 
   private handleError(error: any): Promise<any> {

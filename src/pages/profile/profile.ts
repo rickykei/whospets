@@ -10,6 +10,7 @@ import 'rxjs/Rx';
 
 import { NativeStorage } from '@ionic-native/native-storage';
 import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
+import { PetinfoPage } from '../petinfo/petinfo';
 
 
 @Component({
@@ -99,11 +100,14 @@ export class ProfilePage {
     });
 
 
-    this.profileService.getPet()
-    .then(response => {
-      this.pet = response;
-    });
-  }
+    this.nativeStorage.getItem('email_user')
+    .then(data => {
+        this.profileService.getPet(data.email)
+        .then(response => {
+          this.pet = response;
+        });
+      });
+    }
 
 /*
   ionViewDidLoad() {
@@ -184,6 +188,11 @@ export class ProfilePage {
    .catch(() => {
       console.log('Error');
    });
+  }
+
+  goPetDetail(pet)
+  {
+    this.app.getRootNav().push(PetinfoPage, {pet:pet});
   }
 
 }
