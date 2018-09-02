@@ -192,7 +192,7 @@ export class ProfilePage {
 
   goPetDetail(pet)
   {
-    this.app.getRootNav().push(PetinfoPage, {pet:pet});
+    this.app.getRootNav().push(PetinfoPage, {pet:pet},{profile:this.profile.data});
   }
 
 }
