@@ -41,6 +41,8 @@ import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
 import { LostPetPage } from '../pages/lostpet/lostpet';
 import { PetinfoPage } from '../pages/petinfo/petinfo';
+import { AddLayoutPage } from '../pages/add-page/add-layout';
+
 
 
 //firebase integration
@@ -145,6 +147,7 @@ export function createTranslateLoader(http: HttpClient) {
     PrivacyPolicyPage,
     LostPetPage,
     PetinfoPage,
+    AddLayoutPage,
 
     //functionalities
     MapsPage,
@@ -244,6 +247,7 @@ export function createTranslateLoader(http: HttpClient) {
     VideoPlaylistPage,
     LostPetPage,
     PetinfoPage,
+    AddLayoutPage,
     //firebase integration
     FirebaseFeedPage,
     FirebaseNewUserModalPage,

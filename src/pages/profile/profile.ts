@@ -11,6 +11,7 @@ import 'rxjs/Rx';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { PetinfoPage } from '../petinfo/petinfo';
+import { AddLayoutPage } from '../add-page/add-layout';
 
 
 @Component({
@@ -193,6 +194,11 @@ export class ProfilePage {
   goPetDetail(pet)
   {
     this.app.getRootNav().push(PetinfoPage, {pet:pet},{profile:this.profile.data});
+  }
+
+  addPet()
+  {
+    this.app.getRootNav().push(AddLayoutPage);
   }
 
 }
