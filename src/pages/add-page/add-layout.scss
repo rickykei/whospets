@@ -128,8 +128,27 @@ add-layout-page {
 					}
 				}
 			}
-		}
 
+			.radio-tag2
+			{
+				border-radius: 50%;
+				width: 38px;
+				height: 38px;
+				max-width: 38px;
+
+				.item-inner
+				{
+					padding: 0px;
+
+					ion-label {
+						margin: 0px;
+						font-size: 1.8rem;
+						letter-spacing: 0.3px;
+						font-weight: 300;
+					}
+				}
+			}
+		}
 
 		.post-example-view
 		{

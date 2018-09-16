@@ -71,23 +71,10 @@
           <ion-item>
             <ion-input type="text" placeholder="Pet Name" formControlName="title"></ion-input>
           </ion-item>
-          <!-- <ion-item icon-end>
-            <ion-input type="text" placeholder="Location" formControlName="location"></ion-input>
-            <ion-icon name="navigate" item-right></ion-icon>
-          </ion-item> -->
-          <!-- <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding width-60>
-              <ion-item class="multi-input time-item">
-                <ion-label floating>{{'FROM' | translate }}</ion-label>
-                <ion-datetime formControlName="from_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
-              </ion-item>
-            </ion-col>
-            <ion-col no-padding width-40>
-              <ion-item class="multi-input time-item">
-                <ion-datetime formControlName="from_time" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
-              </ion-item>
-            </ion-col>
-          </ion-row> -->
+      
+          <ion-item>
+              <ion-input type="text" placeholder="Pet Id" formControlName="id"></ion-input>
+            </ion-item>
 
           <ion-row no-padding class="multi-input-row">
             <ion-col no-padding width-60>
@@ -96,11 +83,6 @@
                 <ion-datetime formControlName="to_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
               </ion-item>
             </ion-col>
-            <!-- <ion-col no-padding width-40>
-              <ion-item class="multi-input time-item">
-                <ion-datetime formControlName="to_time" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
-              </ion-item>
-            </ion-col> -->
           </ion-row>
 
           <ion-row no-padding class="user-preferences-row">
@@ -130,6 +112,30 @@
               </ion-col>
             </ion-row>
 
+            <ion-row no-padding class="user-preferences-row">
+                <span class="radio-tags-label">{{'Gender' | translate}}</span>
+                <ion-list class="radio-tags" radio-group formControlName="gender">
+                  <ion-item class="radio-tag">
+                    <ion-label>M</ion-label>
+                    <ion-radio value="male"></ion-radio>
+                  </ion-item>
+                  <ion-item class="radio-tag">
+                    <ion-label>
+                      <span>F</span>
+                    </ion-label>
+                    <ion-radio value="female"></ion-radio>
+                  </ion-item>
+                </ion-list>
+              </ion-row>
+
+            <ion-row no-padding class="multi-input-row">
+                <ion-col no-padding>
+            <ion-item>
+                <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
+              </ion-item>
+            </ion-col>
+
+            </ion-row>
             <section class="form-section">
               <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
                 <ion-icon name="camera"></ion-icon>

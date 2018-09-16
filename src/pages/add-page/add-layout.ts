@@ -45,7 +45,10 @@ export class AddLayoutPage {
     });
     this.event_form = new FormGroup({
       title: new FormControl('', Validators.required),
+      id: new FormControl('', Validators.required),
       petbreed: new FormControl(),
+      description: new FormControl(),
+      gender: new FormControl(),
       from_date: new FormControl('2016-09-18', Validators.required),
       from_time: new FormControl('13:00', Validators.required),
       to_date: new FormControl('', Validators.required),
