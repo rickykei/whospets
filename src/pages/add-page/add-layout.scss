@@ -84,10 +84,9 @@ add-layout-page {
 
 		.user-preferences-row
 		{
-			margin: 0px 0px 20px;
-			padding: 0px 20px;
+			margin: 0px 0px 7px;
+			padding: 0px 7px;
 			@include element-shadow();
-			background-color: $white;
 
 			.radio-tags-label
 			{
@@ -98,6 +97,39 @@ add-layout-page {
 				align-self: center;
 			}
 		}
+
+		@include radio-tags-styles($white, $theme-color-1, $white);
+
+		.radio-tags
+		{
+			flex: 1;
+			flex-wrap: nowrap;
+			justify-content: flex-end;
+			padding: 0px;
+			margin: 0px;
+		  	margin-right: -5px;
+
+			.radio-tag
+			{
+				border-radius: 50%;
+				width: 58px;
+				height: 38px;
+				max-width: 58px;
+
+				.item-inner
+				{
+					padding: 0px;
+
+					ion-label {
+						margin: 0px;
+						font-size: 1.8rem;
+						letter-spacing: 0.3px;
+						font-weight: 500;
+					}
+				}
+			}
+		}
+
 
 		.post-example-view
 		{
@@ -316,6 +348,40 @@ add-layout-page {
 				}
 			}
 		}
+
+		.upload-image-button
+				{
+					border-radius: 6px;
+					background-color: $white;
+					color: $white-d;
+					height: initial;
+					margin: 30px 0px;
+					padding-top: 16px;
+					padding-bottom: 32px;
+					@include element-shadow();
+					contain: style layout;
+
+					.button-inner
+					{
+						flex-wrap: wrap;
+
+						ion-icon {
+							flex: 0 0 100%;
+					    max-width: 100%;
+							font-size: 3.8em;
+						}
+
+						.button-title
+						{
+							flex: 0 0 100%;
+					    max-width: 100%;
+							font-size: 1.4rem;
+							color: $white-d;
+							font-weight: 400;
+							margin: 0px;
+						}
+					}
+				}
 
 
 		.card-example-view

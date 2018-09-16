@@ -23,7 +23,7 @@
       <form class="sample-form post-form" [formGroup]="post_form" (ngSubmit)="createPost()">
         <section class="form-section">
           <ion-item>
-            <ion-input type="text" placeholder="Pet Name: e.g. Krabby Patty" formControlName="title"></ion-input>
+            <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
           </ion-item>
           <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
             <ion-icon name="camera"></ion-icon>
@@ -67,45 +67,15 @@
     <div *ngSwitchCase="'event'" class="event-example-view">
       <form class="sample-form event-form" [formGroup]="event_form" (ngSubmit)="createEvent()">
         <section class="form-section">
-
-            <ion-item>
-                <ion-input type="text" placeholder="Pet Name: e.g. Krabby Patty" formControlName="title"></ion-input>
-              </ion-item>
-
-              <ion-row no-padding>
-                  <ion-col no-padding>
-                    <ion-item >
-                      <ion-label floating>{{'Date Born' | translate }}</ion-label>
-                      <ion-datetime formControlName="born_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
-                    </ion-item>
-                  </ion-col>
-                </ion-row>
-
-                <ion-row class="user-preferences-row">
-                    <span class="radio-tags-label">{{'Type of Pet' | translate}}</span>
-                    <ion-list class="radio-tags" radio-group formControlName="typeofpet">
-                      <ion-item class="radio-tag">
-                        <ion-label>Cat</ion-label>
-                        <ion-radio value="cat"></ion-radio>
-                      </ion-item>
-                      <ion-item class="radio-tag">
-                        <ion-label>
-                          <span>Dog</span>
-                        </ion-label>
-                        <ion-radio value="dog"></ion-radio>
-                      </ion-item>
-                    </ion-list>
-                  </ion-row> 
-
-          <!-- <h2 class="section-title">{{'ADD_AN_EVENT' | translate}}</h2>
+          <h2 class="section-title">{{'Add a pet' | translate}}</h2>
           <ion-item>
-            <ion-input type="text" placeholder="Event title" formControlName="title"></ion-input>
+            <ion-input type="text" placeholder="Pet Name" formControlName="title"></ion-input>
           </ion-item>
-          <ion-item icon-end>
+          <!-- <ion-item icon-end>
             <ion-input type="text" placeholder="Location" formControlName="location"></ion-input>
             <ion-icon name="navigate" item-right></ion-icon>
-          </ion-item>
-          <ion-row no-padding class="multi-input-row">
+          </ion-item> -->
+          <!-- <ion-row no-padding class="multi-input-row">
             <ion-col no-padding width-60>
               <ion-item class="multi-input time-item">
                 <ion-label floating>{{'FROM' | translate }}</ion-label>
@@ -117,24 +87,61 @@
                 <ion-datetime formControlName="from_time" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
               </ion-item>
             </ion-col>
-          </ion-row>
+          </ion-row> -->
+
           <ion-row no-padding class="multi-input-row">
             <ion-col no-padding width-60>
               <ion-item class="multi-input time-item">
-                <ion-label floating>{{'TO' | translate}}</ion-label>
+                <ion-label floating>{{'Date of born' | translate}}</ion-label>
                 <ion-datetime formControlName="to_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
               </ion-item>
             </ion-col>
-            <ion-col no-padding width-40>
+            <!-- <ion-col no-padding width-40>
               <ion-item class="multi-input time-item">
                 <ion-datetime formControlName="to_time" displayFormat="h mm a" pickerFormat="h mm A"></ion-datetime>
               </ion-item>
-            </ion-col>
-          </ion-row>-->
+            </ion-col> -->
+          </ion-row>
+
+          <ion-row no-padding class="user-preferences-row">
+              <span class="radio-tags-label">{{'TYPE OF PET' | translate}}</span>
+              <ion-list class="radio-tags" radio-group formControlName="typeofpet">
+                <ion-item class="radio-tag">
+                  <ion-label>cat</ion-label>
+                  <ion-radio value="cat"></ion-radio>
+                </ion-item>
+                <ion-item class="radio-tag">
+                  <ion-label>
+                    <span>dog</span>
+                  </ion-label>
+                  <ion-radio value="dog"></ion-radio>
+                </ion-item>
+              </ion-list>
+            </ion-row>
+
+            <ion-row no-padding class="multi-input-row">
+              <ion-col no-padding width-60>
+                <ion-item>
+                  <ion-label>{{'PET BREED' | translate}}</ion-label>
+                  <ion-select formControlName="petbreed"> 
+                    <ion-option  *ngFor="let breed of petdetail.pet">{{breed.title}}</ion-option> 
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <section class="form-section">
+              <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
+                <ion-icon name="camera"></ion-icon>
+                <h3 class="button-title">{{'UPLOAD_AN_IMAGE' | translate}}</h3>
+              </button>
+              <preload-image *ngIf="selected_image" [ratio]="{w:1, h:1}" [src]="selected_image" alt="this is the image" title="IMAGE!"></preload-image>
+            </section>
+
         </section>
         <section class="form-section">
           <button ion-button block class="form-action-button create-event-button" type="submit" [disabled]="!event_form.valid">Done!</button>
-        </section> 
+        </section>
       </form>
     </div>
 

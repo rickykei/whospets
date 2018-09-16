@@ -4,6 +4,8 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { counterRangeValidator } from '../../components/counter-input/counter-input';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
+import { PetDetailsService } from './addlayout.service';
+import { PetBreedModel } from './addlayout.model';
 
 @Component({
   selector: 'add-layout-page',
@@ -21,8 +23,11 @@ export class AddLayoutPage {
 
   selected_image: any;
 
+  petdetail: PetBreedModel = new PetBreedModel();
+
   constructor(
     public nav: NavController,
+    public petdetailservice : PetDetailsService,
     public alertCtrl: AlertController,
     public cropService: Crop,
     public imagePicker: ImagePicker,
@@ -40,13 +45,12 @@ export class AddLayoutPage {
     });
     this.event_form = new FormGroup({
       title: new FormControl('', Validators.required),
-      born_date: new FormControl('2018-09-18', Validators.required),
-      typeofpet: new FormControl('dog', Validators.required),
-      // location: new FormControl('', Validators.required),
-      // from_date: new FormControl('2016-09-18', Validators.required),
-      // from_time: new FormControl('13:00', Validators.required),
-      // to_date: new FormControl('', Validators.required),
-      // to_time: new FormControl('', Validators.required)
+      petbreed: new FormControl(),
+      from_date: new FormControl('2016-09-18', Validators.required),
+      from_time: new FormControl('13:00', Validators.required),
+      to_date: new FormControl('', Validators.required),
+      to_time: new FormControl('', Validators.required),
+      typeofpet: new FormControl()
     });
     this.card_form = new FormGroup({
       card_number: new FormControl('', Validators.required),
@@ -57,6 +61,16 @@ export class AddLayoutPage {
     });
   }
 
+  ionViewDidLoad() {
+
+    this.petdetailservice.getData()
+    .then(data2 => {
+      this.petdetail = data2;
+      console.log(this.petdetail.pet[1]);
+
+    });
+  }
+  
   onSegmentChanged(segmentButton: SegmentButton) {
     // console.log('Segment changed to', segmentButton.value);
   }

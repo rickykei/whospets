@@ -93,6 +93,9 @@ import { FirebaseAuthService } from '../pages/firebase-integration/firebase-auth
 import { WordpressService } from '../pages/wordpress-integration/wordpress-integration.service';
 import { LanguageService } from '../providers/language/language.service';
 import { LostPetServices} from '../pages/lostpet/lostpet.service';
+import { PetDetailsService} from '../pages/add-page/addlayout.service';
+
+
 
 // Ionic Native Plugins
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -276,6 +279,7 @@ export function createTranslateLoader(http: HttpClient) {
     ScheduleService,
     TabsNavigationService,
     LostPetServices,
+    PetDetailsService,
     //functionalities
     FacebookLoginService,
     GoogleLoginService,
