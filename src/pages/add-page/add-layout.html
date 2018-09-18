@@ -128,6 +128,70 @@
                 </ion-list>
               </ion-row>
 
+              <ion-row no-padding class="user-preferences-row">
+                <span class="radio-tags-label">{{'Gender' | translate}}</span>
+                <ion-list class="radio-tags" radio-group formControlName="size">
+                  <ion-item class="radio-tag">
+                    <ion-label>L</ion-label>
+                    <ion-radio value="large"></ion-radio>
+                  </ion-item>
+                  <ion-item class="radio-tag">
+                    <ion-label>
+                      <span>M</span>
+                    </ion-label>
+                    <ion-radio value="middle"></ion-radio>
+                  </ion-item>
+                  <ion-item class="radio-tag">
+                    <ion-label>S</ion-label>
+                    <ion-radio value="small"></ion-radio>
+                  </ion-item>
+                </ion-list>
+              </ion-row>
+
+              <ion-row no-padding class="multi-input-row">
+                <ion-col no-padding >
+              <ion-item class="range-item">
+                <ion-label>
+                  <h2 class="range-label">{{'Pet Weight' | translate}}</h2>
+                  <h3 class="range-value">{{event_form.controls.weight.value}} kg</h3>
+                </ion-label>
+                <ion-range formControlName="weight" min="0" max="80" step="1" snaps="true" pin="false"></ion-range>
+              </ion-item>
+              </ion-col>
+              </ion-row>
+
+              <ion-row no-padding class="multi-input-row">
+                <ion-col no-padding >
+              <ion-item class="range-item">
+                <ion-label>
+                  <h2 class="range-label">{{'Pet Height' | translate}}</h2>
+                  <h3 class="range-value">{{event_form.controls.height.value}} cm</h3>
+                </ion-label>
+                <ion-range formControlName="height" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
+              </ion-item>
+
+              </ion-col>
+              </ion-row>
+
+              <ion-row no-padding class="multi-input-row">
+                <ion-col no-padding width-60>
+
+              <ion-item>
+                <ion-label>{{'COUNTRY' | translate}}</ion-label>
+                <ion-select> <ion-option *ngFor="let zone of country.zone">{{zone.title}}</ion-option> </ion-select>
+              </ion-item>
+
+              </ion-col>
+         
+              <ion-col no-padding width-40>
+                  <ion-item>
+                <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+                <ion-select> <ion-option *ngFor="let zone of subcountry.zone">{{zone.title}}</ion-option> </ion-select>
+              </ion-item>
+
+              </ion-col>
+              </ion-row>
+
             <ion-row no-padding class="multi-input-row">
                 <ion-col no-padding>
             <ion-item>

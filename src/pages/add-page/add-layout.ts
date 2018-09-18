@@ -7,6 +7,9 @@ import { Crop } from '@ionic-native/crop';
 import { PetDetailsService } from './addlayout.service';
 import { PetBreedModel } from './addlayout.model';
 
+import { CountryIdModel } from '../profile/profile.model';
+import { ProfileService } from '../profile/profile.service';
+
 @Component({
   selector: 'add-layout-page',
   templateUrl: 'add-layout.html'
@@ -25,9 +28,14 @@ export class AddLayoutPage {
 
   petdetail: PetBreedModel = new PetBreedModel();
 
+  country: CountryIdModel = new CountryIdModel();
+  subcountry: CountryIdModel = new CountryIdModel();
+
+
   constructor(
     public nav: NavController,
     public petdetailservice : PetDetailsService,
+    public profileService: ProfileService,
     public alertCtrl: AlertController,
     public cropService: Crop,
     public imagePicker: ImagePicker,
@@ -49,11 +57,14 @@ export class AddLayoutPage {
       petbreed: new FormControl(),
       description: new FormControl(),
       gender: new FormControl(),
-      from_date: new FormControl('2016-09-18', Validators.required),
-      from_time: new FormControl('13:00', Validators.required),
+      weight: new FormControl(30),
+      height: new FormControl(15),
+      size: new FormControl(),
       to_date: new FormControl('', Validators.required),
       to_time: new FormControl('', Validators.required),
-      typeofpet: new FormControl()
+      typeofpet: new FormControl(),
+      countryId: new FormControl(),
+      subCountryId: new FormControl()
     });
     this.card_form = new FormGroup({
       card_number: new FormControl('', Validators.required),
@@ -71,6 +82,16 @@ export class AddLayoutPage {
       this.petdetail = data2;
       console.log(this.petdetail.pet[1]);
 
+    });
+
+    this.profileService.getCountryCode()
+    .then(zone => {
+      this.country = zone;
+    });
+
+    this.profileService.getSubCountryCode()
+    .then(zone => {
+      this.subcountry = zone;
     });
   }
   
