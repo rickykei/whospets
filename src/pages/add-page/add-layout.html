@@ -149,7 +149,7 @@
               </ion-row>
 
               <ion-row no-padding class="multi-input-row">
-                <ion-col no-padding >
+                <ion-col no-padding width-50>
               <ion-item class="range-item">
                 <ion-label>
                   <h2 class="range-label">{{'Pet Weight' | translate}}</h2>
@@ -158,19 +158,28 @@
                 <ion-range formControlName="weight" min="0" max="80" step="1" snaps="true" pin="false"></ion-range>
               </ion-item>
               </ion-col>
+              <ion-col no-padding width-50>
+                <ion-item class="range-item">
+                  <ion-label>
+                    <h2 class="range-label">{{'Pet Height' | translate}}</h2>
+                    <h3 class="range-value">{{event_form.controls.height.value}} cm</h3>
+                  </ion-label>
+                  <ion-range formControlName="height" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
+                </ion-item>
+  
+                </ion-col>
               </ion-row>
 
+             
               <ion-row no-padding class="multi-input-row">
-                <ion-col no-padding >
-              <ion-item class="range-item">
-                <ion-label>
-                  <h2 class="range-label">{{'Pet Height' | translate}}</h2>
-                  <h3 class="range-value">{{event_form.controls.height.value}} cm</h3>
-                </ion-label>
-                <ion-range formControlName="height" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
-              </ion-item>
+                <ion-col no-padding width-60>
 
-              </ion-col>
+                <ion-item>
+                  <ion-label>{{'Pet Color' | translate}}</ion-label>
+                  <ion-select> <ion-option *ngFor="let color of petColor.pet_color">{{color.color}}</ion-option> </ion-select>
+                </ion-item>
+
+                </ion-col>
               </ion-row>
 
               <ion-row no-padding class="multi-input-row">
@@ -198,8 +207,14 @@
                 <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
               </ion-item>
             </ion-col>
-
             </ion-row>
+
+            <ion-row no-padding class="multi-input-row">
+              <ion-item>
+                <ion-input type="text" placeholder="Mobile Phone" formControlName="phone"></ion-input>
+              </ion-item>
+            </ion-row>
+
             <section class="form-section">
               <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
                 <ion-icon name="camera"></ion-icon>
@@ -207,6 +222,38 @@
               </button>
               <preload-image *ngIf="selected_image" [ratio]="{w:1, h:1}" [src]="selected_image" alt="this is the image" title="IMAGE!"></preload-image>
             </section>
+
+
+            <ion-row no-padding class="multi-input-row">
+              <ion-col no-padding width-50>
+                <ion-item class="multi-input time-item">
+                  <ion-label floating>{{'Lost Date' | translate}}</ion-label>
+                  <ion-datetime formControlName="lost_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              </ion-row>
+
+
+              <ion-row no-padding class="multi-input-row">
+              <ion-col no-padding >
+                <ion-item class="range-item">
+                  <ion-label>
+                    <h2 class="range-label">{{'Rewards' | translate}}</h2>
+                    <h3 class="range-value">$ {{event_form.controls.rewards.value}} </h3>
+                  </ion-label>
+                  <ion-range formControlName="rewards" min="0" max="100000" step="10" snaps="true" pin="false"></ion-range>
+                </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row no-padding class="multi-input-row">
+              <ion-col no-padding width-50>
+                <ion-item class="multi-input time-item">
+                  <ion-label floating>{{'Found Date' | translate}}</ion-label>
+                  <ion-datetime formControlName="found_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
 
         </section>
         <section class="form-section">

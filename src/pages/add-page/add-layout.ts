@@ -5,7 +5,7 @@ import { counterRangeValidator } from '../../components/counter-input/counter-in
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 import { PetDetailsService } from './addlayout.service';
-import { PetBreedModel } from './addlayout.model';
+import { PetBreedModel, PetColorModel } from './addlayout.model';
 
 import { CountryIdModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
@@ -27,6 +27,7 @@ export class AddLayoutPage {
   selected_image: any;
 
   petdetail: PetBreedModel = new PetBreedModel();
+  petColor: PetColorModel = new PetColorModel();
 
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
@@ -56,12 +57,15 @@ export class AddLayoutPage {
       id: new FormControl('', Validators.required),
       petbreed: new FormControl(),
       description: new FormControl(),
+      phone: new FormControl(),
       gender: new FormControl(),
       weight: new FormControl(30),
       height: new FormControl(15),
+      rewards: new FormControl(0),
       size: new FormControl(),
-      to_date: new FormControl('', Validators.required),
-      to_time: new FormControl('', Validators.required),
+      to_date: new FormControl(),
+      lost_date: new FormControl(),
+      found_date: new FormControl(),
       typeofpet: new FormControl(),
       countryId: new FormControl(),
       subCountryId: new FormControl()
@@ -80,8 +84,11 @@ export class AddLayoutPage {
     this.petdetailservice.getData()
     .then(data2 => {
       this.petdetail = data2;
-      console.log(this.petdetail.pet[1]);
+    });
 
+    this.petdetailservice.getColorData()
+    .then(data2 => {
+      this.petColor = data2;
     });
 
     this.profileService.getCountryCode()

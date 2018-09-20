@@ -9,3 +9,12 @@ export class BreedModel {
   description:string;
   language:string;
 }
+
+export class PetColorModel{
+  pet_color:Array<ColorModel>;
+}
+export class ColorModel {
+  color:string;
+  color_zh:string;
+}
+

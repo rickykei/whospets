@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { PetBreedModel } from './addlayout.model';
+import { PetBreedModel, PetColorModel } from './addlayout.model';
 
 
 
@@ -18,6 +18,13 @@ export class PetDetailsService {
     return this.http.get('./assets/example_data/petbreed.json')
      .toPromise()
      .then(response => response.json() as PetBreedModel)
+     .catch(this.handleError);
+  }
+
+  getColorData(): Promise<PetColorModel> {
+    return this.http.get('./assets/example_data/petcolor.json')
+     .toPromise()
+     .then(response => response.json() as PetColorModel)
      .catch(this.handleError);
   }
 
