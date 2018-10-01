@@ -18,3 +18,9 @@ export class ColorModel {
   color_zh:string;
 }
 
+export class PetStatusModel{
+  pet_status:Array<StatusModel>;
+}
+export class StatusModel {
+  status:string;
+}

@@ -80,7 +80,7 @@
             <ion-col no-padding width-60>
               <ion-item class="multi-input time-item">
                 <ion-label floating>{{'Date of born' | translate}}</ion-label>
-                <ion-datetime formControlName="to_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
+                <ion-datetime formControlName="born_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -176,7 +176,18 @@
 
                 <ion-item>
                   <ion-label>{{'Pet Color' | translate}}</ion-label>
-                  <ion-select> <ion-option *ngFor="let color of petColor.pet_color">{{color.color}}</ion-option> </ion-select>
+                  <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color">{{color.color}}</ion-option> </ion-select>
+                </ion-item>
+
+                </ion-col>
+              </ion-row>
+
+              <ion-row no-padding class="multi-input-row">
+                <ion-col no-padding width-60>
+
+                <ion-item>
+                  <ion-label>{{'Pet Status' | translate}}</ion-label>
+                  <ion-select formControlName="petstatus"> <ion-option  *ngFor="let status of petStatus.pet_status">{{status.status}}</ion-option> </ion-select>
                 </ion-item>
 
                 </ion-col>
@@ -255,9 +266,34 @@
               </ion-col>
             </ion-row>
 
+            <ion-row no-padding class="multi-input-row">
+              <ion-col no-padding>
+          <ion-item>
+              <ion-textarea rows="7" placeholder="Last Seen Appearance - When and where your pet was last seen before going missing? Include as many details as possible to help others to find your pet." formControlName="lastseen"></ion-textarea>
+            </ion-item>
+          </ion-col>
+          </ion-row>
+
+          <ion-row no-padding class="user-preferences-row">
+            <span class="radio-tags-label">{{'Status' | translate}}</span>
+            <ion-list class="radio-tags" radio-group formControlName="status">
+              <ion-item class="radio-tag">
+                <ion-label>Active</ion-label>
+                <ion-radio value="active"></ion-radio>
+              </ion-item>
+              <ion-item class="radio-tag">
+                <ion-label>
+                  <span>InActive</span>
+                </ion-label>
+                <ion-radio value="inactive"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+
+
         </section>
         <section class="form-section">
-          <button ion-button block class="form-action-button create-event-button" type="submit" [disabled]="!event_form.valid">Done!</button>
+          <button ion-button block class="form-action-button create-event-button" type="submit" [disabled]="!event_form.valid" (click)="addPet()" >Done!</button>
         </section>
       </form>
     </div>
