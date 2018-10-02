@@ -23,4 +23,5 @@ export class PetStatusModel{
 }
 export class StatusModel {
   status:string;
+  id:string;
 }

@@ -1,9 +1,9 @@
 {
     "pet_status": [
-        {"status":"Pet Lost"},
-        {"status":"At Home"}, 
-        {"status":"Found & at home"}, 
-        {"status":"Pet for adoption"}, 
-        {"status":"Pet boarding required"} 
+        {"status":"Pet Lost","id":"1"},
+        {"status":"At Home","id":"2"}, 
+        {"status":"Found & at home","id":"3"}, 
+        {"status":"Pet for adoption","id":"4"}, 
+        {"status":"Pet boarding required","id":"5"}
     ]
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, SegmentButton, AlertController, Platform, normalizeURL } from 'ionic-angular';
+import { NavController, SegmentButton, AlertController, Platform, normalizeURL, NavParams } from 'ionic-angular';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { counterRangeValidator } from '../../components/counter-input/counter-input';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -7,7 +7,7 @@ import { Crop } from '@ionic-native/crop';
 import { PetDetailsService } from './addlayout.service';
 import { PetBreedModel, PetColorModel, PetStatusModel } from './addlayout.model';
 
-import { CountryIdModel } from '../profile/profile.model';
+import { CountryIdModel, UserModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 import { NativeStorage } from '@ionic-native/native-storage';
 
@@ -21,6 +21,7 @@ import 'rxjs/Rx';
 export class AddLayoutPage {
   section: string;
   email: string;
+  petowner:string;
 
   post_form: any;
   event_form: FormGroup;
@@ -38,6 +39,7 @@ export class AddLayoutPage {
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
 
+  profile: UserModel= new UserModel();
 
   constructor(
     public nav: NavController,
@@ -48,7 +50,8 @@ export class AddLayoutPage {
     public imagePicker: ImagePicker,    
     private http: Http,    
     public nativeStorage:NativeStorage,
-    public platform: Platform
+    public platform: Platform,
+    public navParams: NavParams
   ) {
 
     this.section = "event";
@@ -63,25 +66,25 @@ export class AddLayoutPage {
     this.event_form = new FormGroup({
       title: new FormControl('', Validators.required),
       id: new FormControl('', Validators.required),
-      name_of_pet: new FormControl(),
-      petbreed: new FormControl(),
-      description: new FormControl(),
-      phone: new FormControl(),
-      gender: new FormControl(),
-      weight: new FormControl(30),
-      height: new FormControl(15),
+      name_of_pet: new FormControl(''),
+      petbreed: new FormControl(''),
+      description: new FormControl(''),
+      phone: new FormControl(''),
+      gender: new FormControl(''),
+      weight: new FormControl(0),
+      height: new FormControl(0),
       rewards: new FormControl(0),
-      size: new FormControl(),
-      born_date: new FormControl(),
-      lost_date: new FormControl(),
-      found_date: new FormControl(),
-      typeofpet: new FormControl(),
-      countryId: new FormControl(),
-      color:new FormControl('Black'),
-      petstatus:new FormControl('Pet Lost'),
-      lastseen :new FormControl(),
-      status:new FormControl(),
-      subCountryId: new FormControl()
+      size: new FormControl(''),
+      born_date: new FormControl(''),
+      lost_date: new FormControl(''),
+      found_date: new FormControl(''),
+      typeofpet: new FormControl(''),
+      countryId: new FormControl(''),
+      color:new FormControl(''),
+      petstatus:new FormControl(''),
+      lastseen :new FormControl(''),
+      status:new FormControl(''),
+      subCountryId: new FormControl('')
     });
     this.card_form = new FormGroup({
       card_number: new FormControl('', Validators.required),
@@ -90,11 +93,19 @@ export class AddLayoutPage {
       exp_date: new FormControl('', Validators.required),
       save_card: new FormControl(true, Validators.required)
     });
+
+    this.profile = navParams.get('profile'); 
+    this.petowner = this.profile.firstname + '' + this.profile.lastname;
+
+    console.log(this.petowner);
   }
 
   ionViewDidLoad() {
 
-    this.getEmail();
+    this.nativeStorage.getItem('email_user')
+    .then(data => {
+     this.email = data.email;
+   });
 
     this.petdetailservice.getData()
     .then(data2 => {
@@ -201,42 +212,15 @@ export class AddLayoutPage {
    )
   }
 
-  getEmail(){
-    this.nativeStorage.getItem('email_user')
-    .then(function (data) {
-     console.log(data.email);
-     this.email = data.email;
-   });
-  }
   addPet()
   {
     let data = this.event_form.value;
     
- 
     console.log('-------------------add pet');
 
-    console.log('-----data notification' + data.notifications);
+    // var url = 'http://api.whospets.com/api/users/set_user_pets.php?username=rickykei@yahoo.com.hk&category_id=&status=&tax_id=&title=&price=&size=&quantity=&view=&created&country_id=&sub_country_id=&description=&descriptionDisplay=&keywords=&language=&specifications=&style_code=&color=&condition=&feature_date=&gallery_date=&banner_a=aa&banner_b=b&banner_c=c&todays_deal=&discount=&date_lost=&date_born=&sub_category=&weight=&name_of_pet=&country=&contact=&pet_status=&count_down_end_date=&last_seen_appearance=&questions=&pet_id=&gender='
 
-    // title: new FormControl('', Validators.required),
-    // id: new FormControl('', Validators.required),
-    // petbreed: new FormControl(),
-    // description: new FormControl(),
-    // phone: new FormControl(),
-    // gender: new FormControl(),
-    // weight: new FormControl(30),
-    // height: new FormControl(15),
-    // rewards: new FormControl(0),
-    // size: new FormControl(),
-    // to_date: new FormControl(),
-    // lost_date: new FormControl(),
-    // found_date: new FormControl(),
-    // typeofpet: new FormControl(),
-    // countryId: new FormControl(),
-    // subCountryId: new FormControl()
-
-    // var url = 'http://api.whospets.com/api/users/set_user_pets.php?username='+this.email+'&category_id='+42+'&status='+2+'&tax_id='+0+'&title='+data.title+'&price='+.rewards+'&size='+data.size+'&quantity='+1+'&view='+1+'&created='+0+'&country_id='+data.countryId+'&sub_country_id='+data.subCountryId+'&description='+data.description+'&descriptionDisplay='+data.description+'&keywords='+''+'&language='+''+'&specifications='+''+'&style_code='+''+'&color='+data.color+'&condition='+''+'&feature_date='+''+'&gallery_date='+''+'&banner_a='+''+'&banner_b='+''+'&banner_c='+''+'&todays_deal='+''+'&discount='+0+'&date_lost='+0+'&date_born='+0+'&sub_category='+0+'&weight='+data.weight+'&height='+data.height+'&name_of_pet='+data.title+'&country='+data.countryId+'&contact='+data.phone+'&pet_status='+1+'&count_down_end_date='+0+'&last_seen_appearance='+0+'&questions='+''+'&pet_id='+data.id+'&gender='+data.gender;
-
-    var url = 'http://api.whospets.com/api/users/set_user_pets.php?username='+this.email+'&title='+data.title+'&name_of_pet='+data.name_of_pet+'&date_born='+data.born_date+'&category_id='+data.petbreed+'&sub_category='+data.typeofpet+'&description='+data.description+'&pet_id='+data.id+'&gender='+data.gender+'&color='+data.color+'&weight='+data.weight+'&height='+data.height+'&size='+data.size+'&country_id='+data.countryId+'&sub_country_id='+data.subCountryId+'&contact='+data.phone+'&pet_status='+data.petstatus+'&date_lost='+data.lost_date+'&count_down_end_date='+data.found_date+'&price='+data.rewards+'&last_seen_appearance='+data.lastseen+'&status='+data.status;
+    var url = 'http://api.whospets.com/api/users/set_user_pets.php?username='+this.email+'&title='+data.title+'&name_of_pet='+data.name_of_pet+'&date_born='+data.born_date+'&category_id='+data.petbreed+'&sub_category='+data.typeofpet+'&description='+data.description+'&pet_id='+data.id+'&gender='+data.gender+'&color='+data.color+'&weight='+data.weight+'&height='+data.height+'&size='+data.size+'&country_id='+data.countryId+'&sub_country_id='+data.subCountryId+'&contact='+data.phone+'&pet_status='+data.petstatus+'&date_lost='+data.lost_date+'&count_down_end_date='+data.found_date+'&price='+data.rewards+'&last_seen_appearance='+data.lastseen+'&status='+data.status+'&tax_id=&price=&quantity=&condition=&feature_date=&gallery_date=&banner_a=&banner_b=&banner_c=&todays_deal=&discount=&questions=&descriptionDisplay=&keywords=&language=&specifications=&style_code=&view=&created=&country=';
 
      console.log(url);
     

@@ -198,7 +198,7 @@ export class ProfilePage {
 
   addPet()
   {
-    this.app.getRootNav().push(AddLayoutPage);
+    this.app.getRootNav().push(AddLayoutPage, {profile:this.profile.data});
   }
 
 }
