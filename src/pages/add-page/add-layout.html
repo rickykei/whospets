@@ -90,13 +90,13 @@
               <ion-list class="radio-tags" radio-group formControlName="typeofpet">
                 <ion-item class="radio-tag">
                   <ion-label>cat</ion-label>
-                  <ion-radio value="cat"></ion-radio>
+                  <ion-radio value="2"></ion-radio>
                 </ion-item>
                 <ion-item class="radio-tag">
                   <ion-label>
                     <span>dog</span>
                   </ion-label>
-                  <ion-radio value="dog"></ion-radio>
+                  <ion-radio value="1"></ion-radio>
                 </ion-item>
               </ion-list>
             </ion-row>
@@ -106,7 +106,7 @@
                 <ion-item>
                   <ion-label>{{'PET BREED' | translate}}</ion-label>
                   <ion-select formControlName="petbreed"> 
-                    <ion-option  *ngFor="let breed of petdetail.pet">{{breed.title}}</ion-option> 
+                    <ion-option  *ngFor="let breed of petdetail.pet" [value]="breed.category_id">{{breed.title}}</ion-option> 
                   </ion-select>
                 </ion-item>
               </ion-col>
@@ -117,13 +117,13 @@
                 <ion-list class="radio-tags" radio-group formControlName="gender">
                   <ion-item class="radio-tag">
                     <ion-label>M</ion-label>
-                    <ion-radio value="male"></ion-radio>
+                    <ion-radio value="m"></ion-radio>
                   </ion-item>
                   <ion-item class="radio-tag">
                     <ion-label>
                       <span>F</span>
                     </ion-label>
-                    <ion-radio value="female"></ion-radio>
+                    <ion-radio value="f"></ion-radio>
                   </ion-item>
                 </ion-list>
               </ion-row>
@@ -133,13 +133,13 @@
                 <ion-list class="radio-tags" radio-group formControlName="size">
                   <ion-item class="radio-tag">
                     <ion-label>L</ion-label>
-                    <ion-radio value="large"></ion-radio>
+                    <ion-radio value="Large"></ion-radio>
                   </ion-item>
                   <ion-item class="radio-tag">
                     <ion-label>
                       <span>M</span>
                     </ion-label>
-                    <ion-radio value="middle"></ion-radio>
+                    <ion-radio value="medium"></ion-radio>
                   </ion-item>
                   <ion-item class="radio-tag">
                     <ion-label>S</ion-label>
@@ -176,7 +176,7 @@
 
                 <ion-item>
                   <ion-label>{{'Pet Color' | translate}}</ion-label>
-                  <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color">{{color.color}}</ion-option> </ion-select>
+                  <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color" >{{color.color}}</ion-option> </ion-select>
                 </ion-item>
 
                 </ion-col>
@@ -187,7 +187,7 @@
 
                 <ion-item>
                   <ion-label>{{'Pet Status' | translate}}</ion-label>
-                  <ion-select formControlName="petstatus"> <ion-option  *ngFor="let status of petStatus.pet_status">{{status.status}}</ion-option> </ion-select>
+                  <ion-select formControlName="petstatus"> <ion-option  *ngFor="let status of petStatus.pet_status" [value]="status.id">{{status.status}}</ion-option> </ion-select>
                 </ion-item>
 
                 </ion-col>
@@ -198,7 +198,7 @@
 
               <ion-item>
                 <ion-label>{{'COUNTRY' | translate}}</ion-label>
-                <ion-select> <ion-option *ngFor="let zone of country.zone">{{zone.title}}</ion-option> </ion-select>
+                <ion-select formControlName="countryId"><ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
               </ion-item>
 
               </ion-col>
@@ -206,7 +206,7 @@
               <ion-col no-padding width-40>
                   <ion-item>
                 <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
-                <ion-select> <ion-option *ngFor="let zone of subcountry.zone">{{zone.title}}</ion-option> </ion-select>
+                <ion-select formControlName="subCountryId"> <ion-option *ngFor="let zone of subcountry.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
               </ion-item>
 
               </ion-col>
@@ -279,13 +279,13 @@
             <ion-list class="radio-tags" radio-group formControlName="status">
               <ion-item class="radio-tag">
                 <ion-label>Active</ion-label>
-                <ion-radio value="active"></ion-radio>
+                <ion-radio value="1"></ion-radio>
               </ion-item>
               <ion-item class="radio-tag">
                 <ion-label>
                   <span>InActive</span>
                 </ion-label>
-                <ion-radio value="inactive"></ion-radio>
+                <ion-radio value="0"></ion-radio>
               </ion-item>
             </ion-list>
           </ion-row>
