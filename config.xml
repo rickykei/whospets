@@ -129,5 +129,7 @@
     <allow-navigation href="http://192.168.1.109:8100" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <engine name="ios" spec="^4.5.5" />
+    <plugin name="cordova-plugin-file-opener2" spec="^2.0.19" />
 </widget>

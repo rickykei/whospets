@@ -13,6 +13,13 @@ import { NativeStorage } from '@ionic-native/native-storage';
 
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
+import { ProfilePage } from '../profile/profile';
+//import { Observable } from '@firebase/util';
+
+import { Observable} from 'rxjs/Observable'
+import { FileTransferObject, FileUploadOptions, FileTransfer } from '@ionic-native/file-transfer';
+
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'add-layout-page',
@@ -51,7 +58,9 @@ export class AddLayoutPage {
     private http: Http,    
     public nativeStorage:NativeStorage,
     public platform: Platform,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private camera: Camera,
+    private transfer: FileTransfer
   ) {
 
     this.section = "event";
@@ -65,7 +74,7 @@ export class AddLayoutPage {
     });
     this.event_form = new FormGroup({
       title: new FormControl('', Validators.required),
-      id: new FormControl('', Validators.required),
+      id: new FormControl(''),
       name_of_pet: new FormControl(''),
       petbreed: new FormControl(''),
       description: new FormControl(''),
@@ -225,12 +234,71 @@ export class AddLayoutPage {
      console.log(url);
     
     this.http.get(url).map(res => res.json()).subscribe(data2 => {
-      console.log("success to update profile");
+      console.log("success to add pet");
 
+      this.uploadImage();
+     // this.nav.setRoot(ProfilePage);
      }, error => {
-      console.log("fail to update profile");
+      console.log("fail to add pet");
 
      });
     }
+
+   /* uploadImage()
+    {
+      let url = 'http://api.whospets.com/api/users/upload_image.php?image_field='+this.selected_image.newImage+'&user_id='+this.profile.user_id+'&username='+this.email+'&is_default=Y';
+      let postData = new FormData();
+      postData.append('file', this.selected_image);
+
+      let data:Observable<any> =  this.http.post(url, postData);
+      data.subscribe((result) => {
+        console.log(result);
+      });
+    }
+    */
+
+    uploadImage()
+  {
+    
+     let options = {
+
+         quality: 100
+          };
+
+
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64:
+
+   const fileTransfer: FileTransferObject = this.transfer.create();
+
+    let options1: FileUploadOptions = {
+       fileKey: 'file',
+       fileName: 'name.jpg',
+       headers: {}
+    
+    }
+
+    let url = 'http://api.whospets.com/api/users/upload_image.php?image_field='+options1.fileName+'&user_id='+this.profile.user_id+'&username='+this.email+'&is_default=Y';
+    
+fileTransfer.upload(imageData, url, options1)
+ .then((data) => {
+   // success
+   alert("success");
+   console.log("success");
+
+ }, (err) => {
+   // error
+   alert("error"+JSON.stringify(err));
+   console.log("error"+JSON.stringify(err));
+
+ });
+
+
+  });
+
+
+}
+
 
 }
