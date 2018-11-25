@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.whospets.aos" version="1.0.12" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.whospets.aos" version="1.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>whospets</name>
     <description>whospets</description>
     <author email="hi@ionicthemes.com" href="https://ionicthemes.com/">Ionic Themes</author>
@@ -129,7 +129,6 @@
     <allow-navigation href="http://192.168.1.109:8100" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
-    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
-    <engine name="ios" spec="^4.5.5" />
-    <plugin name="cordova-plugin-file-opener2" spec="^2.0.19" />
+    <engine name="ios" spec="~4.5.0" />
+    <engine name="android" spec="6.3.0" />
 </widget>

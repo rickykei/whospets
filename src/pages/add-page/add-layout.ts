@@ -5,7 +5,7 @@ import { counterRangeValidator } from '../../components/counter-input/counter-in
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 import { PetDetailsService } from './addlayout.service';
-import { PetBreedModel, PetColorModel, PetStatusModel } from './addlayout.model';
+import { PetBreedModel, PetColorModel, PetStatusModel, BreedModel } from './addlayout.model';
 
 import { CountryIdModel, UserModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
@@ -34,8 +34,8 @@ export class AddLayoutPage {
   event_form: FormGroup;
   card_form: FormGroup;
 
-  categories_checkbox_open: boolean;
-  categories_checkbox_result;
+  pets_checkbox_open: boolean;
+  pets_checkbox_result;
 
   selected_image: any;
 
@@ -47,6 +47,10 @@ export class AddLayoutPage {
   subcountry: CountryIdModel = new CountryIdModel();
 
   profile: UserModel= new UserModel();
+
+  selectedbreeds: BreedModel[];
+  breeds: any;
+
 
   constructor(
     public nav: NavController,
@@ -67,10 +71,7 @@ export class AddLayoutPage {
 
     this.post_form = new FormGroup({
       title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      servings: new FormControl(2, counterRangeValidator(10, 1)),
-      time: new FormControl('01:30', Validators.required),
-      temperature: new FormControl(180)
+      description: new FormControl('', Validators.required),      
     });
     this.event_form = new FormGroup({
       title: new FormControl('', Validators.required),
@@ -96,15 +97,14 @@ export class AddLayoutPage {
       subCountryId: new FormControl('')
     });
     this.card_form = new FormGroup({
-      card_number: new FormControl('', Validators.required),
-      card_holder: new FormControl('', Validators.required),
-      cvc: new FormControl('', Validators.required),
-      exp_date: new FormControl('', Validators.required),
-      save_card: new FormControl(true, Validators.required)
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),  
     });
 
     this.profile = navParams.get('profile'); 
     this.petowner = this.profile.firstname + '' + this.profile.lastname;
+
+    this.initializePetType();
 
     console.log(this.petowner);
   }
@@ -162,11 +162,11 @@ export class AddLayoutPage {
     console.log(this.card_form.value);
   }
 
-  chooseCategory(){
+  choosePet(){
     let alert = this.alertCtrl.create({
       cssClass: 'category-prompt'
     });
-    alert.setTitle('Category');
+    alert.setTitle('Pet');
 
     alert.addInput({
       type: 'checkbox',
@@ -186,12 +186,12 @@ export class AddLayoutPage {
       text: 'Confirm',
       handler: data => {
         console.log('Checkbox data:', data);
-        this.categories_checkbox_open = false;
-        this.categories_checkbox_result = data;
+        this.pets_checkbox_open = false;
+        this.pets_checkbox_result = data;
       }
     });
     alert.present().then(() => {
-      this.categories_checkbox_open = true;
+      this.pets_checkbox_open = true;
     });
   }
 
@@ -299,6 +299,25 @@ fileTransfer.upload(imageData, url, options1)
 
 
 }
+// setDistrictValues(sState) {
+//  this.selectedDistricts = this.districts.filter(district => district.state_id == sState.id)
+//}
+initializePetType(){
+  this.breeds = [
+      {id: 1, name: 'Dog', pet_id: 1},
+      {id: 2, name: 'Cat', pet_id: 2}     
+  ];
+  }
+setPetBreedValues(sBreed) {
+  let data = this.event_form.value;
 
+  this.selectedbreeds = this.petdetail.pet.filter(
+    breed => breed.parent_id == sBreed 
+  );
+
+  console.log('lenght : ' + this.selectedbreeds.length);
+  console.log('title :' + this.selectedbreeds[1].title);
+  console.log('parent id: ' + this.selectedbreeds[1].parent_id);
+}
 
 }
