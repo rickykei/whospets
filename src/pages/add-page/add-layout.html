@@ -303,47 +303,56 @@
           <ion-item>
             <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
           </ion-item>
-          <section class="form-section">
-            <button ion-button block icon-end class="choose-pet-button" (click)="choosePet()">
-              {{'CHOOSE_PET' | translate}}
-              <ion-icon name="add"></ion-icon>
-            </button>
-          </section>        
+          <ion-item class="range-item">
+            <ion-label>
+              <h2 class="range-label">{{'Price' | translate}}</h2>
+              <h3 class="range-value">{{card_form.controls.price.value}} kg</h3>
+            </ion-label>
+            <ion-range formControlName="price" min="0" max="99999" step="1" snaps="true" pin="false"></ion-range>
+          </ion-item>
+
+          <ion-row no-padding class="multi-input-row">
+            <ion-col no-padding width-60>
+
+          <ion-item>
+            <ion-label>{{'COUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="countryId"><ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+          </ion-item>
+
+          </ion-col>
+     
+          <ion-col no-padding width-40>
+              <ion-item>
+            <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="subCountryId"> <ion-option *ngFor="let zone of subcountry.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+          </ion-item>
+
+          </ion-col>
+          </ion-row>
+
+          <ion-item>
+            <ion-label>{{'Color' | translate}}</ion-label>
+            <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color" >{{color.color}}</ion-option> </ion-select>
+          </ion-item>
+
+          <ion-item class="range-item">
+            <ion-label>
+              <h2 class="range-label">{{'Weight' | translate}}</h2>
+              <h3 class="range-value">{{card_form.controls.weight.value}} kg</h3>
+            </ion-label>
+            <ion-range formControlName="weight" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="text" placeholder="Small" formControlName="size"></ion-input>
+          </ion-item>
+
+
           <section class="form-section">
             <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!post_form.valid">Post!</button>
           </section>
         </form>
       </div>
 
-    <!--
-    <div *ngSwitchCase="'card'" class="card-example-view">
-      <form class="sample-form card-form" [formGroup]="card_form" (ngSubmit)="createCard()">
-        <section class="form-section">
-          <ion-item>
-            <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
-          </ion-item>
-          <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
-            <ion-icon name="camera"></ion-icon>
-            <h3 class="button-title">{{'UPLOAD_AN_IMAGE' | translate}}</h3>
-          </button>
-          <preload-image *ngIf="selected_image" [ratio]="{w:1, h:1}" [src]="selected_image" alt="this is the image" title="IMAGE!"></preload-image>
-        </section>
-        <ion-item>
-          <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
-        </ion-item>
-       
-        <ion-list class="card-preferences">
-          <ion-item class="switcher-item">
-            <ion-label>{{'SELL' | translate}}</ion-label>
-            <ion-toggle formControlName="save_card"></ion-toggle>
-          </ion-item>
-        </ion-list>
-        <section class="form-section">
-          <button ion-button block class="form-action-button create-card-button" type="submit" [disabled]="!card_form.valid">Confirm</button>
-        </section>
-      </form>
-    </div>
-
-    -->
   </div>
 </ion-content>

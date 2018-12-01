@@ -122,6 +122,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // upload image 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { PagesDisplayServiceProvider } from '../providers/pages-display-service/pages-display-service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -313,7 +314,8 @@ export function createTranslateLoader(http: HttpClient) {
     FileTransfer,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PagesDisplayServiceProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

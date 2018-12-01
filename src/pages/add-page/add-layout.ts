@@ -20,12 +20,15 @@ import { Observable} from 'rxjs/Observable'
 import { FileTransferObject, FileUploadOptions, FileTransfer } from '@ionic-native/file-transfer';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { DisplayPage } from '../display/display';
+import { DisplaySellPage } from '../display-sell/display-sell';
 
 @Component({
   selector: 'add-layout-page',
   templateUrl: 'add-layout.html'
 })
 export class AddLayoutPage {
+  display:string;
   section: string;
   email: string;
   petowner:string;
@@ -99,6 +102,12 @@ export class AddLayoutPage {
     this.card_form = new FormGroup({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),  
+      price:new FormControl(''),
+      countryId: new FormControl(''),
+      subCountryId: new FormControl(''),
+      color:new FormControl(''),
+      weight: new FormControl(0),
+      size: new FormControl(0)
     });
 
     this.profile = navParams.get('profile'); 
@@ -224,12 +233,21 @@ export class AddLayoutPage {
   addPet()
   {
     let data = this.event_form.value;
-    
+    this.display ='addPet';
     console.log('-------------------add pet');
 
     // var url = 'http://api.whospets.com/api/users/set_user_pets.php?username=rickykei@yahoo.com.hk&category_id=&status=&tax_id=&title=&price=&size=&quantity=&view=&created&country_id=&sub_country_id=&description=&descriptionDisplay=&keywords=&language=&specifications=&style_code=&color=&condition=&feature_date=&gallery_date=&banner_a=aa&banner_b=b&banner_c=c&todays_deal=&discount=&date_lost=&date_born=&sub_category=&weight=&name_of_pet=&country=&contact=&pet_status=&count_down_end_date=&last_seen_appearance=&questions=&pet_id=&gender='
 
-    var url = 'http://api.whospets.com/api/users/set_user_pets.php?username='+this.email+'&title='+data.title+'&name_of_pet='+this.petowner+'&date_born='+data.born_date+'&category_id='+data.petbreed+'&sub_category='+data.typeofpet+'&description='+data.description+'&pet_id='+data.id+'&gender='+data.gender+'&color='+data.color+'&weight='+data.weight+'&height='+data.height+'&size='+data.size+'&country_id='+data.countryId+'&sub_country_id='+data.subCountryId+'&contact='+data.phone+'&pet_status='+data.petstatus+'&date_lost='+data.lost_date+'&count_down_end_date='+data.found_date+'&price='+data.rewards+'&last_seen_appearance='+data.lastseen+'&status='+data.status+'&tax_id=&price=&quantity=&condition=&feature_date=&gallery_date=&banner_a=&banner_b=&banner_c=&todays_deal=&discount=&questions=&descriptionDisplay=&keywords=&language=&specifications=&style_code=&view=&created=&country=';
+    var url = 'http://api.whospets.com/api/users/set_user_pets.php?username='+this.email
+    +'&title='+data.title+'&name_of_pet='+this.petowner+'&date_born='+data.born_date
+    +'&category_id='+data.petbreed+'&sub_category='+data.typeofpet+'&description='+data.description
+    +'&pet_id='+data.id+'&gender='+data.gender+'&color='+data.color+'&weight='+data.weight
+    +'&height='+data.height+'&size='+data.size+'&country_id='+data.countryId+'&sub_country_id='+data.subCountryId
+    +'&contact='+data.phone+'&pet_status='+data.petstatus+'&date_lost='+data.lost_date
+    +'&count_down_end_date='+data.found_date+'&price='+data.rewards+'&last_seen_appearance='+data.lastseen
+    +'&status='+data.status+'&tax_id=&price=&quantity=&condition=&feature_date=&gallery_date=&banner_a='
+    +'&banner_b=&banner_c=&todays_deal=&discount=&questions=&descriptionDisplay=&keywords=&language='
+    +'&specifications=&style_code=&view=&created=&country=';
 
      console.log(url);
     
@@ -237,11 +255,70 @@ export class AddLayoutPage {
       console.log("success to add pet");
 
       this.uploadImage();
-     // this.nav.setRoot(ProfilePage);
+      
+      this.goToDisplay();
+
      }, error => {
       console.log("fail to add pet");
 
      });
+    }
+
+    addPost()
+    {
+      let data = this.post_form.value;
+      this.display ='addPost';
+      console.log('-------------------add post');
+  
+      var url = 'http://api.whospets.com/api/users/set_user_posts.php?username='+this.email+'&title='+data.title+
+      '&description='+data.description;
+     
+  
+       console.log(url);
+      
+      this.http.get(url).map(res => res.json()).subscribe(data2 => {
+        console.log("success to add post");
+  
+        this.uploadImage();
+
+        this.goToDisplay();
+      
+      }, error => {
+        console.log("fail to add post");
+  
+       });
+    }
+
+    addSell()
+    {
+      let data = this.card_form.value;
+      this.display ='addSell';
+    
+      console.log('-------------------add sell');
+  
+      var url = 'http://api.whospets.com/api/users/set_user_sells.php?username='+this.email
+      +'&title='+data.title+'&description='+data.description+'&price='+data.price
+      +'&size='+data.size+'&country_id='+data.countryId+'&sub_country_id='+data.subCountryId
+      +'&color='+data.color+'&weight='+data.weight;
+
+       console.log(url);
+      
+      this.http.get(url).map(res => res.json()).subscribe(data2 => {
+        console.log("success to add sell");
+  
+        this.uploadImage();
+       
+        this.nav.push(DisplaySellPage);
+
+       }, error => {
+        console.log("fail to add sell");
+  
+       });
+    }
+
+    goToDisplay() 
+    {
+      this.nav.push(DisplayPage, {display:this.display});
     }
 
    /* uploadImage()

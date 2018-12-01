@@ -37,9 +37,7 @@ export class ProfilePage {
   }
 
 
-  ionViewDidLoad() {
-
-  
+  ionViewDidLoad() { 
 
 
     this.nativeStorage.getItem('email_user')
