@@ -32,7 +32,7 @@ export class AddLayoutPage {
   section: string;
   email: string;
   petowner:string;
-  user_id:string;
+  user_id:number;
 
   post_form: any;
   event_form: FormGroup;
@@ -113,18 +113,19 @@ export class AddLayoutPage {
 
     this.profile = navParams.get('profile'); 
     this.petowner = this.profile.firstname + '' + this.profile.lastname;
+    this.user_id = this.profile.user_id;
 
     this.initializePetType();
 
     console.log(this.petowner);
+    console.log(this.user_id);
   }
 
   ionViewDidLoad() {
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
-     this.email = data.email;
-     this.user_id = data.user_id;
+     this.email = data.email;     
    });
 
     this.petdetailservice.getData()
@@ -240,7 +241,8 @@ export class AddLayoutPage {
 
     // var url = 'http://api.whospets.com/api/users/set_user_pets.php?username=rickykei@yahoo.com.hk&category_id=&status=&tax_id=&title=&price=&size=&quantity=&view=&created&country_id=&sub_country_id=&description=&descriptionDisplay=&keywords=&language=&specifications=&style_code=&color=&condition=&feature_date=&gallery_date=&banner_a=aa&banner_b=b&banner_c=c&todays_deal=&discount=&date_lost=&date_born=&sub_category=&weight=&name_of_pet=&country=&contact=&pet_status=&count_down_end_date=&last_seen_appearance=&questions=&pet_id=&gender='
 
-    var url = 'http://api.whospets.com/api/users/set_user_pets.php?user_id='+this.user_id+'username='+this.email
+    var url = 'http://api.whospets.com/api/users/set_user_pets.php?user_id='+this.user_id
+    +'&username='+this.email
     +'&title='+data.title+'&name_of_pet='+this.petowner+'&date_born='+data.born_date
     +'&category_id='+data.petbreed+'&sub_category='+data.typeofpet+'&description='+data.description
     +'&pet_id='+data.id+'&gender='+data.gender+'&color='+data.color+'&weight='+data.weight
@@ -272,8 +274,8 @@ export class AddLayoutPage {
       this.display ='addPost';
       console.log('-------------------add post');
   
-      var url = 'http://api.whospets.com/api/users/set_user_posts.php?'+'user_id='+this.user_id
-      'email='+this.email+'&title='+data.title+
+      var url = 'http://api.whospets.com/api/users/set_user_posts.php?'+'user_id='+this.user_id+
+      '&email='+this.email+'&title='+data.title+
       '&description='+data.description;
      
   
@@ -299,7 +301,8 @@ export class AddLayoutPage {
     
       console.log('-------------------add sell');
   
-      var url = 'http://api.whospets.com/api/users/set_user_sells.php?user_id='+this.user_id+'username='+this.email
+      var url = 'http://api.whospets.com/api/users/set_user_sells.php?user_id='+this.user_id
+      +'&username='+this.email
       +'&title='+data.title+'&description='+data.description+'&price='+data.price
       +'&size='+data.size+'&country_id='+data.countryId+'&sub_country_id='+data.subCountryId
       +'&color='+data.color+'&weight='+data.weight;

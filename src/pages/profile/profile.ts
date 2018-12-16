@@ -80,6 +80,7 @@ export class ProfilePage {
           this.profile.data.seller = data2.data.seller;
           this.profile.data.country_id = data2.data.country_id;
           this.profile.data.sub_country_id = data2.data.sub_country_id;
+          this.profile.data.user_id = data2.data.user_id;
 
 
           console.log('..data2 image :'+ this.profile.data.fb_uid);
@@ -191,11 +192,13 @@ export class ProfilePage {
 
   goPetDetail(pet)
   {
+    console.log("profile : " +this.profile.data.user_id);
     this.app.getRootNav().push(PetinfoPage, {pet:pet},{profile:this.profile.data});
   }
 
   addPet()
   {
+    console.log("profile : " +this.profile.data.user_id);
     this.app.getRootNav().push(AddLayoutPage, {profile:this.profile.data});
   }
 
