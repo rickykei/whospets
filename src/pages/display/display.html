@@ -15,7 +15,7 @@
 
 <ion-content>
   <ion-content class="profile-content">
-       <div class="user-details">
+       <div class="user-details" *ngFor="let pet of details">
          
          <ion-row class="user-main-image-row">
              <preload-image [ratio]="{w:4, h:4}" src="http://whospets.com/images/product/thumb/{{pet.image}}"  title="pet.title"></preload-image>
@@ -69,7 +69,7 @@
              </p>
         </ion-row>
 
-         <ion-row class="user-main-description-row">
+         <!-- <ion-row class="user-main-description-row">
                <p class="item-text">
                    {{'price' | translate}}
                  </p>
@@ -116,7 +116,7 @@
           <p class="item-text">
             {{pet.weight}}
           </p>
-        </ion-row>
+        </ion-row> -->
 
      </div>
 

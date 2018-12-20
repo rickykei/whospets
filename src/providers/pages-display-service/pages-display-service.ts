@@ -20,22 +20,22 @@ export class PagesDisplayServiceProvider {
     console.log('Hello PagesDisplayServiceProvider Provider');
   }
 
-  getPost(_email:string):Promise<PetModel>
+  getPost(user_id:number):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
    
-      return this.http.get('http://api.whospets.com/api/users/get_posts.php?username='+_email) //('./assets/example_data/mypet.json')
+      return this.http.get('http://api.whospets.com/api/users/get_user_posts.php?user_id='+user_id) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
   
   }
 
-  getSell(_email:string):Promise<PetModel>
+  getSell(user_id:number):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
    
-      return this.http.get('http://api.whospets.com/api/users/get_sells.php?username='+_email) //('./assets/example_data/mypet.json')
+      return this.http.get('http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);

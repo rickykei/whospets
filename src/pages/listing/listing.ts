@@ -4,9 +4,12 @@ import { NavController } from 'ionic-angular';
 import { FeedPage } from '../feed/feed';
 import 'rxjs/Rx';
 
-import { ListingModel } from './listing.model';
+import { ListingModel, ListingItemModel } from './listing.model';
 import { ListingService } from './listing.service';
 import { LostPetPage } from '../lostpet/lostpet';
+import { DisplaySellPage } from '../display-sell/display-sell';
+import { DisplayPage } from '../display/display';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @Component({
   selector: 'listing-page',
@@ -14,9 +17,12 @@ import { LostPetPage } from '../lostpet/lostpet';
 })
 export class ListingPage {
   listing: ListingModel = new ListingModel();
+  categories: ListingItemModel;
+  user_id : string;
 
   constructor(
     public nav: NavController,
+    public nativeStorage:NativeStorage,
     public listingService: ListingService
   ) {}
  
@@ -29,6 +35,11 @@ export class ListingPage {
         this.listing.populars = data.populars;
         this.listing.categories = data.categories;
       });
+
+      this.nativeStorage.getItem('profile_user_id')
+      .then(data => {
+          this.user_id = data.profile_user_id;
+        });
   }
 
   goToLostPet() {
@@ -39,7 +50,20 @@ export class ListingPage {
 
   goToFeed(category: any) {
     console.log("Clicked goToFeed", category);
+    this.categories  = category;
+    if(this.categories.catid == '4')
+    {
+      this.nav.push(DisplaySellPage, {display:this.user_id});
+    }
+    else     if(this.categories.catid == '5')
+    {
+
+    }else     if(this.categories.catid == '6')
+    {
+      this.nav.push(DisplayPage, {display:this.user_id});
+    }else{
      this.nav.push(FeedPage, { category: category });
+    }
   }
 
 }

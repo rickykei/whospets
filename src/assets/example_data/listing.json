@@ -25,15 +25,19 @@
         },
         {
             "title": "Second Hand",
-            "image": "./assets/images/listing/200x200sell.png"
+            "image": "./assets/images/listing/200x200sell.png",
+            "catid": "4"
+
         },
         {
             "title": "Q&A",
-            "image": "./assets/images/listing/200x200qna.png"
+            "image": "./assets/images/listing/200x200qna.png",
+            "catid": "5"
         },
         {
             "title": "Lifestyle",
-            "image": "./assets/images/listing/200x200petlifestyle.png"
+            "image": "./assets/images/listing/200x200petlifestyle.png",
+            "catid": "6"
         }
 
     ]

@@ -18,11 +18,12 @@ import { PagesDisplayServiceProvider } from '../../providers/pages-display-servi
 })
 export class DisplayPage {
 
-  display: string;
+ // display: string;
   pet: PetDetailsModel = new PetDetailsModel();
   uid:string;
   petModel: PetModel = new PetModel();
-
+  user_id:number;
+  details: Array<PetDetailsModel>;
 
   constructor(
     public navCtrl: NavController, 
@@ -31,7 +32,7 @@ export class DisplayPage {
     public navParams: NavParams
   ) 
   {
-    this.display = navParams.get('display'); 
+    this.user_id = navParams.get('display'); 
   }
 
   
@@ -53,14 +54,14 @@ export class DisplayPage {
     // default
     //'http://graph.facebook.com/100001704123828/picture'
 
-    this.nativeStorage.getItem('email_user')
-    .then(data => {
-        this.PagesDisplayServiceProvider.getPost(data.email)
+  //  this.nativeStorage.getItem('email_user')
+ //   .then(data => {
+        this.PagesDisplayServiceProvider.getPost(this.user_id)
         .then(response => {
           this.petModel = response; 
-          this.pet = this.petModel[0].data;                  
+          this.details = response.data;                       
         });
-      });
+   //   });
     } 
 
 }

@@ -28,7 +28,7 @@ import { DisplaySellPage } from '../display-sell/display-sell';
   templateUrl: 'add-layout.html'
 })
 export class AddLayoutPage {
-  display:string;
+ // display:string;
   section: string;
   email: string;
   petowner:string;
@@ -236,7 +236,7 @@ export class AddLayoutPage {
   addPet()
   {
     let data = this.event_form.value;
-    this.display ='addPet';
+   // this.display ='addPet';
     console.log('-------------------add pet');
 
     // var url = 'http://api.whospets.com/api/users/set_user_pets.php?username=rickykei@yahoo.com.hk&category_id=&status=&tax_id=&title=&price=&size=&quantity=&view=&created&country_id=&sub_country_id=&description=&descriptionDisplay=&keywords=&language=&specifications=&style_code=&color=&condition=&feature_date=&gallery_date=&banner_a=aa&banner_b=b&banner_c=c&todays_deal=&discount=&date_lost=&date_born=&sub_category=&weight=&name_of_pet=&country=&contact=&pet_status=&count_down_end_date=&last_seen_appearance=&questions=&pet_id=&gender='
@@ -271,7 +271,7 @@ export class AddLayoutPage {
     addPost()
     {
       let data = this.post_form.value;
-      this.display ='addPost';
+    //  this.display ='addPost';
       console.log('-------------------add post');
   
       var url = 'http://api.whospets.com/api/users/set_user_posts.php?'+'user_id='+this.user_id+
@@ -297,7 +297,7 @@ export class AddLayoutPage {
     addSell()
     {
       let data = this.card_form.value;
-      this.display ='addSell';
+     // this.display ='addSell';
     
       console.log('-------------------add sell');
   
@@ -314,7 +314,7 @@ export class AddLayoutPage {
   
     //    this.uploadImage();
        
-        this.nav.push(DisplaySellPage);
+        this.nav.push(DisplaySellPage, {display:this.user_id});
 
        }, error => {
         console.log("fail to add sell");
@@ -324,7 +324,7 @@ export class AddLayoutPage {
 
     goToDisplay() 
     {
-      this.nav.push(DisplayPage);
+      this.nav.push(DisplayPage, {display:this.user_id} );
     }
 
    /* uploadImage()

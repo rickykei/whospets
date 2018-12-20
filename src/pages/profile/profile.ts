@@ -24,6 +24,7 @@ export class ProfilePage {
   status:string;
   pet: PetModel = new PetModel();
   petstatus:string;
+  profile_user_id: string;
 
   constructor(
     public menu: MenuController,
@@ -82,6 +83,7 @@ export class ProfilePage {
           this.profile.data.sub_country_id = data2.data.sub_country_id;
           this.profile.data.user_id = data2.data.user_id;
 
+          this.setProfileUserId(this.profile.data.user_id.toString());
 
           console.log('..data2 image :'+ this.profile.data.fb_uid);
           console.log('..data2 email:'+ this.profile.data.email);
@@ -107,6 +109,21 @@ export class ProfilePage {
           this.pet = response;
         });
       });
+
+      
+    }
+
+    setProfileUserId( _userid : string)
+    {
+      this.nativeStorage.setItem('profile_user_id',
+      {
+        profile_user_id : _userid
+      })
+      .then(
+        () =>  console.log('profile_user_id ： Stored item!'),
+        error => console.error('profile_user_id : Error storing item')
+      );
+  
     }
 
 /*
