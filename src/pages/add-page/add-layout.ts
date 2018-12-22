@@ -22,6 +22,7 @@ import { FileTransferObject, FileUploadOptions, FileTransfer } from '@ionic-nati
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DisplayPage } from '../display/display';
 import { DisplaySellPage } from '../display-sell/display-sell';
+import { SetQnaPage } from '../set-qna/set-qna';
 
 @Component({
   selector: 'add-layout-page',
