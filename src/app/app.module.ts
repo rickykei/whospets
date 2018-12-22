@@ -44,7 +44,8 @@ import { PetinfoPage } from '../pages/petinfo/petinfo';
 import { AddLayoutPage } from '../pages/add-page/add-layout';
 import { DisplayPage } from '../pages/display/display';
 import { DisplaySellPage} from '../pages/display-sell/display-sell';
-
+import { QnaPage} from '../pages/qna/qna';
+import { SetQnaPage} from '../pages/set-qna/set-qna';
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -159,6 +160,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddLayoutPage,
     DisplayPage,
     DisplaySellPage,
+    QnaPage,
+    SetQnaPage,
 
     //functionalities
     MapsPage,
@@ -261,6 +264,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddLayoutPage,
     DisplayPage,
     DisplaySellPage,
+    QnaPage,
+    SetQnaPage,
     //firebase integration
     FirebaseFeedPage,
     FirebaseNewUserModalPage,

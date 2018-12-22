@@ -42,6 +42,17 @@ export class PagesDisplayServiceProvider {
   
   }
 
+  getQnA(user_id:number):Promise<PetModel>
+  {
+    //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
+   
+      return this.http.get('http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id) //('./assets/example_data/mypet.json')
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+  
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

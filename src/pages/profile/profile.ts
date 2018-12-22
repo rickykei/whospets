@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MenuController, SegmentButton, App, NavParams } from 'ionic-angular';
-import { FollowersPage } from '../followers/followers';
 import { SettingsPage } from '../settings/settings';
 import { ProfileModel, PetModel } from './profile.model';
 import { ProfileService } from './profile.service';
@@ -83,7 +82,7 @@ export class ProfilePage {
           this.profile.data.sub_country_id = data2.data.sub_country_id;
           this.profile.data.user_id = data2.data.user_id;
 
-          this.setProfileUserId(this.profile.data.user_id.toString());
+          this.setProfileUserId(data2.data.user_id +"");
 
           console.log('..data2 image :'+ this.profile.data.fb_uid);
           console.log('..data2 email:'+ this.profile.data.email);
@@ -110,11 +109,13 @@ export class ProfilePage {
         });
       });
 
-      
+
     }
 
     setProfileUserId( _userid : string)
     {
+      console.log('profile_user_id :' + _userid);
+
       this.nativeStorage.setItem('profile_user_id',
       {
         profile_user_id : _userid

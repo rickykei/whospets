@@ -10,6 +10,7 @@ import { LostPetPage } from '../lostpet/lostpet';
 import { DisplaySellPage } from '../display-sell/display-sell';
 import { DisplayPage } from '../display/display';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { QnaPage } from '../qna/qna';
 
 @Component({
   selector: 'listing-page',
@@ -57,6 +58,7 @@ export class ListingPage {
     }
     else     if(this.categories.catid == '5')
     {
+      this.nav.push(QnaPage, {display:this.user_id});
 
     }else     if(this.categories.catid == '6')
     {

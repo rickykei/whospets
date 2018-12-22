@@ -1,5 +1,5 @@
 <!--
-  Generated template for the DisplaySellPage page.
+  Generated template for the DisplayPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,11 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>display-sell-page</ion-title>
+    <ion-title>Q&A page</ion-title>
+    <ion-buttons end> 
+        <button (click)="setQna()"> 
+            <div class="titleicon">
+                <ion-icon name="add"></ion-icon>
+           </div>
+      </button> 
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
-
 
 
 <ion-content>
@@ -45,6 +51,18 @@
            </ion-col>
          </ion-row>
 
+       <ion-row class="user-main-description-row">
+             <p class="item-text">
+                 {{'Pet id' | translate}}
+               </p> 
+
+               <p class="item-text">
+                   {{' ： '}}
+                 </p>
+           <p class="item-text">
+               {{pet.pet_id}}
+             </p>
+       </ion-row>
 
        <ion-row class="user-main-description-row">
              <p class="item-text">
@@ -58,18 +76,54 @@
              </p>
         </ion-row>
 
+         <!-- <ion-row class="user-main-description-row">
+               <p class="item-text">
+                   {{'price' | translate}}
+                 </p>
+                 <p class="item-text">
+                     {{' ： '}}
+                   </p>
+             <p class="item-text">
+                 {{pet.price}}
+               </p>
+         </ion-row>
 
          <ion-row class="user-main-description-row">
           <p class="item-text">
-              {{'Pet Status' | translate}}
+              {{'Color' | translate}}
             </p>
             <p class="item-text">
                 {{' ： '}}
               </p>
-        <p class="item-text">
-            {{pet.pet_status}}
+          <p class="item-text">
+            {{pet.color}}
           </p>
-    </ion-row>
+        </ion-row>
+
+        <ion-row class="user-main-description-row">
+          <p class="item-text">
+              {{'Size' | translate}}
+            </p>
+            <p class="item-text">
+                {{' ： '}}
+              </p>
+          <p class="item-text">
+            {{pet.size}}
+          </p>
+        </ion-row>
+
+
+        <ion-row class="user-main-description-row">
+          <p class="item-text">
+              {{'weight' | translate}}
+            </p>
+            <p class="item-text">
+                {{' ： '}}
+              </p>
+          <p class="item-text">
+            {{pet.weight}}
+          </p>
+        </ion-row> -->
 
      </div>
 
