@@ -54,15 +54,15 @@ export class ListingPage {
     this.categories  = category;
     if(this.categories.catid == '4')
     {
-      this.nav.push(DisplaySellPage, {display:this.user_id});
+      this.nav.push(DisplaySellPage, {display:this.user_id, getall:true});
     }
     else     if(this.categories.catid == '5')
     {
-      this.nav.push(QnaPage, {display:this.user_id});
+      this.nav.push(QnaPage, {display:this.user_id, getall:true});
 
     }else     if(this.categories.catid == '6')
     {
-      this.nav.push(DisplayPage, {display:this.user_id});
+      this.nav.push(DisplayPage, {display:this.user_id, getall:true});
     }else{
      this.nav.push(FeedPage, { category: category });
     }

@@ -41,7 +41,7 @@ export class PetLostPostModel {
   gender:string;
   country_id:string;
   sub_country_id:string;
-	filename:string;
+	image:string;
 }
 
 

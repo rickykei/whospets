@@ -41,7 +41,7 @@ export class FeedPostModel {
   gender:string;
   country_id:string;
   sub_country_id:string;
-  filename:string;
+  image:string;
 	//comments: number = 0;
 	//liked: boolean = false;
 }

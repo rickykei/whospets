@@ -315,7 +315,7 @@ export class AddLayoutPage {
   
     //    this.uploadImage();
        
-        this.nav.push(DisplaySellPage, {display:this.user_id});
+        this.nav.push(DisplaySellPage, {display:this.user_id, getall:false});
 
        }, error => {
         console.log("fail to add sell");
@@ -325,7 +325,7 @@ export class AddLayoutPage {
 
     goToDisplay() 
     {
-      this.nav.push(DisplayPage, {display:this.user_id} );
+      this.nav.push(DisplayPage, {display:this.user_id, getall:false} );
     }
 
    /* uploadImage()

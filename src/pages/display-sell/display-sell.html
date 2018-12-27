@@ -19,13 +19,13 @@
        <div class="user-details" *ngFor="let pet of details">
          
          <ion-row class="user-main-image-row">
-             <preload-image [ratio]="{w:4, h:4}" src="http://whospets.com/images/product/thumb/{{pet.image}}"  title="pet.title"></preload-image>
-         </ion-row>
+           <preload-image [ratio]="{w:4, h:4}" src="{{pet.image}}"  title="pet.title"></preload-image>
+        </ion-row>
          
          <ion-row class="user-main-data-row">
-           <ion-col no-padding width-33>
+           <!-- <ion-col no-padding width-33>
              <preload-image class="user-image" [ratio]="{w:1, h:1}" src="http://graph.facebook.com/{{uid}}/picture"></preload-image>
-           </ion-col>
+           </ion-col> -->
            <ion-col no-padding width-33>
                <h3>{{pet.name_of_pet}}</h3>
              </ion-col>

@@ -24,6 +24,7 @@ export class DisplaySellPage{
   petModel: PetModel = new PetModel();
   user_id:number;
   details: Array<PetDetailsModel>;
+  getall: boolean;
 
   constructor(
     public navCtrl: NavController, 
@@ -33,6 +34,8 @@ export class DisplaySellPage{
   ) 
   {
     this.user_id = navParams.get('display'); 
+    this.getall = navParams.get('getall'); 
+    console.log( 'getall : ' + this.getall);
   }
 
   
@@ -51,17 +54,23 @@ export class DisplaySellPage{
         this.uid=data.uid;
       }
     });
-    // default
-    //'http://graph.facebook.com/100001704123828/picture'
-
- //   this.nativeStorage.getItem('email_user')
-  //  .then(data => {
-        this.PagesDisplayServiceProvider.getPost(this.user_id)
+    
+    if(this.getall===true)
+    {
+      this.PagesDisplayServiceProvider.getAllSell()
+      .then(response => {
+        this.petModel = response; 
+        this.details = response.data;                  
+      });
+    }
+    else
+    {
+        this.PagesDisplayServiceProvider.getSell(this.user_id)
         .then(response => {
           this.petModel = response; 
           this.details = response.data;                  
         });
-     // });
+      }
     } 
 
 }

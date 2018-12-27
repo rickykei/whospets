@@ -104,10 +104,10 @@
     <div *ngSwitchCase="'grid'" class="grid-view">
       <ion-row wrap class="grid-row">
         <ion-col width-33 class="grid-item" *ngFor="let pet of pet.data">
-        <!--  <preload-image [ratio]="{w:1, h:1}" [src]="http://whospets.com/images/product/thumb/{{pet.image}}" title="ion2FullApp"></preload-image>
+        <!--  <preload-image [ratio]="{w:1, h:1}" [src]="{{pet.image}}" title="ion2FullApp"></preload-image>
         -->
         
-        <preload-image [ratio]="{w:1, h:1}" src="http://whospets.com/images/product/thumb/{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
+        <preload-image [ratio]="{w:1, h:1}" src="{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
 
         </ion-col>
         <ion-col width-33 class="grid-item" >

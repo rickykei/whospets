@@ -25,6 +25,7 @@ export class QnaPage {
  petModel: PetModel = new PetModel();
  user_id:number;
  details: Array<PetDetailsModel>;
+  getall:boolean;
 
  constructor(
    public navCtrl: NavController, 
@@ -33,7 +34,8 @@ export class QnaPage {
    public navParams: NavParams
  ) 
  {
- 
+  this.user_id = navParams.get('display'); 
+    this.getall = navParams.get('getall');
  }
 
  
@@ -61,22 +63,27 @@ export class QnaPage {
        this.uid=data.uid;
      }
    });
-   // default
-   //'http://graph.facebook.com/100001704123828/picture'
-
- //  this.nativeStorage.getItem('email_user')
-//   .then(data => {
+   if(this.getall===true)
+    {
+      this.PagesDisplayServiceProvider.getAllQnA()
+      .then(response => {
+        this.petModel = response; 
+        this.details = response.data;   
+      });
+    }
+    else
+    {
        this.PagesDisplayServiceProvider.getQnA(this.user_id)
        .then(response => {
          this.petModel = response; 
          this.details = response.data;                       
        });
-  //   });
+      }
    } 
 
    setQna()
    {
-     this.navCtrl.push(SetQnaPage, {display:this.user_id} );
+     this.navCtrl.push(SetQnaPage, {display:this.user_id , getall:false} );
    }
 
 }

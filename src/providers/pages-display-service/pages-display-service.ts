@@ -53,6 +53,34 @@ export class PagesDisplayServiceProvider {
   
   }
 
+  getAllPost():Promise<PetModel>
+  {
+      return this.http.get('http://api.whospets.com/api/categories/get_all_posts.php')
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+  
+  }
+
+  getAllSell():Promise<PetModel>
+  {
+      return this.http.get('http://api.whospets.com/api/categories/get_all_sells.php')
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+  
+  }
+
+  getAllQnA():Promise<PetModel>
+  {
+      return this.http.get('http://api.whospets.com/api/categories/get_all_qnas.php')
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+  
+  }
+
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
