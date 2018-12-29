@@ -7,7 +7,7 @@ import { Crop } from '@ionic-native/crop';
 import { PetDetailsService } from './addlayout.service';
 import { PetBreedModel, PetColorModel, PetStatusModel, BreedModel } from './addlayout.model';
 
-import { CountryIdModel, UserModel } from '../profile/profile.model';
+import { CountryIdModel, UserModel, PetModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 import { NativeStorage } from '@ionic-native/native-storage';
 
@@ -23,6 +23,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DisplayPage } from '../display/display';
 import { DisplaySellPage } from '../display-sell/display-sell';
 import { SetQnaPage } from '../set-qna/set-qna';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'add-layout-page',
@@ -37,7 +38,7 @@ export class AddLayoutPage {
 
   post_form: any;
   event_form: FormGroup;
-  card_form: FormGroup;
+  card_form: any;
 
   pets_checkbox_open: boolean;
   pets_checkbox_result;
@@ -56,6 +57,10 @@ export class AddLayoutPage {
   selectedbreeds: BreedModel[];
   breeds: any;
 
+  pet: PetModel = new PetModel();
+  choosepet :string;
+  choosepetid :string;
+
 
   constructor(
     public nav: NavController,
@@ -64,13 +69,14 @@ export class AddLayoutPage {
     public alertCtrl: AlertController,
     public cropService: Crop,
     public imagePicker: ImagePicker,    
-    private http: Http,    
+   // private http: Http,  
+    public http: HttpClient,  
     public nativeStorage:NativeStorage,
     public platform: Platform,
     public navParams: NavParams,
     private camera: Camera,
     private transfer: FileTransfer
-  ) {
+  ) { 
 
     this.section = "event";
 
@@ -120,13 +126,20 @@ export class AddLayoutPage {
 
     console.log(this.petowner);
     console.log(this.user_id);
+
+
   }
 
   ionViewDidLoad() {
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
-     this.email = data.email;     
+     this.email = data.email;   
+
+     this.profileService.getPet(data.email)
+     .then(response => {
+       this.pet = response;
+     });
    });
 
     this.petdetailservice.getData()
@@ -181,18 +194,26 @@ export class AddLayoutPage {
     });
     alert.setTitle('Pet');
 
-    alert.addInput({
-      type: 'checkbox',
-      label: 'Alderaan',
-      value: 'value1',
-      checked: true
-    });
+    for (let pet of this.pet.data) {
+      alert.addInput({
+           type: 'checkbox',
+           label: pet.name_of_pet,
+           value: pet.pet_id
+      });
+   }
 
-    alert.addInput({
-      type: 'checkbox',
-      label: 'Bespin',
-      value: 'value2'
-    });
+    // alert.addInput({
+    //   type: 'checkbox',
+    //   label: 'Alderaan',
+    //   value: 'value1',
+    //   checked: true
+    // });
+
+    // alert.addInput({
+    //   type: 'checkbox',
+    //   label: 'Bespin',
+    //   value: 'value2'
+    // });
 
     alert.addButton('Cancel');
     alert.addButton({
@@ -201,6 +222,9 @@ export class AddLayoutPage {
         console.log('Checkbox data:', data);
         this.pets_checkbox_open = false;
         this.pets_checkbox_result = data;
+
+        this.choosepet = data.label;
+        this.choosepetid = data.value;
       }
     });
     alert.present().then(() => {
@@ -234,6 +258,7 @@ export class AddLayoutPage {
    )
   }
 
+ /*
   addPet()
   {
     let data = this.event_form.value;
@@ -269,32 +294,113 @@ export class AddLayoutPage {
      });
     }
 
-    addPost()
-    {
-      let data = this.post_form.value;
-    //  this.display ='addPost';
-      console.log('-------------------add post');
+    */
+
+
+    // addPost()
+    // {
+    //   let data = this.post_form.value;
+    // //  this.display ='addPost';
+    //   console.log('-------------------add post');
   
-      var url = 'http://api.whospets.com/api/users/set_user_posts.php?'+'user_id='+this.user_id+
-      '&email='+this.email+'&title='+data.title+
-      '&description='+data.description;
+    //   var url = 'http://api.whospets.com/api/users/set_user_posts.php?'+'user_id='+this.user_id+
+    //   '&email='+this.email+'&title='+data.title+
+    //   '&description='+data.description;
      
   
-       console.log(url);
+    //    console.log(url);
       
-      this.http.get(url).map(res => res.json()).subscribe(data2 => {
-        console.log("success to add post");
+    //   this.http.get(url).map(res => res.json()).subscribe(data2 => {
+    //     console.log("success to add post");
   
-     //   this.uploadImage();
+    //  //   this.uploadImage();
 
-        this.goToDisplay();
+    //     this.goToDisplay();
       
-      }, error => {
-        console.log("fail to add post");
+    //   }, error => {
+    //     console.log("fail to add post");
   
-       });
-    }
+    //    });
+    // }
 
+    addPet() {
+      let postdata = this.event_form.value;
+
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+            
+      let data=JSON.stringify({user_id:this.user_id,email:this.email
+        , title:postdata.title, description:postdata.description , name_of_pet:this.petowner
+      , pet_id:this.choosepetid, category_id:postdata.category_id, sub_category:postdata.sub_category
+      , gender:postdata.gender
+      , born_date:postdata.born_date, color:postdata.color, weight:postdata.weight, height:postdata.height
+      , size:postdata.size, country_id:postdata.country_id, sub_country_id:postdata.sub_country_id
+      , contact:postdata.phone
+      , pet_status:postdata.petstatus, date_lost:postdata.lost_date, count_down_end_date:postdata.found_date
+      , price:postdata.rewards, last_seen_appearance:postdata.lastseen, status:postdata.status
+      , tax_id:'', quantity:'', condition:'', feature_date:'', gallery_date:'', banner_a:'', banner_b:'', banner_c:''
+      , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
+      , language:'', specifications:'', style_code:'', created:'', country:''});
+      this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
+      // .map(res => res.json(data))
+      .subscribe(res => {
+      alert("success "+res);
+      this.goToDisplay();
+      }, (err) => {
+      alert("failed");
+      });
+      }
+
+    addPost() {
+      let postdata = this.post_form.value;
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      //let options = new RequestOptions({ headers: headers });
+      
+      
+      let data=JSON.stringify({user_id:this.user_id,email:this.email
+        , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
+      , pet_id:this.choosepetid});
+      this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
+      // .map(res => res.json(data))
+      .subscribe(res => {
+      alert("success "+res);
+      this.goToDisplay();
+      }, (err) => {
+      alert("failed");
+      });
+      }
+
+
+      addSell() {
+        let postdata = this.card_form.value;
+
+        let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Access-Control-Allow-Origin' , '*');
+        headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+        //let options = new RequestOptions({ headers: headers });
+        
+        
+        let data=JSON.stringify({user_id:this.user_id,email:this.email
+          , title:postdata.title, description:postdata.description , price:postdata.price
+          , size:postdata.size, country_id:postdata.country_id, sub_country_id:postdata.sub_country_id
+          , color:postdata.color, weight:postdata.weight});
+        this.http.post("http://api.whospets.com/api/users/set_user_sells.php",data, { headers: headers })
+        // .map(res => res.json(data))
+        .subscribe(res => {
+        alert("success "+res);
+        this.nav.push(DisplaySellPage, {display:this.user_id, getall:false});
+
+        }, (err) => {
+        alert("failed");
+        });
+        }
+      /*
     addSell()
     {
       let data = this.card_form.value;
@@ -321,7 +427,7 @@ export class AddLayoutPage {
         console.log("fail to add sell");
   
        });
-    }
+    }*/
 
     goToDisplay() 
     {

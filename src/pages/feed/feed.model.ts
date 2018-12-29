@@ -42,8 +42,8 @@ export class FeedPostModel {
   country_id:string;
   sub_country_id:string;
   image:string;
-	//comments: number = 0;
-	//liked: boolean = false;
+	likecnt: number = 0;
+	ownlike: number = 0;
 }
 
  export class DataModel {

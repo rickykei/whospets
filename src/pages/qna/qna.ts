@@ -36,6 +36,9 @@ export class QnaPage {
  {
   this.user_id = navParams.get('display'); 
     this.getall = navParams.get('getall');
+
+    console.log("this.getall : " +this.getall);
+
  }
 
  

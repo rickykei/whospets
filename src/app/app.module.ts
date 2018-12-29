@@ -46,6 +46,7 @@ import { DisplayPage } from '../pages/display/display';
 import { DisplaySellPage} from '../pages/display-sell/display-sell';
 import { QnaPage} from '../pages/qna/qna';
 import { SetQnaPage} from '../pages/set-qna/set-qna';
+import { PostInfoPage} from '../pages/post-info/post-info';
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -162,7 +163,7 @@ export function createTranslateLoader(http: HttpClient) {
     DisplaySellPage,
     QnaPage,
     SetQnaPage,
-
+    PostInfoPage,
     //functionalities
     MapsPage,
     FunctionalitiesPage,
@@ -266,6 +267,7 @@ export function createTranslateLoader(http: HttpClient) {
     DisplaySellPage,
     QnaPage,
     SetQnaPage,
+    PostInfoPage,
     //firebase integration
     FirebaseFeedPage,
     FirebaseNewUserModalPage,

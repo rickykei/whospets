@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController, SegmentButton, App, NavParams } from 'ionic-angular';
 import { SettingsPage } from '../settings/settings';
-import { ProfileModel, PetModel } from './profile.model';
+import { ProfileModel, PetModel, PetDetailsModel } from './profile.model';
 import { ProfileService } from './profile.service';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -11,6 +11,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { PetinfoPage } from '../petinfo/petinfo';
 import { AddLayoutPage } from '../add-page/add-layout';
+import { PagesDisplayServiceProvider } from '../../providers/pages-display-service/pages-display-service';
+import { PostInfoPage } from '../post-info/post-info';
 
 
 @Component({
@@ -24,11 +26,14 @@ export class ProfilePage {
   pet: PetModel = new PetModel();
   petstatus:string;
   profile_user_id: string;
+  petModel: PetModel = new PetModel();
+  details: Array<PetDetailsModel>;
 
   constructor(
     public menu: MenuController,
     public app: App,
-    public navParams: NavParams,
+    public navParams: NavParams,   
+     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public profileService: ProfileService,
     public nativeStorage:NativeStorage,
     public socialSharing: SocialSharing
@@ -110,6 +115,12 @@ export class ProfilePage {
       });
 
 
+      this.PagesDisplayServiceProvider.getPost( this.profile.data.user_id)
+      .then(response => {
+        this.petModel = response; 
+        this.details = response.data;                       
+      });
+
     }
 
     setProfileUserId( _userid : string)
@@ -127,57 +138,7 @@ export class ProfilePage {
   
     }
 
-/*
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad");
-
-    this.nativeStorage.getItem('email_user')
-    .then(data => {
-      if(data.password!='')
-      {
-        // normal
-       this.url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;
-      }
-      else{
-        //fb
-       this.url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email;
-      }
-    }, error => {
-      console.log('error : '+ error);
-    });
-    console.log(".."+ this.url);
-
-
-    this.profileService.getData()
-      .then(data => {
-        console.log(".."+ data.user);
-
-        this.profile.user = data.user;
-        console.log(".."+ this.profile.user.name);
-        console.log(".."+ this.profile.user.email);
-
-      }, error => {
-        console.log('error : '+ error);
-      });
-  }
-*/
-  // goToFollowersList() {
-  //   // close the menu when clicking a link from the menu
-  //   this.menu.close();
-  //   this.app.getRootNav().push(FollowersPage, {
-  //     list: this.profile.followers
-  //   });
-  // }
-
-  // goToFollowingList() {
-  //   // close the menu when clicking a link from the menu
-  //   this.menu.close();
-  //   this.app.getRootNav().push(FollowersPage, {
-  //     list: this.profile.following
-  //   });
-  // }
-
-  goToSettings() {
+    goToSettings() {
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.app.getRootNav().push(SettingsPage);
@@ -212,6 +173,12 @@ export class ProfilePage {
   {
     console.log("profile : " +this.profile.data.user_id);
     this.app.getRootNav().push(PetinfoPage, {pet:pet},{profile:this.profile.data});
+  }
+
+  goPostDetail(post)
+  {
+    console.log("profile : " +this.profile.data.user_id);
+    this.app.getRootNav().push(PostInfoPage, {post:post},{profile:this.profile.data});
   }
 
   addPet()
