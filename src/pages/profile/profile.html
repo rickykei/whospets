@@ -60,7 +60,7 @@
     </ion-row>
     <ion-segment class="user-content-segment" [(ngModel)]="display" (ionChange)="onSegmentChanged($event)">
       <ion-segment-button value="gridpost" (ionSelect)="onSegmentSelected($event)">
-        {{'POSTS' | translate}}
+        {{'MY POSTS' | translate}}
       </ion-segment-button>
       <ion-segment-button value="grid" (ionSelect)="onSegmentSelected($event)">
         {{'MY PETS' | translate}}
@@ -78,13 +78,29 @@
             <preload-image [ratio]="{w:1, h:1}" src="{{post.image}}"  title="title"  (click)="goPostDetail(post)"></preload-image>
     
             </ion-col>
-            <!-- <ion-col width-33 class="grid-item" >
+            <ion-col width-33 class="grid-item" >
               <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addPet()"></preload-image>
       
-              </ion-col> -->
+              </ion-col> 
           </ion-row>
     
         </div>
+		  <div *ngSwitchCase="'grid'" class="grid-view">
+      <ion-row wrap class="grid-row">
+        <ion-col width-33 class="grid-item" *ngFor="let pet of pet.data">
+        <!--  <preload-image [ratio]="{w:1, h:1}" [src]="{{pet.image}}" title="ion2FullApp"></preload-image>
+        -->
+        
+        <preload-image [ratio]="{w:1, h:1}" src="{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
+
+        </ion-col>
+        <ion-col width-33 class="grid-item" >
+          <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addPet()"></preload-image>
+  
+          </ion-col>
+      </ion-row>
+
+    </div>
     <!-- <div *ngSwitchCase="'list'" class="list-view">
       <div class="list-item" *ngFor="let post of profile.posts">
         <span class="item-date">{{profile.data.email}}</span>
@@ -118,21 +134,6 @@
         </ion-card>
       </div>
     </div> -->
-    <div *ngSwitchCase="'grid'" class="grid-view">
-      <ion-row wrap class="grid-row">
-        <ion-col width-33 class="grid-item" *ngFor="let pet of pet.data">
-        <!--  <preload-image [ratio]="{w:1, h:1}" [src]="{{pet.image}}" title="ion2FullApp"></preload-image>
-        -->
-        
-        <preload-image [ratio]="{w:1, h:1}" src="{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
-
-        </ion-col>
-        <ion-col width-33 class="grid-item" >
-          <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addPet()"></preload-image>
   
-          </ion-col>
-      </ion-row>
-
-    </div>
   </div>
 </ion-content>
