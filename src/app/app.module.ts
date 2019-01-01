@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular/umd';
 import { MyApp } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -40,13 +40,13 @@ import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
 import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
 import { LostPetPage } from '../pages/lostpet/lostpet';
-import { PetinfoPage } from '../pages/petinfo/petinfo';
+//import { PetinfoPage } from '../pages/petinfo/petinfo';
 import { AddLayoutPage } from '../pages/add-page/add-layout';
-import { DisplayPage } from '../pages/display/display';
-import { DisplaySellPage} from '../pages/display-sell/display-sell';
-import { QnaPage} from '../pages/qna/qna';
-import { SetQnaPage} from '../pages/set-qna/set-qna';
-import { PostInfoPage} from '../pages/post-info/post-info';
+//import { DisplayPage } from '../pages/display/display';
+//import { DisplaySellPage} from '../pages/display-sell/display-sell';
+//import { QnaPage} from '../pages/qna/qna';
+//import { SetQnaPage} from '../pages/set-qna/set-qna';
+//import { PostInfoPage} from '../pages/post-info/post-info';
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -77,6 +77,7 @@ import { Rating } from '../components/rating/rating';
 import { GoogleMap } from '../components/google-map/google-map';
 import { VideoPlayerModule } from '../components/video-player/video-player.module';
 import { ValidatorsModule } from '../components/validators/validators.module';
+
 
 //services
 import { FeedService } from '../pages/feed/feed.service';
@@ -127,6 +128,14 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { PagesDisplayServiceProvider } from '../providers/pages-display-service/pages-display-service';
 
+
+import { DisplayPageModule } from '../pages/display/display.module';
+import { DisplaySellPageModule } from '../pages/display-sell/display-sell.module';
+import { QnaPageModule } from '../pages/qna/qna.module';
+import { SetQnaPageModule } from '../pages/set-qna/set-qna.module';
+import { PostInfoPageModule } from '../pages/post-info/post-info.module';
+import { PetinfoPageModule } from '../pages/petinfo/petinfo.module';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -157,13 +166,13 @@ export function createTranslateLoader(http: HttpClient) {
     TermsOfServicePage,
     PrivacyPolicyPage,
     LostPetPage,
-    PetinfoPage,
+   // PetinfoPage,
     AddLayoutPage,
-    DisplayPage,
-    DisplaySellPage,
-    QnaPage,
-    SetQnaPage,
-    PostInfoPage,
+   // DisplayPage,
+    // DisplaySellPage,
+    // QnaPage,
+    // SetQnaPage,
+    // PostInfoPage,
     //functionalities
     MapsPage,
     FunctionalitiesPage,
@@ -225,7 +234,13 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFirestoreModule,
     AngularFireAuthModule,
 		VideoPlayerModule,
-		ValidatorsModule
+    ValidatorsModule,
+    DisplayPageModule,
+    DisplaySellPageModule,
+    QnaPageModule,
+    SetQnaPageModule,
+    PostInfoPageModule,
+    PetinfoPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -261,13 +276,13 @@ export function createTranslateLoader(http: HttpClient) {
 		FormValidationsPage,
     VideoPlaylistPage,
     LostPetPage,
-    PetinfoPage,
+   // PetinfoPage,
     AddLayoutPage,
-    DisplayPage,
-    DisplaySellPage,
-    QnaPage,
-    SetQnaPage,
-    PostInfoPage,
+   // DisplayPage,
+    // DisplaySellPage,
+    // QnaPage,
+    // SetQnaPage,
+    // PostInfoPage,
     //firebase integration
     FirebaseFeedPage,
     FirebaseNewUserModalPage,
