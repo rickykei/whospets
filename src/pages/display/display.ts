@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { PagesDisplayServiceProvider } from '../../providers/pages-display-service/pages-display-service';
@@ -11,7 +11,7 @@ import { PagesDisplayServiceProvider } from '../../providers/pages-display-servi
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-display',
   templateUrl: 'display.html',

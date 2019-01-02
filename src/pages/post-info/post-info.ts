@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 import { PetDetailsModel } from '../profile/profile.model';
 
 /**
@@ -9,7 +9,6 @@ import { PetDetailsModel } from '../profile/profile.model';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-post-info',
   templateUrl: 'post-info.html',

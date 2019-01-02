@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 
@@ -13,7 +13,6 @@ import { UserModel } from '../profile/profile.model';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-set-qna',
   templateUrl: 'set-qna.html',
