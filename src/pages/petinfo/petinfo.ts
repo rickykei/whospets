@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PetDetailsModel, ProfileModel, UserModel } from '../profile/profile.model';
+import {  NavController, NavParams } from 'ionic-angular';
+import { PetDetailsModel } from '../profile/profile.model';
 import { NativeStorage } from '@ionic-native/native-storage';
 
 
@@ -11,7 +11,6 @@ import { NativeStorage } from '@ionic-native/native-storage';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-petinfo',
   templateUrl: 'petinfo.html',

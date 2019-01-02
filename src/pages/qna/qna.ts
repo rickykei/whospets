@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
-import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
-import { PagesDisplayServiceProvider } from '../../providers/pages-display-service/pages-display-service';
 import { SetQnaPage } from '../set-qna/set-qna';
+import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
+import { PagesDisplayServiceProvider } from '../display/display.services';
 
 /**
  * Generated class for the QnaPage page.
@@ -12,7 +12,6 @@ import { SetQnaPage } from '../set-qna/set-qna';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-qna',
   templateUrl: 'qna.html',

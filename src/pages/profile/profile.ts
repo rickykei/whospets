@@ -11,8 +11,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { PetinfoPage } from '../petinfo/petinfo';
 import { AddLayoutPage } from '../add-page/add-layout';
-import { PagesDisplayServiceProvider } from '../../providers/pages-display-service/pages-display-service';
 import { PostInfoPage } from '../post-info/post-info';
+import { PagesDisplayServiceProvider } from '../display/display.services';
 
 
 @Component({

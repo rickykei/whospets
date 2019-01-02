@@ -123,9 +123,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // upload image 
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { PagesDisplayServiceProvider } from '../providers/pages-display-service/pages-display-service';
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { PagesDisplayServiceProvider } from '../pages/display/display.services';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
