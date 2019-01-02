@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import {  NavController, NavParams } from 'ionic-angular';
-<<<<<<< HEAD
 import { PetDetailsModel } from '../profile/profile.model';
-=======
-import { PetDetailsModel, ProfileModel, UserModel } from '../profile/profile.model';
->>>>>>> 91e40d37fc6f71be6007ed6d007eaac4be40bff7
 import { NativeStorage } from '@ionic-native/native-storage';
 
 
