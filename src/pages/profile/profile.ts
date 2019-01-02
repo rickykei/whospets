@@ -88,9 +88,8 @@ export class ProfilePage {
           this.profile.data.user_id = data2.data.user_id;
 
           this.setProfileUserId(data2.data.user_id +"");
-		  console.log('..data2 user_id :'+ data2.data.user_id);
-		   console.log('..data2 user_id :'+ this.profile.data.user_id);
-          console.log('..data2 fb_uid image :'+ this.profile.data.fb_uid);
+
+          console.log('..data2 image :'+ this.profile.data.fb_uid);
           console.log('..data2 email:'+ this.profile.data.email);
 
         }
@@ -99,21 +98,6 @@ export class ProfilePage {
           this.app.getRootNav().push(SettingsPage);
           
         }
-		
-		this.nativeStorage.getItem('email_user')
-			.then(data => {
-				this.profileService.getPet(data.email)
-				.then(response => {
-				  this.pet = response;
-				});
-			  });
-
-			console.log('..data2 user_id getPost:'+  this.profile.data.user_id);
-			  this.PagesDisplayServiceProvider.getPost( this.profile.data.user_id)
-			  .then(response => {
-				this.petModel = response; 
-				this.details = response.data;                       
-			  });
        
       });
 
@@ -122,7 +106,20 @@ export class ProfilePage {
     });
 
 
-			
+    this.nativeStorage.getItem('email_user')
+    .then(data => {
+        this.profileService.getPet(data.email)
+        .then(response => {
+          this.pet = response;
+        });
+      });
+
+
+      this.PagesDisplayServiceProvider.getPost( this.profile.data.user_id)
+      .then(response => {
+        this.petModel = response; 
+        this.details = response.data;                       
+      });
 
     }
 
