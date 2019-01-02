@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { NavController, NavParams } from 'ionic-angular';
+=======
+import {  NavController, NavParams } from 'ionic-angular';
+>>>>>>> 91e40d37fc6f71be6007ed6d007eaac4be40bff7
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 
 import {Http} from '@angular/http';

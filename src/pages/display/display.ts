@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { NavController, NavParams } from 'ionic-angular';
+=======
+import {  NavController, NavParams } from 'ionic-angular';
+import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
+>>>>>>> 91e40d37fc6f71be6007ed6d007eaac4be40bff7
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PagesDisplayServiceProvider } from './display.services';
@@ -11,6 +16,10 @@ import { PagesDisplayServiceProvider } from './display.services';
  * Ionic pages and navigation.
  */
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 91e40d37fc6f71be6007ed6d007eaac4be40bff7
 @Component({
   selector: 'page-display',
   templateUrl: 'display.html',
