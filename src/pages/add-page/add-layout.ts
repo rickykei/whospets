@@ -122,7 +122,7 @@ export class AddLayoutPage {
     this.petowner = this.profile.firstname + '' + this.profile.lastname;
     this.user_id = this.profile.user_id;
 
-    this.initializePetType();
+   // this.initializePetType();
 
     console.log(this.petowner);
     console.log(this.user_id);
@@ -201,19 +201,6 @@ export class AddLayoutPage {
            value: pet.pet_id
       });
    }
-
-    // alert.addInput({
-    //   type: 'checkbox',
-    //   label: 'Alderaan',
-    //   value: 'value1',
-    //   checked: true
-    // });
-
-    // alert.addInput({
-    //   type: 'checkbox',
-    //   label: 'Bespin',
-    //   value: 'value2'
-    // });
 
     alert.addButton('Cancel');
     alert.addButton({
@@ -331,16 +318,31 @@ export class AddLayoutPage {
       headers.append('Access-Control-Allow-Origin' , '*');
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
             
-      let data=JSON.stringify({user_id:this.user_id,email:this.email
+      /*
+
+      ar url = 'http://api.whospets.com/api/users/set_user_pets.php?user_id='+this.user_id
+    +'&username='+this.email
+    +'&title='+data.title+'&name_of_pet='+this.petowner+'&date_born='+data.born_date
+    +'&category_id='+data.petbreed+'&sub_category='+data.typeofpet+'&description='+data.description
+    +'&pet_id='+data.id+'&gender='+data.gender+'&color='+data.color+'&weight='+data.weight
+    +'&height='+data.height+'&size='+data.size+'&country_id='+data.countryId+'&sub_country_id='+data.subCountryId
+    +'&contact='+data.phone+'&pet_status='+data.petstatus+'&date_lost='+data.lost_date
+    +'&count_down_end_date='+data.found_date+'&price='+data.rewards+'&last_seen_appearance='+data.lastseen
+    +'&status='+data.status+'&tax_id=&price=&quantity=&condition=&feature_date=&gallery_date=&banner_a='
+    +'&banner_b=&banner_c=&todays_deal=&discount=&questions=&descriptionDisplay=&keywords=&language='
+    +'&specifications=&style_code=&view=&created=&country=';
+*/
+      let data=JSON.stringify({user_id:this.user_id,username:this.email
         , title:postdata.title, description:postdata.description , name_of_pet:this.petowner
-      , pet_id:this.choosepetid, category_id:postdata.category_id, sub_category:postdata.sub_category
-      , gender:postdata.gender
-      , born_date:postdata.born_date, color:postdata.color, weight:postdata.weight, height:postdata.height
-      , size:postdata.size, country_id:postdata.country_id, sub_country_id:postdata.sub_country_id
-      , contact:postdata.phone
-      , pet_status:postdata.petstatus, date_lost:postdata.lost_date, count_down_end_date:postdata.found_date
+      , pet_id:this.choosepetid, category_id:postdata.petbreed, sub_category:postdata.typeofpet
+      , gender:postdata.gender, date_born:postdata.born_date, color:postdata.color
+      , weight:postdata.weight, height:postdata.height
+      , size:postdata.size, country_id:postdata.countryId, sub_country_id:postdata.subCountryId
+      , contact:postdata.phone , pet_status:postdata.petstatus, date_lost:postdata.lost_date
+      , count_down_end_date:postdata.found_date
       , price:postdata.rewards, last_seen_appearance:postdata.lastseen, status:postdata.status
-      , tax_id:'', quantity:'', condition:'', feature_date:'', gallery_date:'', banner_a:'', banner_b:'', banner_c:''
+      , tax_id:'', quantity:'', condition:'', feature_date:'', gallery_date:'', banner_a:''
+      , banner_b:'', banner_c:''
       , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
       , language:'', specifications:'', style_code:'', created:'', country:''});
       this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
@@ -362,7 +364,7 @@ export class AddLayoutPage {
       //let options = new RequestOptions({ headers: headers });
       
       
-      let data=JSON.stringify({user_id:this.user_id,email:this.email
+      let data=JSON.stringify({user_id:this.user_id,username:this.email
         , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
       , pet_id:this.choosepetid});
       this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
@@ -386,7 +388,7 @@ export class AddLayoutPage {
         //let options = new RequestOptions({ headers: headers });
         
         
-        let data=JSON.stringify({user_id:this.user_id,email:this.email
+        let data=JSON.stringify({user_id:this.user_id,username:this.email
           , title:postdata.title, description:postdata.description , price:postdata.price
           , size:postdata.size, country_id:postdata.country_id, sub_country_id:postdata.sub_country_id
           , color:postdata.color, weight:postdata.weight});
@@ -447,6 +449,8 @@ export class AddLayoutPage {
     }
     */
 
+    /*
+
     uploadImage()
   {
     
@@ -489,9 +493,14 @@ fileTransfer.upload(imageData, url, options1)
 
 
 }
+
+*/
+
 // setDistrictValues(sState) {
 //  this.selectedDistricts = this.districts.filter(district => district.state_id == sState.id)
 //}
+
+/*
 initializePetType(){
   this.breeds = [
       {id: 1, name: 'Dog', pet_id: 1},
@@ -509,5 +518,5 @@ setPetBreedValues(sBreed) {
   console.log('title :' + this.selectedbreeds[1].title);
   console.log('parent id: ' + this.selectedbreeds[1].parent_id);
 }
-
+*/
 }

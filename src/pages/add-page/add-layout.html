@@ -70,7 +70,7 @@
             </ion-col>
           </ion-row>
 
-          <!-- <ion-row no-padding class="user-preferences-row">
+          <ion-row no-padding class="user-preferences-row">
               <span class="radio-tags-label">{{'TYPE OF PET' | translate}}</span>
               <ion-list class="radio-tags" radio-group formControlName="typeofpet">
                 <ion-item class="radio-tag">
@@ -84,20 +84,21 @@
                   <ion-radio value="1"></ion-radio>
                 </ion-item>
               </ion-list>
-            </ion-row> -->
+            </ion-row>
 
-            <ion-item>
+           <!--  <ion-item>
               <ion-label>{{'TYPE OF PET' | translate}}</ion-label>
               <ion-select formControlName="typeofpet" (ionChange)="setPetBreedValues(sBreed)">
                   <ion-option [value]="sBreed.pet_id" *ngFor="let sBreed of breeds">{{sBreed.name}} </ion-option>
               </ion-select>
-          </ion-item>
+          </ion-item> -->
 
             <ion-row no-padding class="user-preferences-row">
                   <ion-item >                  
                   <ion-label>{{'PET BREED' | translate}}</ion-label>
                   <ion-select formControlName="petbreed"> 
-                    <ion-option  *ngFor="let breed of selectedbreeds" [value]="breed.category_id">{{breed.title}}</ion-option> 
+                  <!--  <ion-option  *ngFor="let breed of selectedbreeds" [value]="breed.category_id">{{breed.title}}</ion-option> -->
+                  <ion-option  *ngFor="let breed of petdetail.pet">{{breed.title}}</ion-option> 
                   </ion-select>
                 </ion-item>             
             </ion-row>
