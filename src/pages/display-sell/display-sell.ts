@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
+import { AddsellPage } from '../addsell/addsell';
 
 /**
  * Generated class for the DisplaySellPage page.
@@ -71,5 +72,10 @@ export class DisplaySellPage{
         });
       }
     } 
+
+    setSell()
+    {
+      this.navCtrl.push(AddsellPage, {profile:this.user_id} );
+    }
 
 }
