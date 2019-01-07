@@ -10,9 +10,9 @@ import 'rxjs/Rx';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { PetinfoPage } from '../petinfo/petinfo';
-import { AddLayoutPage } from '../add-page/add-layout';
 import { PostInfoPage } from '../post-info/post-info';
 import { PagesDisplayServiceProvider } from '../display/display.services';
+import { AddpetPage } from '../addpet/addpet';
 
 
 @Component({
@@ -187,7 +187,7 @@ export class ProfilePage {
   addPet()
   {
     console.log("profile : " +this.profile.data.user_id);
-    this.app.getRootNav().push(AddLayoutPage, {profile:this.profile.data});
+    this.app.getRootNav().push(AddpetPage, {profile:this.profile.data});
   }
 
 }

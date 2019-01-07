@@ -1,0 +1,77 @@
+<!--
+  Generated template for the AddsellPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>addsell</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-content class="addsell-content">
+    <form class="addsell-form" [formGroup]="sell_form" >
+      <h2 class="section-title">{{'Add a sell' | translate}}</h2>
+
+      <ion-item>
+              <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
+            </ion-item>
+           
+          <ion-item>
+            <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
+          </ion-item>
+
+          <ion-item class="range-item">
+            <ion-label>
+              <h2 class="range-label">{{'Price' | translate}}</h2>
+              <h3 class="range-value">$ {{sell_form.controls.price.value}} </h3>
+            </ion-label>
+            <ion-range formControlName="price" min="0" max="9999" step="1" snaps="true" pin="false"></ion-range>
+          </ion-item>
+
+          <ion-row no-padding class="multi-input-row">
+            <ion-col no-padding width-60>
+
+          <ion-item>
+            <ion-label>{{'COUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="countryId"><ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+          </ion-item>
+
+          </ion-col>
+     
+          <ion-col no-padding width-40>
+              <ion-item>
+            <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="subCountryId"> <ion-option *ngFor="let zone of subcountry.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+          </ion-item>
+
+          </ion-col>
+          </ion-row>
+
+          <ion-item>
+            <ion-label>{{'Color' | translate}}</ion-label>
+            <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color" >{{color.color}}</ion-option> </ion-select>
+          </ion-item>
+
+          <ion-item class="range-item">
+            <ion-label>
+              <h2 class="range-label">{{'Weight' | translate}}</h2>
+              <h3 class="range-value">{{sell_form.controls.weight.value}} kg</h3>
+            </ion-label>
+            <ion-range formControlName="weight" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="text" placeholder="Small" formControlName="size"></ion-input>
+          </ion-item>
+
+
+            <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!sell_form.valid" (click)="addSell()">Post!</button>
+        </form>
+        </ion-content>
+</ion-content>

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PagesDisplayServiceProvider } from './display.services';
+import { AddpostPage } from '../addpost/addpost';
 
 /**
  * Generated class for the DisplayPage page.
@@ -73,5 +74,10 @@ export class DisplayPage {
         });
       }
     } 
+    
+    setPost()
+    {
+      this.navCtrl.push(AddpostPage, {profile:this.user_id} );
+    }
 
 }

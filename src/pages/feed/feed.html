@@ -1,12 +1,15 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+  <ion-navbar>  
     <ion-title>
       <span>{{ feed.category.title }}</span>
-    </ion-title>
+    </ion-title>   
+    <ion-buttons end> 
+      <button (click)="setPet()">          
+        <ion-icon name="add"></ion-icon>        
+    </button>
+    </ion-buttons>
   </ion-navbar>
+  
 </ion-header>
 
 <ion-content class="feed-content"> 
