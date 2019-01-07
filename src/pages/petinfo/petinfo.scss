@@ -18,6 +18,19 @@ page-petinfo {
                     {
                         border-radius: 50%;
                     }
+
+                    ion-avatar {
+                        flex: 0 0 16%;
+                    max-width: 16%;
+                        margin: 0px;
+                        align-self: flex-start;
+                        margin: 0 16px 0 0!important;
+                        
+                        .user-image
+                        {
+                            border-radius: 50%;
+                        }
+                    }
                 }
             }
         }

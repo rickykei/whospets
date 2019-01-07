@@ -14,6 +14,73 @@
 
 
 
+<ion-content class="profile-content">
+  <div class="user-details" >
+   <ion-card>
+
+      <ion-row class="user-main-data-row">
+          <ion-avatar item-left>
+            <preload-image class="user-image" [ratio]="{w:1, h:1}" src="http://graph.facebook.com/{{uid}}/picture"></preload-image>
+          </ion-avatar>
+          <ion-card-content>
+            <p class="item-text">
+                {{pet.name_of_pet}}
+              </p>
+          </ion-card-content>          
+        </ion-row>
+
+       <preload-image [ratio]="{w:1, h:1}" src="{{pet.image}}"  title="pet.title"></preload-image>
+
+       <ion-card-content>
+         <ion-card-title class="item-title">
+           {{pet.title}}
+         </ion-card-title>
+         <p class="item-text">
+           {{pet.description}}
+         </p>
+       </ion-card-content>
+
+       <ion-row no-padding class="actions-row">
+           <ion-col no-padding width-30 text-left>
+             <button class="action-button" ion-button clear small icon-start>
+               <ion-icon isActive="{{pet.liked}}" name='heart'></ion-icon>
+               {{pet.likecnt}} {{'LIKES' | translate}}
+             </button>
+           </ion-col>
+           <ion-col no-padding width-45 text-center>
+             <button class="action-button" ion-button clear small icon-start>
+               <ion-icon name='chatbubbles'></ion-icon>
+               {{'COMMENTS' | translate}}
+             </button>
+           </ion-col>
+           <ion-col no-padding width-25 text-right>
+             <button class="action-button" ion-button clear small (click)="sharePost(pet)" icon-start>
+               <ion-icon name='share-alt'></ion-icon>
+               {{'SHARE' | translate}}
+             </button>
+           </ion-col>
+         </ion-row>
+
+         <ion-card-content>
+            <p class="item-text">
+                {{'Pet id' | translate}} :  {{pet.pet_id}}
+              </p>
+            <p class="item-text">
+                {{'Gender' | translate}} : {{pet.gender}}
+            </p>
+            <p class="item-text">
+                {{'Date Born' | translate}} : {{pet.date_born}}
+            </p>
+            <p class="item-text">
+                {{'Pet Status' | translate}} : {{pet.pet_status}}
+            </p>
+          </ion-card-content>
+
+   </ion-card>
+</div>
+
+</ion-content>
+<!-- 
 <ion-content>
    <ion-content class="profile-content">
         <div class="user-details">
@@ -33,13 +100,13 @@
                 <ion-row no-padding >
                     <button class="action-button" ion-button clear small icon-start>
                       <ion-icon name='heart'></ion-icon>
-                     <!-- {{pet.likes}} --> {{'LIKES' | translate}}
+                      {{pet.likes}}  {{'LIKES' | translate}}
                     </button>
                   </ion-row>
                   <ion-row no-padding>
                     <button class="action-button" ion-button clear small icon-start>
                       <ion-icon name='chatbubbles'></ion-icon>
-                      <!--{{pet.comments}} --> {{'COMMENTS' | translate}}
+                      {{pet.comments}}  {{'COMMENTS' | translate}}
                     </button>
                   </ion-row>
             </ion-col>
@@ -110,4 +177,4 @@
 
     </ion-content>
 
-</ion-content>
+</ion-content> -->

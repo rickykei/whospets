@@ -1,25 +1,21 @@
 page-display-sell{
     .profile-content
-    {
-        background-color: color($colors, background, base);
+	{
+		background-color: color($colors, background, base);
 
-        .user-details
-        {
-            @include element-shadow();
-            padding-bottom: 4%;
-            background-color: $white;
+		.user-details
+		{
+			@include basic-card-styles($white-d);
 
-            .user-main-data-row
-            {
-                padding: 4% 4% 0px;
-                align-items: center;
-
-                .user-image
-                {
-                    border-radius: 50%;
-                }
-            }
-        }
-    }
+			.item-title
+			{
+				margin: 0px;
+				margin-bottom: 12px;
+				padding: 0px;
+				letter-spacing: 1.1px;
+				color: $theme-color-2;
+			}
+		}
+	}
 }
 
