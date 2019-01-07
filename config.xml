@@ -2,7 +2,7 @@
 <widget id="com.whospets.aos" version="1.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>whospets</name>
     <description>whospets</description>
-    <author email="hi@ionicthemes.com" href="https://ionicthemes.com/">Ionic Themes</author>
+    <author email="ricky.wong@rossfoundry.com" href="https://rossfoundry.com/">rossfoundry</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -119,7 +119,6 @@
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Enable geolocation so you can test it" />
     </plugin>
-    <plugin name="cordova-plugin-ionic-webview" spec="1.1.19" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.2" />
     <plugin name="cordova-plugin-facebook4" spec="^2.2.0">
         <variable name="APP_ID" value="1205825196113953" />
