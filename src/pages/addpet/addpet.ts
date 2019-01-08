@@ -76,19 +76,8 @@ export class AddpetPage {
 
   ionViewDidLoad() {
 
-   /* this.nativeStorage.getItem('email_user')
-    .then(data => {
-     this.email = data.email;   
-
-     this.profileService.getPet(data.email)
-     .then(response => {
-       this.pet = response;
-     });
-	 
-	 
-	 
-   });
- */
+    
+  
    
    
    this.petdetailservice.getData()
@@ -120,6 +109,19 @@ export class AddpetPage {
   
 
   addPet() {
+	  
+	  this.nativeStorage.getItem('email_user')
+    .then(data => {
+     this.email = data.email;   
+
+     /*this.profileService.getPet(data.email)
+     .then(response => {
+       this.pet = response;
+     });
+	 */
+	 
+	 
+   });
     let postdata = this.addPetForm.value;
 
     let headers = new HttpHeaders();
