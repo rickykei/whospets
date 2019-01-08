@@ -128,8 +128,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // upload image 
-import { Camera } from '@ionic-native/camera';
-import { FileTransfer } from '@ionic-native/file-transfer';
+//import { Camera } from '@ionic-native/camera';
+//import { FileTransfer } from '@ionic-native/file-transfer';
 import { PagesDisplayServiceProvider } from '../pages/display/display.services';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -333,8 +333,8 @@ export function createTranslateLoader(http: HttpClient) {
 		ImagePicker,
 		Crop,
     EmailComposer,
-    Camera,
-    FileTransfer,
+  //  Camera,
+   // FileTransfer,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
