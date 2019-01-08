@@ -76,7 +76,7 @@ export class AddpetPage {
 
   ionViewDidLoad() {
 
-    this.nativeStorage.getItem('email_user')
+   /* this.nativeStorage.getItem('email_user')
     .then(data => {
      this.email = data.email;   
 
@@ -84,8 +84,13 @@ export class AddpetPage {
      .then(response => {
        this.pet = response;
      });
+	 
+	 
+	 
    });
-
+ */
+   
+   
    this.petdetailservice.getData()
     .then(data2 => {
       this.petdetail = data2;

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import { NativeStorage } from '@ionic-native/native-storage';
+//import { NativeStorage } from '@ionic-native/native-storage';
 import { PetBreedModel, PetColorModel, PetStatusModel } from './addlayout.model';
 
 
@@ -10,8 +10,10 @@ import { PetBreedModel, PetColorModel, PetStatusModel } from './addlayout.model'
 @Injectable()
 export class PetDetailsService {
   constructor(
-    public http: Http,
-    public nativeStorage: NativeStorage
+  //public nativeStorage: NativeStorage
+    public http: Http
+	//,
+    
   ) {}
 
   getData(): Promise<PetBreedModel> {
