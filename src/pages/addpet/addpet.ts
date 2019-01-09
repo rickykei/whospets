@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams , AlertController, LoadingController} from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { ProfileService } from '../profile/profile.service';
@@ -8,6 +8,9 @@ import { PetDetailsService } from '../add-page/addlayout.service';
 import { PetBreedModel, PetColorModel, PetStatusModel } from '../add-page/addlayout.model';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
 import { DisplayPage } from '../display/display';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+import { ApiProvider } from '../../providers/api/api';
 
 /**
  * Generated class for the AddpetPage page.
@@ -28,6 +31,8 @@ export class AddpetPage {
   user_id:number;
   petowner:string;
 
+  loading: any;
+  
   pet: PetModel = new PetModel();
   petdetail: PetBreedModel = new PetBreedModel();
   petColor: PetColorModel = new PetColorModel();
@@ -35,15 +40,22 @@ export class AddpetPage {
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
   profile: UserModel= new UserModel();
+  regData = { avatar:'', email: '', password: '', fullname: '' };
+  imgPreview = 'assets/images/blank-avatar.jpg';
 
-
+  
   constructor(
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
     public profileService: ProfileService,
     public petdetailservice : PetDetailsService,    
     public http: HttpClient,  
-    public navParams: NavParams) {
+    public navParams: NavParams,
+	private imagePicker: ImagePicker,
+	public loadingCtrl: LoadingController,
+	public alertCtrl: AlertController,
+	public api: ApiProvider,
+    private base64: Base64) {
 
       this.addPetForm = new FormGroup({
         title: new FormControl(''),
@@ -66,7 +78,8 @@ export class AddpetPage {
         petstatus:new FormControl(''),
         lastseen :new FormControl(''),
         status:new FormControl(''),
-        subCountryId: new FormControl('')
+        subCountryId: new FormControl('') 
+		 
       });
 
       this.profile = navParams.get('profile'); 
@@ -74,12 +87,51 @@ export class AddpetPage {
       this.user_id = this.profile.user_id;
   }
 
-  ionViewDidLoad() {
-
-    
   
-   
-   
+  register() {
+  this.showLoader();
+  this.api.register(this.regData).subscribe((result) => {
+    this.loading.dismiss();
+    let alert = this.alertCtrl.create({
+      title: 'Registration Successful',
+      subTitle: 'Great! Your registration is success',
+      buttons: ['OK']
+    });
+    alert.present();
+  }, (err) => {
+    console.log(err);
+    this.loading.dismiss();
+    let alert = this.alertCtrl.create({
+      title: 'Registration Failed',
+      subTitle: 'Oh no! Your registration is failed',
+      buttons: ['OK']
+    });
+    alert.present();
+  });
+  }
+  
+  showLoader(){
+	  this.loading = this.loadingCtrl.create({
+		  content: 'Submitting...'
+	  });
+
+	  this.loading.present();
+  }
+
+
+  ionViewDidLoad() {
+	  
+	this.nativeStorage.getItem('email_user')
+    .then(data => {
+     this.email = data.email;   
+
+    //  this.profileService.getPet(data.email)
+     //then(response => {
+      // this.pet = response;
+     ///});
+ 
+   });
+     
    this.petdetailservice.getData()
     .then(data2 => {
       this.petdetail = data2;
@@ -106,22 +158,25 @@ export class AddpetPage {
     });
   }
 
-  
+  getPhoto() {
+  let options = {
+    maximumImagesCount: 1
+  };
+  this.imagePicker.getPictures(options).then((results) => {
+    for (var i = 0; i < results.length; i++) {
+        this.imgPreview = results[i];
+        this.base64.encodeFile(results[i]).then((base64File: string) => {
+          this.regData.avatar = base64File;
+        }, (err) => {
+          console.log(err);
+        });
+    }
+  }, (err) => { });
+	}
 
   addPet() {
-	  
-	  this.nativeStorage.getItem('email_user')
-    .then(data => {
-     this.email = data.email;   
-
-     /*this.profileService.getPet(data.email)
-     .then(response => {
-       this.pet = response;
-     });
-	 */
-	 
-	 
-   });
+	  this.showLoader();
+	
     let postdata = this.addPetForm.value;
 
     let headers = new HttpHeaders();
@@ -141,13 +196,15 @@ export class AddpetPage {
     , tax_id:'', quantity:'', condition:'', feature_date:'', gallery_date:'', banner_a:''
     , banner_b:'', banner_c:''
     , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
-    , language:'', specifications:'', style_code:'', created:'', country:''});
+    , language:'', specifications:'', style_code:'', created:'', country:'',avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
+		 this.loading.dismiss();
     alert("success "+res);
     this.goToDisplay();
     }, (err) => {
+		 this.loading.dismiss();
     alert("failed");
     });
     }
@@ -156,6 +213,6 @@ export class AddpetPage {
     
     goToDisplay() 
     {
-      this.navCtrl.push(DisplayPage, {display:this.user_id, getall:false} );
+      this.navCtrl.pop();
     }
 }

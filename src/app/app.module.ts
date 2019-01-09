@@ -66,9 +66,9 @@ import { FirebaseTabsNavigationPage } from '../pages/firebase-integration/fireba
 import { BlogFeedPage } from '../pages/wordpress-integration/blog-feed/blog-feed';
 import { BlogPostPage } from '../pages/wordpress-integration/blog-post/blog-post';
 import { BlogCustomPagesPage } from '../pages/wordpress-integration/blog-custom-pages/blog-custom-pages';
+import { WordpressLoginPage } from '../pages/wordpress-integration/wordpress-login/wordpress-login';
 import { BlogCustomPagePage } from '../pages/wordpress-integration/blog-custom-page/blog-custom-page';
 import { BlogCategoriesPage } from '../pages/wordpress-integration/blog-categories/blog-categories';
-import { WordpressLoginPage } from '../pages/wordpress-integration/wordpress-login/wordpress-login';
 import { WordpressMenuPage } from '../pages/wordpress-integration/wordpress-menu/wordpress-menu';
 
 //custom components
@@ -121,6 +121,8 @@ import { AppRate } from '@ionic-native/app-rate';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { Base64 } from '@ionic-native/base64';
+
 
 //Angular Fire
 import { AngularFireModule } from 'angularfire2';
@@ -131,6 +133,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 //import { Camera } from '@ionic-native/camera';
 //import { FileTransfer } from '@ionic-native/file-transfer';
 import { PagesDisplayServiceProvider } from '../pages/display/display.services';
+import { ApiProvider } from '../providers/api/api';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -338,7 +341,10 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PagesDisplayServiceProvider
+    PagesDisplayServiceProvider,
+	ImagePicker,
+	Base64,
+    ApiProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
