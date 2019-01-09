@@ -26,7 +26,7 @@
         </ion-item>
 
       <ion-row no-padding class="multi-input-row">
-        <ion-col no-padding width-60>
+        <ion-col no-padding >
           <ion-item class="multi-input time-item">
             <ion-label floating>{{'Date of born' | translate}}</ion-label>
             <ion-datetime formControlName="born_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
@@ -127,7 +127,7 @@
 
          
           <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding width-60>
+            <ion-col no-padding >
 
             <ion-item>
               <ion-label>{{'Pet Color' | translate}}</ion-label>
@@ -138,7 +138,7 @@
           </ion-row>
 
           <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding width-60>
+            <ion-col no-padding >
 
             <ion-item>
               <ion-label>{{'Pet Status' | translate}}</ion-label>
@@ -149,7 +149,7 @@
           </ion-row>
 
           <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding width-60>
+            <ion-col no-padding >
 
           <ion-item>
             <ion-label>{{'COUNTRY' | translate}}</ion-label>
@@ -157,8 +157,10 @@
           </ion-item>
 
           </ion-col>
-     
-          <ion-col no-padding width-40>
+      </ion-row>
+	  
+	  <ion-row no-padding class="multi-input-row">
+          <ion-col no-padding >
               <ion-item>
             <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
             <ion-select formControlName="subCountryId"> <ion-option *ngFor="let zone of subcountry.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
@@ -181,17 +183,18 @@
           </ion-item>
         </ion-row>
 
-        <section class="form-section">
-          <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
-            <ion-icon name="camera"></ion-icon>
-            <h3 class="button-title">{{'UPLOAD_AN_IMAGE' | translate}}</h3>
-          </button>
-          <preload-image *ngIf="selected_image" [ratio]="{w:1, h:1}" [src]="selected_image" alt="this is the image" title="IMAGE!"></preload-image>
-        </section>
+         <ion-row no-padding class="multi-input-row">
+              <ion-item>
+        <ion-label >{{'UPLOAD_AN_IMAGE' | translate}}</ion-label>
+        <ion-avatar item-end>
+          <img src="{{imgPreview}}" (click)="getPhoto()">
+        </ion-avatar>
+      </ion-item>
+          </ion-row>
 
 
         <ion-row no-padding class="multi-input-row">
-          <ion-col no-padding width-50>
+          <ion-col no-padding >
             <ion-item class="multi-input time-item">
               <ion-label floating>{{'Lost Date' | translate}}</ion-label>
               <ion-datetime formControlName="lost_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
@@ -213,7 +216,7 @@
         </ion-row>
 
         <ion-row no-padding class="multi-input-row">
-          <ion-col no-padding width-50>
+          <ion-col no-padding >
             <ion-item class="multi-input time-item">
               <ion-label floating>{{'Found Date' | translate}}</ion-label>
               <ion-datetime formControlName="found_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
