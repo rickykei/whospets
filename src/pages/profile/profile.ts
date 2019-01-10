@@ -150,10 +150,10 @@ export class ProfilePage {
     this.app.getRootNav().push(SettingsPage);
   }
 
-  backToMainPage()
-  {
-    this.app.getRootNav().push(TabsNavigationPage);
-  }
+  // backToMainPage()
+  // {
+  //   this.app.getRootNav().push(TabsNavigationPage);
+  // }
 
   onSegmentChanged(segmentButton: SegmentButton) {
     // console.log('Segment changed to', segmentButton.value);

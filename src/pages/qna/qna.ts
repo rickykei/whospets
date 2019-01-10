@@ -85,7 +85,7 @@ export class QnaPage {
 
    setQna()
    {
-     this.navCtrl.push(SetQnaPage, {display:this.user_id , getall:false} );
+     this.navCtrl.push(SetQnaPage, {user_id:this.user_id} );
    }
 
 }

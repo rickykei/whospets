@@ -31,7 +31,7 @@
               <h2 class="range-label">{{'Price' | translate}}</h2>
               <h3 class="range-value">$ {{sell_form.controls.price.value}} </h3>
             </ion-label>
-            <ion-range formControlName="price" min="0" max="9999" step="1" snaps="true" pin="false"></ion-range>
+            <ion-range formControlName="price" min="0" max="10000" step="500" snaps="true" pin="false"></ion-range>
           </ion-item>
 
           <ion-row no-padding class="multi-input-row">
@@ -66,9 +66,26 @@
             <ion-range formControlName="weight" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
           </ion-item>
 
-          <ion-item>
-            <ion-input type="text" placeholder="Small" formControlName="size"></ion-input>
-          </ion-item>
+          
+            <ion-row no-padding class="user-preferences-row">
+              <span class="radio-tags-label">{{'Size' | translate}}</span>
+              <ion-list class="radio-tags" radio-group formControlName="size">
+                <ion-item class="radio-tag">
+                  <ion-label>L</ion-label>
+                  <ion-radio value="Large"></ion-radio>
+                </ion-item>
+                <ion-item class="radio-tag">
+                  <ion-label>
+                    <span>M</span>
+                  </ion-label>
+                  <ion-radio value="medium"></ion-radio>
+                </ion-item>
+                <ion-item class="radio-tag">
+                  <ion-label>S</ion-label>
+                  <ion-radio value="small"></ion-radio>
+                </ion-item>
+              </ion-list>
+            </ion-row>
 
           <ion-row no-padding class="multi-input-row">
             <ion-item>

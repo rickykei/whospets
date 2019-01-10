@@ -9,7 +9,6 @@ import { ProfileService } from '../profile/profile.service';
 //image
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
-import { ApiProvider } from '../../providers/api/api';
 /**
  * Generated class for the AddpostPage page.
  *
@@ -133,7 +132,7 @@ export class AddpostPage {
     
     let data=JSON.stringify({user_id:this.user_id,username:this.email
       , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
-    , pet_id:this.choosepetid});
+    , pet_id:this.choosepetid,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {

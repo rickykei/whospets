@@ -43,7 +43,7 @@ export class LoginPage {
     public loadingCtrl: LoadingController
   ) {
 
-    this.main_page = { component: ProfilePage }; //TabsNavigationPage };
+    this.main_page = { component: TabsNavigationPage }; //ProfilePage }; //
 
     this.login = new FormGroup({
       email: new FormControl('rickykei@yahoo.com', Validators.required),
@@ -72,7 +72,7 @@ export class LoginPage {
         console.log('inside true');
 
         this.setEmailUser(this.email.value, this.password.value, '');
-        this.nav.setRoot(ProfilePage);
+        this.nav.push(TabsNavigationPage);//ProfilePage);
       }
       else
       {

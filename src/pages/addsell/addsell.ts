@@ -126,7 +126,7 @@ export class AddsellPage {
     let data=JSON.stringify({user_id:this.user_id,username:this.email
       , title:postdata.title, description:postdata.description , price:postdata.price
       , size:postdata.size, country_id:postdata.country_id, sub_country_id:postdata.sub_country_id
-      , color:postdata.color, weight:postdata.weight});
+      , color:postdata.color, weight:postdata.weight,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_sells.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
