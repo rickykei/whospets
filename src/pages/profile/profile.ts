@@ -87,11 +87,13 @@ export class ProfilePage {
           this.profile.data.sub_country_id = data2.data.sub_country_id;
           this.profile.data.user_id = data2.data.user_id;
 
-          this.setProfileUserId(data2.data.user_id +"");
-		  console.log('..data2 user_id :'+ data2.data.user_id);
-		   console.log('..data2 user_id :'+ this.profile.data.user_id);
-          console.log('..data2 fb_uid image :'+ this.profile.data.fb_uid);
-          console.log('..data2 email:'+ this.profile.data.email);
+          this.setProfileUserId(data2.data.user_id +""
+          , data2.data.firstname + " " + data2.data.lastname);
+
+		  // console.log('..data2 user_id :'+ data2.data.user_id);
+		  //  console.log('..data2 user_id :'+ this.profile.data.user_id);
+      //     console.log('..data2 fb_uid image :'+ this.profile.data.fb_uid);
+      //     console.log('..data2 email:'+ this.profile.data.email);
 
         }
         else{
@@ -126,13 +128,14 @@ export class ProfilePage {
 
     }
 
-    setProfileUserId( _userid : string)
+    setProfileUserId( _userid : string, _user_name :string )
     {
       console.log('profile_user_id :' + _userid);
 
       this.nativeStorage.setItem('profile_user_id',
       {
-        profile_user_id : _userid
+        profile_user_id : _userid,
+        profile_user_name: _user_name
       })
       .then(
         () =>  console.log('profile_user_id ： Stored item!'),

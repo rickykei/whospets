@@ -70,6 +70,14 @@
             <ion-input type="text" placeholder="Small" formControlName="size"></ion-input>
           </ion-item>
 
+          <ion-row no-padding class="multi-input-row">
+            <ion-item>
+            <ion-label >{{'UPLOAD_AN_IMAGE' | translate}}</ion-label>
+            <ion-avatar item-end>
+              <img src="{{imgPreview}}" (click)="getPhoto()">
+            </ion-avatar>
+            </ion-item>
+        </ion-row>
 
             <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!sell_form.valid" (click)="addSell()">Post!</button>
         </form>

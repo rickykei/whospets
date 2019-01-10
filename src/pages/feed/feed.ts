@@ -18,7 +18,8 @@ export class FeedPage {
   feed: FeedModel = new FeedModel();
   feeddata : DataModel = new DataModel();
   details: Array<FeedPostModel>;
-  user_id:number;
+  user_id: number;
+  user_name: string;
 
   constructor(
     public nav: NavController,
@@ -50,6 +51,8 @@ export class FeedPage {
       this.nativeStorage.getItem('profile_user_id')
       .then(data => {
           this.user_id = data.profile_user_id;
+          this.user_name = data.profile_user_name;
+
            console.log(data.profile_user_id);
         });
   }
@@ -62,7 +65,7 @@ export class FeedPage {
 
   setPet()
   {
-    this.nav.push(AddpetPage, {profile:this.user_id});
+    this.nav.push(AddpetPage, {user_id:this.user_id, user_name:this.user_name});
   }
 
   getRandomInt(min, max) {

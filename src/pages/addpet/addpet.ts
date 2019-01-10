@@ -7,7 +7,6 @@ import { PetModel, CountryIdModel, UserModel } from '../profile/profile.model';
 import { PetDetailsService } from '../add-page/addlayout.service';
 import { PetBreedModel, PetColorModel, PetStatusModel } from '../add-page/addlayout.model';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
-import { DisplayPage } from '../display/display';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import { ApiProvider } from '../../providers/api/api';
@@ -51,10 +50,10 @@ export class AddpetPage {
     public petdetailservice : PetDetailsService,    
     public http: HttpClient,  
     public navParams: NavParams,
-	private imagePicker: ImagePicker,
 	public loadingCtrl: LoadingController,
 	public alertCtrl: AlertController,
-	public api: ApiProvider,
+  public api: ApiProvider,
+  private imagePicker: ImagePicker,
     private base64: Base64) {
 
       this.addPetForm = new FormGroup({
@@ -82,9 +81,15 @@ export class AddpetPage {
 		 
       });
 
+      this.user_id = navParams.get('user_id'); 
+      this.petowner = navParams.get('user_name'); 
+
       this.profile = navParams.get('profile'); 
-      this.petowner = this.profile.firstname + '' + this.profile.lastname;
-      this.user_id = this.profile.user_id;
+      if( this.profile)
+      {
+        this.petowner = this.profile.firstname + '' + this.profile.lastname;
+        this.user_id = this.profile.user_id;
+      }     
   }
 
   
@@ -124,7 +129,7 @@ export class AddpetPage {
 	this.nativeStorage.getItem('email_user')
     .then(data => {
      this.email = data.email;   
-
+    
     //  this.profileService.getPet(data.email)
      //then(response => {
       // this.pet = response;

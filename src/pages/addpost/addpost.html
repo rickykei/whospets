@@ -21,11 +21,21 @@
         <ion-item>
         <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
       </ion-item>
-      <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
+
+      <!-- <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
         <ion-icon name="camera"></ion-icon>
         <h3 class="button-title">{{'UPLOAD_AN_IMAGE' | translate}}</h3>
       </button>
-      <preload-image *ngIf="selected_image" [ratio]="{w:1, h:1}" [src]="selected_image" alt="this is the image" title="IMAGE!"></preload-image>
+      <preload-image *ngIf="selected_image" [ratio]="{w:1, h:1}" [src]="selected_image" alt="this is the image" title="IMAGE!"></preload-image> -->
+
+      <ion-row no-padding class="multi-input-row">
+        <ion-item>
+        <ion-label >{{'UPLOAD_AN_IMAGE' | translate}}</ion-label>
+        <ion-avatar item-end>
+          <img src="{{imgPreview}}" (click)="getPhoto()">
+        </ion-avatar>
+        </ion-item>
+    </ion-row>
 
       <ion-item>
       <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>

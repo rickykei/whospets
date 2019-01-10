@@ -8,6 +8,10 @@ import { ProfileService } from '../profile/profile.service';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PetColorModel } from '../add-page/addlayout.model';
 import { PetDetailsService } from '../add-page/addlayout.service';
+//image
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+import { ApiProvider } from '../../providers/api/api';
 
 /**
  * Generated class for the AddsellPage page.
@@ -23,16 +27,18 @@ import { PetDetailsService } from '../add-page/addlayout.service';
 export class AddsellPage {
   sell_form: FormGroup;
 
-  email: string;
-  petowner:string;
-  user_id:number;
-  
+  email: string;  
   pet: PetModel = new PetModel();
   profile: UserModel= new UserModel();
+  user_id:number;
 
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
   petColor: PetColorModel = new PetColorModel();
+
+  //image
+  regData = { avatar:'', email: '', password: '', fullname: '' };
+  imgPreview = 'assets/images/blank-avatar.jpg';
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -40,7 +46,9 @@ export class AddsellPage {
     public petdetailservice : PetDetailsService,    
     public http: HttpClient,  
     public nativeStorage:NativeStorage, 
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private imagePicker: ImagePicker,
+    private base64: Base64) {
       this.sell_form = new FormGroup({
         title: new FormControl(''),
         description: new FormControl(''),  
@@ -51,9 +59,13 @@ export class AddsellPage {
         weight: new FormControl(0),
         size: new FormControl(0)
       });
+
+      this.user_id = navParams.get('user_id'); 
       this.profile = navParams.get('profile'); 
-      this.petowner = this.profile.firstname + '' + this.profile.lastname;
-      this.user_id = this.profile.user_id;
+      if( this.profile)
+      {       
+        this.user_id = this.profile.user_id;
+      }    
   }
 
   ionViewDidLoad() {
@@ -84,6 +96,22 @@ export class AddsellPage {
       this.petColor = data2;
     });
   }
+
+  getPhoto() {
+    let options = {
+      maximumImagesCount: 1
+    };
+    this.imagePicker.getPictures(options).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+          this.imgPreview = results[i];
+          this.base64.encodeFile(results[i]).then((base64File: string) => {
+            this.regData.avatar = base64File;
+          }, (err) => {
+            console.log(err);
+          });
+      }
+    }, (err) => { });
+    }
 
   addSell() {
     let postdata = this.sell_form.value;

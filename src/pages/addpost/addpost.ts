@@ -6,7 +6,10 @@ import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/h
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { UserModel, PetModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
-
+//image
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+import { ApiProvider } from '../../providers/api/api';
 /**
  * Generated class for the AddpostPage page.
  *
@@ -32,21 +35,31 @@ export class AddpostPage {
   profile: UserModel= new UserModel();
   pet: PetModel = new PetModel();
 
+  //image
+  regData = { avatar:'', email: '', password: '', fullname: '' };
+  imgPreview = 'assets/images/blank-avatar.jpg';
+
   constructor(
     public navCtrl: NavController, 
     public alertCtrl: AlertController,
     public profileService: ProfileService,
     public http: HttpClient,  
     public nativeStorage:NativeStorage,
-    public navParams: NavParams) 
+    public navParams: NavParams,
+    private imagePicker: ImagePicker,
+    private base64: Base64) 
     {
       this.post_form = new FormGroup({
         title: new FormControl(''),
         description: new FormControl(''),      
       });
 
+      this.user_id = navParams.get('user_id'); 
       this.profile = navParams.get('profile'); 
-      this.user_id = this.profile.user_id;
+      if( this.profile)
+      {       
+        this.user_id = this.profile.user_id;
+      }     
     }
 
   ionViewDidLoad() {
@@ -63,6 +76,21 @@ export class AddpostPage {
    });
   }
 
+  getPhoto() {
+    let options = {
+      maximumImagesCount: 1
+    };
+    this.imagePicker.getPictures(options).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+          this.imgPreview = results[i];
+          this.base64.encodeFile(results[i]).then((base64File: string) => {
+            this.regData.avatar = base64File;
+          }, (err) => {
+            console.log(err);
+          });
+      }
+    }, (err) => { });
+    }
   
   choosePet(){
     let alert = this.alertCtrl.create({
