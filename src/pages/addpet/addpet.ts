@@ -10,6 +10,7 @@ import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/h
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import { ApiProvider } from '../../providers/api/api';
+import { resolveDefinition } from '../../../node_modules/@angular/core/src/view/util';
 
 /**
  * Generated class for the AddpetPage page.
@@ -189,7 +190,7 @@ export class AddpetPage {
     headers.append('Access-Control-Allow-Origin' , '*');
     headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
           
-    let data=JSON.stringify({user_id:this.user_id,username:this.email
+    let data=JSON.stringify({user_id:this.user_id,email:this.email,username:this.email
       , title:postdata.title, description:postdata.description , name_of_pet:this.petowner
     , pet_id:postdata.id, category_id:postdata.petbreed, sub_category:postdata.typeofpet
     , gender:postdata.gender, date_born:postdata.born_date, color:postdata.color
@@ -203,12 +204,11 @@ export class AddpetPage {
     , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
     , language:'', specifications:'', style_code:'', created:'', country:'',avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
-    // .map(res => res.json(data))
-    .subscribe(res => {
-		 this.loading.dismiss();
-    alert("success "+res);
-    this.goToDisplay();
-    }, (err) => {
+    .subscribe(res => { 
+      this.loading.dismiss();
+      alert("success "+res);
+      this.goToDisplay();
+      }, (err) => {
 		 this.loading.dismiss();
     alert("failed");
     });

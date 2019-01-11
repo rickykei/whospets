@@ -29,7 +29,7 @@ export class AddsellPage {
 
   email: string;  
   pet: PetModel = new PetModel();
-  profile: UserModel= new UserModel();
+//  profile: UserModel= new UserModel();
   user_id:number;
 
   country: CountryIdModel = new CountryIdModel();
@@ -60,12 +60,12 @@ export class AddsellPage {
         size: new FormControl(0)
       });
 
-      this.user_id = navParams.get('user_id'); 
-      this.profile = navParams.get('profile'); 
-      if( this.profile)
-      {       
-        this.user_id = this.profile.user_id;
-      }    
+      // this.user_id = navParams.get('user_id'); 
+      // this.profile = navParams.get('profile'); 
+      // if( this.profile)
+      // {       
+      //   this.user_id = this.profile.user_id;
+      // }    
   }
 
   ionViewDidLoad() {
@@ -81,6 +81,14 @@ export class AddsellPage {
      });
    });
 
+   this.nativeStorage.getItem('profile_user_id')
+   .then(data => {
+       this.user_id = data.profile_user_id;
+        console.log(data.profile_user_id);
+     });
+     
+     console.log("add sell , user id: " + this.user_id);
+
    this.profileService.getCountryCode()
    .then(zone => {
      this.country = zone;
@@ -95,6 +103,8 @@ export class AddsellPage {
     .then(data2 => {
       this.petColor = data2;
     });
+
+   
   }
 
   getPhoto() {
@@ -123,15 +133,17 @@ export class AddsellPage {
     //let options = new RequestOptions({ headers: headers });
     
     
-    let data=JSON.stringify({user_id:this.user_id,username:this.email
+    let data=JSON.stringify({user_id:this.user_id,email:this.email
       , title:postdata.title, description:postdata.description , price:postdata.price
-      , size:postdata.size, country_id:postdata.country_id, sub_country_id:postdata.sub_country_id
+      , size:postdata.size, country_id:postdata.countryId, sub_country_id:postdata.subCountryId
       , color:postdata.color, weight:postdata.weight,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_sells.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
     alert("success "+res);
-    this.navCtrl.push(DisplaySellPage, {display:this.user_id, getall:false});
+    
+    //this.navCtrl.push(DisplaySellPage, {display:this.user_id, getall:false});
+    this.navCtrl.pop();
 
     }, (err) => {
     alert("failed");

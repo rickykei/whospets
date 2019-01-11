@@ -31,7 +31,7 @@ export class AddpostPage {
   choosepet :string;
   choosepetid :string;
 
-  profile: UserModel= new UserModel();
+//  profile: UserModel= new UserModel();
   pet: PetModel = new PetModel();
 
   //image
@@ -50,15 +50,15 @@ export class AddpostPage {
     {
       this.post_form = new FormGroup({
         title: new FormControl(''),
-        description: new FormControl(''),      
+        description: new FormControl('')      
       });
 
-      this.user_id = navParams.get('user_id'); 
-      this.profile = navParams.get('profile'); 
-      if( this.profile)
-      {       
-        this.user_id = this.profile.user_id;
-      }     
+      // this.user_id = navParams.get('user_id'); 
+      // this.profile = navParams.get('profile'); 
+      // if( this.profile)
+      // {       
+      //   this.user_id = this.profile.user_id;
+      // }     
     }
 
   ionViewDidLoad() {
@@ -73,6 +73,14 @@ export class AddpostPage {
        this.pet = response;
      });
    });
+
+   this.nativeStorage.getItem('profile_user_id')
+   .then(data => {
+       this.user_id = data.profile_user_id;
+        console.log(data.profile_user_id);
+     });
+     
+     console.log(this.user_id);
   }
 
   getPhoto() {
@@ -130,7 +138,7 @@ export class AddpostPage {
     //let options = new RequestOptions({ headers: headers });
     
     
-    let data=JSON.stringify({user_id:this.user_id,username:this.email
+    let data=JSON.stringify({user_id:this.user_id,email:this.email
       , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
     , pet_id:this.choosepetid,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
@@ -145,7 +153,9 @@ export class AddpostPage {
 
     goToDisplay() 
     {
-      this.navCtrl.push(DisplayPage, {display:this.user_id, getall:false} );
+     // this.navCtrl.push(DisplayPage, {display:this.user_id, getall:false} );
+     this.navCtrl.pop();
+
     }
 
 }

@@ -90,7 +90,7 @@ export class SetQnaPage {
     //let options = new RequestOptions({ headers: headers });
     
     
-    let data=JSON.stringify({user_id:this.user_id,username:this.email
+    let data=JSON.stringify({user_id:this.user_id,email:this.email
       , title:postdata.title, description:postdata.description ,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_qnas.php",data, { headers: headers })
     // .map(res => res.json(data))
