@@ -47,36 +47,9 @@ export class TabsNavigationPage {
     this.tab1Root = ListingPage;
     this.tab2Root = ProfilePage;
     this.tab3Root = NotificationsPage;
-
-  }
-
- 
-   // 1st log into this page, check is it logged user before
-   ionViewWillEnter() {    
-    if(!this.isLogged()){
-     // this.nav.setRoot(LoginPage);
-    }
-  }
-
-  isLogged(){
-     
-   this.nativeStorage.getItem('email_user')
-   .then(function (data) {
-       
-    console.log(data.email);
-    var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
-    console.log(url);
-
-    this.http.get(url).subscribe(data => {
-      console.log(data);
-    });
-
-    return true;
-  });
   }
  
   ionViewDidLoad() {
-
     this.nativeStorage.getItem('1stLogin')
       .then(data => {
         // if there is not 1st login, do nothings
@@ -84,7 +57,7 @@ export class TabsNavigationPage {
        }, error =>
        {
         this.nav.setRoot(WalkthroughPage);
-  
+
         this.nativeStorage.setItem('1stLogin',
         {       
           login: true,
@@ -93,10 +66,8 @@ export class TabsNavigationPage {
           () =>  console.log('1sr login , Stored item!'),
           error => console.error('Error storing item')
         );
-        });     
-        
+        });             
         this.tabRef.select(1);
-
   }
 
 
@@ -121,9 +92,6 @@ export class TabsNavigationPage {
   }
 
   checkNormalLogin(email :string, password: string, uid :string) {
-
-
-
     console.log('1'+ email);
      console.log('1' + password);
      console.log('1' + uid);
@@ -173,3 +141,29 @@ export class TabsNavigationPage {
  
 }
   
+
+
+ 
+   // 1st log into this page, check is it logged user before
+  //  ionViewWillEnter() {    
+  //   if(!this.isLogged()){
+  //    // this.nav.setRoot(LoginPage);
+  //   }
+  // }
+
+  // isLogged(){
+     
+  //  this.nativeStorage.getItem('email_user')
+  //  .then(function (data) {
+       
+  //   console.log(data.email);
+  //   var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
+  //   console.log(url);
+
+  //   this.http.get(url).subscribe(data => {
+  //     console.log(data);
+  //   });
+
+  //   return true;
+  // });
+  // }

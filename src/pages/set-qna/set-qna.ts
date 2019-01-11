@@ -104,6 +104,7 @@ export class SetQnaPage {
 
     goToDisplay() 
     {
-      this.navCtrl.push(QnaPage, {display:this.user_id, getall:false} );
+     // this.navCtrl.push(QnaPage, {display:this.user_id, getall:false} );
+     this.navCtrl.pop();
     }
 }
