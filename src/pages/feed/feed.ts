@@ -32,21 +32,15 @@ export class FeedPage {
  
   }
 
+  ionViewDidEnter()
+  {
+    this.getContent();
+  }
 
   ionViewDidLoad() {
   console.log('feed.ts');
-    this.feedService
-      .getPosts(this.feed.category.catid)
-      .then(posts => {
-	   console.log('feed.ts.getpost');
-      //  this.feed.posts = posts;
-		this.feed.success =  posts.success;
-        this.feed.data = posts.data;
-        this.feeddata = posts.data;
-        this.details = posts.data.pets;
-
-        console.log('post :' + this.feed.success);
-      });
+   
+  //this.getContent();
 
       this.nativeStorage.getItem('profile_user_id')
       .then(data => {
@@ -83,4 +77,30 @@ export class FeedPage {
       console.log('Error');
    });
  }
+
+ getContent()
+ {
+  this.feedService
+  .getPosts(this.feed.category.catid)
+  .then(posts => {
+ console.log('feed.ts.getpost');
+  //  this.feed.posts = posts;
+this.feed.success =  posts.success;
+    this.feed.data = posts.data;
+    this.feeddata = posts.data;
+    this.details = posts.data.pets;
+
+    console.log('post :' + this.feed.success);
+  });
+ }
+ 
+ doRefresh(refresher) {
+  console.log('Begin async operation', refresher);
+  this.getContent();
+
+  setTimeout(() => {
+    console.log('Async operation has ended');
+    refresher.complete();
+  }, 2000);
+}
 }

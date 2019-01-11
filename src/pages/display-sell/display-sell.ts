@@ -39,6 +39,11 @@ export class DisplaySellPage{
   }
 
   
+  ionViewDidEnter()
+  {
+    this.getContent();
+  }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad PetinfoPage');
     console.log(this.pet.name_of_pet);
@@ -55,22 +60,7 @@ export class DisplaySellPage{
       }
     });
     
-    if(this.getall===true)
-    {
-      this.PagesDisplayServiceProvider.getAllSell()
-      .then(response => {
-        this.petModel = response; 
-        this.details = response.data;                  
-      });
-    }
-    else
-    {
-        this.PagesDisplayServiceProvider.getSell(this.user_id)
-        .then(response => {
-          this.petModel = response; 
-          this.details = response.data;                  
-        });
-      }
+   //this.getContent();
     } 
 
     setSell()
@@ -78,4 +68,34 @@ export class DisplaySellPage{
       this.navCtrl.push(AddsellPage, {profile:this.user_id} );
     }
 
+    getContent()
+    {
+      if(this.getall===true)
+      {
+        this.PagesDisplayServiceProvider.getAllSell()
+        .then(response => {
+          this.petModel = response; 
+          this.details = response.data;                  
+        });
+      }
+      else
+      {
+          this.PagesDisplayServiceProvider.getSell(this.user_id)
+          .then(response => {
+            this.petModel = response; 
+            this.details = response.data;                  
+          });
+        }
+
+    }
+
+    doRefresh(refresher) {
+      console.log('Begin async operation', refresher);
+      this.getContent();
+    
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        refresher.complete();
+      }, 2000);
+    }
 }

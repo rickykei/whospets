@@ -38,7 +38,7 @@ export class ProfilePage {
     public nativeStorage:NativeStorage,
     public socialSharing: SocialSharing
   ) {
-    this.display = "list";
+    this.display = "grid";
   }
 
 
@@ -94,7 +94,7 @@ export class ProfilePage {
 		  //  console.log('..data2 user_id :'+ this.profile.data.user_id);
       //     console.log('..data2 fb_uid image :'+ this.profile.data.fb_uid);
       //     console.log('..data2 email:'+ this.profile.data.email);
-
+          
         }
         else{
           // go to create profile page

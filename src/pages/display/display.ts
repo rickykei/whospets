@@ -40,6 +40,10 @@ export class DisplayPage {
 
   }
 
+  ionViewDidEnter()
+  {
+    this.getContent();
+  }
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad PetinfoPage');
@@ -55,8 +59,12 @@ export class DisplayPage {
       else{
         this.uid=data.uid;
       }
-    });
-    
+    });  
+  
+    } 
+
+  getContent()
+  {
     if(this.getall===true)
     {
       this.PagesDisplayServiceProvider.getAllPost()
@@ -73,11 +81,20 @@ export class DisplayPage {
           this.details = response.data;                       
         });
       }
-    } 
+  }
     
     setPost()
     {
       this.navCtrl.push(AddpostPage, {profile:this.user_id} );
     }
 
+    doRefresh(refresher) {
+      console.log('Begin async operation', refresher);
+      this.getContent();
+    
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        refresher.complete();
+      }, 2000);
+    }
 }

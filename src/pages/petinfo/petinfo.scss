@@ -1,37 +1,20 @@
 page-petinfo {
-        .profile-content
-        {
-            background-color: color($colors, background, base);
-    
-            .user-details
-            {
-                @include element-shadow();
-                padding-bottom: 4%;
-                background-color: $white;
-    
-                .user-main-data-row
-                {
-                    padding: 4% 4% 0px;
-                    align-items: center;
-    
-                    .user-image
-                    {
-                        border-radius: 50%;
-                    }
+    .profile-content
+	{
+		background-color: color($colors, background, base);
 
-                    ion-avatar {
-                        flex: 0 0 16%;
-                    max-width: 16%;
-                        margin: 0px;
-                        align-self: flex-start;
-                        margin: 0 16px 0 0!important;
-                        
-                        .user-image
-                        {
-                            border-radius: 50%;
-                        }
-                    }
-                }
-            }
-        }
+		.user-details
+		{
+			@include basic-card-styles($white-d);
+
+			.item-title
+			{
+				margin: 0px;
+				margin-bottom: 12px;
+				padding: 0px;
+				letter-spacing: 1.1px;
+				color: $theme-color-2;
+			}
+		}
+	}
 }

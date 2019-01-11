@@ -22,6 +22,16 @@
 
 
 <ion-content class="profile-content">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+   </ion-refresher>
+
   <div class="user-details" *ngFor="let pet of details">
    <ion-card>
 

@@ -41,6 +41,11 @@ export class QnaPage {
  }
 
  
+ ionViewDidEnter()
+ {
+   this.getContent();
+ }
+ 
  ionViewDidLoad() {
    console.log('ionViewDidLoad qna');
    console.log(this.pet.name_of_pet);
@@ -65,7 +70,19 @@ export class QnaPage {
        this.uid=data.uid;
      }
    });
-   if(this.getall===true)
+
+   //this.getContent();
+   } 
+
+   setQna()
+   {
+     this.navCtrl.push(SetQnaPage, {user_id:this.user_id} );
+   }
+
+   getContent()
+   {
+
+    if(this.getall===true)
     {
       this.PagesDisplayServiceProvider.getAllQnA()
       .then(response => {
@@ -81,11 +98,15 @@ export class QnaPage {
          this.details = response.data;                       
        });
       }
-   } 
-
-   setQna()
-   {
-     this.navCtrl.push(SetQnaPage, {user_id:this.user_id} );
    }
-
+   
+   doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.getContent();
+  
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
 }

@@ -13,6 +13,17 @@
 </ion-header>
 
 <ion-content class="feed-content"> 
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+   </ion-refresher>
+
+   
   <div class="feed-item" *ngFor="let post of details">
     <ion-card>
        
