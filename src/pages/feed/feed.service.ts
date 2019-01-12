@@ -9,10 +9,10 @@ import { FeedModel } from './feed.model';
 export class FeedService {
   constructor(public http: Http) {}
 
-  getPosts(catid): Promise<FeedModel> {
+  getPosts(catid,limit,offset): Promise<FeedModel> {
     //return this.http.get('./assets/example_data/feed.json')
-	console.log('http://api.whospets.com/api/categories/get_pets.php?pet_status='+catid);
-	  return this.http.get('http://api.whospets.com/api/categories/get_pets.php?pet_status='+catid)
+	console.log('http://api.whospets.com/api/categories/get_pets.php?pet_status='+catid+'&limit='+limit+'&offset='+offset);
+	  return this.http.get('http://api.whospets.com/api/categories/get_pets.php?pet_status='+catid+'&limit='+limit+'&offset='+offset)
                .toPromise()
                .then(response =>
 			   response.json() as FeedModel)

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Post page</ion-title>
+    <ion-title>Life Style</ion-title>
     <ion-buttons end> 
       <button (click)="setPost()"> 
           <div class="titleicon">
@@ -30,8 +30,8 @@
         </ion-refresher-content>
      </ion-refresher>
         
-       <div class="user-details" *ngFor="let pet of details">
-        <ion-card>
+       <ion-card class="user-details" *ngFor="let pet of details">
+        
 
             <preload-image [ratio]="{w:3, h:2}" src="{{pet.image}}"  title="pet.title"></preload-image>
 
@@ -66,61 +66,9 @@
               </ion-row>
 
         </ion-card>
-     </div>
-
+      
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
    </ion-content>
-
-<!--
-
-
-  <ion-row class="user-main-image-row">
-             <preload-image [ratio]="{w:3, h:2}" src="{{pet.image}}"  title="pet.title"></preload-image>
-         </ion-row>
-         
-         <ion-row class="user-main-data-row">
-        
-             <ion-row no-padding width-33>
-                <ion-row no-padding >
-                 
-                    <button class="action-button" ion-button clear small icon-start>
-                      <ion-icon name='heart'></ion-icon>
-                      {{pet.likecnt}}  {{'LIKES' | translate}}
-                    </button>
-                 
-                  </ion-row>
-                  <ion-row no-padding>
-                    <button class="action-button" ion-button clear small icon-start>
-                      <ion-icon name='chatbubbles'></ion-icon>
-                      // {{pet.comments}} 
-                       {{'COMMENTS' | translate}}
-                    </button>
-                  </ion-row>
-            </ion-row>
-          </ion-row>
  
-        <ion-row class="user-main-description-row">
-              <p class="item-text">
-                  {{'title' | translate}}
-                </p> 
- 
-                <p class="item-text">
-                    {{' ： '}}
-                  </p>
-            <p class="item-text">
-                {{pet.title}}
-              </p>
-        </ion-row>
- 
-        <ion-row class="user-main-description-row">
-              <p class="item-text">
-                  {{'Description' | translate}}
-                </p>
-                <p class="item-text">
-                    {{' ： '}}
-                  </p>
-            <p class="item-text">
-                {{pet.description}}
-              </p>
-         </ion-row>
-
--->

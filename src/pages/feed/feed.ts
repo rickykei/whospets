@@ -81,14 +81,14 @@ export class FeedPage {
  getContent()
  {
   this.feedService
-  .getPosts(this.feed.category.catid)
+  .getPosts(this.feed.category.catid,10,0)
   .then(posts => {
- console.log('feed.ts.getpost');
-  //  this.feed.posts = posts;
-this.feed.success =  posts.success;
-    this.feed.data = posts.data;
-    this.feeddata = posts.data;
-    this.details = posts.data.pets;
+   console.log('feed.ts.getpost');
+   //  this.feed.posts = posts;
+   this.feed.success =  posts.success;
+    //this.feed.data = posts.data;
+    //this.feeddata = posts.data;
+    this.details=posts.data.pets;
 
     console.log('post :' + this.feed.success);
   });
@@ -102,5 +102,27 @@ this.feed.success =  posts.success;
     console.log('Async operation has ended');
     refresher.complete();
   }, 2000);
-}
+ }
+
+ doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      this.feedService
+	  .getPosts(this.feed.category.catid,10,this.details.length)
+	  .then(posts => {
+		console.log('feed.ts.getpost');
+		console.log(posts.data.pets.length);
+		this.feed.success =  posts.success;
+		 for(let i=0; i<posts.data.pets.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(posts.data.pets[i]);
+		}
+		console.log('post :' + this.feed.success);
+	  });
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 1000);
+  }
 }

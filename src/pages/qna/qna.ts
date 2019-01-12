@@ -84,7 +84,7 @@ export class QnaPage {
 
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllQnA()
+      this.PagesDisplayServiceProvider.getAllQnA(10,0)
       .then(response => {
         this.petModel = response; 
         this.details = response.data;   
@@ -92,7 +92,7 @@ export class QnaPage {
     }
     else
     {
-       this.PagesDisplayServiceProvider.getQnA(this.user_id)
+       this.PagesDisplayServiceProvider.getQnA(this.user_id,10,0)
        .then(response => {
          this.petModel = response; 
          this.details = response.data;                       

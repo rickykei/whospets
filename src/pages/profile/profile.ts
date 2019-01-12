@@ -111,7 +111,7 @@ export class ProfilePage {
 			  });
 
 			console.log('..data2 user_id getPost:'+  this.profile.data.user_id);
-			  this.PagesDisplayServiceProvider.getPost( this.profile.data.user_id)
+			  this.PagesDisplayServiceProvider.getPost( this.profile.data.user_id,10,0)
 			  .then(response => {
 				this.petModel = response; 
 				this.details = response.data;                       

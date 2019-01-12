@@ -20,60 +20,60 @@ export class PagesDisplayServiceProvider {
     console.log('Hello PagesDisplayServiceProvider Provider');
   }
 
-  getPost(user_id:number):Promise<PetModel>
+  getPost(user_id:number,limit,offset):Promise<PetModel>
+  {
+    //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
+  
+      return this.http.get('http://api.whospets.com/api/users/get_user_posts.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+  
+  }
+
+  getSell(user_id:number,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
    
-      return this.http.get('http://api.whospets.com/api/users/get_user_posts.php?user_id='+user_id) //('./assets/example_data/mypet.json')
+      return this.http.get('http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
   
   }
 
-  getSell(user_id:number):Promise<PetModel>
+  getQnA(user_id:number,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
    
-      return this.http.get('http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id) //('./assets/example_data/mypet.json')
+      return this.http.get('http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
   
   }
 
-  getQnA(user_id:number):Promise<PetModel>
+  getAllPost(limit,offset):Promise<PetModel>
   {
-    //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
-   
-      return this.http.get('http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id) //('./assets/example_data/mypet.json')
+      return this.http.get('http://api.whospets.com/api/categories/get_all_posts.php?limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
   
   }
 
-  getAllPost():Promise<PetModel>
+  getAllSell(limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_posts.php')
+      return this.http.get('http://api.whospets.com/api/categories/get_all_sells.php?limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
   
   }
 
-  getAllSell():Promise<PetModel>
+  getAllQnA(limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_sells.php')
-      .toPromise()
-      .then(response => response.json() as PetModel)
-      .catch(this.handleError);
-  
-  }
-
-  getAllQnA():Promise<PetModel>
-  {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_qnas.php')
+      return this.http.get('http://api.whospets.com/api/categories/get_all_qnas.php?limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);

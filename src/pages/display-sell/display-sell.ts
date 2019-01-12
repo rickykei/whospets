@@ -72,7 +72,7 @@ export class DisplaySellPage{
     {
       if(this.getall===true)
       {
-        this.PagesDisplayServiceProvider.getAllSell()
+        this.PagesDisplayServiceProvider.getAllSell(10,0)
         .then(response => {
           this.petModel = response; 
           this.details = response.data;                  
@@ -80,7 +80,7 @@ export class DisplaySellPage{
       }
       else
       {
-          this.PagesDisplayServiceProvider.getSell(this.user_id)
+          this.PagesDisplayServiceProvider.getSell(this.user_id,10,0)
           .then(response => {
             this.petModel = response; 
             this.details = response.data;                  

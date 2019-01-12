@@ -67,17 +67,17 @@ export class DisplayPage {
   {
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllPost()
+      this.PagesDisplayServiceProvider.getAllPost(10,0)
       .then(response => {
-        this.petModel = response; 
+        //this.petModel = response; 
         this.details = response.data;   
       });
     }
     else
     {
-        this.PagesDisplayServiceProvider.getPost(this.user_id)
+        this.PagesDisplayServiceProvider.getPost(this.user_id,10,0)
         .then(response => {
-          this.petModel = response; 
+          //this.petModel = response; 
           this.details = response.data;                       
         });
       }
@@ -97,4 +97,37 @@ export class DisplayPage {
         refresher.complete();
       }, 2000);
     }
+	
+	 doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+       if(this.getall===true)
+    {
+      this.PagesDisplayServiceProvider.getAllPost(10,this.details.length)
+      .then(response => {
+        //this.petModel = response; 
+		 for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);   
+		 }
+		
+      });
+    }
+    else
+    {
+        this.PagesDisplayServiceProvider.getPost(this.user_id,10,this.details.length)
+        .then(response => {
+          //this.petModel = response; 
+          for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);   
+		  }                    
+        });
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 1000);
+  }
 }
