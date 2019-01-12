@@ -109,4 +109,35 @@ export class QnaPage {
       refresher.complete();
     }, 2000);
   }
+  
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+     if(this.getall===true)
+    {
+      this.PagesDisplayServiceProvider.getAllQnA(10,this.details.length)
+      .then(response => {
+        for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);
+		  };   
+      });
+    }
+    else
+    {
+       this.PagesDisplayServiceProvider.getQnA(this.user_id,10,this.details.length)
+       .then(response => {
+        for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);
+		  }                    
+       });
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 1000);
+    }
+	
 }

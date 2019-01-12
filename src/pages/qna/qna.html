@@ -32,8 +32,8 @@
       </ion-refresher-content>
    </ion-refresher>
 
-  <div class="user-details" *ngFor="let pet of details">
-   <ion-card>
+  <ion-card class="user-details" *ngFor="let pet of details">
+    
 
        <preload-image [ratio]="{w:3, h:2}" src="{{pet.image}}"  title="pet.title"></preload-image>
 
@@ -68,8 +68,11 @@
          </ion-row>
 
    </ion-card>
-</div>
-
+ 
+ 
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>
 
 
