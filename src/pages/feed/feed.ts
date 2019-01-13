@@ -9,6 +9,7 @@ import { FeedService } from './feed.service';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AddpetPage } from '../addpet/addpet';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
+import { PetinfoPage } from '../petinfo/petinfo';
 
 @Component({
   selector: 'feed-page',
@@ -92,6 +93,11 @@ export class FeedPage {
 
     console.log('post :' + this.feed.success);
   });
+ }
+
+ detailPost(pet)
+ {
+   this.nav.push(PetinfoPage, {pet:pet} );
  }
  
  doRefresh(refresher) {

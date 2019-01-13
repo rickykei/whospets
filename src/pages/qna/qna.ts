@@ -4,6 +4,7 @@ import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { SetQnaPage } from '../set-qna/set-qna';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PagesDisplayServiceProvider } from '../display/display.services';
+import { PostInfoPage } from '../post-info/post-info';
 
 /**
  * Generated class for the QnaPage page.
@@ -139,5 +140,9 @@ export class QnaPage {
       infiniteScroll.complete();
     }, 1000);
     }
-	
+  
+  detailPost(post)
+  {        
+    this.navCtrl.push(PostInfoPage, {post:post});  
+  }
 }

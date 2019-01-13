@@ -24,7 +24,7 @@
 
    
   <ion-list>
-    <ion-card class="feed-item" *ngFor="let post of details">
+    <ion-card class="feed-item" *ngFor="let post of details" " (click)="detailPost(post)>
        
        <preload-image [ratio]="{w:3, h:2}" src="{{post.image}}"  title="post.title"></preload-image>
 

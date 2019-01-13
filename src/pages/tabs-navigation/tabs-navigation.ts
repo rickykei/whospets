@@ -64,7 +64,7 @@ export class TabsNavigationPage {
           error => console.error('Error storing item')
         );
         });             
-        this.tabRef.select(1);
+        this.tabRef.select(0);
   }
 
 

@@ -4,6 +4,7 @@ import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PagesDisplayServiceProvider } from './display.services';
 import { AddpostPage } from '../addpost/addpost';
+import { PostInfoPage } from '../post-info/post-info';
 
 /**
  * Generated class for the DisplayPage page.
@@ -130,4 +131,10 @@ export class DisplayPage {
       infiniteScroll.complete();
     }, 1000);
   }
+
+  detailPost(post)
+  {        
+    this.navCtrl.push(PostInfoPage, {post:post});  
+  }
+  
 }
