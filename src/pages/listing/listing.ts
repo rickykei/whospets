@@ -6,7 +6,6 @@ import 'rxjs/Rx';
 
 import { ListingModel, ListingItemModel } from './listing.model';
 import { ListingService } from './listing.service';
-import { LostPetPage } from '../lostpet/lostpet';
 import { DisplaySellPage } from '../display-sell/display-sell';
 import { DisplayPage } from '../display/display';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -41,12 +40,6 @@ export class ListingPage {
       .then(data => {
           this.user_id = data.profile_user_id;
         });
-  }
-
-  goToLostPet() {
-    // console.log("Clicked goToFeed", category);
-    // this.nav.push(FeedPage, { category: category });
-    this.nav.push(LostPetPage);
   }
 
   goToFeed(category: any) {
