@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
 import { DisplayPage } from '../display/display';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
@@ -33,7 +33,8 @@ export class AddpostPage {
 
 //  profile: UserModel= new UserModel();
   pet: PetModel = new PetModel();
-
+  isTab: boolean;
+  loading :any;
   //image
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = 'assets/images/blank-avatar.jpg';
@@ -45,14 +46,18 @@ export class AddpostPage {
     public http: HttpClient,  
     public nativeStorage:NativeStorage,
     public navParams: NavParams,
+    public loadingCtrl: LoadingController,
     private imagePicker: ImagePicker,
-    private base64: Base64) 
+    private base64: Base64,
+    public event: Events) 
     {
       this.post_form = new FormGroup({
         title: new FormControl(''),
         description: new FormControl('')      
       });
 
+      this.isTab = navParams.get('onTab'); 
+      console.log('this.isTab ' + this.isTab);
       // this.user_id = navParams.get('user_id'); 
       // this.profile = navParams.get('profile'); 
       // if( this.profile)
@@ -130,6 +135,8 @@ export class AddpostPage {
     });
   }
   addPost() {
+    this.showLoader();
+
     let postdata = this.post_form.value;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -144,18 +151,29 @@ export class AddpostPage {
     this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
-    alert("success "+res);
+      this.loading.dismiss();
+
+   // alert("success "+res);
     this.goToDisplay();
     }, (err) => {
+      this.loading.dismiss();
+
     alert("failed");
     });
     }
 
+    showLoader(){
+      this.loading = this.loadingCtrl.create({
+        content: 'Submitting...'
+      });
+  
+      this.loading.present();
+    }
+
     goToDisplay() 
     {
-     // this.navCtrl.push(DisplayPage, {display:this.user_id, getall:false} );
-     this.navCtrl.pop();
-
+      this.event.publish('user:back');
+      this.navCtrl.pop();   
     }
 
 }

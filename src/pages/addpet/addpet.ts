@@ -82,7 +82,7 @@ export class AddpetPage {
 		 
       });
 
-      this.user_id = navParams.get('user_id'); 
+    /*  this.user_id = navParams.get('user_id'); 
       this.petowner = navParams.get('user_name'); 
 
       this.profile = navParams.get('profile'); 
@@ -90,7 +90,8 @@ export class AddpetPage {
       {
         this.petowner = this.profile.firstname + '' + this.profile.lastname;
         this.user_id = this.profile.user_id;
-      }     
+      }   
+      */  
   }
 
   
@@ -162,6 +163,16 @@ export class AddpetPage {
     .then(data2 => {
       this.petStatus = data2;
     });
+
+    this.nativeStorage.getItem('profile_user_id')
+   .then(data => {
+       this.user_id = data.profile_user_id;
+      this.petowner = data.profile_user_name;
+        console.log(data.profile_user_id);
+        console.log(data.profile_user_name);
+     });
+     
+     console.log("add sell , user id: " + this.user_id);
   }
 
   getPhoto() {
@@ -206,7 +217,7 @@ export class AddpetPage {
     this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
     .subscribe(res => { 
       this.loading.dismiss();
-      alert("success "+res);
+    //  alert("success "+res);
       this.goToDisplay();
       }, (err) => {
 		 this.loading.dismiss();

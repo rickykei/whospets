@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
 import { DisplaySellPage } from '../display-sell/display-sell';
@@ -36,6 +36,7 @@ export class AddsellPage {
   subcountry: CountryIdModel = new CountryIdModel();
   petColor: PetColorModel = new PetColorModel();
 
+  loading: any;
   //image
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = 'assets/images/blank-avatar.jpg';
@@ -48,7 +49,9 @@ export class AddsellPage {
     public nativeStorage:NativeStorage, 
     public navParams: NavParams,
     private imagePicker: ImagePicker,
-    private base64: Base64) {
+    public loadingCtrl: LoadingController,
+    private base64: Base64,
+    public event: Events) {
       this.sell_form = new FormGroup({
         title: new FormControl(''),
         description: new FormControl(''),  
@@ -59,7 +62,7 @@ export class AddsellPage {
         weight: new FormControl(0),
         size: new FormControl(0)
       });
-
+    
       // this.user_id = navParams.get('user_id'); 
       // this.profile = navParams.get('profile'); 
       // if( this.profile)
@@ -124,6 +127,8 @@ export class AddsellPage {
     }
 
   addSell() {
+    this.showLoader();
+
     let postdata = this.sell_form.value;
 
     let headers = new HttpHeaders();
@@ -140,14 +145,27 @@ export class AddsellPage {
     this.http.post("http://api.whospets.com/api/users/set_user_sells.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
-    alert("success "+res);
+      this.loading.dismiss();
+
+   // alert("success "+res);
     
     //this.navCtrl.push(DisplaySellPage, {display:this.user_id, getall:false});
-    this.navCtrl.pop();
+    this.event.publish('user:back');
+    this.navCtrl.pop();  
 
     }, (err) => {
+      this.loading.dismiss();
+
     alert("failed");
     });
+    }
+
+    showLoader(){
+      this.loading = this.loadingCtrl.create({
+        content: 'Submitting...'
+      });
+  
+      this.loading.present();
     }
 
 }

@@ -9,9 +9,6 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { LoginPage } from '../login/login';
 import { NavController, NavParams, Tabs } from 'ionic-angular';
 
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
-
 import { LoginModel, LoginContentModel } from './tabs-navigation.model';
 import { TabsNavigationService } from './tabs-navigation.service';
 

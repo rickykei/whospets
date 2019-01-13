@@ -67,65 +67,24 @@
       <div *ngSwitchCase="'gridpost'" class="grid-view">
           <ion-row wrap class="grid-row">
             <ion-col width-33 class="grid-item" *ngFor="let post of petModel.data">
-            <!--  <preload-image [ratio]="{w:1, h:1}" [src]="{{pet.image}}" title="ion2FullApp"></preload-image>
-            -->
-            
-            <preload-image [ratio]="{w:1, h:1}" src="{{post.image}}"  title="title"  (click)="goPostDetail(post)"></preload-image>
-    
+                <preload-image [ratio]="{w:1, h:1}" src="{{post.image}}"  title="title"  (click)="goPostDetail(post)"></preload-image>
             </ion-col>
-           
+            <ion-col width-33 class="grid-item" >
+              <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addAllPost()"></preload-image>
+            </ion-col>
           </ion-row>
     
         </div>
 		  <div *ngSwitchCase="'grid'" class="grid-view">
       <ion-row wrap class="grid-row">
         <ion-col width-33 class="grid-item" *ngFor="let pet of pet.data">
-        <!--  <preload-image [ratio]="{w:1, h:1}" [src]="{{pet.image}}" title="ion2FullApp"></preload-image>
-        -->
-        
-        <preload-image [ratio]="{w:1, h:1}" src="{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
-
+            <preload-image [ratio]="{w:1, h:1}" src="{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
         </ion-col>
         <ion-col width-33 class="grid-item" >
-          <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addPet()"></preload-image>
-  
-          </ion-col>
+            <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addPet()"></preload-image>
+        </ion-col>
       </ion-row>
 
     </div>
-    <!-- <div *ngSwitchCase="'list'" class="list-view">
-      <div class="list-item" *ngFor="let post of profile.posts">
-        <span class="item-date">{{profile.data.email}}</span>
-        <ion-card>
-          <preload-image [ratio]="{w:1, h:1}" [src]="post.image" title=""></preload-image>
-          <ion-card-content>
-            <p class="item-text">
-              {{post.description}}
-            </p>
-          </ion-card-content>
-          <ion-row no-padding class="actions-row">
-            <ion-col no-padding width-30 text-left>
-              <button class="action-button" ion-button clear small color="danger" icon-start>
-                <ion-icon isActive="{{post.liked}}" name='heart'></ion-icon>
-                  {{post.likes}} {{'LIKES' | translate}}
-              </button>
-            </ion-col>
-            <ion-col no-padding width-45 text-center>
-              <button class="action-button" ion-button clear small color="danger" icon-start>
-                <ion-icon name='chatbubbles'></ion-icon>
-                  {{post.comments}} {{'COMMENTS' | translate}}
-              </button>
-            </ion-col>
-            <ion-col no-padding width-25 text-right>
-              <button class="action-button" ion-button clear small color="danger" icon-start (click)="sharePost(post)">
-                <ion-icon name='share-alt'></ion-icon>
-                {{'SHARE' | translate}}
-              </button>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-      </div>
-    </div> -->
-  
   </div>
 </ion-content>

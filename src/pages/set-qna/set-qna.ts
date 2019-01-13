@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 
 import {Http} from '@angular/http';
@@ -25,8 +25,8 @@ export class SetQnaPage {
   post_form: any;
   email: string;
   user_id:number;
-
-  profile: UserModel= new UserModel();
+  loading:any;
+ // profile: UserModel= new UserModel();
 
   //image
   regData = { avatar:'', email: '', password: '', fullname: '' };
@@ -37,19 +37,20 @@ export class SetQnaPage {
     public http: HttpClient,  
      public navParams: NavParams,
      private imagePicker: ImagePicker,
-     private base64: Base64) {
-
+     private base64: Base64,
+     public loadingCtrl: LoadingController,
+     public event: Events) {
       this.post_form = new FormGroup({
         title: new FormControl('', Validators.required),
         description: new FormControl('', Validators.required),      
       });
 
-      this.user_id = navParams.get('user_id'); 
-      this.profile = navParams.get('display'); 
-      if( this.profile)
-      {       
-        this.user_id = this.profile.user_id;
-      }       
+      // this.user_id = navParams.get('user_id'); 
+      // this.profile = navParams.get('display'); 
+      // if( this.profile)
+      // {       
+      //   this.user_id = this.profile.user_id;
+      // }       
   }
 
   getPhoto() {
@@ -75,6 +76,14 @@ export class SetQnaPage {
     .then(data => {
      this.email = data.email;     
    });
+
+   this.nativeStorage.getItem('profile_user_id')
+   .then(data => {
+       this.user_id = data.profile_user_id;
+        console.log(data.profile_user_id);
+     });
+     
+     console.log(this.user_id);
   }
 
   createPost(){
@@ -82,6 +91,8 @@ export class SetQnaPage {
   }
 
   addPost() {
+    this.showLoader();
+    
     let postdata = this.post_form.value;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -95,9 +106,12 @@ export class SetQnaPage {
     this.http.post("http://api.whospets.com/api/users/set_user_qnas.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
-    alert("success "+res);
+      this.loading.dismiss();
+    //alert("success "+res);
     this.goToDisplay();
     }, (err) => {
+      this.loading.dismiss();
+
     alert("failed");
     });
     }
@@ -105,6 +119,15 @@ export class SetQnaPage {
     goToDisplay() 
     {
      // this.navCtrl.push(QnaPage, {display:this.user_id, getall:false} );
-     this.navCtrl.pop();
+      this.navCtrl.pop();  
+      this.event.publish('user:back');   
+    }
+
+    showLoader(){
+      this.loading = this.loadingCtrl.create({
+        content: 'Submitting...'
+      });
+  
+      this.loading.present();
     }
 }

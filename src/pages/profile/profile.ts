@@ -8,11 +8,12 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import 'rxjs/Rx';
 
 import { NativeStorage } from '@ionic-native/native-storage';
-import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
+//import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { PetinfoPage } from '../petinfo/petinfo';
 import { PostInfoPage } from '../post-info/post-info';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { AddpetPage } from '../addpet/addpet';
+import { TabsAllsetpostPage } from '../tabs-allsetpost/tabs-allsetpost';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class ProfilePage {
   constructor(
     public menu: MenuController,
     public app: App,
+    //public navCtrl: NavController,
     public navParams: NavParams,   
      public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public profileService: ProfileService,
@@ -178,19 +180,24 @@ export class ProfilePage {
   goPetDetail(pet)
   {
     console.log("profile : " +this.profile.data.user_id);
-    this.app.getRootNav().push(PetinfoPage, {pet:pet},{profile:this.profile.data});
+    this.app.getRootNav().push(PetinfoPage, {pet:pet , profile:this.profile.data});
   }
 
   goPostDetail(post)
   {
     console.log("profile : " +this.profile.data.user_id);
-    this.app.getRootNav().push(PostInfoPage, {post:post},{profile:this.profile.data});
+    this.app.getRootNav().push(PostInfoPage, {post:post, profile:this.profile.data});
   }
 
   addPet()
   {
     console.log("profile : " +this.profile.data.user_id);
     this.app.getRootNav().push(AddpetPage, {profile:this.profile.data});
+  }
+
+  addAllPost()
+  {
+    this.app.getRootNav().push(TabsAllsetpostPage);    
   }
 
 }
