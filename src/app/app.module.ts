@@ -39,7 +39,7 @@ import { GoogleLoginPage } from '../pages/google-login/google-login';
 import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
 import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
-//import { LostPetPage } from '../pages/lostpet/lostpet';
+import { LostPetPage } from '../pages/lostpet/lostpet';
 import { PetinfoPage } from '../pages/petinfo/petinfo';
 //import { AddLayoutPage } from '../pages/add-page/add-layout';
 import { DisplayPage } from '../pages/display/display';
@@ -100,7 +100,7 @@ import { FirebaseService } from '../pages/firebase-integration/firebase-integrat
 import { FirebaseAuthService } from '../pages/firebase-integration/firebase-auth.service';
 import { WordpressService } from '../pages/wordpress-integration/wordpress-integration.service';
 import { LanguageService } from '../providers/language/language.service';
-//import { LostPetServices} from '../pages/lostpet/lostpet.service';
+import { LostPetServices} from '../pages/lostpet/lostpet.service';
 import { PetDetailsService} from '../pages/add-page/addlayout.service';
 
 
@@ -164,7 +164,7 @@ export function createTranslateLoader(http: HttpClient) {
     FiltersPage,
     TermsOfServicePage,
     PrivacyPolicyPage,
-   // LostPetPage,
+    LostPetPage,
     PetinfoPage,
    // AddLayoutPage,
     DisplayPage,
@@ -271,7 +271,7 @@ export function createTranslateLoader(http: HttpClient) {
 		AdsPage,
 		FormValidationsPage,
     VideoPlaylistPage,
-   // LostPetPage,
+    LostPetPage,
     PetinfoPage,
    // AddLayoutPage,
     DisplayPage,
@@ -309,7 +309,7 @@ export function createTranslateLoader(http: HttpClient) {
     List2Service,
     ScheduleService,
     TabsNavigationService,
-  //  LostPetServices,
+    LostPetServices,
     PetDetailsService,
     //functionalities
     FacebookLoginService,
