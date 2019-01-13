@@ -58,7 +58,7 @@ export class AddpetPage {
     private base64: Base64) {
 
       this.addPetForm = new FormGroup({
-        title: new FormControl(''),
+        //title: new FormControl(''),
         id: new FormControl(''),
         name_of_pet: new FormControl(''),
         petbreed: new FormControl(''),
@@ -202,7 +202,8 @@ export class AddpetPage {
     headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
           
     let data=JSON.stringify({user_id:this.user_id,email:this.email,username:this.email
-      , title:postdata.title, description:postdata.description , name_of_pet:this.petowner
+    //  , title:postdata.title
+      , description:postdata.description , name_of_pet:postdata.name_of_pet
     , pet_id:postdata.id, category_id:postdata.petbreed, sub_category:postdata.typeofpet
     , gender:postdata.gender, date_born:postdata.born_date, color:postdata.color
     , weight:postdata.weight, height:postdata.height

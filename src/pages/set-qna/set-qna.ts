@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Events, LoadingController, AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
-import { UserModel } from '../profile/profile.model';
+import { UserModel, PetModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { ImagePicker } from '../../../node_modules/@ionic-native/image-picker';
 import { Base64 } from '../../../node_modules/@ionic-native/base64';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
 import { QnaPage } from '../qna/qna';
+import { ProfileService } from '../profile/profile.service';
 /**
  * Generated class for the SetQnaPage page.
  *
@@ -26,8 +27,11 @@ export class SetQnaPage {
   email: string;
   user_id:number;
   loading:any;
- // profile: UserModel= new UserModel();
-
+  pet: PetModel = new PetModel();
+   pets_checkbox_open: boolean;
+ pets_checkbox_result;
+ choosepet :string;
+ choosepetid :string;
   //image
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = 'assets/images/blank-avatar.jpg';
@@ -38,6 +42,8 @@ export class SetQnaPage {
      public navParams: NavParams,
      private imagePicker: ImagePicker,
      private base64: Base64,
+     public alertCtrl: AlertController,
+     public profileService: ProfileService,
      public loadingCtrl: LoadingController,
      public event: Events) {
       this.post_form = new FormGroup({
@@ -75,6 +81,11 @@ export class SetQnaPage {
     this.nativeStorage.getItem('email_user')
     .then(data => {
      this.email = data.email;     
+
+     this.profileService.getPet(data.email)
+     .then(response => {
+       this.pet = response;
+     });
    });
 
    this.nativeStorage.getItem('profile_user_id')
@@ -90,6 +101,36 @@ export class SetQnaPage {
     console.log(this.post_form.value);
   }
 
+  choosePet(){
+    let alert = this.alertCtrl.create({
+      cssClass: 'category-prompt'
+    });
+    alert.setTitle('Pet');
+
+    for (let pet of this.pet.data) {
+      alert.addInput({
+           type: 'checkbox',
+           label: pet.name_of_pet,
+           value: pet.pet_id
+      });
+   }
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Confirm',
+      handler: data => {
+        console.log('Checkbox data:', data);
+        this.pets_checkbox_open = false;
+        this.pets_checkbox_result = data;
+
+        this.choosepet = data.label;
+        this.choosepetid = data.value;
+      }
+    });
+    alert.present().then(() => {
+      this.pets_checkbox_open = true;
+    });
+  }
   addPost() {
     this.showLoader();
     
@@ -102,7 +143,7 @@ export class SetQnaPage {
     
     
     let data=JSON.stringify({user_id:this.user_id,email:this.email
-      , title:postdata.title, description:postdata.description ,avatar:this.regData.avatar});
+      , title:postdata.title, description:postdata.description, owner_pet_id:this.choosepetid ,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_qnas.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {

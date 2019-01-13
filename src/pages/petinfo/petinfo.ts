@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {  NavController, NavParams } from 'ionic-angular';
 import { PetDetailsModel } from '../profile/profile.model';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 
 
 /**
@@ -23,9 +24,10 @@ export class PetinfoPage {
   constructor(
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public socialSharing: SocialSharing
+  ) {
     this.pet = navParams.get('pet'); 
-
   }
 
   ionViewDidLoad() {
@@ -48,4 +50,15 @@ export class PetinfoPage {
 
   }
 
+  sharePost(post) {
+    //this code is to use the social sharing plugin
+    // message, subject, file, url
+    this.socialSharing.share(post.description, post.title, post.image, null)
+    .then(() => {
+      console.log('Success!');
+    })
+    .catch(() => {
+       console.log('Error');
+    });
+  }
 }

@@ -134,6 +134,8 @@ export class AddpostPage {
       this.pets_checkbox_open = true;
     });
   }
+
+  
   addPost() {
     this.showLoader();
 
@@ -147,7 +149,7 @@ export class AddpostPage {
     
     let data=JSON.stringify({user_id:this.user_id,email:this.email
       , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
-    , pet_id:this.choosepetid,avatar:this.regData.avatar});
+    , pet_id:this.choosepetid,owner_pet_id:this.choosepetid,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
