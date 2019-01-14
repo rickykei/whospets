@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
-import { DisplayPage } from '../display/display';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
-import { UserModel, PetModel } from '../profile/profile.model';
+import { PetModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 //image
 import { ImagePicker } from '@ionic-native/image-picker';

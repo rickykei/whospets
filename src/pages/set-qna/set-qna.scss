@@ -1,44 +1,12 @@
 page-set-qna {
     .post-example-view
     {
-        padding-bottom: 20px;
+        background-color: $white;
 
         .post-form
         {
-            .upload-image-button
-            {
-                border-radius: 6px;
-                background-color: $white;
-                color: $white-d;
-                height: initial;
-                margin: 30px 0px;
-                padding-top: 16px;
-                padding-bottom: 32px;
-                @include element-shadow();
-                contain: style layout;
-
-                .button-inner
-                {
-                    flex-wrap: wrap;
-
-                    ion-icon {
-                        flex: 0 0 100%;
-                    max-width: 100%;
-                        font-size: 3.8em;
-                    }
-
-                    .button-title
-                    {
-                        flex: 0 0 100%;
-                    max-width: 100%;
-                        font-size: 1.4rem;
-                        color: $white-d;
-                        font-weight: 400;
-                        margin: 0px;
-                    }
-                }
-            }
-
+          //  margin-bottom: 20px;
+       
             .item.item-textarea
             {
                 background-color: $white;

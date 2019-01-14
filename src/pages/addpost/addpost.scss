@@ -1,9 +1,8 @@
 page-addpost {
+    
         .addpost-content
         {
-            background-color: color($colors, background, base);
-    
-            padding-bottom: 20px;
+        	background-color: $white;
 
             .choose-pet-button
 				{
@@ -34,85 +33,17 @@ page-addpost {
 				}
 			}
 
-            .addpost-form
-            {           
-                .multi-input-row
-                {
-                    align-items: flex-end;
-    
-                    ion-col {
-                        padding: 0px 7px;
-    
-                        &:first-child{
-                            padding-left: 0px;
-                        }
-    
-                        &:last-child{
-                            padding-right: 0px;
-                        }
-                    }
-    
-                    .multi-input
-                    {
-                        margin: 0px;
-    
-                        &.item-datetime.item-label-floating
-                        {
-                            ion-label {
-                                margin-top: 7px;
-                            }
-    
-                            ion-datetime {
-                                padding-top: 0px;
-                            }
-                        }
-    
-                        ion-datetime {
-                            padding-left: 0px;
-    
-                            .datetime-text
-                            {
-                                color: $theme-color-3;
-                            }
-                        }
-                    }
-                }
-    
-                ion-item {
-                    @include basic-input-style(color($colors, background, base), $theme-color-3, $white-d);
-    
-                    &.item
-                    {
-                        margin-top: 14px;
-    
-                        &.item-label-floating
-                        {
-                            margin-top: 0px;
-    
-                            ion-label {
-                                color: $white-d;
-                            }
-                        }
-    
-                        .item-inner
-                        {
-                            ion-icon {
-                                color: $theme-color-2;
-                            }
-                        }
-                    }
-    
-                    &:first-of-type {
-                        margin-top: 0px;
-                    }
-                }
-            }
+            // .addpost-form
+            // {           
+            //     margin-bottom: 20px;
+            // }
     
             .user-preferences-row
             {
-                margin: 0px 0px 7px;
-                padding: 0px 7px;
+                margin: 0px 0px 20px;
+                padding: 0px 20px;
                 @include element-shadow();
+                background-color: $white;
     
                 .radio-tags-label
                 {

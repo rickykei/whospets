@@ -12,11 +12,14 @@
 
 </ion-header>
   
-<ion-content>
+<ion-content padding>
  <!-- POST -->
  <div class="user-details">
     <div class="post-example-view">
       <form class="sample-form post-form" [formGroup]="post_form" (ngSubmit)="createPost()">
+        
+        <h2 class="section-title">{{'Add a Q&A' | translate}}</h2>
+     
         <section class="form-section">
           <ion-item>
             <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
