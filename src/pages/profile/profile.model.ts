@@ -1,6 +1,5 @@
 import { DateTime } from "ionic-angular";
 
-
 export class UserModel {
   status: string;
   message: string;
@@ -25,68 +24,22 @@ export class UserModel {
 
 }
 
-
-/*
-
-{success:true; 
-data:{
-  status:true;
-  message:Successfully Login!;
-  id:494;
-  tc:0;
-  user_id:494;
-  lastname:Ka;
-  firstname:Ricky;
-  email:rickykei@yahoo.com.hk;
-  street:null;
-  city:null;
-  about:null;
-  newsletter:null;
-  seller:null;
-  notification:null;
-  gender:M;
-  birthday:null;
-  bio:null;
-  country_id:1;
-  sub_country_id:307}}
-*/
-
-/*export class ProfileModel {
-
-  success : boolean;
-  user: UserModel = new UserModel();
-  
-}*/
-
-/*
-export class UserModel {
-  image: string;
-  location: string;
-  about: string;
-  email: string;
-  phone: string;
-  name: string;
-  website: string;
+export class LoginModel {
+  success : string;
+  data: LoginUserModel = new LoginUserModel();
 }
 
-*/
-
-/*
-export class ProfilePostModel {
-  date: Date;
-	image: string;
-	description: string;
-	likes: number = 0;
-	comments: number = 0;
-	liked: boolean = false;
-}*/
+export class LoginUserModel{
+  status : String;
+  message : string;
+  id: number;
+  username : string;
+  image : string;
+}
 
 export class ProfileModel {
   success : string;
   data: UserModel = new UserModel();
-  // following: Array<UserModel> = [];
-  // followers: Array<UserModel> = [];
-  // posts: Array<ProfilePostModel> = [];
 }
 
 export class CountryIdModel{

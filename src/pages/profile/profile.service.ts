@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { ProfileModel, CountryIdModel, PetModel } from './profile.model';
+import { ProfileModel, CountryIdModel, PetModel, LoginModel } from './profile.model';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 
@@ -20,6 +20,13 @@ export class ProfileService {
     return this.http.get(url)//('./assets/example_data/profile.json')
      .toPromise()
      .then(response => response.json() as ProfileModel)
+     .catch(this.handleError);
+  }
+
+  getLoginData(url:string):Promise<LoginModel> {
+    return this.http.get(url)
+     .toPromise()
+     .then(response => response.json() as LoginModel)
      .catch(this.handleError);
   }
 
@@ -41,13 +48,10 @@ export class ProfileService {
 
   getPet(_email:string):Promise<PetModel>
   {
-    //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
-   
       return this.http.get('http://api.whospets.com/api/users/get_user_pets.php?username='+_email) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
-  
   }
 
   private handleError(error: any): Promise<any> {

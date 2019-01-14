@@ -9,10 +9,8 @@
   <ion-navbar>
     <ion-title>display-sell-page</ion-title>
     <ion-buttons end> 
-      <button (click)="setSell()"> 
-          <div class="titleicon">
-              <ion-icon name="add"></ion-icon>
-         </div>
+      <button ion-buttons (click)="setSell()"> 
+        {{ 'ADD' | translate }}
     </button> 
     </ion-buttons>
   </ion-navbar>

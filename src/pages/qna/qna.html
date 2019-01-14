@@ -9,11 +9,9 @@
   <ion-navbar>
     <ion-title>Q&A page</ion-title>
     <ion-buttons end> 
-        <button (click)="setQna()"> 
-            <div class="titleicon">
-                <ion-icon name="add"></ion-icon>
-           </div>
-      </button> 
+        <button ion-button  (click)="setQna()"> 
+           {{ 'ADD' | translate }}
+      </button>
       </ion-buttons>
   </ion-navbar>
 

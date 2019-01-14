@@ -9,10 +9,8 @@
   <ion-navbar>
     <ion-title>Life Style</ion-title>
     <ion-buttons end> 
-      <button (click)="setPost()"> 
-          <div class="titleicon">
-              <ion-icon name="add"></ion-icon>
-         </div>
+      <button ion-buttons (click)="setPost()"> 
+        {{ 'ADD' | translate }}
     </button> 
     </ion-buttons>
   </ion-navbar>

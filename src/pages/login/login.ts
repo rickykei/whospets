@@ -17,7 +17,8 @@ import 'rxjs/add/operator/map';
 
 import { NativeStorage } from '@ionic-native/native-storage';
 
-import { ProfilePage } from '../profile/profile';
+import { ProfileService } from '../profile/profile.service';
+import { LoginModel } from '../profile/profile.model';
 
 
 @Component({
@@ -30,20 +31,22 @@ export class LoginPage {
   loading: any;
   email : AbstractControl;
   password : AbstractControl;
+  userId :string;
  success: string;
  message: string;
+ status: string;
+
+ loginInfo: LoginModel = new LoginModel();
 
   constructor(
     public nav: NavController,
     public facebookLoginService: FacebookLoginService,
-	public nativeStorage:NativeStorage,
-    //public googleLoginService: GoogleLoginService,
-    //public twitterLoginService: TwitterLoginService,
-	private http: Http,
+	  public nativeStorage:NativeStorage,
+    public profileService: ProfileService,
     public loadingCtrl: LoadingController
   ) {
 
-    this.main_page = { component: TabsNavigationPage }; //ProfilePage }; //
+    this.main_page = { component: TabsNavigationPage }; 
 
     this.login = new FormGroup({
       email: new FormControl('rickykei@yahoo.com', Validators.required),
@@ -61,35 +64,45 @@ export class LoginPage {
     var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password ;
     console.log(url);
 
-	 this.http.get(url).map(res => res.json()).subscribe(data2 => {
-    console.log(data2.success);
+    this.profileService.getLoginData(url)
+    .then(data2 => {
+      console.log('..data2 :'+ data2.success);
 
-      this.success = data2.success;
-      console.log(this.success);
-
-      if(this.success=='true')
+      this.status = data2.success;
+      if(this.status=='true')
       {
-        console.log('inside true');
+        this.loginInfo.data.id = data2.data.id; 
+        this.loginInfo.data.username = data2.data.username;
+        this.loginInfo.data.image = data2.data.image;
+        this.loginInfo.data.message = data2.data.message;
 
         this.setEmailUser(this.email.value, this.password.value, '');
+        this.setProfileUserId(data2.data.id +'');
         this.nav.push(TabsNavigationPage);//ProfilePage);
-      }
-      else
-      {
-        console.log('inside false');
 
+      }
+      else{
         this.removeEmailUser();
-        this.nav.setRoot(SignupPage);
+         this.nav.setRoot(SignupPage);
       }
-    },
-  error => 
-    {
-      console.log('inside error : ' + error);
-
-      
     });
-  }
 
+    }
+
+    setProfileUserId( _userid : string )
+    {
+      console.log('profile_user_id :' + _userid);
+
+      this.nativeStorage.setItem('profile_user_id',
+      {
+        profile_user_id : _userid
+      })
+      .then(
+        () =>  console.log('profile_user_id ： Stored item!'),
+        error => console.error('profile_user_id : Error storing item')
+      );
+    }
+  
   removeEmailUser(){
     this.nativeStorage.remove('email_user');
   }
@@ -121,6 +134,8 @@ export class LoginPage {
       console.log("data.email:"+data.email);
       console.log("data.userid:"+data.userId);
       console.log("data.name:"+data.name);
+
+      this.setProfileUserId(data.userId +'');
 
        this.setEmailUser(data.email, '', data.userId);
       this.nav.setRoot(this.main_page.component);
