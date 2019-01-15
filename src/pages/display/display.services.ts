@@ -77,7 +77,22 @@ export class PagesDisplayServiceProvider {
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
-  
+  }
+
+  /*
+  "http://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_post
+
+http://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_sell
+
+http://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_qna"*/
+
+  setlike(userId,contentId,tablename):Promise<PetModel>
+  {
+      return this.http.get('http://api.whospets.com/api/users/like.php?user_id='+userId+'&content_id='
+              +contentId+'&table_name='+tablename)
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
   }
 
 
