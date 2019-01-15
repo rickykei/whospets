@@ -136,5 +136,16 @@ export class DisplayPage {
   {        
     this.navCtrl.push(PostInfoPage, {post:post});  
   }
+
+  likePost(post)
+  {
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
+      .then(response => {
+        if(response.success==='true')
+        {
+          this.pet.likecnt = this.pet.likecnt+1;
+        }
+      });
+  }
   
 }

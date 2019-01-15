@@ -55,14 +55,15 @@ export class ZoneModel{
   language: string;
 }
 
+
 export class PetModel{
   success:string;
   data:Array<PetDetailsModel>;
 }
 
 export class PetDetailsModel{
-
-  product_id:string;
+        id:string;
+        product_id:string;
         category_id:string;
         status:string;
         store_id:string;
@@ -105,4 +106,6 @@ export class PetDetailsModel{
         country_id:string;
         sub_country_id:number;
         image:string;
+        likecnt: number = 0;
+	      ownlike: number = 0;
 }
