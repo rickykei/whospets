@@ -55,12 +55,25 @@ export class PostInfoPage {
 
   likePost(post)
   {
+    if(post.ownlike==0)
+    {
     this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
       .then(response => {
         if(response.success==='true')
         {
           this.post.likecnt = this.post.likecnt+1;
+          this.post.ownlike = 1;
         }
       });
+    }else{
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
+      .then(response => {
+        if(response.success==='true')
+        {
+          this.post.likecnt = this.post.likecnt-1;
+          this.post.ownlike = 0;
+        }
+      });
+    }
   }
 }

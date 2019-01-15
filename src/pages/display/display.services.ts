@@ -95,6 +95,14 @@ http://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=ap
       .catch(this.handleError);
   }
 
+  setdislike(userId,contentId,tablename):Promise<PetModel>
+  {
+      return this.http.get('http://api.whospets.com/api/users/dislike.php?user_id='+userId+'&content_id='
+              +contentId+'&table_name='+tablename)
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

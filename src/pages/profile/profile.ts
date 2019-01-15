@@ -186,7 +186,7 @@ export class ProfilePage {
   goPostDetail(post)
   {
     console.log("profile : " +this.profile.data.user_id);
-    this.app.getRootNav().push(PostInfoPage, {post:post, profile:this.profile.data});
+    this.app.getRootNav().push(PostInfoPage, {post:post, tablename:'app_post'});  
   }
 
   addPet()

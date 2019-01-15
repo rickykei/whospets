@@ -30,7 +30,7 @@
 
            <ion-row no-padding class="actions-row">
                <ion-col no-padding width-30 text-left>
-                 <button class="action-button" ion-button clear small icon-start>
+                 <button class="action-button" ion-button clear small (click)="likePost(post)" icon-start>
                    <ion-icon isActive="{{post.liked}}" name='heart'></ion-icon>
                    {{post.likecnt}} {{'LIKES' | translate}}
                  </button>

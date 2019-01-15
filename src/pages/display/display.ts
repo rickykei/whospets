@@ -5,6 +5,7 @@ import { NativeStorage } from '../../../node_modules/@ionic-native/native-storag
 import { PagesDisplayServiceProvider } from './display.services';
 import { AddpostPage } from '../addpost/addpost';
 import { PostInfoPage } from '../post-info/post-info';
+import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 
 /**
  * Generated class for the DisplayPage page.
@@ -31,7 +32,8 @@ export class DisplayPage {
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public socialSharing: SocialSharing
   ) 
   {
     this.user_id = navParams.get('display'); 
@@ -134,18 +136,42 @@ export class DisplayPage {
 
   detailPost(post)
   {        
-    this.navCtrl.push(PostInfoPage, {post:post});  
+    this.navCtrl.push(PostInfoPage, {post:post, tablename:'app_post'});  
   }
 
   likePost(post)
   {
+    if(post.ownlike==0)
+    {
     this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
       .then(response => {
         if(response.success==='true')
         {
           this.pet.likecnt = this.pet.likecnt+1;
+          this.pet.ownlike = 1;
         }
       });
+    }else{
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
+      .then(response => {
+        if(response.success==='true')
+        {
+          this.pet.likecnt = this.pet.likecnt-1;
+          this.pet.ownlike = 0;
+        }
+      });
+    }
   }
   
+  sharePost(post) {
+    //this code is to use the social sharing plugin
+    // message, subject, file, url
+    this.socialSharing.share(post.description, post.title, post.image, null)
+    .then(() => {
+      console.log('Success!');
+    })
+    .catch(() => {
+       console.log('Error');
+    });
+  }
 }
