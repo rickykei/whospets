@@ -13,8 +13,8 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-content class="addpet-content">
+<ion-content>
+    <div class="addpet-content">
   <form [formGroup]="addPetForm" class="addpet-form">
       <h2 class="section-title">{{'Add a pet' | translate}}</h2>
       <ion-item>
@@ -250,5 +250,5 @@
 
       <button ion-button block class="form-action-button create-event-button" type="submit" [disabled]="!addPetForm.valid" (click)="addPet()" >Done!</button>
   </form>
-  </ion-content>
+  </div>
 </ion-content>

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
-import { DisplaySellPage } from '../display-sell/display-sell';
-import { PetModel, UserModel, CountryIdModel } from '../profile/profile.model';
+import { PetModel, CountryIdModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PetColorModel } from '../add-page/addlayout.model';
@@ -11,7 +10,6 @@ import { PetDetailsService } from '../add-page/addlayout.service';
 //image
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
-import { ApiProvider } from '../../providers/api/api';
 
 /**
  * Generated class for the AddsellPage page.

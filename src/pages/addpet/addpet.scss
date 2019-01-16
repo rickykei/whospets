@@ -1,12 +1,12 @@
 page-addpet {
     .addpet-content
     {
-     	background-color: $white;
+		background-color: white;
 
-        // .addpet-form
-        // {           
-		// 	margin-bottom: 20px;
-		// }
+         .addpet-form
+         {           
+			@include basic-select-style(color($colors, background, base), $theme-color-3, $white-d);
+		 }
 
 		.user-preferences-row
 		{

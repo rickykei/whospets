@@ -13,8 +13,8 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-content class="addpost-content">
+<ion-content>
+    <div class="addpost-content">
 
   <form [formGroup]="post_form" class="addpost-form">
     <h2 class="section-title">{{'Add a post' | translate}}</h2>
@@ -51,5 +51,5 @@
       <button ion-button block class="form-action-button create-post-button" type="submit" (click)="addPost()">Post!</button>
  
   </form>
-</ion-content>
+</div>
 </ion-content>

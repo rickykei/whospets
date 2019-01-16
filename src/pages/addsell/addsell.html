@@ -13,8 +13,8 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-content class="addsell-content">
+<ion-content>
+    <div class="addsell-content">
     <form class="addsell-form" [formGroup]="sell_form" >
       <h2 class="section-title">{{'Add a sell' | translate}}</h2>
 
@@ -98,5 +98,5 @@
 
             <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!sell_form.valid" (click)="addSell()">Post!</button>
         </form>
-        </ion-content>
+      </div>
 </ion-content>
