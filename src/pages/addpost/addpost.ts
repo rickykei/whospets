@@ -112,7 +112,7 @@ export class AddpostPage {
     for (let pet of this.pet.data) {
       alert.addInput({
            type: 'checkbox',
-           label: pet.name_of_pet,
+           label: pet.title, // pet.name_of_pet,
            value: pet.pet_id
       });
    }
