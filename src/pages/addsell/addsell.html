@@ -35,7 +35,7 @@
           </ion-item>
 
           <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding width-60>
+            <ion-col no-padding >
 
           <ion-item>
             <ion-label>{{'COUNTRY' | translate}}</ion-label>
@@ -43,8 +43,11 @@
           </ion-item>
 
           </ion-col>
+          </ion-row>
      
-          <ion-col no-padding width-40>
+          
+          <ion-row no-padding class="multi-input-row">
+          <ion-col no-padding >
               <ion-item>
             <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
             <ion-select formControlName="subCountryId"> <ion-option *ngFor="let zone of subcountry.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
