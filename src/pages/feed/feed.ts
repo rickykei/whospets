@@ -82,17 +82,24 @@ export class FeedPage {
  getContent()
  {
   this.feedService
-  .getPosts(this.feed.category.catid,10,0)
-  .then(posts => {
-   console.log('feed.ts.getpost');
-   //  this.feed.posts = posts;
-   this.feed.success =  posts.success;
-    //this.feed.data = posts.data;
-    //this.feeddata = posts.data;
-    this.details=posts.data.pets;
-
-    console.log('post :' + this.feed.success);
+  .getPosts(this.feed.category.catid,10,this.details.length)
+  .then(response => {
+    for(let i=0; i<response.data.pets.length; i++) {
+  console.log('postdata looop'+i); 
+  this.details.push(response.data.pets[i]);
+  };   
   });
+ 
+  // .then(posts => {
+  //  console.log('feed.ts.getpost');
+  //  //  this.feed.posts = posts;
+  //  this.feed.success =  posts.success;
+  //   //this.feed.data = posts.data;
+  //   //this.feeddata = posts.data;
+  //   this.details=posts.data.pets;
+
+  //   console.log('post :' + this.feed.success);
+  // });
  }
 
  detailPost(pet)

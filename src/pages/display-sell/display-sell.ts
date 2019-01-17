@@ -72,24 +72,28 @@ export class DisplaySellPage{
     }
 
     getContent()
+  {
+    if(this.getall===true)
     {
-      if(this.getall===true)
-      {
-        this.PagesDisplayServiceProvider.getAllSell(10,0)
-        .then(response => {
-          this.petModel = response; 
-          this.details = response.data;                  
-        });
+      this.PagesDisplayServiceProvider.getAllSell(10,this.details.length)
+      .then(response => {
+        for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);
+		  };   
+      });
+    }
+    else
+    {
+      this.PagesDisplayServiceProvider.getSell(this.user_id,10,this.details.length)
+      .then(response => {
+        for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);
+		  };   
+      });
       }
-      else
-      {
-          this.PagesDisplayServiceProvider.getSell(this.user_id,10,0)
-          .then(response => {
-            this.petModel = response; 
-            this.details = response.data;                  
-          });
-        }
-
+  
     }
 
     doRefresh(refresher) {

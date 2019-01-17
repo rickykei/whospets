@@ -70,19 +70,33 @@ export class DisplayPage {
   {
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllPost(10,0)
+      // this.PagesDisplayServiceProvider.getAllPost(10,0)
+      // .then(response => {
+      //   //this.petModel = response; 
+      //   this.details = response.data;   
+      // });
+      this.PagesDisplayServiceProvider.getAllPost(10,this.details.length)
       .then(response => {
-        //this.petModel = response; 
-        this.details = response.data;   
+        for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);
+		  };   
       });
     }
     else
     {
-        this.PagesDisplayServiceProvider.getPost(this.user_id,10,0)
-        .then(response => {
-          //this.petModel = response; 
-          this.details = response.data;                       
-        });
+        // this.PagesDisplayServiceProvider.getPost(this.user_id,10,0)
+        // .then(response => {
+        //   //this.petModel = response; 
+        //   this.details = response.data;                       
+        // });
+      this.PagesDisplayServiceProvider.getPost(this.user_id,10,this.details.length)
+      .then(response => {
+        for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);
+		  };   
+      });
       }
   }
     

@@ -82,26 +82,30 @@ export class QnaPage {
      this.navCtrl.push(SetQnaPage, {user_id:this.user_id} );
    }
 
-   getContent()
-   {
-
+   
+  getContent()
+  {
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllQnA(10,0)
+      this.PagesDisplayServiceProvider.getAllQnA(10,this.details.length)
       .then(response => {
-        this.petModel = response; 
-        this.details = response.data;   
+        for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);
+		  };   
       });
     }
     else
     {
-       this.PagesDisplayServiceProvider.getQnA(this.user_id,10,0)
-       .then(response => {
-         this.petModel = response; 
-         this.details = response.data;                       
-       });
+      this.PagesDisplayServiceProvider.getQnA(this.user_id,10,this.details.length)
+      .then(response => {
+        for(let i=0; i<response.data.length; i++) {
+			console.log('postdata looop'+i); 
+			this.details.push(response.data[i]);
+		  };   
+      });
       }
-   }
+  }
    
    doRefresh(refresher) {
     console.log('Begin async operation', refresher);
