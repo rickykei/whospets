@@ -25,7 +25,7 @@ export class DisplayPage {
   uid:string;
   petModel: PetModel = new PetModel();
   user_id:number;
-  details: Array<PetDetailsModel>;
+  details: Array<PetDetailsModel> = new Array<PetDetailsModel>() ;
   getall:boolean;
 
   constructor(
@@ -75,7 +75,7 @@ export class DisplayPage {
       //   //this.petModel = response; 
       //   this.details = response.data;   
       // });
-      this.PagesDisplayServiceProvider.getAllPost(10,this.details.length)
+      this.PagesDisplayServiceProvider.getAllPost(10,0)
       .then(response => {
         for(let i=0; i<response.data.length; i++) {
 			console.log('postdata looop'+i); 
@@ -90,11 +90,11 @@ export class DisplayPage {
         //   //this.petModel = response; 
         //   this.details = response.data;                       
         // });
-      this.PagesDisplayServiceProvider.getPost(this.user_id,10,this.details.length)
+      this.PagesDisplayServiceProvider.getPost(this.user_id,10,0)
       .then(response => {
         for(let i=0; i<response.data.length; i++) {
 			console.log('postdata looop'+i); 
-			this.details.push(response.data[i]);
+      this.details.push(response.data[i]);   
 		  };   
       });
       }

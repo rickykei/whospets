@@ -25,7 +25,7 @@ export class DisplaySellPage{
   uid:string;
   petModel: PetModel = new PetModel();
   user_id:number;
-  details: Array<PetDetailsModel>;
+  details: Array<PetDetailsModel> = new Array<PetDetailsModel>() ;
   getall: boolean;
 
   constructor(

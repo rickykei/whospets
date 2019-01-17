@@ -18,7 +18,7 @@ import { PetinfoPage } from '../petinfo/petinfo';
 export class FeedPage {
   feed: FeedModel = new FeedModel();
   feeddata : DataModel = new DataModel();
-  details: Array<FeedPostModel>;
+  details: Array<FeedPostModel> = new Array<FeedPostModel>() ;
   user_id: number;
   user_name: string;
 
