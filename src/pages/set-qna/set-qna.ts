@@ -31,7 +31,7 @@ export class SetQnaPage {
    pets_checkbox_open: boolean;
  pets_checkbox_result;
  choosepet :string;
- choosepetid :string;
+ choosepetid :number;
   //image
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = 'assets/images/blank-avatar.jpg';
@@ -108,10 +108,10 @@ export class SetQnaPage {
     alert.setTitle('Pet');
 
     for (let pet of this.pet.data) {
-      alert.addInput({
-           type: 'checkbox',
+         alert.addInput({
+           type: 'radio',
            label: pet.title, // pet.name_of_pet,
-           value: pet.pet_id
+           value: pet.product_id
       });
    }
 
@@ -123,8 +123,8 @@ export class SetQnaPage {
         this.pets_checkbox_open = false;
         this.pets_checkbox_result = data;
 
-        this.choosepet = data.label;
-        this.choosepetid = data.value;
+        this.choosepetid = data;
+
       }
     });
     alert.present().then(() => {
@@ -141,9 +141,11 @@ export class SetQnaPage {
     headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
     //let options = new RequestOptions({ headers: headers });
     
+    console.info('this.choosepetid : ' + this.choosepetid);
     
     let data=JSON.stringify({user_id:this.user_id,email:this.email
-      , title:postdata.title, description:postdata.description, owner_pet_id:this.choosepetid ,avatar:this.regData.avatar});
+      , title:postdata.title, description:postdata.description
+      , owner_pet_id:this.choosepetid ,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_qnas.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {

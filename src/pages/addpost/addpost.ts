@@ -28,7 +28,7 @@ export class AddpostPage {
   pets_checkbox_open: boolean;
   pets_checkbox_result;
   choosepet :string;
-  choosepetid :string;
+  choosepetid :number;
 
 //  profile: UserModel= new UserModel();
   pet: PetModel = new PetModel();
@@ -111,9 +111,9 @@ export class AddpostPage {
 
     for (let pet of this.pet.data) {
       alert.addInput({
-           type: 'checkbox',
+           type: 'radio',
            label: pet.title, // pet.name_of_pet,
-           value: pet.pet_id
+           value: pet.product_id
       });
    }
 
@@ -125,8 +125,7 @@ export class AddpostPage {
         this.pets_checkbox_open = false;
         this.pets_checkbox_result = data;
 
-        this.choosepet = data.label;
-        this.choosepetid = data.value;
+        this.choosepetid = data;
       }
     });
     alert.present().then(() => {
