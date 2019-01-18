@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PagesDisplayServiceProvider } from './display.services';
@@ -27,13 +27,16 @@ export class DisplayPage {
   user_id:number;
   details: Array<PetDetailsModel> = new Array<PetDetailsModel>() ;
   getall:boolean;
+  loading: any;
 
   constructor(
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public navParams: NavParams,
-    public socialSharing: SocialSharing
+    public socialSharing: SocialSharing,
+    public loadingCtrl: LoadingController
+
   ) 
   {
     this.user_id = navParams.get('display'); 
@@ -68,35 +71,27 @@ export class DisplayPage {
 
   getContent()
   {
+    this.showLoader();
+
     if(this.getall===true)
     {
-      // this.PagesDisplayServiceProvider.getAllPost(10,0)
-      // .then(response => {
-      //   //this.petModel = response; 
-      //   this.details = response.data;   
-      // });
       this.PagesDisplayServiceProvider.getAllPost(10,0)
       .then(response => {
-        for(let i=0; i<response.data.length; i++) {
-			console.log('postdata looop'+i); 
-			this.details.push(response.data[i]);
-		  };   
+        //this.petModel = response; 
+        this.details = response.data;  
+        this.loading.dismiss(); 
       });
+      
     }
     else
     {
-        // this.PagesDisplayServiceProvider.getPost(this.user_id,10,0)
-        // .then(response => {
-        //   //this.petModel = response; 
-        //   this.details = response.data;                       
-        // });
-      this.PagesDisplayServiceProvider.getPost(this.user_id,10,0)
-      .then(response => {
-        for(let i=0; i<response.data.length; i++) {
-			console.log('postdata looop'+i); 
-      this.details.push(response.data[i]);   
-		  };   
-      });
+        this.PagesDisplayServiceProvider.getPost(this.user_id,10,0)
+        .then(response => {
+          //this.petModel = response; 
+          this.details = response.data;  
+          this.loading.dismiss();                      
+        });
+         
       }
   }
     
@@ -187,5 +182,14 @@ export class DisplayPage {
     .catch(() => {
        console.log('Error');
     });
+  }
+
+  
+  showLoader(){
+    this.loading = this.loadingCtrl.create({
+      content: 'Loading...'
+    });
+
+    this.loading.present();
   }
 }

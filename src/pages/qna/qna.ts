@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { SetQnaPage } from '../set-qna/set-qna';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
@@ -27,13 +27,16 @@ export class QnaPage {
  user_id:number;
  details: Array<PetDetailsModel>  = new Array<PetDetailsModel>() ;
   getall:boolean;
+  loading: any;
+
 
  constructor(
    public navCtrl: NavController, 
    public nativeStorage:NativeStorage,
    public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
    public navParams: NavParams,
-   public socialSharing: SocialSharing
+   public socialSharing: SocialSharing,
+   public loadingCtrl: LoadingController
  ) 
  {
   this.user_id = navParams.get('display'); 
@@ -46,7 +49,7 @@ export class QnaPage {
  
  ionViewDidEnter()
  {
-   this.getContent();
+    this.getContent();
  }
  
  ionViewDidLoad() {
@@ -80,29 +83,35 @@ export class QnaPage {
    setQna()
    {
      this.navCtrl.push(SetQnaPage, {user_id:this.user_id} );
+   //  this.details = new Array<PetDetailsModel>();
    }
 
    
   getContent()
   {
+    this.showLoader();
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllQnA(10,this.details.length)
+      this.PagesDisplayServiceProvider.getAllQnA(10,0)
       .then(response => {
-        for(let i=0; i<response.data.length; i++) {
-			console.log('postdata looop'+i); 
-			this.details.push(response.data[i]);
-		  };   
+        this.details = response.data;
+      //   for(let i=0; i<response.data.length; i++) {
+			// console.log('postdata looop'+i); 
+			// this.details.push(response.data[i]);
+      // };   
+      this.loading.dismiss();
       });
     }
     else
     {
-      this.PagesDisplayServiceProvider.getQnA(this.user_id,10,this.details.length)
+      this.PagesDisplayServiceProvider.getQnA(this.user_id,10,0)
       .then(response => {
-        for(let i=0; i<response.data.length; i++) {
-			console.log('postdata looop'+i); 
-			this.details.push(response.data[i]);
-		  };   
+      //   for(let i=0; i<response.data.length; i++) {
+			// console.log('postdata looop'+i); 
+      // this.details.push(response.data[i]);     
+      // };   
+      this.details = response.data;
+      this.loading.dismiss();
       });
       }
   }
@@ -177,7 +186,6 @@ export class QnaPage {
     }
   }
 
-
   sharePost(post) {
     //this code is to use the social sharing plugin
     // message, subject, file, url
@@ -188,5 +196,12 @@ export class QnaPage {
     .catch(() => {
        console.log('Error');
     });
+  }
+  showLoader(){
+    this.loading = this.loadingCtrl.create({
+      content: 'Loading...'
+    });
+
+    this.loading.present();
   }
 }

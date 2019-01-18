@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { ProfilePage } from '../profile/profile';
 import 'rxjs/Rx';
@@ -21,13 +21,15 @@ export class FeedPage {
   details: Array<FeedPostModel> = new Array<FeedPostModel>() ;
   user_id: number;
   user_name: string;
+  loading:any;
 
   constructor(
     public nav: NavController,
     public feedService: FeedService,
     public nativeStorage:NativeStorage,
     public navParams: NavParams,
-    public socialSharing: SocialSharing
+    public socialSharing: SocialSharing,
+    public loadingCtrl: LoadingController
   ) {
     this.feed.category = navParams.get('category');
  
@@ -81,13 +83,16 @@ export class FeedPage {
 
  getContent()
  {
+   this.showLoader();
   this.feedService
-  .getPosts(this.feed.category.catid,10,this.details.length)
+  .getPosts(this.feed.category.catid,10,0)
   .then(response => {
-    for(let i=0; i<response.data.pets.length; i++) {
-  console.log('postdata looop'+i); 
-  this.details.push(response.data.pets[i]);
-  };   
+  //   for(let i=0; i<response.data.pets.length; i++) {
+  // console.log('postdata looop'+i); 
+  // this.details.push(response.data.pets[i]);
+  // };   
+  this.details = response.data.pets;
+  this.loading.dismiss();
   });
  
   // .then(posts => {
@@ -137,5 +142,13 @@ export class FeedPage {
       console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 1000);
+  }
+
+  showLoader(){
+    this.loading = this.loadingCtrl.create({
+      content: 'Loading...'
+    });
+
+    this.loading.present();
   }
 }
