@@ -23,7 +23,7 @@ export class PagesDisplayServiceProvider {
   getMixPost(user_id:number):Promise<PetModel>
   {
     //http://api.whospets.com/api/categories/get_all_max.php?user_id=514
-    return this.http.get('http://api.whospets.com/api/users/get_user_posts.php?user_id='+user_id) //('./assets/example_data/mypet.json')
+    return this.http.get('http://api.whospets.com/api/categories/get_all_max.php?user_id='+user_id) //('./assets/example_data/mypet.json')
     .toPromise()
     .then(response => response.json() as PetModel)
     .catch(this.handleError);

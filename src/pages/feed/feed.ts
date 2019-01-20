@@ -10,6 +10,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { AddpetPage } from '../addpet/addpet';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PetinfoPage } from '../petinfo/petinfo';
+import { PagesDisplayServiceProvider } from '../display/display.services';
 
 @Component({
   selector: 'feed-page',
@@ -22,17 +23,22 @@ export class FeedPage {
   user_id: number;
   user_name: string;
   loading:any;
+  likevalue : number;
+  dislikevalue : number;
+  
 
   constructor(
     public nav: NavController,
     public feedService: FeedService,
     public nativeStorage:NativeStorage,
     public navParams: NavParams,
+    public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public socialSharing: SocialSharing,
     public loadingCtrl: LoadingController
   ) {
     this.feed.category = navParams.get('category');
- 
+    this.likevalue = 0;
+    this.dislikevalue = 0;
   }
 
   ionViewDidEnter()
@@ -150,5 +156,32 @@ export class FeedPage {
     });
 
     this.loading.present();
+  }
+  likePost(post)
+  {
+    if(post.ownlike==0)
+    {
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
+      .then(response => {
+        if(response.success==='true')
+        {
+          this.likevalue = post.likecnt;
+          this.likevalue ++;
+          post.likecnt = this.likevalue;
+          post.ownlike = 1;
+        }
+      });
+    }else{
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
+      .then(response => {
+        if(response.success==='true')
+        {
+          this.dislikevalue = post.likecnt;
+          this.dislikevalue --;
+          post.likecnt = this.dislikevalue;
+          post.ownlike = 0;
+        }
+      });
+    }
   }
 }

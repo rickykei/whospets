@@ -3,6 +3,7 @@ import {  NavController, NavParams } from 'ionic-angular';
 import { PetDetailsModel } from '../profile/profile.model';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
+import { PagesDisplayServiceProvider } from '../display/display.services';
 
 
 /**
@@ -20,14 +21,21 @@ export class PetinfoPage {
 
   pet: PetDetailsModel = new PetDetailsModel();
  uid:string;
+ user_id:string;
+
+ likevalue : number;
+ dislikevalue : number;
 
   constructor(
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
     public navParams: NavParams,
+    public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public socialSharing: SocialSharing
   ) {
-    this.pet = navParams.get('pet'); 
+    this.pet = navParams.get('pet');
+    this.likevalue = 0;
+    this.dislikevalue = 0; 
   }
 
   ionViewDidLoad() {
@@ -45,9 +53,13 @@ export class PetinfoPage {
         this.uid=data.uid;
       }
     });
-    // default
-    //'http://graph.facebook.com/100001704123828/picture'
-
+  
+    this.nativeStorage.getItem('profile_user_id')
+    .then(data => {
+        this.user_id = data.profile_user_id;
+         console.log(data.profile_user_id);
+      });
+  
   }
 
   sharePost(post) {
@@ -60,5 +72,33 @@ export class PetinfoPage {
     .catch(() => {
        console.log('Error');
     });
+  }
+
+  likePost(post)
+  {
+    if(post.ownlike==0)
+    {
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
+      .then(response => {
+        if(response.success==='true')
+        {
+          this.likevalue = post.likecnt;
+          this.likevalue ++;
+          post.likecnt = this.likevalue;
+          post.ownlike = 1;
+        }
+      });
+    }else{
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
+      .then(response => {
+        if(response.success==='true')
+        {
+          this.dislikevalue = post.likecnt;
+          this.dislikevalue --;
+          post.likecnt = this.dislikevalue;
+          post.ownlike = 0;
+        }
+      });
+    }
   }
 }

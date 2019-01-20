@@ -28,6 +28,8 @@ export class DisplayPage {
   details: Array<PetDetailsModel> = new Array<PetDetailsModel>() ;
   getall:boolean;
   loading: any;
+  likevalue : number;
+  dislikevalue : number;
 
   constructor(
     public navCtrl: NavController, 
@@ -43,6 +45,9 @@ export class DisplayPage {
     this.getall = navParams.get('getall');
 
     console.log("this.getall : " +this.getall);
+
+    this.likevalue = 0;
+    this.dislikevalue = 0;
 
   }
 
@@ -156,7 +161,9 @@ export class DisplayPage {
       .then(response => {
         if(response.success==='true')
         {
-          post.likecnt = post.likecnt++;
+          this.likevalue = post.likecnt;
+          this.likevalue ++;
+          post.likecnt = this.likevalue;
           post.ownlike = 1;
         }
       });
@@ -165,7 +172,9 @@ export class DisplayPage {
       .then(response => {
         if(response.success==='true')
         {
-          post.likecnt = post.likecnt--;
+          this.dislikevalue = post.likecnt;
+          this.dislikevalue --;
+          post.likecnt = this.dislikevalue;
           post.ownlike = 0;
         }
       });

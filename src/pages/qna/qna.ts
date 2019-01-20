@@ -28,7 +28,10 @@ export class QnaPage {
  details: Array<PetDetailsModel>  = new Array<PetDetailsModel>() ;
   getall:boolean;
   loading: any;
+  countlike: number;
 
+  likevalue : number;
+  dislikevalue : number;
 
  constructor(
    public navCtrl: NavController, 
@@ -43,6 +46,9 @@ export class QnaPage {
     this.getall = navParams.get('getall');
 
     console.log("this.getall : " +this.getall);
+
+    this.likevalue = 0;
+    this.dislikevalue = 0;
 
  }
 
@@ -161,26 +167,30 @@ export class QnaPage {
     this.navCtrl.push(PostInfoPage, {post:post, tablename:'app_qna'});  
   }
 
-  
+ 
   likePost(post)
   {
     if(post.ownlike==0)
     {
-    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_qna')
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
       .then(response => {
         if(response.success==='true')
         {
-          this.pet.likecnt = this.pet.likecnt+1;
-          this.pet.ownlike = 1;
+          this.likevalue = post.likecnt;
+          this.likevalue ++;
+          post.likecnt = this.likevalue;
+          post.ownlike = 1;
         }
       });
     }else{
-      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_qna')
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
       .then(response => {
         if(response.success==='true')
         {
-          this.pet.likecnt = this.pet.likecnt-1;
-          this.pet.ownlike = 0;
+          this.dislikevalue = post.likecnt;
+          this.dislikevalue --;
+          post.likecnt = this.dislikevalue;
+          post.ownlike = 0;
         }
       });
     }

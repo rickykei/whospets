@@ -21,6 +21,9 @@ export class PostInfoPage {
   post: PetDetailsModel = new PetDetailsModel();
   user_id:string;
   
+  likevalue : number;
+  dislikevalue : number;
+
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public PagesDisplayServiceProvider: PagesDisplayServiceProvider,
@@ -28,7 +31,8 @@ export class PostInfoPage {
      public nativeStorage: NativeStorage
     ) {
     this.post = navParams.get('post'); 
-
+    this.likevalue = 0;
+    this.dislikevalue = 0;
   }
 
   ionViewDidLoad() {
@@ -53,6 +57,7 @@ export class PostInfoPage {
     });
   }
 
+ 
   likePost(post)
   {
     if(post.ownlike==0)
@@ -61,8 +66,10 @@ export class PostInfoPage {
       .then(response => {
         if(response.success==='true')
         {
-          this.post.likecnt = this.post.likecnt+1;
-          this.post.ownlike = 1;
+          this.likevalue = post.likecnt;
+          this.likevalue ++;
+          post.likecnt = this.likevalue;
+          post.ownlike = 1;
         }
       });
     }else{
@@ -70,8 +77,10 @@ export class PostInfoPage {
       .then(response => {
         if(response.success==='true')
         {
-          this.post.likecnt = this.post.likecnt-1;
-          this.post.ownlike = 0;
+          this.dislikevalue = post.likecnt;
+          this.dislikevalue --;
+          post.likecnt = this.dislikevalue;
+          post.ownlike = 0;
         }
       });
     }

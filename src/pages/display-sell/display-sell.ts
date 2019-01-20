@@ -28,7 +28,9 @@ export class DisplaySellPage{
   details: Array<PetDetailsModel> = new Array<PetDetailsModel>() ;
   getall: boolean;
   loading: any;
-
+  likevalue : number;
+  dislikevalue : number;
+  
   constructor(
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
@@ -41,6 +43,9 @@ export class DisplaySellPage{
     this.user_id = navParams.get('display'); 
     this.getall = navParams.get('getall'); 
     console.log( 'getall : ' + this.getall);
+
+    this.likevalue = 0;
+    this.dislikevalue = 0;
   }
 
   
@@ -147,21 +152,25 @@ export class DisplaySellPage{
   {
     if(post.ownlike==0)
     {
-    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_sell')
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
       .then(response => {
         if(response.success==='true')
         {
-          this.pet.likecnt = this.pet.likecnt+1;
-          this.pet.ownlike = 1;
+          this.likevalue = post.likecnt;
+          this.likevalue ++;
+          post.likecnt = this.likevalue;
+          post.ownlike = 1;
         }
       });
     }else{
-      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_sell')
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
       .then(response => {
         if(response.success==='true')
         {
-          this.pet.likecnt = this.pet.likecnt-1;
-          this.pet.ownlike = 0;
+          this.dislikevalue = post.likecnt;
+          this.dislikevalue --;
+          post.likecnt = this.dislikevalue;
+          post.ownlike = 0;
         }
       });
     }
