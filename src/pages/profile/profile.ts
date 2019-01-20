@@ -63,9 +63,6 @@ export class ProfilePage {
       
           }
      
-    // var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;;
-
-    //  var url = './assets/example_data/profile.json';
       console.log('..url :'+ url);
 
       this.profileService.getData(url)
@@ -112,8 +109,8 @@ export class ProfilePage {
 				});
 			  });
 
-			console.log('..data2 user_id getPost:'+  this.profile.data.user_id);
-			  this.PagesDisplayServiceProvider.getPost( this.profile.data.user_id,10,0)
+			console.log('..data2 user_id getMixPost:'+  this.profile.data.user_id);
+			  this.PagesDisplayServiceProvider.getMixPost( this.profile.data.user_id)
 			  .then(response => {
 				this.petModel = response; 
 				this.details = response.data;                       
@@ -124,10 +121,6 @@ export class ProfilePage {
     }, error => {
       console.log('error : '+ error);
     });
-
-
-			
-
     }
 
     setProfileUserId( _userid : string, _user_name :string )
@@ -150,19 +143,6 @@ export class ProfilePage {
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.app.getRootNav().push(SettingsPage);
-  }
-
-  // backToMainPage()
-  // {
-  //   this.app.getRootNav().push(TabsNavigationPage);
-  // }
-
-  onSegmentChanged(segmentButton: SegmentButton) {
-    // console.log('Segment changed to', segmentButton.value);
-  }
-
-  onSegmentSelected(segmentButton: SegmentButton) {
-    // console.log('Segment selected', segmentButton.value);
   }
 
   sharePost(post) {

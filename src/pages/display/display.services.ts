@@ -20,6 +20,15 @@ export class PagesDisplayServiceProvider {
     console.log('Hello PagesDisplayServiceProvider Provider');
   }
 
+  getMixPost(user_id:number):Promise<PetModel>
+  {
+    //http://api.whospets.com/api/categories/get_all_max.php?user_id=514
+    return this.http.get('http://api.whospets.com/api/users/get_user_posts.php?user_id='+user_id) //('./assets/example_data/mypet.json')
+    .toPromise()
+    .then(response => response.json() as PetModel)
+    .catch(this.handleError);
+  }
+
   getPost(user_id:number,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
