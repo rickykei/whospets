@@ -4,6 +4,7 @@ import { PetModel } from '../../pages/profile/profile.model';
 import 'rxjs/add/operator/toPromise';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http } from '@angular/http';
+import { CommentModel } from '../comment/comment.model';
 
 
 /*
@@ -19,6 +20,23 @@ export class PagesDisplayServiceProvider {
     public nativeStorage: NativeStorage) {
     console.log('Hello PagesDisplayServiceProvider Provider');
   }
+
+  getPetComment(product_id:string):Promise<CommentModel>
+  {
+    return this.http.get('http://api.whospets.com/api/users/get_pet_comments.php?product_id='+product_id) //('./assets/example_data/mypet.json')
+    .toPromise()
+    .then(response => response.json() as CommentModel)
+    .catch(this.handleError);
+  }
+ 
+  getUserComment(content_id:string, table_name:string):Promise<CommentModel>
+  {
+    return this.http.get('http://api.whospets.com/api/users/get_user_comments.php?content_id='+content_id+'&table_name='+table_name) //('./assets/example_data/mypet.json')
+    .toPromise()
+    .then(response => response.json() as CommentModel)
+    .catch(this.handleError);
+  }
+ 
 
   getMixPost(user_id:number):Promise<PetModel>
   {

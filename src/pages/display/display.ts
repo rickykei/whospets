@@ -6,6 +6,7 @@ import { PagesDisplayServiceProvider } from './display.services';
 import { AddpostPage } from '../addpost/addpost';
 import { PostInfoPage } from '../post-info/post-info';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
+import { CommentPage } from '../comment/comment';
 
 /**
  * Generated class for the DisplayPage page.
@@ -201,4 +202,10 @@ export class DisplayPage {
 
     this.loading.present();
   }
+
+  commentPost(post)
+ {
+   this.navCtrl.push( CommentPage, {post:post.product_id, tablename:'app_post'})
+ }
+
 }
