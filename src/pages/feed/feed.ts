@@ -11,6 +11,7 @@ import { AddpetPage } from '../addpet/addpet';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PetinfoPage } from '../petinfo/petinfo';
 import { PagesDisplayServiceProvider } from '../display/display.services';
+import { CommentpetPage } from '../commentpet/commentpet';
 
 @Component({
   selector: 'feed-page',
@@ -184,4 +185,10 @@ export class FeedPage {
       });
     }
   }
+
+
+  commentPost(post)
+ {
+   this.nav.push( CommentpetPage, {post:post.product_id})
+ }
 }
