@@ -27,6 +27,7 @@ import { FacebookLoginService } from '../facebook-login//facebook-login.service'
 
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Base64 } from '../../../node_modules/@ionic-native/base64';
 
 
 
@@ -48,6 +49,8 @@ export class SettingsPage {
   subcountry: CountryIdModel = new CountryIdModel();
 
   user: FacebookUserModel = new FacebookUserModel();
+  regData = { avatar:'', email: '', password: '', fullname: '' };
+  imgPreview = 'assets/images/blank-avatar.jpg';
 
 
   constructor(
@@ -63,7 +66,8 @@ export class SettingsPage {
     public nativeStorage:NativeStorage,
     public facebookLoginService: FacebookLoginService,
     private http: Http,
-    public platform: Platform
+    public platform: Platform,
+      private base64: Base64
   ) {
 
     this.loading = this.loadingCtrl.create();
@@ -262,7 +266,7 @@ export class SettingsPage {
       console.log("You are not in a cordova environment. You should test this feature in a real device or an emulator");
     }
   }
-
+/*
   openImagePicker(){
    this.imagePicker.hasReadPermission().then(
      (result) => {
@@ -291,4 +295,34 @@ export class SettingsPage {
        console.log(err);
      });
   }
+
+  */
+
+ getPhoto() {
+  let options = {
+    maximumImagesCount: 1
+  };
+  this.imagePicker.getPictures(options).then((results) => {
+    for (var i = 0; i < results.length; i++) {
+      for (var i = 0; i < results.length; i++) {
+        
+        this.cropService.crop(results[i], {quality: 75}).then(
+          newImage => {
+            let image  = normalizeURL(newImage);
+
+            this.profileService.setUserImage(image);
+            this.profile.data.fb_uid = image;
+          },
+          error => console.error("Error cropping image", error)
+        );
+      }
+       // this.imgPreview = results[i];
+        this.base64.encodeFile(results[i]).then((base64File: string) => {
+          this.regData.avatar = base64File;
+        }, (err) => {
+          console.log(err);
+        });
+    }
+  }, (err) => { });
+	}
 }

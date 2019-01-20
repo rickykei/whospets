@@ -1,4 +1,4 @@
-<ion-tabs #myTab [tabbarLayout]="tabBarLayout" [selectedIndex]="tabsIndex" preloadTabs="false">
+<ion-tabs #myTab tabbarPlacement="top" [selectedIndex]="tabsIndex" preloadTabs="false">
   <ion-tab [root]="tab1Root" tabTitle="{{'Sell' | translate}}" [rootParams]="isTab"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="{{'Life Style' | translate}}" [rootParams]="isTab"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="{{'Q&A' | translate}}" [rootParams]="isTab"></ion-tab>

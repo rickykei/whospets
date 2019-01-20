@@ -51,7 +51,7 @@ import { AddpostPage} from '../pages/addpost/addpost';
 import { AddpetPage} from '../pages/addpet/addpet';
 import { AddsellPage} from '../pages/addsell/addsell';
 import { TabsAllsetpostPage} from '../pages/tabs-allsetpost/tabs-allsetpost';
-
+import { CommentPage } from '../pages/comment/comment';
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -176,6 +176,7 @@ export function createTranslateLoader(http: HttpClient) {
     AddpetPage,
     AddsellPage,
     TabsAllsetpostPage,
+    CommentPage,
 
     //functionalities
     MapsPage,
@@ -285,6 +286,7 @@ export function createTranslateLoader(http: HttpClient) {
     AddpostPage,
     AddsellPage,
     TabsAllsetpostPage,
+    CommentPage,
     
     //firebase integration
     FirebaseFeedPage,

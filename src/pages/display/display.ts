@@ -156,8 +156,8 @@ export class DisplayPage {
       .then(response => {
         if(response.success==='true')
         {
-          this.pet.likecnt = this.pet.likecnt+1;
-          this.pet.ownlike = 1;
+          post.likecnt = post.likecnt++;
+          post.ownlike = 1;
         }
       });
     }else{
@@ -165,8 +165,8 @@ export class DisplayPage {
       .then(response => {
         if(response.success==='true')
         {
-          this.pet.likecnt = this.pet.likecnt-1;
-          this.pet.ownlike = 0;
+          post.likecnt = post.likecnt--;
+          post.ownlike = 0;
         }
       });
     }
