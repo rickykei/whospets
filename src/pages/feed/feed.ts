@@ -92,7 +92,7 @@ export class FeedPage {
  {
    this.showLoader();
   this.feedService
-  .getPosts(this.feed.category.catid,10,0)
+  .getPosts(this.feed.category.catid,this.user_id,10,0)
   .then(response => {
   this.details = response.data.pets;
   this.loading.dismiss();
@@ -120,7 +120,7 @@ export class FeedPage {
 
     setTimeout(() => {
       this.feedService
-	  .getPosts(this.feed.category.catid,10,this.details.length)
+	  .getPosts(this.feed.category.catid,this.user_id,10,this.details.length)
 	  .then(posts => {
 		console.log('feed.ts.getpost');
 		console.log(posts.data.pets.length);
