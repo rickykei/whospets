@@ -28,7 +28,7 @@ export class AddpetPage {
   addPetForm: FormGroup;
 
   email: string; 
-  user_id:number;
+  user_id:string;
   petowner:string;
 
   loading: any;

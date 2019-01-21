@@ -21,7 +21,7 @@ export class FeedPage {
   feed: FeedModel = new FeedModel();
   feeddata : DataModel = new DataModel();
   details: Array<FeedPostModel> = new Array<FeedPostModel>() ;
-  user_id: number;
+  user_id: string;
   user_name: string;
   loading:any;
   likevalue : number;
@@ -49,19 +49,19 @@ export class FeedPage {
 
   ionViewDidLoad() {
   console.log('feed.ts');
-   
-  //this.getContent();
+  
+  this.nativeStorage.getItem('profile_user_id')
+  .then(data => {
+      this.user_id = data.profile_user_id;
+      this.user_name = data.profile_user_name;
+       console.log(data.profile_user_id);
+       console.log(data.profile_user_name);
+    });
 
-      this.nativeStorage.getItem('profile_user_id')
-      .then(data => {
-          this.user_id = data.profile_user_id;
-          this.user_name = data.profile_user_name;
 
-           console.log(data.profile_user_id);
-        });
   }
 
-  goToProfile(event, item) {
+  goToProfile(item) {
     this.nav.push(ProfilePage, {
       user: item
     });
@@ -94,24 +94,10 @@ export class FeedPage {
   this.feedService
   .getPosts(this.feed.category.catid,10,0)
   .then(response => {
-  //   for(let i=0; i<response.data.pets.length; i++) {
-  // console.log('postdata looop'+i); 
-  // this.details.push(response.data.pets[i]);
-  // };   
   this.details = response.data.pets;
   this.loading.dismiss();
   });
- 
-  // .then(posts => {
-  //  console.log('feed.ts.getpost');
-  //  //  this.feed.posts = posts;
-  //  this.feed.success =  posts.success;
-  //   //this.feed.data = posts.data;
-  //   //this.feeddata = posts.data;
-  //   this.details=posts.data.pets;
 
-  //   console.log('post :' + this.feed.success);
-  // });
  }
 
  detailPost(pet)
@@ -158,11 +144,12 @@ export class FeedPage {
 
     this.loading.present();
   }
+
   likePost(post)
   {
     if(post.ownlike==0)
     {
-    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'shop_products')
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.product_id, 'shop_products')
       .then(response => {
         if(response.success==='true')
         {
@@ -173,7 +160,7 @@ export class FeedPage {
         }
       });
     }else{
-      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'shop_products')
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.product_id, 'shop_products')
       .then(response => {
         if(response.success==='true')
         {

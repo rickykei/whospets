@@ -25,7 +25,7 @@ export class DisplaySellPage{
   pet: PetDetailsModel = new PetDetailsModel();
   uid:string;
   petModel: PetModel = new PetModel();
-  user_id:number;
+  user_id:string;
   details: Array<PetDetailsModel> = new Array<PetDetailsModel>() ;
   getall: boolean;
   loading: any;
@@ -44,6 +44,7 @@ export class DisplaySellPage{
     this.user_id = navParams.get('display'); 
     this.getall = navParams.get('getall'); 
     console.log( 'getall : ' + this.getall);
+    console.log( 'user_id : ' + this.user_id);
 
     this.likevalue = 0;
     this.dislikevalue = 0;
@@ -75,7 +76,13 @@ export class DisplaySellPage{
       }
     });
     
-   //this.getContent();
+    this.nativeStorage.getItem('profile_user_id')
+    .then(data => {
+        this.user_id = data.profile_user_id;
+         console.log(data.profile_user_id);
+       
+      });
+      
     } 
 
     setSell()
@@ -155,6 +162,8 @@ export class DisplaySellPage{
 
   likePost(post)
   {
+    console.info('ost.ownlike: ' + post.ownlike);
+
     if(post.ownlike==0)
     {
     this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_sell')

@@ -25,7 +25,7 @@ export class QnaPage {
  pet: PetDetailsModel = new PetDetailsModel();
  uid:string;
  petModel: PetModel = new PetModel();
- user_id:number;
+ user_id:string;
  details: Array<PetDetailsModel>  = new Array<PetDetailsModel>() ;
   getall:boolean;
   loading: any;

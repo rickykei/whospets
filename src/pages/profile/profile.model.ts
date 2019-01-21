@@ -3,9 +3,9 @@ import { DateTime } from "ionic-angular";
 export class UserModel {
   status: string;
   message: string;
-  id: number = 0;
+  id: string;
   tc: number =0;
-  user_id = 0;
+  user_id : string;
   lastname : string;
   firstname :string;
   email:string;

@@ -25,7 +25,7 @@ import { ProfileService } from '../profile/profile.service';
 export class SetQnaPage {
   post_form: any;
   email: string;
-  user_id:number;
+  user_id:string;
   loading:any;
   pet: PetModel = new PetModel();
    pets_checkbox_open: boolean;

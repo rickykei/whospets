@@ -21,7 +21,7 @@ import { Base64 } from '@ionic-native/base64';
 })
 export class AddpostPage {
   email: string;
-  user_id:number;
+  user_id:string;
 
   post_form: any;
 

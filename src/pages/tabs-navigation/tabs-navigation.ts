@@ -14,6 +14,7 @@ import { TabsNavigationService } from './tabs-navigation.service';
 
 import 'rxjs/Rx';
 import { WalkthroughPage } from '../walkthrough/walkthrough';
+import { UserModel } from '../profile/profile.model';
 
 
 
@@ -30,6 +31,7 @@ export class TabsNavigationPage {
  
   posts: LoginModel = new LoginModel();
   logindata : LoginContentModel = new LoginContentModel();
+  profile: UserModel= new UserModel();
 
   login : boolean;
   tabs: number;
@@ -81,11 +83,26 @@ export class TabsNavigationPage {
       console.log('thislogindata : ' + this.logindata.email);
 
       this.checkNormalLogin(this.logindata.email, this.logindata.password , this.logindata.uid);
+
      }, error =>
      {
        console.log(error);
        this.nav.setRoot(LoginPage);    
       });
+  }
+ 
+  setProfileUserId( _userid : string )
+  {
+    console.log('profile_user_id :' + _userid);
+
+    this.nativeStorage.setItem('profile_user_id',
+    {
+      profile_user_id : _userid
+    })
+    .then(
+      () =>  console.log('profile_user_id ： Stored item!'),
+      error => console.error('profile_user_id : Error storing item')
+    );
   }
 
   checkNormalLogin(email :string, password: string, uid :string) {
@@ -102,7 +119,8 @@ export class TabsNavigationPage {
         this.posts.success = data2.success;
       if(this.posts.success=='true')
       {
-
+        this.profile = data2.data;
+        this.setProfileUserId(data2.data.id+"");
       }
       else
       {

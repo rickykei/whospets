@@ -11,10 +11,6 @@ import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-
-// import { GoogleLoginService } from '../google-login/google-login.service';
-// import { TwitterLoginService } from '../twitter-login/twitter-login.service';
-
 import { NativeStorage } from '@ionic-native/native-storage';
 
 import { ProfileService } from '../profile/profile.service';

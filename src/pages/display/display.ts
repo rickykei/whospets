@@ -25,7 +25,7 @@ export class DisplayPage {
   pet: PetDetailsModel = new PetDetailsModel();
   uid:string;
   petModel: PetModel = new PetModel();
-  user_id:number;
+  user_id:string;
   details: Array<PetDetailsModel> = new Array<PetDetailsModel>() ;
   getall:boolean;
   loading: any;
@@ -46,6 +46,7 @@ export class DisplayPage {
     this.getall = navParams.get('getall');
 
     console.log("this.getall : " +this.getall);
+    console.log( 'user_id : ' + this.user_id);
 
     this.likevalue = 0;
     this.dislikevalue = 0;
@@ -72,8 +73,15 @@ export class DisplayPage {
         this.uid=data.uid;
       }
     });  
+
+    this.nativeStorage.getItem('profile_user_id')
+  .then(data => {
+      this.user_id = data.profile_user_id;
+       console.log(data.profile_user_id);
+     
+    });
   
-    } 
+  } 
 
   getContent()
   {

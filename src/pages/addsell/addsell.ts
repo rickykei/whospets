@@ -28,7 +28,7 @@ export class AddsellPage {
   email: string;  
   pet: PetModel = new PetModel();
 //  profile: UserModel= new UserModel();
-  user_id:number;
+  user_id:string;
 
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();

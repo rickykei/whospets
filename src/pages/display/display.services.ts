@@ -38,7 +38,7 @@ export class PagesDisplayServiceProvider {
   }
  
 
-  getMixPost(user_id:number):Promise<PetModel>
+  getMixPost(user_id:string):Promise<PetModel>
   {
     //http://api.whospets.com/api/categories/get_all_max.php?user_id=514
     return this.http.get('http://api.whospets.com/api/categories/get_all_max.php?user_id='+user_id) //('./assets/example_data/mypet.json')
@@ -47,7 +47,7 @@ export class PagesDisplayServiceProvider {
     .catch(this.handleError);
   }
 
-  getPost(user_id:number,limit,offset):Promise<PetModel>
+  getPost(user_id:string,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
   
@@ -58,7 +58,7 @@ export class PagesDisplayServiceProvider {
   
   }
 
-  getSell(user_id:number,limit,offset):Promise<PetModel>
+  getSell(user_id:string,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
    
@@ -69,7 +69,7 @@ export class PagesDisplayServiceProvider {
   
   }
 
-  getQnA(user_id:number,limit,offset):Promise<PetModel>
+  getQnA(user_id:string,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
    
