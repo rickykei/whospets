@@ -49,6 +49,10 @@ export class DisplaySellPage{
     this.dislikevalue = 0;
   }
 
+  ionViewWillLeave()
+  {
+    this.loading.dismiss();
+  }
   
   ionViewDidEnter()
   {
@@ -153,7 +157,7 @@ export class DisplaySellPage{
   {
     if(post.ownlike==0)
     {
-    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_sell')
       .then(response => {
         if(response.success==='true')
         {
@@ -164,7 +168,7 @@ export class DisplaySellPage{
         }
       });
     }else{
-      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_sell')
       .then(response => {
         if(response.success==='true')
         {

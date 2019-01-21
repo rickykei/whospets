@@ -162,7 +162,7 @@ export class FeedPage {
   {
     if(post.ownlike==0)
     {
-    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'shop_products')
       .then(response => {
         if(response.success==='true')
         {
@@ -173,7 +173,7 @@ export class FeedPage {
         }
       });
     }else{
-      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'shop_products')
       .then(response => {
         if(response.success==='true')
         {
@@ -191,4 +191,10 @@ export class FeedPage {
  {
    this.nav.push( CommentpetPage, {product_id:post.product_id})
  }
+
+ ionViewWillLeave()
+  {
+    this.loading.dismiss();
+  }
+  
 }

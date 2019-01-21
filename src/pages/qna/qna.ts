@@ -173,7 +173,7 @@ export class QnaPage {
   {
     if(post.ownlike==0)
     {
-    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_post')
+    this.PagesDisplayServiceProvider.setlike(this.user_id, post.id, 'app_qna')
       .then(response => {
         if(response.success==='true')
         {
@@ -184,7 +184,7 @@ export class QnaPage {
         }
       });
     }else{
-      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_post')
+      this.PagesDisplayServiceProvider.setdislike(this.user_id, post.id, 'app_qna')
       .then(response => {
         if(response.success==='true')
         {
@@ -220,4 +220,10 @@ export class QnaPage {
   {
     this.navCtrl.push( CommentPage, {content_id:post.id, table_name:'app_qna'})
   }
+
+  ionViewWillLeave()
+  {
+    this.loading.dismiss();
+  }
+  
 }

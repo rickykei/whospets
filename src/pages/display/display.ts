@@ -208,4 +208,11 @@ export class DisplayPage {
    this.navCtrl.push( CommentPage, {content_id:post.id, table_name:'app_post'})
  }
 
+ ionViewWillLeave()
+  {
+    this.loading.dismiss();
+  }
+
+  
+
 }
