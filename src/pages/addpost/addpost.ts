@@ -172,8 +172,8 @@ export class AddpostPage {
 
     goToDisplay() 
     {
-      this.event.publish('user:back');
       this.navCtrl.pop();   
+      this.event.publish('user:back');      
     }
 
 }

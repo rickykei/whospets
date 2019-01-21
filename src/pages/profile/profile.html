@@ -47,7 +47,7 @@
       <div *ngSwitchCase="'gridpost'" class="grid-view">
           <ion-row wrap class="grid-row">
             <ion-col width-33 class="grid-item" *ngFor="let post of petModel.data">
-                <preload-image [ratio]="{w:1, h:1}" src="{{post.filename}}"  title="title"  (click)="goPostDetail(post)"></preload-image>
+                <preload-image [ratio]="{w:1, h:1}" src="{{post.image}}"  title="title"  (click)="goPostDetail(post)"></preload-image>
             </ion-col>
             <ion-col width-33 class="grid-item" >
               <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addAllPost()"></preload-image>
