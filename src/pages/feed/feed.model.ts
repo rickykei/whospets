@@ -43,6 +43,7 @@ export class FeedPostModel {
   country_id:string;
   sub_country_id:string;
   image:string;
+  filename:string;
 	likecnt: number = 0;
 	ownlike: number = 0;
 }

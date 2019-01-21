@@ -189,6 +189,6 @@ export class FeedPage {
 
   commentPost(post)
  {
-   this.nav.push( CommentpetPage, {post:post.product_id})
+   this.nav.push( CommentpetPage, {product_id:post.product_id})
  }
 }

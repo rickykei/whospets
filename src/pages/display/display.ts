@@ -205,7 +205,7 @@ export class DisplayPage {
 
   commentPost(post)
  {
-   this.navCtrl.push( CommentPage, {post:post.product_id, tablename:'app_post'})
+   this.navCtrl.push( CommentPage, {content_id:post.product_id, table_name:'app_post'})
  }
 
 }
