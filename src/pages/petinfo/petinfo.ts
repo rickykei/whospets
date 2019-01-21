@@ -5,6 +5,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { CommentpetPage } from '../commentpet/commentpet';
+import { PetStatusModel } from '../add-page/addlayout.model';
+import { PetDetailsService } from '../add-page/addlayout.service';
 
 
 /**
@@ -23,6 +25,7 @@ export class PetinfoPage {
   pet: PetDetailsModel = new PetDetailsModel();
  uid:string;
  user_id:string;
+ petStatus: PetStatusModel = new PetStatusModel();
 
  likevalue : number;
  dislikevalue : number;
@@ -31,12 +34,14 @@ export class PetinfoPage {
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
     public navParams: NavParams,
+    public petdetailservice : PetDetailsService,    
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public socialSharing: SocialSharing
   ) {
     this.pet = navParams.get('pet');
     this.likevalue = 0;
     this.dislikevalue = 0; 
+   
   }
 
   ionViewDidLoad() {
@@ -60,6 +65,11 @@ export class PetinfoPage {
         this.user_id = data.profile_user_id;
          console.log(data.profile_user_id);
       });
+
+      this.petdetailservice.getStatusData()
+      .then(data2 => {
+        this.petStatus = data2;        
+      });      
   
   }
 

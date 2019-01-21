@@ -95,31 +95,10 @@
             <p class="item-text">
               {{'Pet reward' | translate}} :  {{pet.price}}
             </p>
-            <div *ngif = "pet.pet_status===1">
             <p class="item-text">
-              {{'Pet Status' | translate}} :  {{'Pet Lost' | translate}}
+              {{'Pet Status' | translate}} :  {{pet.pet_status}}
             </p>
-            </div>
-            <div *ngif = "pet.pet_status===2">
-              <p class="item-text">
-                  {{'Pet Status' | translate}} : {{'At Home' | translate}}
-              </p>
-           </div>
-           <div *ngif = "pet.pet_status===3">
-            <p class="item-text">
-              {{'Pet Status' | translate}} : {{'Found & at home' | translate}}
-            </p>
-           </div>
-           <div *ngif = "pet.pet_status===4">
-              <p class="item-text">
-                {{'Pet Status' | translate}} : {{'Pet for adoption' | translate}}
-              </p>
-             </div>
-             <div *ngif = "pet.pet_status===5">
-                <p class="item-text">
-                  {{'Pet Status' | translate}} : {{'Pet boarding required' | translate}}
-                </p>
-               </div>
+           
 
           </ion-card-content>
 
