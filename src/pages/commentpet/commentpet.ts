@@ -27,6 +27,8 @@ export class CommentpetPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommentpetPage');
+    this.getPetComment();
+
   }
 
 

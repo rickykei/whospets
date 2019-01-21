@@ -6,6 +6,7 @@ import { NativeStorage } from '../../../node_modules/@ionic-native/native-storag
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { PostInfoPage } from '../post-info/post-info';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
+import { CommentPage } from '../comment/comment';
 
 /**
  * Generated class for the QnaPage page.
@@ -213,5 +214,10 @@ export class QnaPage {
     });
 
     this.loading.present();
+  }
+
+  commentPost(post)
+  {
+    this.navCtrl.push( CommentPage, {content_id:post.id, table_name:'app_qna'})
   }
 }

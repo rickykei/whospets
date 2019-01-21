@@ -9,7 +9,7 @@ export class CommentDetailsModel{
         content_id:string;
         store_id:string;
         order_id:string;
-        create_date:string;
+        created_date:string;
         feedback:string;
         comment:string;
         product_id:string;

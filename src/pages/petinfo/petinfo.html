@@ -48,7 +48,7 @@
              </button>
            </ion-col>
            <ion-col no-padding width-45 text-center>
-             <button class="action-button" ion-button clear small icon-start>
+             <button class="action-button" ion-button clear small (click)="commentPost(pet)" icon-start>
                <ion-icon name='chatbubbles'></ion-icon>
                {{'COMMENTS' | translate}}
              </button>
@@ -69,112 +69,62 @@
                 {{'Gender' | translate}} : {{pet.gender}}
             </p>
             <p class="item-text">
-                {{'Date Born' | translate}} : {{pet.date_born}}
+              {{'Date Lost' | translate}} :  {{pet.date_lost}}
             </p>
             <p class="item-text">
-                {{'Pet Status' | translate}} : {{pet.pet_status}}
+                {{'Date Born' | translate}} : {{pet.date_born}}
+            </p>           
+            <p class="item-text">
+              {{'Pet color' | translate}} :  {{pet.color}}
             </p>
+            <p class="item-text">
+              {{'Pet size' | translate}} :  {{pet.size}}
+            </p>
+            <p class="item-text">
+              {{'Pet weight' | translate}} :  {{pet.weight}}
+            </p>
+            <p class="item-text">
+              {{'Pet height' | translate}} :  {{pet.height}}
+            </p>
+            <p class="item-text">
+              {{'Pet country' | translate}} :  {{pet.country}}
+            </p>
+            <p class="item-text">
+              {{'Pet last seen appearance' | translate}} :  {{pet.last_seen_appearance}}
+            </p>
+            <p class="item-text">
+              {{'Pet reward' | translate}} :  {{pet.price}}
+            </p>
+            <div *ngif = "pet.pet_status===1">
+            <p class="item-text">
+              {{'Pet Status' | translate}} :  {{'Pet Lost' | translate}}
+            </p>
+            </div>
+            <div *ngif = "pet.pet_status===2">
+              <p class="item-text">
+                  {{'Pet Status' | translate}} : {{'At Home' | translate}}
+              </p>
+           </div>
+           <div *ngif = "pet.pet_status===3">
+            <p class="item-text">
+              {{'Pet Status' | translate}} : {{'Found & at home' | translate}}
+            </p>
+           </div>
+           <div *ngif = "pet.pet_status===4">
+              <p class="item-text">
+                {{'Pet Status' | translate}} : {{'Pet for adoption' | translate}}
+              </p>
+             </div>
+             <div *ngif = "pet.pet_status===5">
+                <p class="item-text">
+                  {{'Pet Status' | translate}} : {{'Pet boarding required' | translate}}
+                </p>
+               </div>
+
           </ion-card-content>
 
    </ion-card>
 </div>
 
 </ion-content>
-<!-- 
-<ion-content>
-   <ion-content class="profile-content">
-        <div class="user-details">
-          
-          <ion-row class="user-main-image-row">
-              <preload-image [ratio]="{w:3, h:2}" src="{{pet.image}}"  title="pet.title"></preload-image>
-          </ion-row>
-          
-          <ion-row class="user-main-data-row">
-            <ion-col no-padding width-33>
-              <preload-image class="user-image" [ratio]="{w:1, h:1}" src="http://graph.facebook.com/{{uid}}/picture"></preload-image>
-            </ion-col>
-            <ion-col no-padding width-33>
-                <h3>{{pet.name_of_pet}}</h3>
-              </ion-col>
-            <ion-col no-padding width-33>
-                <ion-row no-padding >
-                    <button class="action-button" ion-button clear small icon-start>
-                      <ion-icon name='heart'></ion-icon>
-                      {{pet.likes}}  {{'LIKES' | translate}}
-                    </button>
-                  </ion-row>
-                  <ion-row no-padding>
-                    <button class="action-button" ion-button clear small icon-start>
-                      <ion-icon name='chatbubbles'></ion-icon>
-                      {{pet.comments}}  {{'COMMENTS' | translate}}
-                    </button>
-                  </ion-row>
-            </ion-col>
-          </ion-row>
 
-        <ion-row class="user-main-description-row">
-              <p class="item-text">
-                  {{'Pet id' | translate}}
-                </p> 
-
-                <p class="item-text">
-                    {{' ： '}}
-                  </p>
-            <p class="item-text">
-                {{pet.pet_id}}
-              </p>
-        </ion-row>
-        <ion-row class="user-main-description-row">
-                  <p class="item-text">
-                      {{'Gender' | translate}}
-                    </p>
-                    <p class="item-text">
-                        {{' ： '}}
-                      </p>
-                <p class="item-text">
-                    {{pet.gender}}
-                  </p>
-        </ion-row>
-
-        <ion-row class="user-main-description-row">
-              <p class="item-text">
-                  {{'Description' | translate}}
-                </p>
-                <p class="item-text">
-                    {{' ： '}}
-                  </p>
-            <p class="item-text">
-                {{pet.description}}
-              </p>
-         </ion-row>
-
-         <ion-row class="user-main-description-row">
-            <p class="item-text">
-                {{'Date of Birth' | translate}}
-              </p>
-              <p class="item-text">
-                  {{' ： '}}
-                </p>
-           <p class="item-text">
-              {{pet.date_born}}
-            </p>
-
-          </ion-row>
-
-          <ion-row class="user-main-description-row">
-                <p class="item-text">
-                    {{'Pet Status' | translate}}
-                  </p>
-                  <p class="item-text">
-                      {{' ： '}}
-                    </p>
-              <p class="item-text">
-                  {{pet.pet_status}}
-                </p>
-          </ion-row>
-
-      </div>
-
-    </ion-content>
-
-</ion-content> -->

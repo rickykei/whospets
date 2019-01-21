@@ -108,5 +108,6 @@ export class PetDetailsModel{
         image:string;
         filename:string;
         likecnt: number = 0;
-	      ownlike: number = 0;
+        ownlike: number = 0;
+        app_table: string;
 }

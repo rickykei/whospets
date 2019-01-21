@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CommentDetailsModel } from './comment.model';
 import { PagesDisplayServiceProvider } from '../display/display.services';
-import { StringLike } from '@firebase/util';
 
 /**
  * Generated class for the CommentPage page.
@@ -31,6 +30,7 @@ export class CommentPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommentPage');
+    this.getUserComment();
   }
 
   getUserComment()
@@ -40,6 +40,7 @@ export class CommentPage {
       this.PagesDisplayServiceProvider.getUserComment(this.content_id,this.table_name)
       .then(response => {
         this.comment = response.data;
+        
       //  this.loading.dismiss();
       });
   }

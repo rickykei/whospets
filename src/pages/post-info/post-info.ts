@@ -4,6 +4,7 @@ import { PetDetailsModel } from '../profile/profile.model';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { CommentPage } from '../comment/comment';
 
 /**
  * Generated class for the PostInfoPage page.
@@ -20,6 +21,7 @@ export class PostInfoPage {
 
   post: PetDetailsModel = new PetDetailsModel();
   user_id:string;
+  tablename:string;
   
   likevalue : number;
   dislikevalue : number;
@@ -84,5 +86,22 @@ export class PostInfoPage {
         }
       });
     }
+  }
+
+  commentPost(post)
+  {
+    if(post.app_table==='SELL')
+    {
+      this.tablename = 'app_sell'
+    }
+    else if(post.app_table==='LIFESTYLE')
+    {
+      this.tablename = 'app_post'
+    }
+    else if(post.app_table==='QNA')
+    {
+      this.tablename = 'app_qna'
+    }
+    this.navCtrl.push( CommentPage, {content_id:post.id, table_name:this.tablename})
   }
 }

@@ -1,18 +1,24 @@
-<!--
-  Generated template for the CommentpetPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>commentpet</ion-title>
+    <ion-title>{{'COMMENT' | translate}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content class="comment-content">
+  <ion-item-group>
+    <ion-item-divider class="comment-divider">{{ 'Comment' | translate }}</ion-item-divider>
+    <ion-item class="comment-item" *ngFor="let comment of comment">
+    <!--  <ion-avatar item-left>
+        <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="comment.image"></preload-image>
+      </ion-avatar>
+    -->
+      <h2 class="item-title">{{comment.user_id}}</h2>
+      <p class="item-description">{{comment.comment}}</p>
+      <ion-note class="item-time" item-right>{{comment.created_date}}</ion-note>
+    </ion-item>
+  </ion-item-group>
 </ion-content>
+
+
+

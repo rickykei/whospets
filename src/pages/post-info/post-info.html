@@ -36,7 +36,7 @@
                  </button>
                </ion-col>
                <ion-col no-padding width-45 text-center>
-                 <button class="action-button" ion-button clear small icon-start>
+                 <button class="action-button" ion-button clear small (click)="commentPost(post)" icon-start>
                    <ion-icon name='chatbubbles'></ion-icon>
                    {{'COMMENTS' | translate}}
                  </button>
@@ -49,6 +49,11 @@
                </ion-col>
              </ion-row>
 
+             <div *ngIf = "pet.name_of_pet">>
+              <p class="item-text">
+                {{'Pet name' | translate}} :  {{pet.name_of_pet}}
+              </p>
+            </div>
        </ion-card>
     </div>
 

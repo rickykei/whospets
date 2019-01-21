@@ -4,6 +4,7 @@ import { PetDetailsModel } from '../profile/profile.model';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { PagesDisplayServiceProvider } from '../display/display.services';
+import { CommentpetPage } from '../commentpet/commentpet';
 
 
 /**
@@ -101,4 +102,8 @@ export class PetinfoPage {
       });
     }
   }
+  commentPost(post)
+ {
+   this.navCtrl.push( CommentpetPage, {product_id:post.product_id})
+ }
 }

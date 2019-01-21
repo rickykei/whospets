@@ -6,6 +6,7 @@ import { NativeStorage } from '../../../node_modules/@ionic-native/native-storag
 import { AddsellPage } from '../addsell/addsell';
 import { PostInfoPage } from '../post-info/post-info';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
+import { CommentPage } from '../comment/comment';
 
 /**
  * Generated class for the DisplaySellPage page.
@@ -196,4 +197,10 @@ export class DisplaySellPage{
 
     this.loading.present();
   }
+
+  commentPost(post)
+  {
+    this.navCtrl.push( CommentPage, {content_id:post.id, table_name:'app_sell'})
+  }
+
 }
