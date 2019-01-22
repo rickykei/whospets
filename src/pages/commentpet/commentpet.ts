@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { CommentDetailsModel } from '../comment/comment.model';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { FormGroup, FormControl } from '@angular/forms';
 
 /**
  * Generated class for the CommentpetPage page.
@@ -17,10 +20,20 @@ import { CommentDetailsModel } from '../comment/comment.model';
 export class CommentpetPage {
   comment: Array<CommentDetailsModel> = new Array<CommentDetailsModel>() ;
   product_id:string;
+  comment_form: any;
+  loading:any;
+  user_id:string;
 
   constructor(public navCtrl: NavController,
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
-    public navParams: NavParams) {
+     public http: HttpClient,  
+    public nativeStorage:NativeStorage,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController) {
+
+      this.comment_form = new FormGroup({
+        reply: new FormControl()   
+      });
 
       this.product_id = navParams.get('product_id');
   }
@@ -29,18 +42,53 @@ export class CommentpetPage {
     console.log('ionViewDidLoad CommentpetPage');
     this.getPetComment();
 
+    this.nativeStorage.getItem('profile_user_id')
+    .then(data => {
+        this.user_id = data.profile_user_id;
+         console.log(data.profile_user_id);
+      });
   }
 
 
   getPetComment()
   {
- //   this.showLoader();
-   
       this.PagesDisplayServiceProvider.getPetComment(this.product_id)
       .then(response => {
         this.comment = response.data;
-      //  this.loading.dismiss();
       });
   }
   
+  replyClick() {
+    this.showLoader();
+
+    let postdata = this.comment_form.value;
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    //let options = new RequestOptions({ headers: headers });
+    
+    
+    let data=JSON.stringify({user_id:this.user_id,product_id:this.product_id
+      , comment:postdata.reply});
+    this.http.post("http://api.whospets.com/api/users/set_pet_comments.php",data, { headers: headers })
+    // .map(res => res.json(data))
+    .subscribe(res => {
+      this.getPetComment();
+      this.loading.dismiss();
+      this.comment_form.reset();
+    }, (err) => {
+      this.loading.dismiss();
+
+    alert("failed");
+    });
+    }
+
+    showLoader(){
+      this.loading = this.loadingCtrl.create({
+        content: 'Submitting...'
+      });
+  
+      this.loading.present();
+    }
 }

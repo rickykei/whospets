@@ -21,4 +21,15 @@
 </ion-content>
 
 
+<ion-footer>
+    <ion-toolbar>
+     <form [formGroup]="comment_form" no-padding>
+      <ion-item >
+        <ion-input type="text" placeholder="Reply..." formControlName="reply"></ion-input>
+        <button ion-button outline item-end (click)="replyClick()">{{ 'Reply' | translate }}</button>
+      </ion-item>
+    </form>
+    </ion-toolbar>
+  </ion-footer>
+  
 
