@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams , AlertController, LoadingController} from 'ionic-angular';
+import { NavController, NavParams , AlertController, LoadingController, Events} from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { ProfileService } from '../profile/profile.service';
@@ -55,7 +55,8 @@ export class AddpetPage {
 	public alertCtrl: AlertController,
   public api: ApiProvider,
   private imagePicker: ImagePicker,
-    private base64: Base64) {
+    private base64: Base64,
+    public event: Events) {
 
       this.addPetForm = new FormGroup({
         //title: new FormControl(''),
@@ -231,5 +232,6 @@ export class AddpetPage {
     goToDisplay() 
     {
       this.navCtrl.pop();
+      this.event.publish('user:back');      
     }
 }

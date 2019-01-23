@@ -103,7 +103,7 @@ export class ProfilePage {
 		
 		this.nativeStorage.getItem('email_user')
 			.then(data => {
-				this.profileService.getPet(data.email)
+				this.profileService.getPet(data.email, this.profile_user_id)
 				.then(response => {
 				  this.pet = response;
 				});

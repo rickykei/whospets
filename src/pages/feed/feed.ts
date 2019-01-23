@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 
 import { ProfilePage } from '../profile/profile';
 import 'rxjs/Rx';
@@ -35,16 +35,17 @@ export class FeedPage {
     public navParams: NavParams,
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public socialSharing: SocialSharing,
-    public loadingCtrl: LoadingController
-  ) {
+    public loadingCtrl: LoadingController,
+    public events:Events) {   
+     
+      events.subscribe('user:back', () =>
+    {    
+      console.log('user:back');   
+      this.getContent();
+    });
     this.feed.category = navParams.get('category');
     this.likevalue = 0;
     this.dislikevalue = 0;
-  }
-
-  ionViewDidEnter()
-  {
-    this.getContent();
   }
 
   ionViewDidLoad() {
@@ -58,7 +59,7 @@ export class FeedPage {
        console.log(data.profile_user_name);
     });
 
-
+    this.getContent();
   }
 
   goToProfile(item) {
@@ -79,7 +80,7 @@ export class FeedPage {
   sharePost(post) {
    //this code is to use the social sharing plugin
    // message, subject, file, url
-   this.socialSharing.share(post.description, post.title, post.image, null)
+   this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/products/'+post.product_id)
    .then(() => {
      console.log('Success!');
    })
@@ -138,12 +139,10 @@ export class FeedPage {
   }
 
   showLoader(){
-    this.loading = this.loadingCtrl.create({
-      content: 'Loading...'
-    });
-
+    this.loading = this.loadingCtrl.create();
     this.loading.present();
   }
+
 
   likePost(post)
   {

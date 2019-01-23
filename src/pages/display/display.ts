@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PagesDisplayServiceProvider } from './display.services';
@@ -38,10 +38,14 @@ export class DisplayPage {
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public navParams: NavParams,
     public socialSharing: SocialSharing,
-    public loadingCtrl: LoadingController
-
-  ) 
-  {
+    public loadingCtrl: LoadingController,
+    public events:Events) {   
+     
+      events.subscribe('user:back', () =>
+    {    
+      console.log('user:back');   
+      this.getContent();
+    });
     this.user_id = navParams.get('display'); 
     this.getall = navParams.get('getall');
 
@@ -52,16 +56,13 @@ export class DisplayPage {
     this.dislikevalue = 0;
 
   }
-
-  ionViewDidEnter()
-  {
-    this.getContent();
-  }
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad PetinfoPage');
     console.log(this.pet.name_of_pet);
    
+    this.getContent();
+
     this.nativeStorage.getItem('email_user')
     .then(data => {
       var url ;
@@ -77,10 +78,8 @@ export class DisplayPage {
     this.nativeStorage.getItem('profile_user_id')
   .then(data => {
       this.user_id = data.profile_user_id;
-       console.log(data.profile_user_id);
-     
+       console.log(data.profile_user_id);   
     });
-  
   } 
 
   getContent()
@@ -193,7 +192,7 @@ export class DisplayPage {
   sharePost(post) {
     //this code is to use the social sharing plugin
     // message, subject, file, url
-    this.socialSharing.share(post.description, post.title, post.image, null)
+    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/lifestyle/'+post.id)
     .then(() => {
       console.log('Success!');
     })
@@ -201,13 +200,9 @@ export class DisplayPage {
        console.log('Error');
     });
   }
-
   
   showLoader(){
-    this.loading = this.loadingCtrl.create({
-      content: 'Loading...'
-    });
-
+    this.loading = this.loadingCtrl.create();
     this.loading.present();
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { SetQnaPage } from '../set-qna/set-qna';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
@@ -40,9 +40,14 @@ export class QnaPage {
    public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
    public navParams: NavParams,
    public socialSharing: SocialSharing,
-   public loadingCtrl: LoadingController
- ) 
- {
+   public loadingCtrl: LoadingController,
+   public events:Events) {   
+    
+     events.subscribe('user:back', () =>
+   {    
+     console.log('user:back');   
+     this.getContent();
+   });
   this.user_id = navParams.get('display'); 
     this.getall = navParams.get('getall');
 
@@ -53,12 +58,7 @@ export class QnaPage {
 
  }
 
- 
- ionViewDidEnter()
- {
-    this.getContent();
- }
- 
+
  ionViewDidLoad() {
    console.log('ionViewDidLoad qna');
    console.log(this.pet.name_of_pet);
@@ -84,7 +84,7 @@ export class QnaPage {
      }
    });
 
-   //this.getContent();
+   this.getContent();
    } 
 
    setQna()
@@ -200,7 +200,7 @@ export class QnaPage {
   sharePost(post) {
     //this code is to use the social sharing plugin
     // message, subject, file, url
-    this.socialSharing.share(post.description, post.title, post.image, null)
+    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/qna/'+post.id)
     .then(() => {
       console.log('Success!');
     })
@@ -209,10 +209,7 @@ export class QnaPage {
     });
   }
   showLoader(){
-    this.loading = this.loadingCtrl.create({
-      content: 'Loading...'
-    });
-
+    this.loading = this.loadingCtrl.create();
     this.loading.present();
   }
 

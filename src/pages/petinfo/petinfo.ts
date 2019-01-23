@@ -70,13 +70,12 @@ export class PetinfoPage {
       .then(data2 => {
         this.petStatus = data2;        
       });      
-  
   }
 
   sharePost(post) {
     //this code is to use the social sharing plugin
     // message, subject, file, url
-    this.socialSharing.share(post.description, post.title, post.image, null)
+    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/products/'+post.product_id)
     .then(() => {
       console.log('Success!');
     })

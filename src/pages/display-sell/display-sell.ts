@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
@@ -38,9 +38,14 @@ export class DisplaySellPage{
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public navParams: NavParams,
     public socialSharing: SocialSharing,
-    public loadingCtrl: LoadingController
-  ) 
-  {
+    public loadingCtrl: LoadingController,
+    public events:Events) {   
+     
+      events.subscribe('user:back', () =>
+    {    
+      console.log('user:back');   
+      this.getContent();
+    });
     this.user_id = navParams.get('display'); 
     this.getall = navParams.get('getall'); 
     console.log( 'getall : ' + this.getall);
@@ -53,11 +58,6 @@ export class DisplaySellPage{
   ionViewWillLeave()
   {
     this.loading.dismiss();
-  }
-  
-  ionViewDidEnter()
-  {
-    this.getContent();
   }
   
   ionViewDidLoad() {
@@ -82,8 +82,10 @@ export class DisplaySellPage{
          console.log(data.profile_user_id);
        
       });
+
+    this.getContent();
       
-    } 
+    }
 
     setSell()
     {
@@ -193,7 +195,7 @@ export class DisplaySellPage{
   sharePost(post) {
     //this code is to use the social sharing plugin
     // message, subject, file, url
-    this.socialSharing.share(post.description, post.title, post.image, null)
+    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/sell/'+post.id)
     .then(() => {
       console.log('Success!');
     })
@@ -204,12 +206,10 @@ export class DisplaySellPage{
 
   
   showLoader(){
-    this.loading = this.loadingCtrl.create({
-      content: 'Loading...'
-    });
-
+    this.loading = this.loadingCtrl.create();
     this.loading.present();
   }
+
 
   commentPost(post)
   {

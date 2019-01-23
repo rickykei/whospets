@@ -50,7 +50,19 @@ export class PostInfoPage {
   sharePost(post) {
     //this code is to use the social sharing plugin
     // message, subject, file, url
-    this.socialSharing.share(post.description, post.title, post.image, null)
+    if(post.app_table==='SELL')
+    {
+      this.tablename = 'sell'
+    }
+    else if(post.app_table==='LIFESTYLE')
+    {
+      this.tablename = 'lifestyle'
+    }
+    else if(post.app_table==='QNA')
+    {
+      this.tablename = 'qna'
+    }
+    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/'+this.tablename+'/'+post.id)
     .then(() => {
       console.log('Success!');
     })

@@ -82,7 +82,7 @@ export class SetQnaPage {
     .then(data => {
      this.email = data.email;     
 
-     this.profileService.getPet(data.email)
+     this.profileService.getPet(data.email, this.user_id)
      .then(response => {
        this.pet = response;
      });
