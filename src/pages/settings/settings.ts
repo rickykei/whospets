@@ -50,7 +50,7 @@ export class SettingsPage {
 
   user: FacebookUserModel = new FacebookUserModel();
   regData = { avatar:'', email: '', password: '', fullname: '' };
-  imgPreview = 'assets/images/blank-avatar.jpg';
+  imgPreview = './assets/images/blank-avatar.jpg';
 
 
   constructor(

@@ -41,7 +41,7 @@ export class AddpetPage {
   subcountry: CountryIdModel = new CountryIdModel();
   profile: UserModel= new UserModel();
   regData = { avatar:'', email: '', password: '', fullname: '' };
-  imgPreview = 'assets/images/blank-avatar.jpg';
+  imgPreview = './assets/images/blank-avatar.jpg';
 
   
   constructor(

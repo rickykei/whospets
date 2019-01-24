@@ -13,14 +13,15 @@
   <div class="user-image-content">
     <ion-row no-padding class="user-image-row">
       <ion-col no-padding width-40>
-        <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="profile.data.fb_uid" alt="this is the image" title="IMAGE!"></preload-image>
+        <ion-avatar item-end>
+          <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="profile.data.fb_uid" alt="this is the image" title="IMAGE!"></preload-image>
+        </ion-avatar>
       </ion-col>
     </ion-row>
     <ion-row no-padding class="user-image-row">
       <ion-col no-padding width-60>
-          <ion-avatar item-end>
       <button class="image-action-button" ion-button outline block small (click)="getPhoto()">{{ 'CHANGE_PROFILE_PICTURE' | translate}}</button>
-       </ion-avatar>
+       
       </ion-col>
     </ion-row>
   </div>
