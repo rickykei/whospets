@@ -3,8 +3,76 @@
     "banner_title": "Location",
     "populars": [
         {
+            "title": "Central and Western",
+            "image": "./assets/images/listing/district302.png"
+        },
+        {
+            "title": "Eastern",
+            "image": "./assets/images/listing/district303.png"
+        },
+        {
+            "title": "Southern",
+            "image": "./assets/images/listing/district304.png"
+        },
+        {
+            "title": "Wan Chai",
+            "image": "./assets/images/listing/district305.png"
+        },
+        {
+            "title": "Sham Shui Po",
+            "image": "./assets/images/listing/district306.png"
+        },
+        {
+            "title": "Kowloon City",
+            "image": "./assets/images/listing/district307.png"
+        },
+        {
+            "title": "Kwun Tong",
+            "image": "./assets/images/listing/district308.png"
+        },
+        {
+            "title": "Wong Tai Sin",
+            "image": "./assets/images/listing/district309.png"
+        },
+        {
+            "title": "Yau Tsim Mong",
+            "image": "./assets/images/listing/district310.png"
+        },
+        {
+            "title": "Islands",
+            "image": "./assets/images/listing/district311.png"
+        },
+        {
+            "title": "Kwai Tsing",
+            "image": "./assets/images/listing/district312.png"
+        },
+        {
+            "title": "North",
+            "image": "./assets/images/listing/district312.png"
+        },
+        {
+            "title": "Sai Kung",
+            "image": "./assets/images/listing/district313.png"
+        },
+        {
             "title": "Shatin",
-            "image": "./assets/images/listing/district368.png"
+            "image": "./assets/images/listing/district314.png"
+        },
+        {
+            "title": "Tai Po",
+            "image": "./assets/images/listing/district315.png"
+        },
+        {
+            "title": "Tsuen Wan",
+            "image": "./assets/images/listing/district316.png"
+        },
+        {
+            "title": "Tuen Mun",
+            "image": "./assets/images/listing/district317.png"
+        },
+        {
+            "title": "Yuen Long",
+            "image": "./assets/images/listing/district318.png"
         }
     ],
     "categories": [
