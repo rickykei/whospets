@@ -25,9 +25,9 @@ import { FacebookUserModel } from '../facebook-login/facebook-user.model';
 import { FacebookLoginService } from '../facebook-login//facebook-login.service';
 
 
-import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Base64 } from '../../../node_modules/@ionic-native/base64';
+import { HttpHeaders, HttpClient} from '@angular/common/http';
 
 
 
@@ -65,7 +65,7 @@ export class SettingsPage {
     public cropService: Crop,
     public nativeStorage:NativeStorage,
     public facebookLoginService: FacebookLoginService,
-    private http: Http,
+    private http: HttpClient,
     public platform: Platform,
       private base64: Base64
   ) {
@@ -197,7 +197,7 @@ export class SettingsPage {
     this.loading.dismiss();
 
   }
-
+/*
   saveProfile()
   {
     let data = this.settingsForm.value;
@@ -208,7 +208,12 @@ export class SettingsPage {
     console.log('-----data notification' + data.notifications);
 
     //http://api.whospets.com/api/users/createprofile.php?username=rickykei@yahoo.com.hk&street=street
-     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + '&street='+data.street + '&about='+data.about + '&notification='+ (data.notifications ==false?'0':'1' )    + '&newsletter='+ (data.newsletter ==false?'0':'1') + '&seller='+ (data.seller==false?'0':'1' ) + '&gender='+data.gender   + '&birthday='+data.birthday+ '&bio='+ (data.bio ==false?'0':'1') + '&country_id='+data.countryId + '&sub_country_id='+data.subCountryId   ;
+     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + 
+     '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + 
+     '&street='+data.street + '&about='+data.about + '&notification='+ 
+     (data.notifications ==false?'0':'1' )    + '&newsletter='+ (data.newsletter ==false?'0':'1') + 
+     '&seller='+ (data.seller==false?'0':'1' ) + '&gender='+data.gender   + '&birthday='+data.birthday+ 
+     '&bio='+ (data.bio ==false?'0':'1') + '&country_id='+data.countryId + '&sub_country_id='+data.subCountryId   ;
      console.log(url);
     
     this.http.get(url).map(res => res.json()).subscribe(data2 => {
@@ -219,6 +224,45 @@ export class SettingsPage {
 
      });
   }
+*/
+
+  saveProfile()
+  {
+
+     this.showLoader();
+
+    let postdata = this.settingsForm.value;
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    //let options = new RequestOptions({ headers: headers });
+    
+    let data=JSON.stringify({email:postdata.email,username:postdata.email
+      , firstname:postdata.firstname, lastname:postdata.lastname , city:postdata.city
+    , street:postdata.street,about:postdata.about, notification:(postdata.notifications ==false?'0':'1' )
+    ,newsletter :(postdata.newsletter ==false?'0':'1'), seller:(postdata.seller==false?'0':'1' ),
+    gender:postdata.gender, birthday:postdata.birthday, bio:(postdata.bio ==false?'0':'1') ,
+    country_id:postdata.countryId, sub_country_id: postdata.subCountryId,avatar:this.regData.avatar});
+    this.http.post("http://api.whospets.com/api/users/createprofile.php",data, { headers: headers })
+    // .map(res => res.json(data))
+    .subscribe(res => {
+      this.loading.dismiss();
+      this.nav.pop();
+    }, (err) => {
+      this.loading.dismiss();
+
+    alert("failed");
+    });
+    }
+
+    showLoader(){
+      this.loading = this.loadingCtrl.create({
+        content: 'Submitting...'
+      });
+  
+      this.loading.present();
+    }
 
   logout() {
     // navigate to the new page if it is not the current page
@@ -266,46 +310,21 @@ export class SettingsPage {
       console.log("You are not in a cordova environment. You should test this feature in a real device or an emulator");
     }
   }
-/*
-  openImagePicker(){
-   this.imagePicker.hasReadPermission().then(
-     (result) => {
-       if(result == false){
-         // no callbacks required as this opens a popup which returns async
-         this.imagePicker.requestReadPermission();
-       }
-       else if(result == true){
-         this.imagePicker.getPictures({ maximumImagesCount: 1 }).then(
-           (results) => {
-             for (var i = 0; i < results.length; i++) {
-               this.cropService.crop(results[i], {quality: 75}).then(
-                 newImage => {
-                   let image  = normalizeURL(newImage);
 
-                   this.profileService.setUserImage(image);
-                   this.profile.data.fb_uid = image;
-                 },
-                 error => console.error("Error cropping image", error)
-               );
-             }
-           }, (err) => console.log(err)
-         );
-       }
-     }, (err) => {
-       console.log(err);
-     });
-  }
-
-  */
-
- getPhoto() {
+  getPhoto() {
   let options = {
     maximumImagesCount: 1
   };
   this.imagePicker.getPictures(options).then((results) => {
     for (var i = 0; i < results.length; i++) {
-      for (var i = 0; i < results.length; i++) {
-        
+    
+        // this.imgPreview = results[i];
+        this.base64.encodeFile(results[i]).then((base64File: string) => {
+          this.regData.avatar = base64File;
+        }, (err) => {
+          console.log(err);
+        });
+
         this.cropService.crop(results[i], {quality: 75}).then(
           newImage => {
             let image  = normalizeURL(newImage);
@@ -315,14 +334,13 @@ export class SettingsPage {
           },
           error => console.error("Error cropping image", error)
         );
-      }
-       // this.imgPreview = results[i];
-        this.base64.encodeFile(results[i]).then((base64File: string) => {
-          this.regData.avatar = base64File;
-        }, (err) => {
-          console.log(err);
-        });
+     
     }
   }, (err) => { });
-	}
+  }
+  
+  ionViewWillLeave()
+  {
+    this.loading.dismiss();
+  }
 }
