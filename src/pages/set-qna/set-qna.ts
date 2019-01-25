@@ -161,9 +161,18 @@ export class SetQnaPage {
 
     goToDisplay() 
     {
-     // this.navCtrl.push(QnaPage, {display:this.user_id, getall:false} );
-      this.navCtrl.pop();  
-      this.event.publish('user:back');   
+      this.navCtrl.pop().then(
+        response => {
+          console.log('Response ' + response);
+        },
+        error => {
+          console.log('Error: ' + error);
+          this.event.publish('user:back');      
+        }
+      ).catch(exception => {
+        console.log('Exception ' + exception);
+        this.event.publish('user:back');      
+      });;   
     }
 
     showLoader(){

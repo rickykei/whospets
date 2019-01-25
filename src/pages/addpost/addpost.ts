@@ -172,8 +172,18 @@ export class AddpostPage {
 
     goToDisplay() 
     {
-      this.navCtrl.pop();   
-      this.event.publish('user:back');      
+      this.navCtrl.pop().then(
+        response => {
+          console.log('Response ' + response);
+        },
+        error => {
+          console.log('Error: ' + error);
+          this.event.publish('user:back');      
+        }
+      ).catch(exception => {
+        console.log('Exception ' + exception);
+        this.event.publish('user:back');      
+      });;   
     }
 
 }

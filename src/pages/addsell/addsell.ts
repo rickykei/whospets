@@ -144,12 +144,8 @@ export class AddsellPage {
     // .map(res => res.json(data))
     .subscribe(res => {
       this.loading.dismiss();
-
+      this.goToDisplay();
    // alert("success "+res);
-    
-    //this.navCtrl.push(DisplaySellPage, {display:this.user_id, getall:false});
-    this.event.publish('user:back');
-    this.navCtrl.pop();  
 
     }, (err) => {
       this.loading.dismiss();
@@ -164,6 +160,22 @@ export class AddsellPage {
       });
   
       this.loading.present();
+    }
+
+    goToDisplay() 
+    {
+      this.navCtrl.pop().then(
+        response => {
+          console.log('Response ' + response);
+        },
+        error => {
+          console.log('Error: ' + error);
+          this.event.publish('user:back');      
+        }
+      ).catch(exception => {
+        console.log('Exception ' + exception);
+        this.event.publish('user:back');      
+      });;   
     }
 
 }

@@ -6,7 +6,12 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goToDisplay()">
+              <ion-icon name="arrow-back"></ion-icon>
+            </button>
+          </ion-buttons>
     <ion-title>addsell</ion-title>
   </ion-navbar>
 
