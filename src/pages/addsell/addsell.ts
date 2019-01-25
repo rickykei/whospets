@@ -144,7 +144,8 @@ export class AddsellPage {
     // .map(res => res.json(data))
     .subscribe(res => {
       this.loading.dismiss();
-      this.goToDisplay();
+      this.event.publish('user:back');
+      //this.goToDisplay();
    // alert("success "+res);
 
     }, (err) => {

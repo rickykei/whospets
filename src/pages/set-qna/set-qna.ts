@@ -150,8 +150,9 @@ export class SetQnaPage {
     // .map(res => res.json(data))
     .subscribe(res => {
       this.loading.dismiss();
+      this.event.publish('user:back');
     //alert("success "+res);
-    this.goToDisplay();
+    //this.goToDisplay();
     }, (err) => {
       this.loading.dismiss();
 
