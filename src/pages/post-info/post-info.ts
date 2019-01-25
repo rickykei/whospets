@@ -33,6 +33,8 @@ export class PostInfoPage {
      public nativeStorage: NativeStorage
     ) {
     this.post = navParams.get('post'); 
+    this.tablename  =  navParams.get('tablename');
+    
     this.likevalue = 0;
     this.dislikevalue = 0;
   }
