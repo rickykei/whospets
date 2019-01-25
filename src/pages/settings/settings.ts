@@ -323,21 +323,50 @@ export class SettingsPage {
           this.regData.avatar = base64File;
         }, (err) => {
           console.log(err);
+        }).catch(exception => {
+          console.log(' base64 Exception ' + exception);
         });
 
-        this.cropService.crop(results[i], {quality: 75}).then(
-          newImage => {
-            let image  = normalizeURL(newImage);
+        let image  = results[i];
+        this.profileService.setUserImage(image);
+        this.profile.data.fb_uid = image;
 
-            this.profileService.setUserImage(image);
-            this.profile.data.fb_uid = image;
-          },
-          error => console.error("Error cropping image", error)
-        );
+        // this.cropService.crop(results[i], {quality: 75}).then(
+        //   newImage => {
+        //     let image  = normalizeURL(newImage);
+
+        //     this.profileService.setUserImage(image);
+        //     this.profile.data.fb_uid = image;
+        //   },
+        //   error => console.error("Error cropping image", error)
+        // ).catch(exception => {
+        //   console.log('cropping image Exception ' + exception);
+        // });
      
     }
-  }, (err) => { });
+  }, (err) => { })
+  .catch(exception => {
+    console.log('Exception ' + exception);
+  }); 
+
   }
+
+  /*
+  .then(
+        response => {
+          console.log('Response ' + response);
+        },
+        error => {
+          console.log('Error: ' + error);
+          this.event.publish('user:back');      
+        }
+      ).catch(exception => {
+        console.log('Exception ' + exception);
+        this.event.publish('user:back');      
+      });;   
+
+      */
+
   
   ionViewWillLeave()
   {
