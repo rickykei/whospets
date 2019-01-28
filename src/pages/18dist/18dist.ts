@@ -39,6 +39,9 @@ export class Dist18Page {
     ,public nativeStorage:NativeStorage
     ) {
     this._popular = this.navParams.get('popular');
+    console.log("array1: "+ this._popular.group_ids[0]);
+    console.log("array1 , length: "+ this._popular.group_ids.length);
+
   }
 
   ionViewDidLoad() {
@@ -57,7 +60,7 @@ export class Dist18Page {
   getContent()
  {
 
-   this.profileService.getPopularData(this._popular.group_ids,10,0)
+   this.profileService.getPopularData(this._popular.group_ids, this._popular.group_ids.length,10,0)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);
 
@@ -91,7 +94,7 @@ export class Dist18Page {
     console.log('Begin async operation');
 
     setTimeout(() => {
-      this.profileService.getPopularData(this._popular.group_ids,10,this.details.length)
+      this.profileService.getPopularData(this._popular.group_ids,this._popular.group_ids.length,10,this.details.length)
 	  .then(posts => {
 		console.log('feed.ts.getpost');
 		console.log(posts.data.pets.length);

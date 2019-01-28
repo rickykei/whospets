@@ -57,13 +57,12 @@ export class ProfileService {
   }
 
 
-  getPopularData(group_ids:string[],limit,offset): Promise<FeedModel> {
+  getPopularData(group_ids:string[],length,limit,offset): Promise<FeedModel> {
 
-    console.info(group_ids.length);
     var _tmpQ ='';
-    for(let i = 0; i < group_ids.length; i++)
+    for(let i = 0; i < length ; i++)
     {
-      if(i=0)
+      if(i==0)
         _tmpQ = '?sub_country_id_array[]=' + group_ids[i];
       else
         _tmpQ = _tmpQ + '&sub_country_id_array[]=' + group_ids[i];
