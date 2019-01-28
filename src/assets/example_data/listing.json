@@ -4,75 +4,108 @@
     "populars": [
         {
             "title": "Central and Western",
-            "image": "./assets/images/listing/district302.png"
+            "image": "./assets/images/listing/district302.png",
+            "group_ids":["322", "332", "331", "334", "339"]
         },
         {
             "title": "Eastern",
-            "image": "./assets/images/listing/district303.png"
+            "image": "./assets/images/listing/district303.png",
+            "group_ids":["323", "329", "330", "336", "337"]
         },
         {
             "title": "Southern",
-            "image": "./assets/images/listing/district304.png"
+            "image": "./assets/images/listing/district304.png",
+            "group_ids":["324", "325", "335", "338"]
+
         },
         {
             "title": "Wan Chai",
-            "image": "./assets/images/listing/district305.png"
+            "image": "./assets/images/listing/district305.png",
+            "group_ids":["327", "328", "333"]
+
         },
         {
             "title": "Sham Shui Po",
-            "image": "./assets/images/listing/district306.png"
+            "image": "./assets/images/listing/district306.png",
+            "group_ids":["351", "352", "353", "355", "356", "358"]
+
         },
         {
             "title": "Kowloon City",
-            "image": "./assets/images/listing/district307.png"
+            "image": "./assets/images/listing/district307.png",
+            "group_ids":["350", "359", "360", "363", "364"]
+
         },
         {
             "title": "Kwun Tong",
-            "image": "./assets/images/listing/district308.png"
+            "image": "./assets/images/listing/district308.png",
+            "group_ids":["346", "354", "357", "358", "365"]
+
         },
         {
             "title": "Wong Tai Sin",
-            "image": "./assets/images/listing/district309.png"
+            "image": "./assets/images/listing/district309.png",
+            "group_ids":["344", "345", "348", "362", "367", "369"]
+
         },
         {
             "title": "Yau Tsim Mong",
-            "image": "./assets/images/listing/district310.png"
+            "image": "./assets/images/listing/district310.png",
+            "group_ids":["343", "347", "349", "361", "366"]
+
         },
         {
             "title": "Islands",
-            "image": "./assets/images/listing/district311.png"
+            "image": "./assets/images/listing/district311.png",
+            "group_ids":["318", "319", "320", "321", "341", "342"]
+
         },
         {
             "title": "Kwai Tsing",
-            "image": "./assets/images/listing/district312.png"
+            "image": "./assets/images/listing/district312.png",
+            "group_ids":["309", "311", "312"]
+
         },
         {
             "title": "North",
-            "image": "./assets/images/listing/district312.png"
+            "image": "./assets/images/listing/district312.png",
+            "group_ids":["306", "315"]
+
         },
         {
             "title": "Sai Kung",
-            "image": "./assets/images/listing/district313.png"
+            "image": "./assets/images/listing/district313.png",
+            "group_ids":["302", "313"]
+
         },
         {
             "title": "Shatin",
-            "image": "./assets/images/listing/district314.png"
+            "image": "./assets/images/listing/district314.png",
+            "group_ids":["307", "310","314", "316"]
+
         },
         {
             "title": "Tai Po",
-            "image": "./assets/images/listing/district315.png"
+            "image": "./assets/images/listing/district315.png",
+            "group_ids":["305", "317"]
+
         },
         {
             "title": "Tsuen Wan",
-            "image": "./assets/images/listing/district316.png"
+            "image": "./assets/images/listing/district316.png",
+            "group_ids":["308", "340"]
+
         },
         {
             "title": "Tuen Mun",
-            "image": "./assets/images/listing/district317.png"
+            "image": "./assets/images/listing/district317.png",
+            "group_ids":["303"]
+
         },
         {
             "title": "Yuen Long",
-            "image": "./assets/images/listing/district318.png"
+            "image": "./assets/images/listing/district318.png",
+            "group_ids":["301", "304"]
         }
     ],
     "categories": [

@@ -11,6 +11,20 @@
         <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.data.fb_uid" alt="profile.data.firstname" title="profile.data.firstname"></preload-image>
       </ion-col>
       <ion-col no-padding>
+          <!-- <ion-row class="social-presence-row">
+          <ion-col width-50 class="social-presence-item">
+            <a (click)="goToFollowersList()">
+              <h2 class="social-presence-value">{{profile.followers.length}}</h2>
+              <h4 class="social-presence-title">{{'FOLLOWERS' | translate }}</h4>
+            </a>
+          </ion-col>
+          <ion-col width-50 class="social-presence-item">
+            <a (click)="goToFollowingList()">
+              <h2 class="social-presence-value">{{profile.following.length}}</h2>
+              <h4 class="social-presence-title">{{'FOLLOWING' | translate }}</h4>
+            </a>
+          </ion-col>
+        </ion-row> -->
         <ion-row class="profile-action-row">
           <ion-col no-padding>
             <button ion-button block small (click)="goToSettings()">
