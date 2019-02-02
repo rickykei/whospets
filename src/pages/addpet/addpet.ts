@@ -177,9 +177,13 @@ export class AddpetPage {
   }
 
   getPhoto() {
-  let options = {
-    maximumImagesCount: 1
-  };
+    let options = {
+      maximumImagesCount: 1,
+      quality: 50,
+      width: 512,
+      height: 512,
+      outputType: 1
+    };
   this.imagePicker.getPictures(options).then((results) => {
     for (var i = 0; i < results.length; i++) {
       this.imgPreview = 'data:image/jpeg;base64,' + results[i];
