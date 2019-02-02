@@ -59,18 +59,31 @@ export class SetQnaPage {
       // }       
   }
 
+
   getPhoto() {
     let options = {
-      maximumImagesCount: 1
+      maximumImagesCount: 1,
+      quality: 50,
+      width: 512,
+      height: 512,
+      outputType: 1
     };
+
     this.imagePicker.getPictures(options).then((results) => {
       for (var i = 0; i < results.length; i++) {
-          this.imgPreview = results[i];
-          this.base64.encodeFile(results[i]).then((base64File: string) => {
-            this.regData.avatar = base64File;
-          }, (err) => {
-            console.log(err);
-          });
+        this.imgPreview = 'data:image/jpeg;base64,' + results[i];
+        this.regData.avatar = this.imgPreview;
+
+     //     this.imgPreview = results[i];
+
+          // //this.base64.encodeFile(results[i]).then((base64File: string) => {
+          //   this.base64.encodeFile(this.imgPreview).then((base64File: string) => {
+          //  this.regData.avatar = base64File;
+          // // this.regData.avatar = "data:image/jpeg;base64," + base64File;
+
+          // }, (err) => {
+          //   console.log(err);
+          // });
       }
     }, (err) => { });
     }
@@ -151,6 +164,7 @@ export class SetQnaPage {
     .subscribe(res => {
       this.loading.dismiss();
       this.event.publish('user:back');
+      this.navCtrl.pop();
     //alert("success "+res);
     //this.goToDisplay();
     }, (err) => {

@@ -182,12 +182,14 @@ export class AddpetPage {
   };
   this.imagePicker.getPictures(options).then((results) => {
     for (var i = 0; i < results.length; i++) {
-        this.imgPreview = results[i];
-        this.base64.encodeFile(results[i]).then((base64File: string) => {
-          this.regData.avatar = base64File;
-        }, (err) => {
-          console.log(err);
-        });
+      this.imgPreview = 'data:image/jpeg;base64,' + results[i];
+      this.regData.avatar = this.imgPreview;
+        // this.imgPreview = results[i];
+        // this.base64.encodeFile(results[i]).then((base64File: string) => {
+        //   this.regData.avatar = base64File;
+        // }, (err) => {
+        //   console.log(err);
+        // });
     }
   }, (err) => { });
 	}
@@ -226,12 +228,10 @@ export class AddpetPage {
     alert("failed");
     });
     }
-
-
     
     goToDisplay() 
     {
-      this.navCtrl.pop();
       this.event.publish('user:back');      
+      this.navCtrl.pop();
     }
 }
