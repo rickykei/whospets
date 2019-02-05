@@ -1,26 +1,90 @@
 import { Component } from '@angular/core';
-import { MenuController, NavParams } from 'ionic-angular';
-import { UserModel } from '../profile/profile.model';
+import { MenuController, NavParams, LoadingController } from 'ionic-angular';
+import { UserModel, SearchUserModel, FollowerModel } from '../profile/profile.model';
+import { ProfileService } from '../profile/profile.service';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @Component({
   selector: 'followers-page',
   templateUrl: 'followers.html'
 })
 export class FollowersPage {
-  list: Array<UserModel> = [];
+  list: Array<FollowerModel> = [];
+  originallist: Array<FollowerModel> = [];
+  searchlist: Array<FollowerModel> = [];
+  
+  user_id:string;
+  status:string;
 
-  constructor(public menu: MenuController, public navParams: NavParams)
+  loading: any;
+
+
+  constructor(public menu: MenuController, 
+    public profileService: ProfileService,
+    public nativeStorage: NativeStorage,
+    public loadingCtrl: LoadingController,
+    public navParams: NavParams)
   {
-    this.list = navParams.get('list');
+    this.originallist = navParams.get('list');
+    this.list = this.originallist;
   }
 
   ionViewDidEnter() {
     // the root left menu should be disabled on this page
     this.menu.enable(false);
+
+    this.nativeStorage.getItem('profile_user_id')
+    .then(data => {
+        this.user_id = data.profile_user_id;
+      
+      });
+      
+      console.log("followers , user id: " + this.user_id);
   }
 
   ionViewWillLeave() {
     // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
+  }
+
+  showLoader(){
+	  this.loading = this.loadingCtrl.create({
+		 // content: 'Loading...'
+	  });
+
+	  this.loading.present();
+  }
+
+
+  onSearch(event){
+    this.showLoader();
+
+    console.info(event.target.value);
+    var url ='http://api.whospets.com/api/users/get_username.php?user_id='+this.user_id+'&username='+event.target.value;
+    this.profileService.getSearchUserData(url)
+    .then(data2 => {
+      console.log('..data2 :'+ data2.success);
+      this.status = data2.success;
+      if(this.status=='true')
+      {
+        this.searchlist = data2.data;
+        this.list = this.searchlist;
+      }
+      this.loading.dismiss();
+
+    });
+
+  }
+  
+
+  onCancel(event)
+  {
+    console.info('onCancel: '+event.target.value);
+      this.list = this.originallist;
+  }
+
+  clearSearch(event){
+    console.info('onCancel: '+event.target.value);
+    this.list = this.originallist;
   }
 }

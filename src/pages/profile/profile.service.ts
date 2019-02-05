@@ -3,10 +3,9 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { ProfileModel, CountryIdModel, PetModel, LoginModel } from './profile.model';
+import { ProfileModel, CountryIdModel, PetModel, LoginModel, SearchUserModel } from './profile.model';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
-import { ListingItemModel } from "../listing/listing.model";
 import { FeedModel } from "../feed/feed.model";
 
 
@@ -22,6 +21,13 @@ export class ProfileService {
     return this.http.get(url)//('./assets/example_data/profile.json')
      .toPromise()
      .then(response => response.json() as ProfileModel)
+     .catch(this.handleError);
+  }
+
+  getSearchUserData(url:string): Promise<SearchUserModel> {
+    return this.http.get(url)//('./assets/example_data/profile.json')
+     .toPromise()
+     .then(response => response.json() as SearchUserModel)
      .catch(this.handleError);
   }
 

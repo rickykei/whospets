@@ -56,6 +56,11 @@ export class ProfileModel {
   followers: Array<FollowerModel> = [];
 }
 
+export class SearchUserModel {
+  success : string;
+  data: Array<FollowerModel> = [];
+}
+
 export class CountryIdModel{
   zone:Array<ZoneModel>;
 }
