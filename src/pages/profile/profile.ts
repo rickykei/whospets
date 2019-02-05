@@ -14,6 +14,7 @@ import { PostInfoPage } from '../post-info/post-info';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { AddpetPage } from '../addpet/addpet';
 import { TabsAllsetpostPage } from '../tabs-allsetpost/tabs-allsetpost';
+import { FollowersPage } from '../followers/followers';
 
 
 @Component({
@@ -72,6 +73,9 @@ export class ProfilePage {
         this.status = data2.success;
         if(this.status=='true')
         {
+          this.profile = data2;
+          this.profile.followers = data2.followers;
+          this.profile.following = data2.following;
           this.profile.data.fb_uid = data2.data.fb_uid; //image
           this.profile.data.email = data2.data.email;
           this.profile.data.firstname = data2.data.firstname;
@@ -180,4 +184,19 @@ export class ProfilePage {
     this.app.getRootNav().push(TabsAllsetpostPage);    
   }
 
+  goToFollowersList() {
+    // close the menu when clicking a link from the menu
+    this.menu.close();
+    this.app.getRootNav().push(FollowersPage, {
+      list: this.profile.followers
+    });
+  }
+
+  goToFollowingList() {
+    // close the menu when clicking a link from the menu
+    this.menu.close();
+    this.app.getRootNav().push(FollowersPage, {
+      list: this.profile.following
+    });
+  }
 }

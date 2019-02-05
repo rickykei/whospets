@@ -21,7 +21,19 @@ export class UserModel {
   country_id:number =0;
   sub_country_id:number=0;
   fb_uid: string ='http://graph.facebook.com/100001704123828/picture';
+}
 
+export class FollowerModel {
+  id: string;
+  username:string;
+  
+  image: string;
+  location: string;
+  about: string;
+  email: string;
+  phone: string;
+  name: string;
+  website: string;
 }
 
 export class LoginModel {
@@ -40,6 +52,8 @@ export class LoginUserModel{
 export class ProfileModel {
   success : string;
   data: UserModel = new UserModel();
+  following: Array<FollowerModel> = [];
+  followers: Array<FollowerModel> = [];
 }
 
 export class CountryIdModel{
