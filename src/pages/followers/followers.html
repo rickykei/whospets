@@ -15,9 +15,9 @@
       </ion-thumbnail>
      <h2 class="item-title">{{item.username}}</h2>
       <!-- <p class="item-description" rows="2">{{item.about}}</p> -->
-      <button class="relation-button" [ngClass]="{following: !item.inverse_relation}" ion-button clear icon-only item-right>
-        <ion-icon *ngIf="item.inverse_relation" name="person-add"></ion-icon>
-        <ion-icon *ngIf="!item.inverse_relation" name="checkmark"></ion-icon>
+      <button class="relation-button" [ngClass]="{following: !item.isfollowed}" ion-button clear icon-only item-right (click)="itemFollower(item)">
+        <ion-icon *ngIf="item.isfollowed" name="checkmark"></ion-icon>
+        <ion-icon *ngIf="!item.isfollowed" name="person-add"></ion-icon>
       </button>
     </ion-item>
   </ion-list>

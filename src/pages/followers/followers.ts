@@ -3,6 +3,7 @@ import { MenuController, NavParams, LoadingController } from 'ionic-angular';
 import { UserModel, SearchUserModel, FollowerModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'followers-page',
@@ -23,6 +24,7 @@ export class FollowersPage {
     public profileService: ProfileService,
     public nativeStorage: NativeStorage,
     public loadingCtrl: LoadingController,
+    public http: HttpClient,  
     public navParams: NavParams)
   {
     this.originallist = navParams.get('list');
@@ -86,17 +88,16 @@ export class FollowersPage {
     {
       if(list[i].followed=='Y')
       {
-        list[i].inverse_relation=false;
+        list[i].isfollowed=true;
       }
       else
       {
-        list[i].inverse_relation=true;
+        list[i].isfollowed=false;
       }
     }
 
   }
   
-
   onCancel(event)
   {
     console.info('onCancel: '+event.target.value);
@@ -107,4 +108,71 @@ export class FollowersPage {
     console.info('onCancel: '+event.target.value);
     this.list = this.originallist;
   }
+
+  itemFollower(item:FollowerModel){
+    console.info('user id: ' + item.user_id);
+    console.info('follower user id : ' + item.follower_user_id);
+
+    if(item.isfollowed===true)
+    {
+      this.removeFollower(item);
+    }else{
+      this.addFollower(item);
+    }
+  }
+
+  addFollower(item:FollowerModel) {
+    //this.showLoader();
+
+   // let postdata = this.sell_form.value;
+
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    //let options = new RequestOptions({ headers: headers });
+    
+    
+    let data=JSON.stringify({user_id:item.user_id,follower_user_id:item.follower_user_id});
+    this.http.post("http://api.whospets.com/api/users/set_user_subscribe.php",data, { headers: headers })
+    // .map(res => res.json(data))
+    .subscribe(res => {
+     // this.loading.dismiss();
+     item.isfollowed=true;
+
+    }, (err) => {
+     // this.loading.dismiss();
+
+    alert("failed");
+    });
+    }
+
+    removeFollower(item:FollowerModel) {
+      //this.showLoader();
+  
+     // let postdata = this.sell_form.value;
+  
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      //let options = new RequestOptions({ headers: headers });
+      
+      
+      let data=JSON.stringify({user_id:item.user_id,follower_user_id:item.follower_user_id});
+      this.http.post("http://api.whospets.com/api/users/unset_user_subscribe.php",data, { headers: headers })
+      // .map(res => res.json(data))
+      .subscribe(res => {
+       // this.loading.dismiss();
+       item.isfollowed=false;
+  
+      }, (err) => {
+       // this.loading.dismiss();
+  
+      alert("failed");
+      });
+      }
+
+
+
 }

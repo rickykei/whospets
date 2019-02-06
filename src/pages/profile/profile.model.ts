@@ -30,7 +30,7 @@ export class FollowerModel {
   follower_user_id:string;
   followed:string;
   image: string;
-  inverse_relation:boolean;
+  isfollowed:boolean;
   // location: string;
   // about: string;
   // email: string;
