@@ -26,6 +26,8 @@ export class FollowersPage {
     public navParams: NavParams)
   {
     this.originallist = navParams.get('list');
+    this.checkFollowed(this.originallist);
+
     this.list = this.originallist;
   }
 
@@ -68,11 +70,29 @@ export class FollowersPage {
       if(this.status=='true')
       {
         this.searchlist = data2.data;
+        this.checkFollowed(this.searchlist);
+
         this.list = this.searchlist;
       }
       this.loading.dismiss();
 
     });
+
+  }
+
+  checkFollowed(list: Array<FollowerModel>)
+  {
+    for(var i = 0; i < list.length; i++)
+    {
+      if(list[i].followed=='Y')
+      {
+        list[i].inverse_relation=false;
+      }
+      else
+      {
+        list[i].inverse_relation=true;
+      }
+    }
 
   }
   

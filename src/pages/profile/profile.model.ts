@@ -26,14 +26,17 @@ export class UserModel {
 export class FollowerModel {
   id: string;
   username:string;
-  
+  user_id:string;
+  follower_user_id:string;
+  followed:string;
   image: string;
-  location: string;
-  about: string;
-  email: string;
-  phone: string;
-  name: string;
-  website: string;
+  inverse_relation:boolean;
+  // location: string;
+  // about: string;
+  // email: string;
+  // phone: string;
+  // name: string;
+  // website: string;
 }
 
 export class LoginModel {
