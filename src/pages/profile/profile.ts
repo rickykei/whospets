@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, SegmentButton, App, NavParams } from 'ionic-angular';
+import { MenuController, SegmentButton, App, NavParams, NavController } from 'ionic-angular';
 import { SettingsPage } from '../settings/settings';
 import { ProfileModel, PetModel, PetDetailsModel } from './profile.model';
 import { ProfileService } from './profile.service';
@@ -34,7 +34,7 @@ export class ProfilePage {
   constructor(
     public menu: MenuController,
     public app: App,
-    //public navCtrl: NavController,
+    public navCtrl: NavController,
     public navParams: NavParams,   
      public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public profileService: ProfileService,
@@ -44,9 +44,28 @@ export class ProfilePage {
     this.display = "grid";
   }
 
+  ionViewDidEnter()
+  {
+    console.log('ionViewDidEnter');
+
+  }
+  ionViewWillEnter()
+  {
+    console.log('ionViewWillEnter');
+
+    this.nativeStorage.getItem('profile_user_id')
+    .then(data => {
+        this.profile_user_id = data.profile_user_id;
+      
+      });
+
+      this.getfollowers();
+      this.getfollowing();
+    
+  }
+
 
   ionViewDidLoad() { 
-
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
@@ -187,16 +206,46 @@ export class ProfilePage {
   goToFollowersList() {
     // close the menu when clicking a link from the menu
     this.menu.close();
-    this.app.getRootNav().push(FollowersPage, {
-      list: this.profile.followers
+    this.navCtrl.push(FollowersPage, {
+      list: this.profile.followers, type:'followers'
     });
   }
 
   goToFollowingList() {
     // close the menu when clicking a link from the menu
     this.menu.close();
-    this.app.getRootNav().push(FollowersPage, {
-      list: this.profile.following
+    this.navCtrl.push(FollowersPage, {
+      list: this.profile.following, type:'following'
     });
+  }
+
+  getfollowers(){
+
+    var url ='http://api.whospets.com/api/users/get_user_follower.php?user_id='+this.profile_user_id;
+    this.profileService.getSearchUserData(url)
+    .then(data2 => {
+      console.log('..data2 :'+ data2.success);
+      this.status = data2.success;
+      if(this.status=='true')
+      {
+        this.profile.followers = data2.data;
+      }
+    });
+
+  }
+
+  getfollowing(){
+
+    var url ='http://api.whospets.com/api/users/get_user_subscribe.php?user_id='+this.profile_user_id;
+    this.profileService.getSearchUserData(url)
+    .then(data2 => {
+      console.log('..data2 :'+ data2.success);
+      this.status = data2.success;
+      if(this.status=='true')
+      {
+        this.profile.following = data2.data;
+      }
+    });
+
   }
 }

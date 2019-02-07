@@ -19,6 +19,7 @@ export class FollowersPage {
 
   loading: any;
 
+  type:string;
 
   constructor(public menu: MenuController, 
     public profileService: ProfileService,
@@ -31,6 +32,8 @@ export class FollowersPage {
     this.checkFollowed(this.originallist);
 
     this.list = this.originallist;
+
+    this.type = navParams.get('type');
   }
 
   ionViewDidEnter() {
@@ -101,12 +104,59 @@ export class FollowersPage {
   onCancel(event)
   {
     console.info('onCancel: '+event.target.value);
-      this.list = this.originallist;
+   //   this.list = this.originallist;
+      this.refreshFollow();
   }
 
   clearSearch(event){
     console.info('onCancel: '+event.target.value);
-    this.list = this.originallist;
+    //this.list = this.originallist;
+    this.refreshFollow();
+  }
+
+  refreshFollow()
+  {
+    if(this.type=='followers')
+    {
+      this.getfollowers();
+    }else if(this.type=='following')
+    {
+      this.getfollowing();
+    }
+  }
+
+  getfollowers(){
+
+    var url ='http://api.whospets.com/api/users/get_user_follower.php?user_id='+this.user_id;
+    this.profileService.getSearchUserData(url)
+    .then(data2 => {
+      console.log('..data2 :'+ data2.success);
+      this.status = data2.success;
+      if(this.status=='true')
+      {
+        this.searchlist = data2.data;
+        this.checkFollowed(this.searchlist);
+
+        this.list = this.searchlist;      }
+    });
+
+  }
+
+  getfollowing(){
+
+    var url ='http://api.whospets.com/api/users/get_user_subscribe.php?user_id='+this.user_id;
+    this.profileService.getSearchUserData(url)
+    .then(data2 => {
+      console.log('..data2 :'+ data2.success);
+      this.status = data2.success;
+      if(this.status=='true')
+      {
+        this.searchlist = data2.data;
+        this.checkFollowed(this.searchlist);
+
+        this.list = this.searchlist;      }
+    });
+
   }
 
   itemFollower(item:FollowerModel){
@@ -119,6 +169,7 @@ export class FollowersPage {
     }else{
       this.addFollower(item);
     }
+
   }
 
   addFollower(item:FollowerModel) {
@@ -133,7 +184,7 @@ export class FollowersPage {
     //let options = new RequestOptions({ headers: headers });
     
     
-    let data=JSON.stringify({user_id:item.user_id,follower_user_id:item.follower_user_id});
+    let data=JSON.stringify({user_id:this.user_id,subscribe_user_id:item.id});
     this.http.post("http://api.whospets.com/api/users/set_user_subscribe.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
@@ -159,7 +210,7 @@ export class FollowersPage {
       //let options = new RequestOptions({ headers: headers });
       
       
-      let data=JSON.stringify({user_id:item.user_id,follower_user_id:item.follower_user_id});
+      let data=JSON.stringify({user_id:this.user_id,subscribe_user_id:item.id});
       this.http.post("http://api.whospets.com/api/users/unset_user_subscribe.php",data, { headers: headers })
       // .map(res => res.json(data))
       .subscribe(res => {
