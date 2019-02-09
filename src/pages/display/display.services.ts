@@ -37,11 +37,19 @@ export class PagesDisplayServiceProvider {
     .catch(this.handleError);
   }
  
+  deletePost(url:string):Promise<PetModel>
+  {
+  //http://api.whospets.com/api/users/del_user_lifestyles.php?user_id=514&content_id=61
+    return this.http.get(url) 
+    .toPromise()
+    .then(response => response.json() as PetModel)
+    .catch(this.handleError);
+  }
 
   getMixPost(user_id:string):Promise<PetModel>
   {
-    //http://api.whospets.com/api/categories/get_all_max.php?user_id=514
-    return this.http.get('http://api.whospets.com/api/categories/get_all_max.php?user_id='+user_id) //('./assets/example_data/mypet.json')
+    //http://api.whospets.com/api/categories/get_all_mix.php?user_id=514
+    return this.http.get('http://api.whospets.com/api/categories/get_all_mix.php?user_id='+user_id) //('./assets/example_data/mypet.json')
     .toPromise()
     .then(response => response.json() as PetModel)
     .catch(this.handleError);

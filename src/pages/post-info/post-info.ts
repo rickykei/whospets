@@ -73,6 +73,34 @@ export class PostInfoPage {
     });
   }
 
+  deletePost() {
+    var url;
+    if(this.post.app_table==='SELL')
+    {
+      url = 'http://api.whospets.com/api/users/del_user_sells.php?user_id='+this.user_id+'&content_id='+this.post.id;
+    }
+    else if(this.post.app_table==='LIFESTYLE')
+    {
+      url ='http://api.whospets.com/api/users/del_user_lifestyles.php?user_id='+this.user_id+'&content_id='+this.post.id;
+    }
+    else if(this.post.app_table==='QNA')
+    {
+      url='http://api.whospets.com/api/users/del_user_qnas.php?user_id='+this.user_id+'&content_id='+this.post.id;
+    }
+
+    this.PagesDisplayServiceProvider.deletePost(url)
+      .then(response => {
+        if(response.success==='true')
+        {
+          console.log('deleted');
+        }
+        else
+        {
+          alert('Fail to delete.Please try later!')
+        }
+      });
+  }
+
  
   likePost(post)
   {
