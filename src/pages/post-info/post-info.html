@@ -9,7 +9,7 @@
     <ion-navbar>
       <ion-title>Post Details</ion-title>
       <ion-buttons end> 
-        <button ion-button (click)="deletePost()"> 
+        <button *ngIf="showDelbtn" ion-button (click)="deletePost(post)"> 
           {{ 'DELETE' | translate }}
       </button> 
       </ion-buttons>

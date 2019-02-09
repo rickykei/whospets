@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams, Events } from 'ionic-angular';
 import { PetDetailsModel } from '../profile/profile.model';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
@@ -7,6 +7,7 @@ import { PagesDisplayServiceProvider } from '../display/display.services';
 import { CommentpetPage } from '../commentpet/commentpet';
 import { PetStatusModel } from '../add-page/addlayout.model';
 import { PetDetailsService } from '../add-page/addlayout.service';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 
 /**
@@ -34,9 +35,11 @@ export class PetinfoPage {
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
     public navParams: NavParams,
+    public http:HttpClient,
     public petdetailservice : PetDetailsService,    
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
-    public socialSharing: SocialSharing
+    public socialSharing: SocialSharing,
+    public events:Events
   ) {
     this.pet = navParams.get('pet');
     this.likevalue = 0;
@@ -71,6 +74,32 @@ export class PetinfoPage {
         this.petStatus = data2;        
       });      
   }
+
+  deletePost() {
+    var url = 'http://api.whospets.com/api/users/del_user_pets.php';
+
+  
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    //let options = new RequestOptions({ headers: headers });
+    
+    
+    let data=JSON.stringify({user_id:this.user_id,pet_id:this.pet.product_id});
+    this.http.post(url,data, { headers: headers })
+    // .map(res => res.json(data))
+    .subscribe(res => {
+      this.events.publish('user:back');      
+      this.navCtrl.pop();
+   // alert("success "+res);
+   // this.goToDisplay();
+    }, (err) => {
+    alert("failed");
+    });
+    }
+
+ 
 
   sharePost(post) {
     //this code is to use the social sharing plugin

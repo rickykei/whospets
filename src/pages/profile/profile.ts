@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, SegmentButton, App, NavParams, NavController } from 'ionic-angular';
+import { MenuController, App, NavParams, NavController, Events } from 'ionic-angular';
 import { SettingsPage } from '../settings/settings';
 import { ProfileModel, PetModel, PetDetailsModel } from './profile.model';
 import { ProfileService } from './profile.service';
@@ -39,8 +39,14 @@ export class ProfilePage {
      public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public profileService: ProfileService,
     public nativeStorage:NativeStorage,
-    public socialSharing: SocialSharing
-  ) {
+    public socialSharing: SocialSharing,
+    public events:Events) {   
+    
+      events.subscribe('user:back', () =>
+    {    
+      console.log('user:back');   
+      this.loadData();
+    });
     this.display = "grid";
   }
 
@@ -56,12 +62,13 @@ export class ProfilePage {
     this.nativeStorage.getItem('profile_user_id')
     .then(data => {
         this.profile_user_id = data.profile_user_id;
-      
+       // this.loadData();
+
       });
 
       this.getfollowers();
       this.getfollowing();
-    
+
   }
 
 
@@ -108,42 +115,46 @@ export class ProfilePage {
           this.profile.data.country_id = data2.data.country_id;
           this.profile.data.sub_country_id = data2.data.sub_country_id;
           this.profile.data.user_id = data2.data.user_id;
+          this.profile_user_id = data2.data.user_id;
 
           this.setProfileUserId(data2.data.user_id +""
           , data2.data.firstname + " " + data2.data.lastname);
-
-		  // console.log('..data2 user_id :'+ data2.data.user_id);
-		  //  console.log('..data2 user_id :'+ this.profile.data.user_id);
-      //     console.log('..data2 fb_uid image :'+ this.profile.data.fb_uid);
-      //     console.log('..data2 email:'+ this.profile.data.email);
           
         }
         else{
           // go to create profile page
           this.app.getRootNav().push(SettingsPage);
-          
         }
-		
-		this.nativeStorage.getItem('email_user')
-			.then(data => {
-				this.profileService.getPet(data.email, this.profile_user_id)
-				.then(response => {
-				  this.pet = response;
-				});
-			  });
 
-			console.log('..data2 user_id getMixPost:'+  this.profile.data.user_id);
-			  this.PagesDisplayServiceProvider.getMixPost( this.profile.data.user_id)
-			  .then(response => {
-				this.petModel = response; 
-				this.details = response.data;                       
-			  });
-       
+        this.loadData();
       });
-
     }, error => {
       console.log('error : '+ error);
     });
+
+     
+    }
+    
+
+    loadData()
+    {
+      //this.showLoader();
+      
+      this.nativeStorage.getItem('email_user')
+    .then(data => {
+      this.profileService.getPet(data.email, this.profile_user_id)
+      .then(response => {
+        this.pet = response;
+      });
+      });
+
+  console.log('..data2 user_id getMixPost:'+  this.profile.data.user_id);
+  this.PagesDisplayServiceProvider.getMixPost( this.profile_user_id)
+      .then(response => {
+      this.petModel = response; 
+      this.details = response.data;    
+                   
+      });
     }
 
     setProfileUserId( _userid : string, _user_name :string )
@@ -248,4 +259,5 @@ export class ProfilePage {
     });
 
   }
+
 }

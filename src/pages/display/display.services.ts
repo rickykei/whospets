@@ -55,6 +55,15 @@ export class PagesDisplayServiceProvider {
     .catch(this.handleError);
   }
 
+    //http://api.whospets.com/api/users/get_user_qnas.php?user_id=501&content_id=23
+    getSpecPost(url:string):Promise<PetModel>
+    {
+      return this.http.get(url) //('./assets/example_data/mypet.json')
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+    }
+
   getPost(user_id:string,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
