@@ -141,20 +141,26 @@ export class QnaPage {
     {
       this.PagesDisplayServiceProvider.getAllQnA(10,this.details.length)
       .then(response => {
+        if(response.success==='true')
+        {
         for(let i=0; i<response.data.length; i++) {
 			console.log('postdata looop'+i); 
 			this.details.push(response.data[i]);
-		  };   
+      };
+    }   
       });
     }
     else
     {
        this.PagesDisplayServiceProvider.getQnA(this.user_id,10,this.details.length)
        .then(response => {
+        if(response.success==='true')
+        {
         for(let i=0; i<response.data.length; i++) {
 			console.log('postdata looop'+i); 
 			this.details.push(response.data[i]);
-		  }                    
+      }                    
+    }
        });
       }
 

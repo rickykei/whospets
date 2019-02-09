@@ -125,11 +125,14 @@ export class FeedPage {
 	  .then(posts => {
 		console.log('feed.ts.getpost');
 		console.log(posts.data.pets.length);
-		this.feed.success =  posts.success;
+    this.feed.success =  posts.success;
+    if(posts.success==='true')
+        {
 		 for(let i=0; i<posts.data.pets.length; i++) {
 			console.log('postdata looop'+i); 
 			this.details.push(posts.data.pets[i]);
-		}
+    }
+  }
 		console.log('post :' + this.feed.success);
 	  });
 

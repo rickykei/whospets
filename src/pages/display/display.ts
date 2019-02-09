@@ -31,6 +31,7 @@ export class DisplayPage {
   loading: any;
   likevalue : number;
   dislikevalue : number;
+  //totalpost:number;
 
   constructor(
     public navCtrl: NavController, 
@@ -54,7 +55,7 @@ export class DisplayPage {
 
     this.likevalue = 0;
     this.dislikevalue = 0;
-
+    //this.totalpost =0;
   }
   
   ionViewDidLoad() {
@@ -126,28 +127,35 @@ export class DisplayPage {
 	 doInfinite(infiniteScroll) {
     console.log('Begin async operation');
 
+   // this.totalpost = this.totalpost + 10;
+
     setTimeout(() => {
        if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllPost(10,this.details.length)
+      this.PagesDisplayServiceProvider.getAllPost(10,this.details.length)//this.totalpost)
       .then(response => {
         //this.petModel = response; 
-		 for(let i=0; i<response.data.length; i++) {
-			console.log('postdata looop'+i); 
-			this.details.push(response.data[i]);   
-		 }
-		
+        if(response.success==='true')
+        {
+          for(let i=0; i<response.data.length; i++) {
+            console.log('postdata looop'+i); 
+            this.details.push(response.data[i]);   
+           }
+        }
       });
     }
     else
     {
-        this.PagesDisplayServiceProvider.getPost(this.user_id,10,this.details.length)
+        this.PagesDisplayServiceProvider.getPost(this.user_id,10,this.details.length) //this.totalpost)
         .then(response => {
+          if(response.success==='true')
+          {
           //this.petModel = response; 
           for(let i=0; i<response.data.length; i++) {
-			console.log('postdata looop'+i); 
-			this.details.push(response.data[i]);   
-		  }                    
+            console.log('postdata looop'+i); 
+            this.details.push(response.data[i]);   
+            }                   
+          } 
         });
       }
 

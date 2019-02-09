@@ -134,10 +134,13 @@ export class DisplaySellPage{
         this.PagesDisplayServiceProvider.getAllSell(10,this.details.length)
         .then(response => {
           //this.petModel = response; 
+          if(response.success==='true')
+          {
           for(let i=0; i<response.data.length; i++) {
 			console.log('postdata looop'+i); 
 			this.details.push(response.data[i]);
-		  }
+      }
+    }
         });
       }
       else
@@ -145,10 +148,13 @@ export class DisplaySellPage{
           this.PagesDisplayServiceProvider.getSell(this.user_id,10,this.details.length)
           .then(response => {
             this.petModel = response; 
+            if(response.success==='true'){
+
             for(let i=0; i<response.data.length; i++) {
 			console.log('postdata looop'+i); 
 			this.details.push(response.data[i]);
-		    }                 
+        }                 
+      }
           });
         }
 
