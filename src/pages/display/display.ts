@@ -213,7 +213,6 @@ export class DisplayPage {
   }
   
   showLoader(){
-    if(this.loading)
     this.loading = this.loadingCtrl.create();
     this.loading.present();
 
