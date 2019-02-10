@@ -48,19 +48,20 @@ export class PostInfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostInfoPage');
     
-    this.checkDelButton();
     this.nativeStorage.getItem('profile_user_id')
     .then(data => {
         this.user_id = data.profile_user_id;
          console.log('this.user_id : ' + data.profile_user_id);
          this.getContent(data.profile_user_id);
+         this.checkDelButton(data.profile_user_id);
       });
 
   }
 
-  checkDelButton()
+  checkDelButton(user_id:string)
   {
-    if( this.post.app_table==='SELL' || this.post.app_table==='LIFESTYLE' || this.post.app_table==='QNA' )
+    //this.post.app_table==='SELL' || this.post.app_table==='LIFESTYLE' || this.post.app_table==='QNA' || 
+    if(this.post.user_id===user_id)
     {
       this.showDelbtn =true;
     }

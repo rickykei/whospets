@@ -45,7 +45,6 @@ export class PetinfoPage {
     public events:Events
   ) {
     this.pet = navParams.get('pet');
-    this.showDelbtn = navParams.get('fromProfile');
     this.likevalue = 0;
     this.dislikevalue = 0; 
    
@@ -71,12 +70,20 @@ export class PetinfoPage {
     .then(data => {
         this.user_id = data.profile_user_id;
          console.log(data.profile_user_id);
+         this.checkDelButton(data.profile_user_id);
       });
 
       this.petdetailservice.getStatusData()
       .then(data2 => {
         this.petStatus = data2;        
       });      
+  }
+  checkDelButton(user_id:string)
+  {
+    if(this.pet.user_id===user_id)
+    {
+      this.showDelbtn =true;
+    }
   }
 
   deletePost() {

@@ -85,6 +85,7 @@ export class PetModel{
 
 export class PetDetailsModel{
         id:string;
+        user_id:string;
         product_id:string;
         category_id:string;
         status:string;
