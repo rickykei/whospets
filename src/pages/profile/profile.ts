@@ -194,7 +194,7 @@ export class ProfilePage {
   goPetDetail(pet)
   {
     console.log("profile : " +this.profile.data.user_id);
-    this.app.getRootNav().push(PetinfoPage, {pet:pet , profile:this.profile.data});
+    this.app.getRootNav().push(PetinfoPage, {pet:pet , profile:this.profile.data, fromProfile:true});
   }
 
   goPostDetail(post)

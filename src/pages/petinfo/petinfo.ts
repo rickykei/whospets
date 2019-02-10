@@ -31,6 +31,9 @@ export class PetinfoPage {
  likevalue : number;
  dislikevalue : number;
 
+ showDelbtn:boolean = false;
+
+
   constructor(
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
@@ -42,6 +45,7 @@ export class PetinfoPage {
     public events:Events
   ) {
     this.pet = navParams.get('pet');
+    this.showDelbtn = navParams.get('fromProfile');
     this.likevalue = 0;
     this.dislikevalue = 0; 
    
