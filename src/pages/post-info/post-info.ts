@@ -23,6 +23,7 @@ export class PostInfoPage {
   post: PetDetailsModel = new PetDetailsModel();
   user_id:string;
   tablename:string;
+  table_type:string;
   
   likevalue : number;
   dislikevalue : number;
@@ -42,6 +43,8 @@ export class PostInfoPage {
     
     this.likevalue = 0;
     this.dislikevalue = 0;
+
+    this.table_type='';
     
   }
 
@@ -74,14 +77,21 @@ export class PostInfoPage {
     if( this.post.app_table==='SELL' || this.tablename ==='app_sell')
     {
       url = 'http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id+'&content_id='+this.post.id;
+      this.table_type ='sell';
+      this.tablename ='app_sell';
     }
     else if(this.post.app_table==='LIFESTYLE' || this.tablename === 'app_post') 
     {
       url ='http://api.whospets.com/api/users/get_user_lifestyles.php?user_id='+user_id+'&content_id='+this.post.id;
+      this.table_type ='lifestyle';
+      this.tablename = 'app_post';
+
     }
     else if(this.post.app_table==='QNA' || this.tablename === 'app_qna')
     {
       url='http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id+'&content_id='+this.post.id;
+      this.table_type ='qna';
+      this.tablename = 'app_qna';
     }
 
     //http://api.whospets.com/api/users/get_user_qnas.php?user_id=501&content_id=23
@@ -96,23 +106,8 @@ export class PostInfoPage {
   }
 
   sharePost(post) {
-    //this code is to use the social sharing plugin
-    // message, subject, file, url
-    var table_name;
-    if(post.app_table==='SELL')
-    {
-      table_name = 'sell'
-    }
-    else if(post.app_table==='LIFESTYLE')
-    {
-      table_name = 'lifestyle'
-    }
-    else if(post.app_table==='QNA')
-    {
-      table_name = 'qna'
-    }
-
-    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/'+table_name+'/'+post.id)
+   
+    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/'+this.table_type+'/'+post.id)
     .then(() => {
       console.log('Success!');
     })
@@ -121,21 +116,27 @@ export class PostInfoPage {
     });
   }
 
-  deletePost(post) {
+  deletePost() {
     var url;
+    if(this.table_type!='')
+      url = 'http://api.whospets.com/api/users/del_user_'+this.table_type+'s.php';
+    else
+      console.log('error with table_type');
 
-    if( post.app_table==='SELL' || this.tablename ==='app_sell')
-    {
-      url = 'http://api.whospets.com/api/users/del_user_sells.php';
-    }
-    else if(post.app_table==='LIFESTYLE' || this.tablename === 'app_post') 
-    {
-      url ='http://api.whospets.com/api/users/del_user_lifestyles.php';
-    }
-    else if(post.app_table==='QNA' || this.tablename === 'app_qna')
-    {
-      url='http://api.whospets.com/api/users/del_user_qnas.php';
-    }
+    // if( this.post.app_table==='SELL' || this.tablename ==='app_sell')
+    // {
+      
+    // }
+    // else if(this.post.app_table==='LIFESTYLE' || this.tablename === 'app_post') 
+    // {
+    //   url ='http://api.whospets.com/api/users/del_user_lifestyles.php';
+    // }
+    // else if(this.post.app_table==='QNA' || this.tablename === 'app_qna')
+    // {
+    //   url='http://api.whospets.com/api/users/del_user_qnas.php';
+    // }
+
+    console.log('url : '+ url);
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -187,18 +188,18 @@ export class PostInfoPage {
 
   commentPost(post)
   {
-    if(post.app_table==='SELL')
-    {
-      this.tablename = 'app_sell'
-    }
-    else if(post.app_table==='LIFESTYLE')
-    {
-      this.tablename = 'app_post'
-    }
-    else if(post.app_table==='QNA')
-    {
-      this.tablename = 'app_qna'
-    }
+    // if(post.app_table==='SELL')
+    // {
+    //   this.tablename = 'app_sell'
+    // }
+    // else if(post.app_table==='LIFESTYLE')
+    // {
+    //   this.tablename = 'app_post'
+    // }
+    // else if(post.app_table==='QNA')
+    // {
+    //   this.tablename = 'app_qna'
+    // }
     this.navCtrl.push( CommentPage, {content_id:post.id, table_name:this.tablename})
   }
 }
