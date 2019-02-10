@@ -26,7 +26,6 @@ export class FeedPage {
   loading:any;
   likevalue : number;
   dislikevalue : number;
-  
 
   constructor(
     public nav: NavController,
@@ -91,14 +90,16 @@ export class FeedPage {
 
  getContent()
  {
+  
    this.showLoader();
   this.feedService
   .getPosts(this.feed.category.catid,this.user_id,10,0)
   .then(response => {
   this.details = response.data.pets;
-  this.loading.dismiss();
-  });
+  this.dismissLoading();
 
+  });
+  
  }
 
  detailPost(pet)
@@ -144,6 +145,15 @@ export class FeedPage {
   showLoader(){
     this.loading = this.loadingCtrl.create();
     this.loading.present();
+    this.dismissLoading();
+
+  }
+
+  dismissLoading()
+  {
+    setTimeout(() => {
+      this.loading.dismiss();//显示多久消失
+  }, 2000);
   }
 
 
@@ -181,9 +191,9 @@ export class FeedPage {
    this.nav.push( CommentpetPage, {product_id:post.product_id})
  }
 
- ionViewWillLeave()
-  {
-    this.loading.dismiss();
-  }
+//  ionViewWillLeave()
+//   {
+//     this.loading.dismiss();
+//   }
   
 }

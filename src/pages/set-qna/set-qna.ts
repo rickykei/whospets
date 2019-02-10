@@ -166,7 +166,7 @@ export class SetQnaPage {
       this.postResponse = res; 
      
     console.log("VALUE RECEIVED: "+res);
-    this.loading.dismiss();
+    this.dismissLoading();
 
     if(this.postResponse.success==='true')
     {
@@ -179,11 +179,11 @@ export class SetQnaPage {
     }
 
   }, (err) => {
-    this.loading.dismiss();
+    this.dismissLoading();
     alert("Fail to add, please try it later.")
   }, () =>
   {
-    this.loading.dismiss();
+    this.dismissLoading();
   });
   }
     // .map(res => res.json(data))
@@ -222,5 +222,15 @@ export class SetQnaPage {
       });
   
       this.loading.present();
+
+      this.dismissLoading();
+
     }
+
+    dismissLoading()
+  {
+    setTimeout(() => {
+      this.loading.dismiss();//显示多久消失
+  }, 2000);
+  }
 }

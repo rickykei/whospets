@@ -106,8 +106,8 @@ export class QnaPage {
 			// console.log('postdata looop'+i); 
 			// this.details.push(response.data[i]);
       // };   
-      this.loading.dismiss();
-      });
+      this.dismissLoading();
+    });
     }
     else
     {
@@ -118,8 +118,8 @@ export class QnaPage {
       // this.details.push(response.data[i]);     
       // };   
       this.details = response.data;
-      this.loading.dismiss();
-      });
+      this.dismissLoading();
+    });
       }
   }
    
@@ -217,16 +217,26 @@ export class QnaPage {
   showLoader(){
     this.loading = this.loadingCtrl.create();
     this.loading.present();
+
+    this.dismissLoading();
   }
+
+  dismissLoading()
+  {
+    setTimeout(() => {
+      this.loading.dismiss();//显示多久消失
+  }, 2000);
+  }
+
 
   commentPost(post)
   {
     this.navCtrl.push( CommentPage, {content_id:post.id, table_name:'app_qna'})
   }
 
-  ionViewWillLeave()
-  {
-    this.loading.dismiss();
-  }
+  // ionViewWillLeave()
+  // {
+  //   this.loading.dismiss();
+  // }
   
 }

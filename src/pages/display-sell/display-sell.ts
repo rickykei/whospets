@@ -55,10 +55,10 @@ export class DisplaySellPage{
     this.dislikevalue = 0;
   }
 
-  ionViewWillLeave()
-  {
-    this.loading.dismiss();
-  }
+  // ionViewWillLeave()
+  // {
+  //   this.dismissLoading();
+  // }
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad PetinfoPage');
@@ -94,13 +94,15 @@ export class DisplaySellPage{
 
     getContent()
   {
+   
     this.showLoader();
     if(this.getall===true)
     {
       this.PagesDisplayServiceProvider.getAllSell(10,0)
       .then(response => {
        this.details = response.data;
-        this.loading.dismiss();
+       this.dismissLoading();
+
       });
     }
     else
@@ -108,10 +110,11 @@ export class DisplaySellPage{
       this.PagesDisplayServiceProvider.getSell(this.user_id,10,0)
       .then(response => {
         this.details = response.data;
-        this.loading.dismiss();
+        this.dismissLoading();
+
       });
       }
-  
+    
     }
 
     doRefresh(refresher) {
@@ -214,12 +217,21 @@ export class DisplaySellPage{
   showLoader(){
     this.loading = this.loadingCtrl.create();
     this.loading.present();
+
+    this.dismissLoading();
   }
 
 
   commentPost(post)
   {
     this.navCtrl.push( CommentPage, {content_id:post.id, table_name:'app_sell'})
+  }
+
+  dismissLoading()
+  {
+    setTimeout(() => {
+      this.loading.dismiss();//显示多久消失
+  }, 2000);
   }
 
 }

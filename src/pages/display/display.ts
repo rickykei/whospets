@@ -85,6 +85,7 @@ export class DisplayPage {
 
   getContent()
   {
+   
     this.showLoader();
 
     if(this.getall===true)
@@ -93,7 +94,7 @@ export class DisplayPage {
       .then(response => {
         //this.petModel = response; 
         this.details = response.data;  
-        this.loading.dismiss(); 
+        this.dismissLoading();
       });
       
     }
@@ -103,10 +104,12 @@ export class DisplayPage {
         .then(response => {
           //this.petModel = response; 
           this.details = response.data;  
-          this.loading.dismiss();                      
+          this.dismissLoading();
         });
          
       }
+
+    
   }
     
     setPost()
@@ -210,8 +213,11 @@ export class DisplayPage {
   }
   
   showLoader(){
+    if(this.loading)
     this.loading = this.loadingCtrl.create();
     this.loading.present();
+
+    this.dismissLoading();
   }
 
   commentPost(post)
@@ -219,9 +225,16 @@ export class DisplayPage {
    this.navCtrl.push( CommentPage, {content_id:post.id, table_name:'app_post'})
  }
 
- ionViewWillLeave()
+//  ionViewWillLeave()
+//   {
+//     this.dismissLoading();
+//   }
+
+  dismissLoading()
   {
-    this.loading.dismiss();
+    setTimeout(() => {
+      this.loading.dismiss();//显示多久消失
+  }, 2000);
   }
 
   
