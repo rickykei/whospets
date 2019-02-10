@@ -175,12 +175,15 @@ export class SetQnaPage {
     }
     else
     {
-      alert("Fail to add, please try it later.")
+      alert("Fail to add, missing contents.")
     }
 
   }, (err) => {
     this.loading.dismiss();
     alert("Fail to add, please try it later.")
+  }, () =>
+  {
+    this.loading.dismiss();
   });
   }
     // .map(res => res.json(data))
