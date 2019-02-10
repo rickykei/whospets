@@ -4,7 +4,7 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
-import { UserModel, PetModel } from '../profile/profile.model';
+import { UserModel, PetModel, ResponseModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { ImagePicker } from '../../../node_modules/@ionic-native/image-picker';
 import { Base64 } from '../../../node_modules/@ionic-native/base64';
@@ -32,6 +32,8 @@ export class SetQnaPage {
  pets_checkbox_result;
  choosepet :string;
  choosepetid :number;
+ postResponse:ResponseModel;
+
   //image
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
@@ -160,19 +162,40 @@ export class SetQnaPage {
       , title:postdata.title, description:postdata.description
       , owner_pet_id:this.choosepetid ,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_qnas.php",data, { headers: headers })
-    // .map(res => res.json(data))
-    .subscribe(res => {
-      this.loading.dismiss();
+    .subscribe((res:ResponseModel) => { 
+      this.postResponse = res; 
+     
+    console.log("VALUE RECEIVED: "+res);
+    this.loading.dismiss();
+
+    if(this.postResponse.success==='true')
+    {
       this.event.publish('user:back');
       this.navCtrl.pop();
-    //alert("success "+res);
-    //this.goToDisplay();
-    }, (err) => {
-      this.loading.dismiss();
-
-    alert("failed");
-    });
     }
+    else
+    {
+      alert("Fail to add, please try it later.")
+    }
+
+  }, (err) => {
+    this.loading.dismiss();
+    alert("Fail to add, please try it later.")
+  });
+  }
+    // .map(res => res.json(data))
+    // .subscribe(res => {
+    //   this.loading.dismiss();
+    //   this.event.publish('user:back');
+    //   this.navCtrl.pop();
+    // //alert("success "+res);
+    // //this.goToDisplay();
+    // }, (err) => {
+    //   this.loading.dismiss();
+
+    // alert("failed");
+    // });
+    // }
 
     goToDisplay() 
     {

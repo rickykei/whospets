@@ -39,6 +39,10 @@ export class FollowerModel {
   // website: string;
 }
 
+export class ResponseModel {
+  success : string;
+}
+
 export class LoginModel {
   success : string;
   data: LoginUserModel = new LoginUserModel();

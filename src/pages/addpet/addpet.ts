@@ -3,7 +3,7 @@ import { NavController, NavParams , AlertController, LoadingController, Events} 
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { ProfileService } from '../profile/profile.service';
-import { PetModel, CountryIdModel, UserModel } from '../profile/profile.model';
+import { PetModel, CountryIdModel, UserModel, ResponseModel } from '../profile/profile.model';
 import { PetDetailsService } from '../add-page/addlayout.service';
 import { PetBreedModel, PetColorModel, PetStatusModel } from '../add-page/addlayout.model';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
@@ -32,6 +32,7 @@ export class AddpetPage {
   petowner:string;
 
   loading: any;
+  postResponse:ResponseModel;
   
   pet: PetModel = new PetModel();
   petdetail: PetBreedModel = new PetBreedModel();
@@ -60,10 +61,10 @@ export class AddpetPage {
 
       this.addPetForm = new FormGroup({
         //title: new FormControl(''),
-        id: new FormControl(''),
-        name_of_pet: new FormControl(''),
+        id: new FormControl('',Validators.required),
+        name_of_pet: new FormControl('',Validators.required),
         petbreed: new FormControl(''),
-        description: new FormControl(''),
+        description: new FormControl('', Validators.required),
         phone: new FormControl(''),
         gender: new FormControl(''),
         weight: new FormControl(0),
@@ -223,15 +224,37 @@ export class AddpetPage {
     , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
     , language:'', specifications:'', style_code:'', created:'', country:'',avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
-    .subscribe(res => { 
-      this.loading.dismiss();
-    //  alert("success "+res);
-      this.goToDisplay();
-      }, (err) => {
-		 this.loading.dismiss();
-    alert("failed");
-    });
+    .subscribe((res:ResponseModel) => { 
+      this.postResponse = res; 
+     
+    console.log("VALUE RECEIVED: "+res);
+    this.loading.dismiss();
+
+    if(this.postResponse.success==='true')
+    {
+      this.event.publish('user:back');
+      this.navCtrl.pop();
     }
+    else
+    {
+      alert("Fail to add, please try it later.")
+    }
+
+  }, (err) => {
+    this.loading.dismiss();
+    alert("Fail to add, please try it later.")
+  });
+  }
+
+    // .subscribe(res => { 
+    //   this.loading.dismiss();
+    // //  alert("success "+res);
+    //   this.goToDisplay();
+    //   }, (err) => {
+		//  this.loading.dismiss();
+    // alert("failed");
+    // });
+    // }
     
     goToDisplay() 
     {

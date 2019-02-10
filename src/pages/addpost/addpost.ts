@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
-import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
+import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
-import { PetModel } from '../profile/profile.model';
+import { PetModel, ResponseModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 //image
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -29,6 +29,7 @@ export class AddpostPage {
   pets_checkbox_result;
   choosepet :string;
   choosepetid :number;
+  postResponse:ResponseModel;
 
 //  profile: UserModel= new UserModel();
   pet: PetModel = new PetModel();
@@ -51,18 +52,12 @@ export class AddpostPage {
     public event: Events) 
     {
       this.post_form = new FormGroup({
-        title: new FormControl(''),
-        description: new FormControl('')      
+        title: new FormControl('',Validators.required),
+        description: new FormControl('',Validators.required)      
       });
 
       this.isTab = navParams.get('onTab'); 
       console.log('this.isTab ' + this.isTab);
-      // this.user_id = navParams.get('user_id'); 
-      // this.profile = navParams.get('profile'); 
-      // if( this.profile)
-      // {       
-      //   this.user_id = this.profile.user_id;
-      // }     
     }
 
   ionViewDidLoad() {
@@ -155,19 +150,40 @@ export class AddpostPage {
       , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
     , pet_id:this.choosepetid,owner_pet_id:this.choosepetid,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
-    // .map(res => res.json(data))
-    .subscribe(res => {
-      this.loading.dismiss();
+    .subscribe((res:ResponseModel) => { 
+      this.postResponse = res; 
+     
+    console.log("VALUE RECEIVED: "+res);
+    this.loading.dismiss();
+
+    if(this.postResponse.success==='true')
+    {
       this.event.publish('user:back');
       this.navCtrl.pop();
-   // alert("success "+res);
-   // this.goToDisplay();
-    }, (err) => {
-      this.loading.dismiss();
-
-    alert("failed");
-    });
     }
+    else
+    {
+      alert("Fail to add, please try it later.")
+    }
+
+  }, (err) => {
+    this.loading.dismiss();
+    alert("Fail to add, please try it later.")
+  });
+  }
+    // .map(res => res.json(data))
+  //   .subscribe(res => {
+  //     this.loading.dismiss();
+  //     this.event.publish('user:back');
+  //     this.navCtrl.pop();
+  //  // alert("success "+res);
+  //  // this.goToDisplay();
+  //   }, (err) => {
+  //     this.loading.dismiss();
+
+  //   alert("failed");
+  //   });
+  //   }
 
     showLoader(){
       this.loading = this.loadingCtrl.create({

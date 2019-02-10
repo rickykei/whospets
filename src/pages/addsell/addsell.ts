@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
-import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
+import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
-import { PetModel, CountryIdModel } from '../profile/profile.model';
+import { PetModel, CountryIdModel, ResponseModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PetColorModel } from '../add-page/addlayout.model';
@@ -35,6 +35,7 @@ export class AddsellPage {
   petColor: PetColorModel = new PetColorModel();
 
   loading: any;
+  postResponse:ResponseModel;
   //image
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
@@ -51,8 +52,8 @@ export class AddsellPage {
     private base64: Base64,
     public event: Events) {
       this.sell_form = new FormGroup({
-        title: new FormControl(''),
-        description: new FormControl(''),  
+        title: new FormControl('',Validators.required),
+        description: new FormControl('',Validators.required),  
         price:new FormControl(''),
         countryId: new FormControl(''),
         subCountryId: new FormControl(''),
@@ -60,13 +61,7 @@ export class AddsellPage {
         weight: new FormControl(0),
         size: new FormControl(0)
       });
-    
-      // this.user_id = navParams.get('user_id'); 
-      // this.profile = navParams.get('profile'); 
-      // if( this.profile)
-      // {       
-      //   this.user_id = this.profile.user_id;
-      // }    
+  
   }
 
   ionViewDidLoad() {
@@ -148,17 +143,26 @@ export class AddsellPage {
       , color:postdata.color, weight:postdata.weight,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/set_user_sells.php",data, { headers: headers })
     // .map(res => res.json(data))
-    .subscribe(res => {
+    //.subscribe(res => {
+      .subscribe((res:ResponseModel) => { 
+        this.postResponse = res; 
+       
+      console.log("VALUE RECEIVED: "+res);
       this.loading.dismiss();
-      this.event.publish('user:back');
-      this.navCtrl.pop();
-      //this.goToDisplay();
-   // alert("success "+res);
+
+      if(this.postResponse.success==='true')
+      {
+        this.event.publish('user:back');
+        this.navCtrl.pop();
+      }
+      else
+      {
+        alert("Fail to add, please try it later.")
+      }
 
     }, (err) => {
       this.loading.dismiss();
-
-    alert("failed");
+      alert("Fail to add, please try it later.")
     });
     }
 
