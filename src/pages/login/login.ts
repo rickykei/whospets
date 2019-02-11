@@ -45,8 +45,8 @@ export class LoginPage {
     this.main_page = { component: TabsNavigationPage }; 
 
     this.login = new FormGroup({
-      email: new FormControl('rickykei@yahoo.com', Validators.required),
-      password: new FormControl('1234', Validators.required)
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
     });
 
     this.email = this.login.controls['email'];

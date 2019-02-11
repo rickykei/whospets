@@ -5,7 +5,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { CommentpetPage } from '../commentpet/commentpet';
-import { PetStatusModel } from '../add-page/addlayout.model';
+//import { PetStatusModel } from '../add-page/addlayout.model';
 import { PetDetailsService } from '../add-page/addlayout.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
@@ -26,7 +26,7 @@ export class PetinfoPage {
   pet: PetDetailsModel = new PetDetailsModel();
  uid:string;
  user_id:string;
- petStatus: PetStatusModel = new PetStatusModel();
+ //petStatus: PetStatusModel = new PetStatusModel();
 
  likevalue : number;
  dislikevalue : number;
@@ -56,7 +56,6 @@ export class PetinfoPage {
    
     this.nativeStorage.getItem('email_user')
     .then(data => {
-      var url ;
       if(data.uid=='')
       {   
         this.uid='100001704123828';  
@@ -65,6 +64,8 @@ export class PetinfoPage {
         this.uid=data.uid;
       }
     });
+
+    this.checkPetStatus();
   
     this.nativeStorage.getItem('profile_user_id')
     .then(data => {
@@ -73,17 +74,43 @@ export class PetinfoPage {
          this.checkDelButton(data.profile_user_id);
       });
 
-      this.petdetailservice.getStatusData()
-      .then(data2 => {
-        this.petStatus = data2;        
-      });      
+      // this.petdetailservice.getStatusData()
+      // .then(data2 => {
+      //   this.petStatus = data2;        
+      // });      
   }
+
   checkDelButton(user_id:string)
   {
     if(this.pet.user_id===user_id)
     {
       this.showDelbtn =true;
     }
+  }
+
+  checkPetStatus()
+  {
+    if(this.pet.pet_status==1)
+    {
+      this.pet.pet_Status_string = 'Pet Lost';
+    }
+    else if(this.pet.pet_status==2)
+    {
+      this.pet.pet_Status_string = 'At Home';
+    }
+    else if(this.pet.pet_status==3)
+    {
+      this.pet.pet_Status_string = 'found & at home';
+    }
+    else if(this.pet.pet_status==4)
+    {
+      this.pet.pet_Status_string = 'Pet adoption';
+    }
+    else if(this.pet.pet_status==5)
+    {
+      this.pet.pet_Status_string = 'Pet boarding required';
+    }
+
   }
 
   deletePost() {

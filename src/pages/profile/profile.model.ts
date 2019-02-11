@@ -124,7 +124,8 @@ export class PetDetailsModel{
         name_of_pet:string;
         country:string;
         contact:string;
-        pet_status:0;
+        pet_status:number =0;
+        pet_Status_string:string;
         count_down_end_date:DateTime;
         last_seen_appearance:string;
         questions:string;
