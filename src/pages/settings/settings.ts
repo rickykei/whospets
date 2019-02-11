@@ -306,9 +306,9 @@ export class SettingsPage {
   getPhoto() {
     let options = {
       maximumImagesCount: 1,
-      quality: 50,
-      width: 512,
-      height: 512,
+      // quality: 50,
+      // width: 512,
+      // height: 512,
       outputType: 1
     };
   this.imagePicker.getPictures(options).then((results) => {
