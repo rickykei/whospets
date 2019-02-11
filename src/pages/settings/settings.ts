@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, LoadingController, Platform, normalizeURL } from 'ionic-angular';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { TermsOfServicePage } from '../terms-of-service/terms-of-service';
 import { PrivacyPolicyPage } from '../privacy-policy/privacy-policy';
@@ -9,7 +9,7 @@ import { WalkthroughPage } from '../walkthrough/walkthrough';
 
 import 'rxjs/Rx';
 
-import { ProfileModel, CountryIdModel } from '../profile/profile.model';
+import { ProfileModel, CountryIdModel, ZoneModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -47,11 +47,11 @@ export class SettingsPage {
 
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
-
+  zone: Array<ZoneModel> = new Array();
+  
   user: FacebookUserModel = new FacebookUserModel();
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
-
 
   constructor(
     public nav: NavController,
@@ -75,10 +75,10 @@ export class SettingsPage {
     this.languages = this.languageService.getLanguages();
 
     this.settingsForm = new FormGroup({
-      username: new FormControl(),
-      firstname: new FormControl(),
-      lastname: new FormControl(),
-      email: new FormControl(),
+      username: new FormControl('', Validators.required),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
       city: new FormControl(),
       street: new FormControl(),
       notifications: new FormControl(),
@@ -105,6 +105,7 @@ export class SettingsPage {
     this.profileService.getSubCountryCode()
     .then(zone => {
       this.subcountry = zone;
+      this.zone = this.subcountry.zone;
     });
 
     this.nativeStorage.getItem('email_user')
@@ -141,11 +142,11 @@ export class SettingsPage {
           this.profile.data.street = data2.data.street;
           this.profile.data.city = data2.data.city;
           this.profile.data.about = data2.data.about;
-          this.profile.data.newsletter = (data2.data.newsletter=='1'? 'true':'false');
-          this.profile.data.seller = (data2.data.seller=='1'? 'true':'false');
-          this.profile.data.notification = (data2.data.notification=='1'? 'true':'false');
+          this.profile.data.newsletter = data2.data.newsletter;
+          this.profile.data.seller = data2.data.seller;
+          this.profile.data.notification = data2.data.notification;
           this.profile.data.gender = data2.data.gender;
-          this.profile.data.bio = (data2.data.bio=='1'? 'true':'false');
+          this.profile.data.bio = data2.data.bio;
           this.profile.data.birthday = data2.data.birthday;
           this.profile.data.country_id = data2.data.country_id;
           this.profile.data.sub_country_id = data2.data.sub_country_id;
@@ -164,12 +165,12 @@ export class SettingsPage {
           city: this.profile.data.city,
           street: this.profile.data.street,
           about: this.profile.data.about,
-          notifications: this.profile.data.notification,
-          newsletter: this.profile.data.newsletter,
-          seller: this.profile.data.seller,
+          notifications: (data2.data.notification=='1'? true:false),
+          newsletter: (data2.data.newsletter=='1'? true:false),
+          seller: (data2.data.seller=='1'? true:false),
           gender: this.profile.data.gender,
           language: this.languages.filter(x => x.code == currentLang),
-          bio : this.profile.data.bio,
+          bio : (data2.data.bio=='1'? true:false),
           birthday : this.profile.data.birthday ,
           countryId : this.profile.data.country_id ,
           subCountryId : this.profile.data.sub_country_id ,
@@ -197,34 +198,25 @@ export class SettingsPage {
     this.loading.dismiss();
 
   }
-/*
-  saveProfile()
+
+  biotoggle()
   {
-    let data = this.settingsForm.value;
-    
- 
-    console.log('-------------------update profile');
 
-    console.log('-----data notification' + data.notifications);
-
-    //http://api.whospets.com/api/users/createprofile.php?username=rickykei@yahoo.com.hk&street=street
-     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + 
-     '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + 
-     '&street='+data.street + '&about='+data.about + '&notification='+ 
-     (data.notifications ==false?'0':'1' )    + '&newsletter='+ (data.newsletter ==false?'0':'1') + 
-     '&seller='+ (data.seller==false?'0':'1' ) + '&gender='+data.gender   + '&birthday='+data.birthday+ 
-     '&bio='+ (data.bio ==false?'0':'1') + '&country_id='+data.countryId + '&sub_country_id='+data.subCountryId   ;
-     console.log(url);
-    
-    this.http.get(url).map(res => res.json()).subscribe(data2 => {
-      console.log("success to update profile");
-
-     }, error => {
-      console.log("fail to update profile");
-
-     });
   }
-*/
+
+  onCountryChange(event)
+  {
+    console.info(this.settingsForm.value.countryId);
+    this.zone = new Array();
+    
+    for(var i = 0; i < this.subcountry.zone.length; i++)
+    {
+        if(this.subcountry.zone[i].parent_id === this.settingsForm.value.countryId)
+        {
+          this.zone.push(this.subcountry.zone[i]);
+        }
+    }
+  }
 
   saveProfile()
   {
@@ -240,15 +232,15 @@ export class SettingsPage {
     
     let data=JSON.stringify({email:postdata.email,username:postdata.email
       , firstname:postdata.firstname, lastname:postdata.lastname , city:postdata.city
-    , street:postdata.street,about:postdata.about, notification:(postdata.notifications ==false?'0':'1' )
-    ,newsletter :(postdata.newsletter ==false?'0':'1'), seller:(postdata.seller==false?'0':'1' ),
-    gender:postdata.gender, birthday:postdata.birthday, bio:(postdata.bio ==false?'0':'1') ,
-    country_id:postdata.countryId, sub_country_id: postdata.subCountryId,avatar:this.regData.avatar});
+    , street:postdata.street,about:postdata.about, notification:(postdata.notifications?'1':'0' )
+    ,newsletter:(postdata.newsletter?'1':'0'), seller:(postdata.seller?'1':'0' ),
+    gender:postdata.gender, birthday:postdata.birthday, bio:(postdata.bio?'1':'0') ,
+    country_id:postdata.countryId, sub_country_id:postdata.subCountryId,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/createprofile.php",data, { headers: headers })
     // .map(res => res.json(data))
-    .subscribe(res => {
-      this.loading.dismiss();
+    .subscribe((res) => { 
       this.nav.pop();
+      this.loading.dismiss();
     }, (err) => {
       this.loading.dismiss();
 
@@ -312,13 +304,17 @@ export class SettingsPage {
   }
 
   getPhoto() {
-  let options = {
-    maximumImagesCount: 1
-  };
+    let options = {
+      maximumImagesCount: 1,
+      quality: 50,
+      width: 512,
+      height: 512,
+      outputType: 1
+    };
   this.imagePicker.getPictures(options).then((results) => {
     for (var i = 0; i < results.length; i++) {
     
-        // this.imgPreview = results[i];
+        this.imgPreview = results[i];
         this.base64.encodeFile(results[i]).then((base64File: string) => {
           this.regData.avatar = base64File;
         }, (err) => {
@@ -327,22 +323,12 @@ export class SettingsPage {
           console.log(' base64 Exception ' + exception);
         });
 
+        // this.imgPreview = 'data:image/jpeg;base64,' + results[i];
+        // this.regData.avatar = this.imgPreview;
+
         let image  = results[i];
         this.profileService.setUserImage(image);
         this.profile.data.fb_uid = image;
-
-        // this.cropService.crop(results[i], {quality: 75}).then(
-        //   newImage => {
-        //     let image  = normalizeURL(newImage);
-
-        //     this.profileService.setUserImage(image);
-        //     this.profile.data.fb_uid = image;
-        //   },
-        //   error => console.error("Error cropping image", error)
-        // ).catch(exception => {
-        //   console.log('cropping image Exception ' + exception);
-        // });
-     
     }
   }, (err) => { })
   .catch(exception => {

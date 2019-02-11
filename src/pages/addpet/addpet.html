@@ -36,7 +36,7 @@
 
       <ion-row no-padding class="user-preferences-row">
           <span class="radio-tags-label">{{'TYPE OF PET' | translate}}</span>
-          <ion-list class="radio-tags" radio-group formControlName="typeofpet">
+          <ion-list class="radio-tags" radio-group formControlName="typeofpet" (ionChange)="changePetType($event)">
             <ion-item class="radio-tag">
               <ion-label>cat</ion-label>
               <ion-radio value="2"></ion-radio>
@@ -50,19 +50,11 @@
           </ion-list>
         </ion-row>
 
-       <!--  <ion-item>
-          <ion-label>{{'TYPE OF PET' | translate}}</ion-label>
-          <ion-select formControlName="typeofpet" (ionChange)="setPetBreedValues(sBreed)">
-              <ion-option [value]="sBreed.pet_id" *ngFor="let sBreed of breeds">{{sBreed.name}} </ion-option>
-          </ion-select>
-      </ion-item> -->
-
         <ion-row no-padding class="user-preferences-row">
               <ion-item >                  
               <ion-label>{{'PET BREED' | translate}}</ion-label>
               <ion-select formControlName="petbreed"> 
-              <!--  <ion-option  *ngFor="let breed of selectedbreeds" [value]="breed.category_id">{{breed.title}}</ion-option> -->
-              <ion-option  *ngFor="let breed of petdetail.pet">{{breed.title}}</ion-option> 
+              <ion-option  *ngFor="let breed of petbreed">{{breed.title}}</ion-option> 
               </ion-select>
             </ion-item>             
         </ion-row>
@@ -153,7 +145,9 @@
 
           <ion-item>
             <ion-label>{{'COUNTRY' | translate}}</ion-label>
-            <ion-select formControlName="countryId"><ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+            <ion-select formControlName="countryId" (ionChange)="onCountryChange($event)">
+              <ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> 
+            </ion-select>
           </ion-item>
 
           </ion-col>
@@ -163,7 +157,9 @@
           <ion-col no-padding >
               <ion-item>
             <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
-            <ion-select formControlName="subCountryId"> <ion-option *ngFor="let zone of subcountry.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+            <ion-select formControlName="subCountryId"> 
+                <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> 
+            </ion-select>
           </ion-item>
 
           </ion-col>

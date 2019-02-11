@@ -3,14 +3,13 @@ import { NavController, NavParams , AlertController, LoadingController, Events} 
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { ProfileService } from '../profile/profile.service';
-import { PetModel, CountryIdModel, UserModel, ResponseModel } from '../profile/profile.model';
+import { PetModel, CountryIdModel, UserModel, ResponseModel, ZoneModel } from '../profile/profile.model';
 import { PetDetailsService } from '../add-page/addlayout.service';
-import { PetBreedModel, PetColorModel, PetStatusModel } from '../add-page/addlayout.model';
+import { PetBreedModel, PetColorModel, PetStatusModel, BreedModel } from '../add-page/addlayout.model';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import { ApiProvider } from '../../providers/api/api';
-import { resolveDefinition } from '../../../node_modules/@angular/core/src/view/util';
 
 /**
  * Generated class for the AddpetPage page.
@@ -40,10 +39,12 @@ export class AddpetPage {
   petStatus: PetStatusModel = new PetStatusModel();
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
+  zone: Array<ZoneModel> = new Array();
+  petbreed: Array<BreedModel> = new Array();
+
   profile: UserModel= new UserModel();
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
-
   
   constructor(
     public navCtrl: NavController, 
@@ -175,6 +176,34 @@ export class AddpetPage {
      });
      
      console.log("add sell , user id: " + this.user_id);
+  }
+
+  changePetType(event)
+  {
+    console.log(event);
+    this.petbreed = new Array();
+
+    for(var i = 0; i < this.petdetail.pet.length; i++)
+    {
+        if(this.petdetail.pet[i].parent_id === event)
+        {
+          this.petbreed.push(this.petdetail.pet[i]);
+        }
+    }
+  }
+
+  onCountryChange(event)
+  {
+    console.info(this.addPetForm.value.countryId);
+    this.zone = new Array();
+    
+    for(var i = 0; i < this.subcountry.zone.length; i++)
+    {
+        if(this.subcountry.zone[i].parent_id === this.addPetForm.value.countryId)
+        {
+          this.zone.push(this.subcountry.zone[i]);
+        }
+    }
   }
 
   getPhoto() {

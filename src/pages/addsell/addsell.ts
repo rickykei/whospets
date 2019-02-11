@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
-import { PetModel, CountryIdModel, ResponseModel } from '../profile/profile.model';
+import { PetModel, CountryIdModel, ResponseModel, ZoneModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PetColorModel } from '../add-page/addlayout.model';
@@ -32,6 +32,8 @@ export class AddsellPage {
 
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
+  zone: Array<ZoneModel> = new Array();
+
   petColor: PetColorModel = new PetColorModel();
 
   loading: any;
@@ -167,6 +169,20 @@ export class AddsellPage {
     {
       this.loading.dismiss();
     });
+    }
+
+    onCountryChange(event)
+    {
+      console.info(this.sell_form.value.countryId);
+      this.zone = new Array();
+      
+      for(var i = 0; i < this.subcountry.zone.length; i++)
+      {
+          if(this.subcountry.zone[i].parent_id === this.sell_form.value.countryId)
+          {
+            this.zone.push(this.subcountry.zone[i]);
+          }
+      }
     }
 
     showLoader(){
