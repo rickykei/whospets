@@ -124,6 +124,8 @@ export class ProfilePage {
           this.setProfileUserId(data2.data.user_id +""
           , data2.data.firstname + " " + data2.data.lastname);
           
+          this.loadData();
+
         }
         else{
           // go to create profile page
@@ -135,7 +137,6 @@ export class ProfilePage {
       console.log('error : '+ error);
     });
 
-    this.loadData();
 
      
     }
