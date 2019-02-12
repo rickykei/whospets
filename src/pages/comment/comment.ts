@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { CommentDetailsModel } from './comment.model';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -24,6 +24,8 @@ export class CommentPage {
   comment_form: any;
   loading:any;
   user_id:string;
+  addComment:boolean =false;
+  commentcount: number;
 
   constructor(
     public navCtrl: NavController,
@@ -31,7 +33,8 @@ export class CommentPage {
     public http: HttpClient,  
     public nativeStorage:NativeStorage,
     public navParams: NavParams,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public event:Events
         ) {
      
       this.comment_form = new FormGroup({
@@ -41,6 +44,14 @@ export class CommentPage {
       this.content_id = this.navParams.get('content_id');
       this.table_name = this.navParams.get('table_name');
 
+  }
+
+  ionViewWillLeave()
+  {
+    if(this.addComment)
+    {
+      this.event.publish('user:comment', this.commentcount);
+    }
   }
 
   ionViewDidLoad() {
@@ -82,6 +93,8 @@ export class CommentPage {
       this.getUserComment();
       this.loading.dismiss();
       this.comment_form.reset();
+      this.addComment=true;
+      this.commentcount++;
       
     }, (err) => {
       this.loading.dismiss();

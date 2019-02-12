@@ -55,7 +55,7 @@
            <ion-col no-padding width-45 text-center>
              <button class="action-button" ion-button clear small (click)="commentPost(pet)" icon-start>
                <ion-icon name='chatbubbles'></ion-icon>
-               {{'COMMENTS' | translate}}
+               {{pet.commentcnt}} {{'COMMENTS' | translate}}
              </button>
            </ion-col>
            <ion-col no-padding width-25 text-right>

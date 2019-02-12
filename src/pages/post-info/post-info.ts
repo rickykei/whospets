@@ -38,6 +38,7 @@ export class PostInfoPage {
      public nativeStorage: NativeStorage,
      public events:Events
     ) {
+
     this.post = navParams.get('post'); 
     this.tablename  =  navParams.get('tablename');
     
@@ -45,6 +46,12 @@ export class PostInfoPage {
     this.dislikevalue = 0;
 
     this.table_type='';
+
+    events.subscribe('user:comment', (commentcount) =>
+    {    
+     // console.log('user:back');   
+     this.post.commentcnt = this.post.commentcnt + commentcount;
+    });
     
   }
 

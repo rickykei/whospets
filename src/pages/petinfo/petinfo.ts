@@ -44,10 +44,16 @@ export class PetinfoPage {
     public socialSharing: SocialSharing,
     public events:Events
   ) {
+    
     this.pet = navParams.get('pet');
     this.likevalue = 0;
     this.dislikevalue = 0; 
    
+    events.subscribe('user:comment', (commentcount) =>
+    {    
+     // console.log('user:back');   
+     this.pet.commentcnt = this.pet.commentcnt + commentcount;
+    });
   }
 
   ionViewDidLoad() {

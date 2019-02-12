@@ -138,4 +138,5 @@ export class PetDetailsModel{
         likecnt: number = 0;
         ownlike: number = 0;
         app_table: string;
+        commentcnt: number = 0;
 }

@@ -45,7 +45,10 @@ export class FeedPostModel {
   image:string;
   filename:string;
 	likecnt: number = 0;
-	ownlike: number = 0;
+  ownlike: number = 0;
+  commentcnt: number = 0;
+  app_table: string;
+
 }
 
  export class DataModel {

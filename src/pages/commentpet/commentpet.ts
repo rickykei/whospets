@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { CommentDetailsModel } from '../comment/comment.model';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -23,19 +23,32 @@ export class CommentpetPage {
   comment_form: any;
   loading:any;
   user_id:string;
+  addComment:boolean =false;
+  commentcount:number;
 
   constructor(public navCtrl: NavController,
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
      public http: HttpClient,  
     public nativeStorage:NativeStorage,
     public navParams: NavParams,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public event:Events
+    ) {
 
       this.comment_form = new FormGroup({
         reply: new FormControl()   
       });
 
       this.product_id = navParams.get('product_id');
+      this.commentcount =0;
+  }
+
+  ionViewWillLeave()
+  {
+    if(this.addComment)
+    {
+      this.event.publish('user:comment', this.commentcount);
+    }
   }
 
   ionViewDidLoad() {
@@ -77,6 +90,8 @@ export class CommentpetPage {
       this.getPetComment();
       this.loading.dismiss();
       this.comment_form.reset();
+      this.addComment=true;
+      this.commentcount++;
     }, (err) => {
       this.loading.dismiss();
 
