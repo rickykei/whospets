@@ -74,6 +74,8 @@ export class ProfilePage {
 
   ionViewDidLoad() { 
 
+
+
     this.nativeStorage.getItem('email_user')
     .then(data => {
       console.log('..data :'+ data.email);
@@ -99,9 +101,11 @@ export class ProfilePage {
         this.status = data2.success;
         if(this.status=='true')
         {
-          this.profile = data2;
-          this.profile.followers = data2.followers;
-          this.profile.following = data2.following;
+          console.log('..data2 :'+ data2.success);
+
+          //this.profile = data2;
+          //this.profile.followers = data2.followers;
+          //this.profile.following = data2.following;
           this.profile.data.fb_uid = data2.data.fb_uid; //image
           this.profile.data.email = data2.data.email;
           this.profile.data.firstname = data2.data.firstname;
@@ -126,11 +130,12 @@ export class ProfilePage {
           this.app.getRootNav().push(SettingsPage);
         }
 
-        this.loadData();
       });
     }, error => {
       console.log('error : '+ error);
     });
+
+    this.loadData();
 
      
     }
