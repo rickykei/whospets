@@ -104,8 +104,8 @@ export class ProfilePage {
           console.log('..data2 :'+ data2.success);
 
           //this.profile = data2;
-          //this.profile.followers = data2.followers;
-          //this.profile.following = data2.following;
+          this.profile.followers = data2.followers;
+          this.profile.following = data2.following;
           this.profile.data.fb_uid = data2.data.fb_uid; //image
           this.profile.data.email = data2.data.email;
           this.profile.data.firstname = data2.data.firstname;
