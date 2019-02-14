@@ -53,6 +53,8 @@ export class SettingsPage {
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
 
+  isEnable:boolean = false;
+
   constructor(
     public nav: NavController,
     public modal: ModalController,
@@ -199,21 +201,18 @@ export class SettingsPage {
 
   }
 
-  biotoggle()
-  {
-
-  }
-
   onCountryChange(event)
   {
     console.info(this.settingsForm.value.countryId);
     this.zone = new Array();
-    
+    this.isEnable = false;
+
     for(var i = 0; i < this.subcountry.zone.length; i++)
     {
         if(this.subcountry.zone[i].parent_id === this.settingsForm.value.countryId)
         {
           this.zone.push(this.subcountry.zone[i]);
+          this.isEnable = true;
         }
     }
   }

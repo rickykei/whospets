@@ -35,6 +35,7 @@ export class AddsellPage {
   zone: Array<ZoneModel> = new Array();
 
   petColor: PetColorModel = new PetColorModel();
+  isEnable:boolean = false;
 
   loading: any;
   postResponse:ResponseModel;
@@ -175,12 +176,14 @@ export class AddsellPage {
     {
       console.info(this.sell_form.value.countryId);
       this.zone = new Array();
-      
+      this.isEnable = false;
+
       for(var i = 0; i < this.subcountry.zone.length; i++)
       {
           if(this.subcountry.zone[i].parent_id === this.sell_form.value.countryId)
           {
             this.zone.push(this.subcountry.zone[i]);
+            this.isEnable = true;
           }
       }
     }

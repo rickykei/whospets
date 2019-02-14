@@ -32,6 +32,8 @@ export class AddpetPage {
 
   loading: any;
   postResponse:ResponseModel;
+
+  isEnable:boolean = false;
   
   pet: PetModel = new PetModel();
   petdetail: PetBreedModel = new PetBreedModel();
@@ -84,17 +86,6 @@ export class AddpetPage {
         subCountryId: new FormControl('') 
 		 
       });
-
-    /*  this.user_id = navParams.get('user_id'); 
-      this.petowner = navParams.get('user_name'); 
-
-      this.profile = navParams.get('profile'); 
-      if( this.profile)
-      {
-        this.petowner = this.profile.firstname + '' + this.profile.lastname;
-        this.user_id = this.profile.user_id;
-      }   
-      */  
   }
 
   
@@ -196,12 +187,14 @@ export class AddpetPage {
   {
     console.info(this.addPetForm.value.countryId);
     this.zone = new Array();
-    
+    this.isEnable = false;
+
     for(var i = 0; i < this.subcountry.zone.length; i++)
     {
         if(this.subcountry.zone[i].parent_id === this.addPetForm.value.countryId)
         {
           this.zone.push(this.subcountry.zone[i]);
+          this.isEnable = true;
         }
     }
   }

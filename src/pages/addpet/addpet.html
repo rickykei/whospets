@@ -157,7 +157,7 @@
           <ion-col no-padding >
               <ion-item>
             <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
-            <ion-select formControlName="subCountryId"> 
+            <ion-select [disabled]="isEnabled" formControlName="subCountryId"> 
                 <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> 
             </ion-select>
           </ion-item>
