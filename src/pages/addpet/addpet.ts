@@ -64,10 +64,10 @@ export class AddpetPage {
 
       this.addPetForm = new FormGroup({
         //title: new FormControl(''),
-        id: new FormControl('',Validators.required),
+        id: new FormControl(''),
         name_of_pet: new FormControl('',Validators.required),
         petbreed: new FormControl(''),
-        description: new FormControl('', Validators.required),
+        description: new FormControl(''),
         phone: new FormControl(''),
         gender: new FormControl(''),
         weight: new FormControl(0),
@@ -236,53 +236,57 @@ export class AddpetPage {
 	}
 
   addPet() {
-	  this.showLoader();
-	
-    let postdata = this.addPetForm.value;
 
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Access-Control-Allow-Origin' , '*');
-    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-          
-    let data=JSON.stringify({user_id:this.user_id,email:this.email,username:this.email
-      , title:postdata.name_of_pet
-      , description:postdata.description , name_of_pet:postdata.name_of_pet
-    , pet_id:postdata.id, category_id:postdata.petbreed, sub_category:postdata.typeofpet
-    , gender:postdata.gender, date_born:postdata.born_date, color:postdata.color
-    , weight:postdata.weight, height:postdata.height
-    , size:postdata.size, country_id:postdata.countryId, sub_country_id:postdata.subCountryId
-    , contact:postdata.phone , pet_status:postdata.petstatus, date_lost:postdata.lost_date
-    , count_down_end_date:postdata.found_date
-    , price:postdata.rewards, last_seen_appearance:postdata.lastseen, status:postdata.status
-    , tax_id:'', quantity:'', condition:'', feature_date:'', gallery_date:'', banner_a:''
-    , banner_b:'', banner_c:''
-    , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
-    , language:'', specifications:'', style_code:'', created:'', country:'',avatar:this.regData.avatar});
-    this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
-    .subscribe((res:ResponseModel) => { 
-      this.postResponse = res; 
-     
-    console.log("VALUE RECEIVED: "+res);
-    this.loading.dismiss();
-
-    if(this.postResponse.success==='true')
+    if(this.checkField())
     {
-      this.event.publish('user:back');
-      this.navCtrl.pop();
-    }
-    else
-    {
-      alert("Fail to add, missing contents.")
-    }
+        this.showLoader();
+      
+        let postdata = this.addPetForm.value;
 
-  }, (err) => {
-    this.loading.dismiss();
-    alert("Fail to add, please try it later.")
-  }, () =>
-  {
-    this.loading.dismiss();
-  });
+        let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Access-Control-Allow-Origin' , '*');
+        headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+              
+        let data=JSON.stringify({user_id:this.user_id,email:this.email,username:this.email
+          , title:postdata.name_of_pet
+          , description:postdata.description , name_of_pet:postdata.name_of_pet
+        , pet_id:postdata.id, category_id:postdata.petbreed, sub_category:postdata.typeofpet
+        , gender:postdata.gender, date_born:postdata.born_date, color:postdata.color
+        , weight:postdata.weight, height:postdata.height
+        , size:postdata.size, country_id:postdata.countryId, sub_country_id:postdata.subCountryId
+        , contact:postdata.phone , pet_status:postdata.petstatus, date_lost:postdata.lost_date
+        , count_down_end_date:postdata.found_date
+        , price:postdata.rewards, last_seen_appearance:postdata.lastseen, status:postdata.status
+        , tax_id:'', quantity:'', condition:'', feature_date:'', gallery_date:'', banner_a:''
+        , banner_b:'', banner_c:''
+        , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
+        , language:'', specifications:'', style_code:'', created:'', country:'',avatar:this.regData.avatar});
+        this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
+        .subscribe((res:ResponseModel) => { 
+          this.postResponse = res; 
+        
+        console.log("VALUE RECEIVED: "+res);
+        this.loading.dismiss();
+
+        if(this.postResponse.success==='true')
+        {
+          this.event.publish('user:back');
+          this.navCtrl.pop();
+        }
+        else
+        {
+          alert("Fail to add, missing contents.")
+        }
+
+      }, (err) => {
+        this.loading.dismiss();
+        alert("Fail to add, please try it later.")
+      }, () =>
+      {
+        this.loading.dismiss();
+      });
+    }
   }
 
     // .subscribe(res => { 
@@ -300,4 +304,15 @@ export class AddpetPage {
       this.event.publish('user:back');      
       this.navCtrl.pop();
     }
+
+    checkField()
+  {
+    if(!this.regData.avatar)
+    {
+      alert('Missing petId or image.');
+      return false;
+    }
+   
+    return true;
+  }
 }

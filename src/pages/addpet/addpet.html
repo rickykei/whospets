@@ -18,8 +18,11 @@
   <form [formGroup]="addPetForm" class="addpet-form">
       <h2 class="section-title">{{'Add a pet' | translate}}</h2>
       <ion-item>
-        <ion-input type="text" placeholder="Pet Name" formControlName="name_of_pet"></ion-input>
+        <ion-input type="text" placeholder="Pet Name (*Required)" formControlName="name_of_pet"></ion-input> 
       </ion-item>
+      <ion-text color="danger">
+          <p >{{' *required' | translate}}</p>
+      </ion-text>
   
       <ion-item>
           <ion-input type="text" placeholder="Pet Id" formControlName="id"></ion-input>

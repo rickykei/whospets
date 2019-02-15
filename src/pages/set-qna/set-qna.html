@@ -24,7 +24,7 @@
       <form class="sample-form post-form" [formGroup]="post_form" (ngSubmit)="createPost()">
         
         <h2 class="section-title">{{'Add a Q&A' | translate}}</h2>
-     
+
         <section class="form-section">
           <ion-item>
             <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
@@ -51,6 +51,10 @@
             <ion-label >{{choosepetid}}</ion-label>
           </button>
           </section>
+
+          <ion-text>
+              <p  color="danger"> {{' *All field required' | translate}}</p>
+          </ion-text>
            
         <section class="form-section">
           <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!post_form.valid" (click)="addPost()">Post!</button>

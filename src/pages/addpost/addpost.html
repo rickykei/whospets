@@ -23,6 +23,7 @@
 
   <form [formGroup]="post_form" class="addpost-form">
     <h2 class="section-title">{{'Add a post' | translate}}</h2>
+
         <ion-item>
         <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
       </ion-item>
@@ -45,6 +46,10 @@
       <ion-item>
       <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
     </ion-item>
+
+    <ion-text color="danger">
+        <p >{{' *All field required' | translate}}</p>
+    </ion-text>
     
     <section class="form-section">
       <button ion-button block icon-end class="choose-pet-button" (click)="choosePet()">

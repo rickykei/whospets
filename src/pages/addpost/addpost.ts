@@ -136,43 +136,47 @@ export class AddpostPage {
 
   
   addPost() {
-    this.showLoader();
 
-    let postdata = this.post_form.value;
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Access-Control-Allow-Origin' , '*');
-    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-    //let options = new RequestOptions({ headers: headers });
-    
-    
-    let data=JSON.stringify({user_id:this.user_id,email:this.email
-      , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
-    , pet_id:this.choosepetid,owner_pet_id:this.choosepetid,avatar:this.regData.avatar});
-    this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
-    .subscribe((res:ResponseModel) => { 
-      this.postResponse = res; 
-     
-    console.log("VALUE RECEIVED: "+res);
-    this.loading.dismiss();
-
-    if(this.postResponse.success==='true')
+    if(this.checkField())
     {
-      this.event.publish('user:back');
-      this.navCtrl.pop();
-    }
-    else
-    {
-      alert("Fail to add, missing contents.")
-    }
+        this.showLoader();
 
-  }, (err) => {
-    this.loading.dismiss();
-    alert("Fail to add, please try it later.")
-  }, () =>
-  {
-    this.loading.dismiss();
-  });
+        let postdata = this.post_form.value;
+        let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Access-Control-Allow-Origin' , '*');
+        headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+        //let options = new RequestOptions({ headers: headers });
+        
+        
+        let data=JSON.stringify({user_id:this.user_id,email:this.email
+          , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
+        , pet_id:this.choosepetid,owner_pet_id:this.choosepetid,avatar:this.regData.avatar});
+        this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
+        .subscribe((res:ResponseModel) => { 
+          this.postResponse = res; 
+        
+        console.log("VALUE RECEIVED: "+res);
+        this.loading.dismiss();
+
+        if(this.postResponse.success==='true')
+        {
+          this.event.publish('user:back');
+          this.navCtrl.pop();
+        }
+        else
+        {
+          alert("Fail to add, missing contents.")
+        }
+
+      }, (err) => {
+        this.loading.dismiss();
+        alert("Fail to add, please try it later.")
+      }, () =>
+      {
+        this.loading.dismiss();
+      });
+    } 
   }
     // .map(res => res.json(data))
   //   .subscribe(res => {
@@ -211,5 +215,16 @@ export class AddpostPage {
         this.event.publish('user:back');      
       });;   
     }
+
+    checkField()
+  {
+    if(!this.choosepetid || !this.regData.avatar)
+    {
+      alert('Missing petId or image.');
+      return false;
+    }
+   
+    return true;
+  }
 
 }

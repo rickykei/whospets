@@ -57,12 +57,12 @@ export class AddsellPage {
       this.sell_form = new FormGroup({
         title: new FormControl('',Validators.required),
         description: new FormControl('',Validators.required),  
-        price:new FormControl(''),
-        countryId: new FormControl(''),
-        subCountryId: new FormControl(''),
-        color:new FormControl(''),
-        weight: new FormControl(0),
-        size: new FormControl(0)
+        price:new FormControl('',Validators.required),
+        countryId: new FormControl('',Validators.required),
+        subCountryId: new FormControl('',Validators.required),
+        color:new FormControl('',Validators.required),
+        weight: new FormControl(0,Validators.required),
+        size: new FormControl(0,Validators.required)
       });
   
   }
@@ -129,47 +129,51 @@ export class AddsellPage {
     }
 
   addSell() {
-    this.showLoader();
 
-    let postdata = this.sell_form.value;
-
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Access-Control-Allow-Origin' , '*');
-    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-    //let options = new RequestOptions({ headers: headers });
-    
-    
-    let data=JSON.stringify({user_id:this.user_id,email:this.email
-      , title:postdata.title, description:postdata.description , price:postdata.price
-      , size:postdata.size, country_id:postdata.countryId, sub_country_id:postdata.subCountryId
-      , color:postdata.color, weight:postdata.weight,avatar:this.regData.avatar});
-    this.http.post("http://api.whospets.com/api/users/set_user_sells.php",data, { headers: headers })
-    // .map(res => res.json(data))
-    //.subscribe(res => {
-      .subscribe((res:ResponseModel) => { 
-        this.postResponse = res; 
-       
-      console.log("VALUE RECEIVED: "+res);
-      this.loading.dismiss();
-
-      if(this.postResponse.success==='true')
-      {
-        this.event.publish('user:back');
-        this.navCtrl.pop();
-      }
-      else
-      {
-        alert("Fail to add, missing contents.")
-      }
-
-    }, (err) => {
-      this.loading.dismiss();
-      alert("Fail to add, please try it later.")
-    }, () =>
+    if(this.checkField())
     {
-      this.loading.dismiss();
-    });
+        this.showLoader();
+
+        let postdata = this.sell_form.value;
+
+        let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Access-Control-Allow-Origin' , '*');
+        headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+        //let options = new RequestOptions({ headers: headers });
+        
+        
+        let data=JSON.stringify({user_id:this.user_id,email:this.email
+          , title:postdata.title, description:postdata.description , price:postdata.price
+          , size:postdata.size, country_id:postdata.countryId, sub_country_id:postdata.subCountryId
+          , color:postdata.color, weight:postdata.weight,avatar:this.regData.avatar});
+        this.http.post("http://api.whospets.com/api/users/set_user_sells.php",data, { headers: headers })
+        // .map(res => res.json(data))
+        //.subscribe(res => {
+          .subscribe((res:ResponseModel) => { 
+            this.postResponse = res; 
+          
+          console.log("VALUE RECEIVED: "+res);
+          this.loading.dismiss();
+
+          if(this.postResponse.success==='true')
+          {
+            this.event.publish('user:back');
+            this.navCtrl.pop();
+          }
+          else
+          {
+            alert("Fail to add, missing contents.")
+          }
+
+        }, (err) => {
+          this.loading.dismiss();
+          alert("Fail to add, please try it later.")
+        }, () =>
+        {
+          this.loading.dismiss();
+        });
+      }
     }
 
     onCountryChange(event)
@@ -223,6 +227,17 @@ export class AddsellPage {
         console.log('Exception ' + exception);
         this.event.publish('user:back');      
       });;   
+    }
+
+    checkField()
+    {
+      if(!this.regData.avatar)
+      {
+        alert('Missing image.');
+        return false;
+      }
+     
+      return true;
     }
 
 }

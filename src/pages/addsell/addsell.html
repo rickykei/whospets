@@ -104,6 +104,10 @@
             </ion-item>
         </ion-row>
 
+        <ion-text color="danger">
+            <p >{{' *All field required' | translate}}</p>
+        </ion-text>
+
             <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!sell_form.valid" (click)="addSell()">Post!</button>
         </form>
       </div>

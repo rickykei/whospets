@@ -147,44 +147,51 @@ export class SetQnaPage {
     });
   }
   addPost() {
-    this.showLoader();
-    
-    let postdata = this.post_form.value;
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Access-Control-Allow-Origin' , '*');
-    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-    //let options = new RequestOptions({ headers: headers });
-    
-    console.info('this.choosepetid : ' + this.choosepetid);
-    
-    let data=JSON.stringify({user_id:this.user_id,email:this.email
-      , title:postdata.title, description:postdata.description
-      , owner_pet_id:this.choosepetid ,avatar:this.regData.avatar});
-    this.http.post("http://api.whospets.com/api/users/set_user_qnas.php",data, { headers: headers })
-    .subscribe((res:ResponseModel) => { 
-      this.postResponse = res; 
-     
-    console.log("VALUE RECEIVED: "+res);
-    this.dismissLoading();
 
-    if(this.postResponse.success==='true')
+    if(this.checkField())
     {
-      this.event.publish('user:back');
-      this.navCtrl.pop();
-    }
-    else
-    {
-      alert("Fail to add, missing contents.")
-    }
 
-  }, (err) => {
-    this.dismissLoading();
-    alert("Fail to add, please try it later.")
-  }, () =>
-  {
-    this.dismissLoading();
-  });
+      this.showLoader();
+      
+      let postdata = this.post_form.value;
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      //let options = new RequestOptions({ headers: headers });
+      
+      console.info('this.choosepetid : ' + this.choosepetid);
+      
+      let data=JSON.stringify({user_id:this.user_id,email:this.email
+        , title:postdata.title, description:postdata.description
+        , owner_pet_id:this.choosepetid ,avatar:this.regData.avatar});
+      this.http.post("http://api.whospets.com/api/users/set_user_qnas.php",data, { headers: headers })
+      .subscribe((res:ResponseModel) => { 
+        this.postResponse = res; 
+      
+      console.log("VALUE RECEIVED: "+res);
+      this.dismissLoading();
+
+      if(this.postResponse.success==='true')
+      {
+        this.event.publish('user:back');
+        this.navCtrl.pop();
+      }
+      else
+      {
+        alert("Fail to add, missing contents.")
+      }
+
+    }, (err) => {
+      this.dismissLoading();
+      alert("Fail to add, please try it later.")
+    }, () =>
+    {
+      this.dismissLoading();
+    });
+
+  }
+
   }
     // .map(res => res.json(data))
     // .subscribe(res => {
@@ -232,5 +239,16 @@ export class SetQnaPage {
     setTimeout(() => {
       this.loading.dismiss();//显示多久消失
   }, 2000);
+  }
+
+  checkField()
+  {
+    if(!this.choosepetid || !this.regData.avatar)
+    {
+      alert('Missing petId or image.');
+      return false;
+    }
+   
+    return true;
   }
 }
