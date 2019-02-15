@@ -181,7 +181,21 @@ export class AddpetPage {
           this.petbreed.push(this.petdetail.pet[i]);
         }
     }
+    this.checkEnable();
   }
+
+  checkEnable()
+    {
+      console.info('this.zone.length: ' + this.zone.length);
+      if(this.zone.length>0)
+      {
+        this.isEnable = true;
+      }
+      else
+      {
+        this.isEnable = false;
+      }
+    }
 
   onCountryChange(event)
   {

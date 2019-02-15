@@ -176,15 +176,28 @@ export class AddsellPage {
     {
       console.info(this.sell_form.value.countryId);
       this.zone = new Array();
-      this.isEnable = false;
 
       for(var i = 0; i < this.subcountry.zone.length; i++)
       {
           if(this.subcountry.zone[i].parent_id === this.sell_form.value.countryId)
           {
             this.zone.push(this.subcountry.zone[i]);
-            this.isEnable = true;
           }
+      }
+
+      this.checkEnable();
+    }
+
+    checkEnable()
+    {
+      console.info('this.zone.length: ' + this.zone.length);
+      if(this.zone.length>0)
+      {
+        this.isEnable = true;
+      }
+      else
+      {
+        this.isEnable = false;
       }
     }
 
