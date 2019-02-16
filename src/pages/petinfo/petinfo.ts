@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {  NavController, NavParams, Events } from 'ionic-angular';
-import { PetDetailsModel } from '../profile/profile.model';
+import { PetDetailsModel, CountryIdModel } from '../profile/profile.model';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { PagesDisplayServiceProvider } from '../display/display.services';
@@ -8,6 +8,7 @@ import { CommentpetPage } from '../commentpet/commentpet';
 //import { PetStatusModel } from '../add-page/addlayout.model';
 import { PetDetailsService } from '../add-page/addlayout.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { ProfileService } from '../profile/profile.service';
 
 
 /**
@@ -28,6 +29,9 @@ export class PetinfoPage {
  user_id:string;
  //petStatus: PetStatusModel = new PetStatusModel();
 
+ country: CountryIdModel = new CountryIdModel();
+ subcountry: CountryIdModel = new CountryIdModel();
+
  likevalue : number;
  dislikevalue : number;
 
@@ -42,6 +46,7 @@ export class PetinfoPage {
     public petdetailservice : PetDetailsService,    
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public socialSharing: SocialSharing,
+    public profileService: ProfileService,
     public events:Events
   ) {
     
@@ -80,10 +85,19 @@ export class PetinfoPage {
          this.checkDelButton(data.profile_user_id);
       });
 
-      // this.petdetailservice.getStatusData()
-      // .then(data2 => {
-      //   this.petStatus = data2;        
-      // });      
+   this.profileService.getCountryCode()
+   .then(zone => {
+     this.country = zone;
+   });
+
+   this.profileService.getSubCountryCode()
+   .then(zone => {
+     this.subcountry = zone;
+   });
+
+      this.checkCountryZone();
+      this.checkSubCountryZone();
+
   }
 
   checkDelButton(user_id:string)
@@ -188,4 +202,30 @@ export class PetinfoPage {
  {
    this.navCtrl.push( CommentpetPage, {product_id:post.product_id})
  }
+
+ checkCountryZone()
+  {
+    console.info("this.pet.country_id : " + this.pet.country_id);
+    for(var i = 0; i < this.country.zone.length; i++)
+    {
+        if(this.country.zone[i].country_id === this.pet.country_id)
+        {
+          this.pet.country_title = this.country.zone[i].title;
+          this.pet.country_title_zh = this.country.zone[i].title_zh;
+        }
+    }
+  }
+  checkSubCountryZone()
+  {
+    console.info("this.pet.sub_country_id : " + this.pet.sub_country_id);
+
+    for(var i = 0; i < this.subcountry.zone.length; i++)
+    {
+        if(this.subcountry.zone[i].country_id === this.pet.sub_country_id)
+        {
+          this.pet.subcountry_title = this.subcountry.zone[i].title;
+          this.pet.subcountry_title_zh = this.subcountry.zone[i].title_zh;
+        }
+    }
+  }
 }

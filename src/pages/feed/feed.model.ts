@@ -48,7 +48,10 @@ export class FeedPostModel {
   ownlike: number = 0;
   commentcnt: number = 0;
   app_table: string;
-
+  country_title: string;
+  subcountry_title :string;
+  country_title_zh: string;
+  subcountry_title_zh :string;
 }
 
  export class DataModel {

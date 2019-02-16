@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
-import { PetDetailsModel } from '../profile/profile.model';
+import { PetDetailsModel, CountryIdModel } from '../profile/profile.model';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { CommentPage } from '../comment/comment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { ProfileService } from '../profile/profile.service';
 
 /**
  * Generated class for the PostInfoPage page.
@@ -30,12 +31,16 @@ export class PostInfoPage {
 
   showDelbtn:boolean = false;
 
+  country: CountryIdModel = new CountryIdModel();
+  subcountry: CountryIdModel = new CountryIdModel();
+
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public http: HttpClient,  
      public PagesDisplayServiceProvider: PagesDisplayServiceProvider,
      public socialSharing: SocialSharing,
      public nativeStorage: NativeStorage,
+     public profileService: ProfileService,
      public events:Events
     ) {
 
@@ -66,6 +71,40 @@ export class PostInfoPage {
          this.checkDelButton(data.profile_user_id);
       });
 
+    this.profileService.getCountryCode()
+   .then(zone => {
+     this.country = zone;
+   });
+
+   this.profileService.getSubCountryCode()
+   .then(zone => {
+     this.subcountry = zone;
+   });
+
+  }
+
+  checkCountryZone()
+  {
+    console.info()
+    for(var i = 0; i < this.country.zone.length; i++)
+    {
+        if(this.country.zone[i].country_id === this.post.country_id)
+        {
+          this.post.country_title = this.country.zone[i].title;
+          this.post.country_title_zh = this.country.zone[i].title_zh;
+        }
+    }
+  }
+  checkSubCountryZone()
+  {
+    for(var i = 0; i < this.subcountry.zone.length; i++)
+    {
+        if(this.subcountry.zone[i].country_id === this.post.sub_country_id)
+        {
+          this.post.subcountry_title = this.subcountry.zone[i].title;
+          this.post.subcountry_title_zh = this.subcountry.zone[i].title_zh;
+        }
+    }
   }
 
   checkDelButton(user_id:string)
@@ -108,6 +147,9 @@ export class PostInfoPage {
       {
         this.details = data.data;
         this.post = this.details[0];
+
+        this.checkCountryZone();
+        this.checkSubCountryZone();
       }
     });
   }

@@ -132,11 +132,15 @@ export class PetDetailsModel{
         pet_id:string;
         gender:string;
         country_id:string;
-        sub_country_id:number;
+        sub_country_id:string;
         image:string;
         filename:string;
         likecnt: number = 0;
         ownlike: number = 0;
         app_table: string;
         commentcnt: number = 0;
+        country_title: string;
+        subcountry_title :string;
+        country_title_zh: string;
+        subcountry_title_zh :string;
 }
