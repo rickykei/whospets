@@ -54,6 +54,29 @@
                </ion-col>
              </ion-row>
 
+            
+             <ion-card-content *ngIf="tablename == 'app_sell'">
+                <p class="item-text">
+                    {{'COUNTRY' | translate}} :  {{post.country_id}}
+                </p>
+                <p class="item-text">
+                    {{'SUBCOUNTRY' | translate}} :  {{post.sub_country_id}}
+                </p>
+                <p class="item-text">
+                    {{'PRICE' | translate}} :  {{post.price}}
+                </p>
+                <p class="item-text">
+                    {{'COLOR' | translate}} :  {{post.color}}
+                </p>
+                <p class="item-text">
+                    {{'WEIGHT' | translate}} :  {{post.weight}}
+                </p>
+                <p class="item-text">
+                    {{'SIZE' | translate}} :  {{post.size}}
+                </p>
+             </ion-card-content>
+            
+
        </ion-card>
     </div>
 

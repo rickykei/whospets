@@ -12,14 +12,6 @@
 </ion-header>
 
 <ion-content class="listing-content">
-<!--  <!-- <background-image class="image-heading" [src]="listing.banner_image">  
-    <ion-row class="heading-row">
-      <ion-col no-padding offset-100>
-        <!-- <h2 class="main-title">{{listing.banner_title}}</h2> 
-        <ion-searchbar [(ngModel)]="searchTerm"></ion-searchbar>
-      </ion-col>
-    </ion-row>
-  <!-- </background-image>  -->  
 
   <h4 class="categories-title">{{'POPULAR' | translate}}</h4>
   <ion-scroll scrollX="true" class="horizontal-categories">
@@ -31,17 +23,6 @@
   </ion-scroll>
   <h4 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}</h4>
   <ion-row class="grid-categories">
-  
-
-   <!--  <ion-col width-50 class="category-item" >
-        <background-image tappable class="category-heading" src="./assets/images/listing/200x200boxeo.png" (click)="goToLostPet()">
-          <ion-row class="heading-row">
-            <ion-col no-padding width-100>
-              <h2 class="category-title">{{'LOST_PET' | translate}}</h2>
-            </ion-col>
-          </ion-row>
-        </background-image>
-      </ion-col> -->
  
         <ion-col width-50 class="category-item" *ngFor="let category of listing.categories">
       <background-image tappable class="category-heading" [src]="category.image" (click)="goToFeed(category)">

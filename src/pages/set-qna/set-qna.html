@@ -12,7 +12,7 @@
               <ion-icon name="arrow-back"></ion-icon>
             </button>
           </ion-buttons>
-    <ion-title>setQna</ion-title>
+    <ion-title>{{'ADD_QNA' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,14 +23,19 @@
     <div class="post-example-view">
       <form class="sample-form post-form" [formGroup]="post_form" (ngSubmit)="createPost()">
         
-        <h2 class="section-title">{{'Add a Q&A' | translate}}</h2>
+        <h2 class="section-title">{{'ADD_QNA' | translate}}</h2>
 
         <section class="form-section">
           <ion-item>
-            <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
+            <ion-input type="text" placeholder="{{'TITLE_TXT' | translate}}" formControlName="title"></ion-input>
           </ion-item>
           
-          <ion-row no-padding class="multi-input-row">
+        </section>
+        <ion-item>
+          <ion-textarea rows="7" placeholder="{{'WRITE_DESCRIPTION' | translate}}"  formControlName="description"></ion-textarea>
+        </ion-item>  
+        
+        <ion-row no-padding class="multi-input-row">
             <ion-item>
             <ion-label >{{'UPLOAD_AN_IMAGE' | translate}}</ion-label>
             <ion-avatar item-end>
@@ -38,11 +43,6 @@
             </ion-avatar>
             </ion-item>
         </ion-row>
-          
-        </section>
-        <ion-item>
-          <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
-        </ion-item>
 
         <section class="form-section">
           <button ion-button block icon-end class="choose-pet-button" (click)="choosePet()">
@@ -53,7 +53,7 @@
           </section>
 
           <ion-text>
-              <p  color="danger"> {{' *All field required' | translate}}</p>
+              <p  color="danger"> {{'ALL_REQUIRED' | translate}}</p>
           </ion-text>
            
         <section class="form-section">

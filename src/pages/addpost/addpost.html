@@ -12,7 +12,7 @@
             <ion-icon name="arrow-back"></ion-icon>
           </button>
         </ion-buttons>
-    <ion-title>Add a post</ion-title>
+    <ion-title>{{'ADD_A_POST' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,10 +22,10 @@
     <div class="addpost-content">
 
   <form [formGroup]="post_form" class="addpost-form">
-    <h2 class="section-title">{{'Add a post' | translate}}</h2>
+    <h2 class="section-title">{{'ADD_A_POST' | translate}}</h2>
 
         <ion-item>
-        <ion-input type="text" placeholder="Title: e.g. Krabby Patty" formControlName="title"></ion-input>
+        <ion-input type="text" placeholder="{{'TITLE_TXT' | translate}}" formControlName="title"></ion-input>
       </ion-item>
 
       <!-- <button *ngIf="!selected_image" ion-button block large class="upload-image-button" (click)="openImagePicker()">
@@ -47,8 +47,8 @@
       <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
     </ion-item>
 
-    <ion-text color="danger">
-        <p >{{' *All field required' | translate}}</p>
+    <ion-text >
+        <p  color="danger"> {{'ALL_REQUIRED' | translate}}</p>
     </ion-text>
     
     <section class="form-section">
@@ -59,7 +59,7 @@
       </button>
       </section>
       
-      <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!post_form.valid" (click)="addPost()">Post!</button>
+      <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!post_form.valid" (click)="addPost()">{{'DONE_BTN' | translate}}</button>
  
   </form>
 </div>

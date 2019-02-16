@@ -130,19 +130,6 @@ export class PostInfoPage {
     else
       console.log('error with table_type');
 
-    // if( this.post.app_table==='SELL' || this.tablename ==='app_sell')
-    // {
-      
-    // }
-    // else if(this.post.app_table==='LIFESTYLE' || this.tablename === 'app_post') 
-    // {
-    //   url ='http://api.whospets.com/api/users/del_user_lifestyles.php';
-    // }
-    // else if(this.post.app_table==='QNA' || this.tablename === 'app_qna')
-    // {
-    //   url='http://api.whospets.com/api/users/del_user_qnas.php';
-    // }
-
     console.log('url : '+ url);
 
     let headers = new HttpHeaders();
@@ -195,18 +182,6 @@ export class PostInfoPage {
 
   commentPost(post)
   {
-    // if(post.app_table==='SELL')
-    // {
-    //   this.tablename = 'app_sell'
-    // }
-    // else if(post.app_table==='LIFESTYLE')
-    // {
-    //   this.tablename = 'app_post'
-    // }
-    // else if(post.app_table==='QNA')
-    // {
-    //   this.tablename = 'app_qna'
-    // }
     this.navCtrl.push( CommentPage, {content_id:post.id, table_name:this.tablename})
   }
 }
