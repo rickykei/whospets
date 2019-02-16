@@ -95,20 +95,21 @@ export class SetQnaPage {
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
-     this.email = data.email;     
+     this.email = data.email;   
 
-     this.profileService.getPet(data.email, this.user_id)
-     .then(response => {
-       this.pet = response;
-     });
+     this.nativeStorage.getItem('profile_user_id')
+     .then(data2 => {
+         this.user_id = data2.profile_user_id;
+          console.log(data2.profile_user_id);
+
+          this.profileService.getPet(this.email, this.user_id)
+          .then(response => {
+            this.pet = response;
+          });
+
+       });
    });
-
-   this.nativeStorage.getItem('profile_user_id')
-   .then(data => {
-       this.user_id = data.profile_user_id;
-        console.log(data.profile_user_id);
-     });
-     
+   
      console.log(this.user_id);
   }
 

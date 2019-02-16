@@ -63,22 +63,22 @@ export class AddpostPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddpostPage');
 
-    this.nativeStorage.getItem('email_user')
+    this.nativeStorage.getItem('profile_user_id')
     .then(data => {
-     this.email = data.email;   
+        this.user_id = data.profile_user_id;
+         console.log(data.profile_user_id);
 
-     this.profileService.getPet(data.email, this.user_id)
-     .then(response => {
-       this.pet = response;
-     });
-   });
+         this.nativeStorage.getItem('email_user')
+         .then(data2 => {
+          this.email = data2.email;   
 
-   this.nativeStorage.getItem('profile_user_id')
-   .then(data => {
-       this.user_id = data.profile_user_id;
-        console.log(data.profile_user_id);
-     });
-     
+          this.profileService.getPet(data2.email, data.profile_user_id)
+          .then(response => {
+            this.pet = response;
+          });
+         });
+      });
+   
      console.log(this.user_id);
   }
 
@@ -105,6 +105,8 @@ export class AddpostPage {
     }
   
   choosePet(){
+
+
     let alert = this.alertCtrl.create({
       cssClass: 'category-prompt'
     });

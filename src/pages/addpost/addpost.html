@@ -47,10 +47,6 @@
       <ion-textarea rows="7" placeholder="Write a description or something..." formControlName="description"></ion-textarea>
     </ion-item>
 
-    <ion-text >
-        <p  color="danger"> {{'ALL_REQUIRED' | translate}}</p>
-    </ion-text>
-    
     <section class="form-section">
       <button ion-button block icon-end class="choose-pet-button" (click)="choosePet()">
         {{'CHOOSE_PET' | translate}}
@@ -58,6 +54,10 @@
         <ion-label >{{choosepetid}}</ion-label>
       </button>
       </section>
+
+      <ion-text >
+          <p  color="danger"> {{'ALL_REQUIRED' | translate}}</p>
+      </ion-text>
       
       <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!post_form.valid" (click)="addPost()">{{'DONE_BTN' | translate}}</button>
  
