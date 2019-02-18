@@ -47,7 +47,7 @@ export class CommentpetPage {
   {
     if(this.addComment)
     {
-      this.event.publish('user:comment', this.commentcount);
+      this.event.publish('user:back', this.commentcount);
     }
   }
 

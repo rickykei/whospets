@@ -43,6 +43,7 @@ export class CommentPage {
 
       this.content_id = this.navParams.get('content_id');
       this.table_name = this.navParams.get('table_name');
+      this.commentcount = 0;
 
   }
 
@@ -50,7 +51,7 @@ export class CommentPage {
   {
     if(this.addComment)
     {
-      this.event.publish('user:comment', this.commentcount);
+      this.event.publish('user:back', this.commentcount);
     }
   }
 

@@ -34,6 +34,9 @@ export class PostInfoPage {
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
 
+  commentcnt: number;
+  _temp:number;
+
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public http: HttpClient,  
@@ -49,13 +52,15 @@ export class PostInfoPage {
     
     this.likevalue = 0;
     this.dislikevalue = 0;
+    this.commentcnt = 0;
 
     this.table_type='';
 
-    events.subscribe('user:comment', (commentcount) =>
+    events.subscribe('user:back', (commentcount) =>
     {    
-     // console.log('user:back');   
-     this.post.commentcnt = this.post.commentcnt + commentcount;
+      this._temp = commentcount;
+      this.commentcnt = this.post.commentcnt *1 + this._temp*1;
+      this.post.commentcnt = this.commentcnt;
     });
     
   }

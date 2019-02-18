@@ -36,8 +36,9 @@ export class PetinfoPage {
  dislikevalue : number;
 
  showDelbtn:boolean = false;
-
-
+  commentcnt:number;
+  _temp:number;
+  
   constructor(
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
@@ -53,11 +54,13 @@ export class PetinfoPage {
     this.pet = navParams.get('pet');
     this.likevalue = 0;
     this.dislikevalue = 0; 
-   
-    events.subscribe('user:comment', (commentcount) =>
+
+ 
+    events.subscribe('user:back', (commentcount) =>
     {    
-     // console.log('user:back');   
-     this.pet.commentcnt = this.pet.commentcnt + commentcount;
+      this._temp = commentcount;
+      this.commentcnt = this.pet.commentcnt*1 + this._temp*1;
+      this.pet.commentcnt = this.commentcnt;
     });
   }
 
