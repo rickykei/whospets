@@ -34,6 +34,7 @@ export class AddpetPage {
   postResponse:ResponseModel;
 
   isEnable:boolean = false;
+  isEnableBreed: boolean = false;
   
   pet: PetModel = new PetModel();
   petdetail: PetBreedModel = new PetBreedModel();
@@ -181,7 +182,21 @@ export class AddpetPage {
           this.petbreed.push(this.petdetail.pet[i]);
         }
     }
-    this.checkEnable();
+
+    this.checkBreedEnable();
+  }
+
+  checkBreedEnable()
+  {
+    console.info('this.petbreed.length: ' + this.petbreed.length);
+      if(this.petbreed.length>0)
+      {
+        this.isEnableBreed = true;
+      }
+      else
+      {
+        this.isEnableBreed = false;
+      }
   }
 
   checkEnable()
@@ -197,21 +212,21 @@ export class AddpetPage {
       }
     }
 
-  onCountryChange(event)
-  {
-    console.info(this.addPetForm.value.countryId);
-    this.zone = new Array();
-    this.isEnable = false;
-
-    for(var i = 0; i < this.subcountry.zone.length; i++)
+    onCountryChange(event)
     {
-        if(this.subcountry.zone[i].parent_id === this.addPetForm.value.countryId)
-        {
-          this.zone.push(this.subcountry.zone[i]);
-          this.isEnable = true;
-        }
+      console.info(this.addPetForm.value.countryId);
+      this.zone = new Array();
+
+      for(var i = 0; i < this.subcountry.zone.length; i++)
+      {
+          if(this.subcountry.zone[i].parent_id === this.addPetForm.value.countryId)
+          {
+            this.zone.push(this.subcountry.zone[i]);
+          }
+      }
+
+      this.checkEnable();
     }
-  }
 
   getPhoto() {
     let options = {

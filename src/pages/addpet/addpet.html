@@ -53,7 +53,7 @@
         <ion-row no-padding class="user-preferences-row">
               <ion-item >                  
               <ion-label>{{'PET_BREED' | translate}}</ion-label>
-              <ion-select formControlName="petbreed"> 
+              <ion-select [disabled]="!isEnableBreed"  formControlName="petbreed"> 
               <ion-option  *ngFor="let breed of petbreed">{{breed.title}}</ion-option> 
               </ion-select>
             </ion-item>             
@@ -153,15 +153,14 @@
           </ion-col>
       </ion-row>
 	  
-	  <ion-row no-padding class="multi-input-row">
-          <ion-col no-padding >
-              <ion-item>
-            <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
-            <ion-select [disabled]="!isEnabled" formControlName="subCountryId"> 
-                <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> 
-            </ion-select>
-          </ion-item>
-
+          <ion-row no-padding class="multi-input-row">
+              <ion-col no-padding >
+                  <ion-item>
+                <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+                <ion-select [disabled]="!isEnable" formControlName="subCountryId"> 
+                  <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+              </ion-item>
+    
           </ion-col>
           </ion-row>
 
