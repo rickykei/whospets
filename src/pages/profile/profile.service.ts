@@ -63,7 +63,7 @@ export class ProfileService {
   }
 
 
-  getPopularData(group_ids:string[],length,limit,offset): Promise<FeedModel> {
+  getPopularData(group_ids:string[],length,limit,offset,user_id:string): Promise<FeedModel> {
 
     var _tmpQ ='';
     for(let i = 0; i < length ; i++)
@@ -74,7 +74,7 @@ export class ProfileService {
         _tmpQ = _tmpQ + '&sub_country_id_array[]=' + group_ids[i];
     }
 
-    return this.http.get('http://api.whospets.com/api/categories/get_pets.php'+_tmpQ+'&limit='+limit+'&offset='+offset)
+    return this.http.get('http://api.whospets.com/api/categories/get_pets.php'+_tmpQ+'&limit='+limit+'&offset='+offset+'&user_id='+user_id)
     .toPromise()
      .then(response => response.json() as FeedModel)
      .catch(this.handleError);
