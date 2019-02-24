@@ -20,6 +20,8 @@ export class ListingPage {
   listing: ListingModel = new ListingModel();
   categories: ListingItemModel;
   user_id : string;
+  language :string;
+  isChi : boolean = false;
 
   constructor(
     public nav: NavController,
@@ -27,6 +29,18 @@ export class ListingPage {
     public listingService: ListingService
   ) {}
  
+  ionViewWillLoad()
+  {
+    if(this.language==="zh")
+    {
+      this.isChi = true;
+    }
+    else
+    {
+      this.isChi = false;
+    }
+  }
+
   ionViewDidLoad() {
     this.listingService
       .getData()
@@ -40,6 +54,15 @@ export class ListingPage {
       this.nativeStorage.getItem('profile_user_id')
       .then(data => {
           this.user_id = data.profile_user_id;
+          this.language = data.profile_language;
+          if(data.profile_language==="zh")
+          {
+            this.isChi = true;
+          }
+          else
+          {
+            this.isChi = false;
+          }
         });
   }
 

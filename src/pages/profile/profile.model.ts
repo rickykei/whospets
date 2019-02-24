@@ -14,6 +14,7 @@ export class UserModel {
   about:string;
   newsletter: string;
   seller:string;
+  language:string;
   notification:string;
   gender:string;
   birthday: Date;
@@ -56,6 +57,25 @@ export class LoginUserModel{
   id: number;
   username : string;
   image : string;
+  tc: number =0;
+  user_id : string;
+  lastname : string;
+  firstname :string;
+  email:string;
+  street:string;
+  city:string;
+  about:string;
+  newsletter: string;
+  seller:string;
+  language:string;
+  notification:string;
+  gender:string;
+  birthday: Date;
+  bio:string;
+  country_id:number =0;
+  sub_country_id:number=0;
+  fb_uid: string ='http://graph.facebook.com/100001704123828/picture';
+
 }
 
 export class ProfileModel {

@@ -156,8 +156,8 @@ export class SettingsPage {
         // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
         // More info: https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#populate-the-form-model-with-_setvalue_-and-_patchvalue_
   
-        let currentLang = this.translate.currentLang;
-  
+        let currentLang = data2.data.language;//this.translate.currentLang;
+      
         this.settingsForm.patchValue({
 
           username: data.email,
@@ -246,7 +246,7 @@ export class SettingsPage {
       , firstname:postdata.firstname, lastname:postdata.lastname , city:postdata.city
     , street:postdata.street,about:postdata.about, notification:(postdata.notifications?'1':'0' )
     ,newsletter:(postdata.newsletter?'1':'0'), seller:(postdata.seller?'1':'0' ),
-    gender:postdata.gender, birthday:postdata.birthday, bio:(postdata.bio?'1':'0') ,
+    gender:postdata.gender, birthday:postdata.birthday, bio:(postdata.bio?'1':'0') ,language:postdata.language.code,
     country_id:postdata.countryId, sub_country_id:postdata.subCountryId,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/createprofile.php",data, { headers: headers })
     // .map(res => res.json(data))

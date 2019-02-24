@@ -71,9 +71,12 @@ export class LoginPage {
         this.loginInfo.data.username = data2.data.username;
         this.loginInfo.data.image = data2.data.image;
         this.loginInfo.data.message = data2.data.message;
+        this.loginInfo.data.language = data2.data.language;
+
 
         this.setEmailUser(this.email.value, this.password.value, '');
-        this.setProfileUserId(data2.data.id +'');
+        this.setProfileUserId(data2.data.id +'',data2.data.language+'') ;
+        
         this.nav.push(TabsNavigationPage);//ProfilePage);
 
       }
@@ -86,13 +89,14 @@ export class LoginPage {
 
     }
 
-    setProfileUserId( _userid : string )
+    setProfileUserId( _userid : string, _language:string )
     {
       console.log('profile_user_id :' + _userid);
 
       this.nativeStorage.setItem('profile_user_id',
       {
-        profile_user_id : _userid
+        profile_user_id : _userid,
+        profile_language: _language
       })
       .then(
         () =>  console.log('profile_user_id ： Stored item!'),
@@ -132,7 +136,7 @@ export class LoginPage {
       console.log("data.userid:"+data.userId);
       console.log("data.name:"+data.name);
 
-      this.setProfileUserId(data.userId +'');
+      this.setProfileUserId(data.userId +'', data.language);
 
        this.setEmailUser(data.email, '', data.userId);
       this.nav.setRoot(this.main_page.component);

@@ -115,9 +115,11 @@ export class ProfilePage {
           this.profile.data.sub_country_id = data2.data.sub_country_id;
           this.profile.data.user_id = data2.data.user_id;
           this.profile_user_id = data2.data.user_id;
+          this.profile.data.language = data2.data.language;
+
 
           this.setProfileUserId(data2.data.user_id +""
-          , data2.data.firstname + " " + data2.data.lastname);
+          , data2.data.firstname + " " + data2.data.lastname, data2.data.language);
           
           this.loadData();
 
@@ -156,14 +158,16 @@ export class ProfilePage {
       });
     }
 
-    setProfileUserId( _userid : string, _user_name :string )
+    setProfileUserId( _userid : string, _user_name :string , _language:string)
     {
       console.log('profile_user_id :' + _userid);
 
       this.nativeStorage.setItem('profile_user_id',
       {
         profile_user_id : _userid,
-        profile_user_name: _user_name
+        profile_user_name: _user_name,
+        profile_language: _language
+
       })
       .then(
         () =>  console.log('profile_user_id ： Stored item!'),
