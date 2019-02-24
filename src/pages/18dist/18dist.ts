@@ -52,9 +52,9 @@ export class Dist18Page {
       this.user_name = data.profile_user_name;
        console.log(data.profile_user_id);
        console.log(data.profile_user_name);
-    });
 
-  this.getContent();
+       this.getContent();
+    });
   }
 
   getContent()
