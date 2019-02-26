@@ -91,13 +91,15 @@ export class TabsNavigationPage {
       });
   }
  
-  setProfileUserId( _userid : string )
+  setProfileUserId( _userid : string , _language:string)
   {
     console.log('profile_user_id :' + _userid);
 
     this.nativeStorage.setItem('profile_user_id',
     {
-      profile_user_id : _userid
+      profile_user_id : _userid,
+      profile_language: _language
+
     })
     .then(
       () =>  console.log('profile_user_id ： Stored item!'),
@@ -120,7 +122,7 @@ export class TabsNavigationPage {
       if(this.posts.success=='true')
       {
         this.profile = data2.data;
-        this.setProfileUserId(data2.data.id+"");
+        this.setProfileUserId(data2.data.id+"", data2.data.language);
       }
       else
       {
@@ -140,7 +142,8 @@ export class TabsNavigationPage {
         this.posts.success = data2.success;
       if(this.posts.success=='true')
       {
-
+        this.profile = data2.data;
+        this.setProfileUserId(data2.data.id+"", data2.data.language);
       }
       else
       {

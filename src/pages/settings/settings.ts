@@ -156,7 +156,7 @@ export class SettingsPage {
         // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
         // More info: https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#populate-the-form-model-with-_setvalue_-and-_patchvalue_
   
-        let currentLang = data2.data.language;//this.translate.currentLang;
+       // let currentLang = data2.data.language;//this.translate.currentLang; //
       
         this.settingsForm.patchValue({
 
@@ -171,7 +171,7 @@ export class SettingsPage {
           newsletter: (data2.data.newsletter=='1'? true:false),
           seller: (data2.data.seller=='1'? true:false),
           gender: this.profile.data.gender,
-          language: this.languages.filter(x => x.code == currentLang),
+          language: (data2.data.language == 'en'? this.languages[0]:this.languages[1]),
           bio : (data2.data.bio=='1'? true:false),
           birthday : this.profile.data.birthday ,
           countryId : this.profile.data.country_id ,
@@ -182,6 +182,7 @@ export class SettingsPage {
   
         this.settingsForm.get('language').valueChanges.subscribe((lang) => {
           this.setLanguage(lang);
+          this.setProfileUserId(lang.code);
         });
       }
       else{
@@ -266,6 +267,21 @@ export class SettingsPage {
       });
   
       this.loading.present();
+    }
+
+    setProfileUserId(  _language:string)
+    {
+
+      this.nativeStorage.setItem('profile_user_id',
+      {
+        profile_language: _language
+
+      })
+      .then(
+        () =>  console.log('profile_user_id ： Stored item!'),
+        error => console.error('profile_user_id : Error storing item')
+      );
+  
     }
 
   logout() {

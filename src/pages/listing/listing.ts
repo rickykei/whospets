@@ -29,16 +29,22 @@ export class ListingPage {
     public listingService: ListingService
   ) {}
  
-  ionViewWillLoad()
+  ionViewWillEnter()
   {
-    if(this.language==="zh")
-    {
-      this.isChi = true;
-    }
-    else
-    {
-      this.isChi = false;
-    }
+    this.nativeStorage.getItem('profile_user_id')
+    .then(data => {
+        this.user_id = data.profile_user_id;
+        this.language = data.profile_language;
+        console.log('data.profile_language : ' + data.profile_language);
+        if(data.profile_language==="zh")
+        {
+          this.isChi = true;
+        }
+        else
+        {
+          this.isChi = false;
+        }
+      });
   }
 
   ionViewDidLoad() {
@@ -49,9 +55,11 @@ export class ListingPage {
         this.listing.banner_title = data.banner_title;
         this.listing.populars = data.populars;
         this.listing.categories = data.categories;
+
       });
 
-      this.nativeStorage.getItem('profile_user_id')
+      setTimeout(() => {
+        this.nativeStorage.getItem('profile_user_id')
       .then(data => {
           this.user_id = data.profile_user_id;
           this.language = data.profile_language;
@@ -64,7 +72,24 @@ export class ListingPage {
             this.isChi = false;
           }
         });
+      }, 3000);
+     
   }
+
+  setProfileUserId(  _language:string)
+    {
+
+      this.nativeStorage.setItem('profile_user_id',
+      {
+        profile_language: _language
+
+      })
+      .then(
+        () =>  console.log('profile_user_id ： Stored item!'),
+        error => console.error('profile_user_id : Error storing item')
+      );
+  
+    }
 
   goToFeed(category: any) {
     console.log("Clicked goToFeed", category);
