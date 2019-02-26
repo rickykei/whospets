@@ -91,16 +91,18 @@ export class PetinfoPage {
    this.profileService.getCountryCode()
    .then(zone => {
      this.country = zone;
+
+     this.checkCountryZone();
+
    });
 
    this.profileService.getSubCountryCode()
    .then(zone => {
      this.subcountry = zone;
+
+     this.checkSubCountryZone();
+  
    });
-
-      this.checkCountryZone();
-      this.checkSubCountryZone();
-
   }
 
   checkDelButton(user_id:string)
