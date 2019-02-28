@@ -128,19 +128,19 @@
     ],
     "categories": [
         {
-            "title": "Lost Pet",
+            "title": "LOSTPET",
             "image": "./assets/images/listing/200x200lostpetchi.png",
             "image_en": "./assets/images/listing/200x200lostpet.png",
 			"catid": "1"
         },
         {
-            "title": "Adoption ",
+            "title": "ADOPTION",
             "image": "./assets/images/listing/200x200petadoptionchi.png",
             "image_en": "./assets/images/listing/200x200petadoption.png",
 			"catid": "3"
         },
         {
-            "title": "Pet Found",
+            "title": "PETFOUND",
             "image": "./assets/images/listing/200x200petfoundchi.png",
             "image_en": "./assets/images/listing/200x200petfound.png",
 			"catid": "2"

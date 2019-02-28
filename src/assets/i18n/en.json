@@ -168,8 +168,10 @@
   "TITLE_TXT": "Title: e.g. Krabby Patty",
   "SELLER" : "Seller",
   "NEWSLETTER" : "Newsletter",
-  "BIO" : "Bio"
-
+  "BIO" : "Bio",
+  "LOSTPET": "Lost Pet",
+  "ADOPTION": "Adoption",
+  "PETFOUND": "Pet Found"
 
   
 }

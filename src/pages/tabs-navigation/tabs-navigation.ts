@@ -15,6 +15,9 @@ import { TabsNavigationService } from './tabs-navigation.service';
 import 'rxjs/Rx';
 import { WalkthroughPage } from '../walkthrough/walkthrough';
 import { UserModel } from '../profile/profile.model';
+import { LanguageModel } from '../../providers/language/language.model';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../providers/language/language.service';
 
 
 
@@ -26,6 +29,8 @@ export class TabsNavigationPage {
   tab1Root: any;
   tab2Root: any;
   tab3Root: any;
+  languages: Array<LanguageModel>;
+  language:LanguageModel;
 
   @ViewChild('myTab') tabRef: Tabs;
  
@@ -40,12 +45,16 @@ export class TabsNavigationPage {
     public nav: NavController,
     public tabsNavigationService: TabsNavigationService,
     public nativeStorage:NativeStorage,
+    public translate: TranslateService,
+    public languageService: LanguageService,
     public facebookLoginService: FacebookLoginService,
     public navParams: NavParams
     ) {
     this.tab1Root = ListingPage;
     this.tab2Root = ProfilePage;
     this.tab3Root = NotificationsPage;
+    this.languages = this.languageService.getLanguages();
+
   }
  
   ionViewDidLoad() {
@@ -123,6 +132,9 @@ export class TabsNavigationPage {
       {
         this.profile = data2.data;
         this.setProfileUserId(data2.data.id+"", data2.data.language);
+        this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
+        this.setLanguage(this.language);
+
       }
       else
       {
@@ -143,7 +155,10 @@ export class TabsNavigationPage {
       if(this.posts.success=='true')
       {
         this.profile = data2.data;
+        this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
+
         this.setProfileUserId(data2.data.id+"", data2.data.language);
+        this.setLanguage(this.language);
       }
       else
       {
@@ -155,6 +170,16 @@ export class TabsNavigationPage {
       });
     }
     
+    }
+
+    setLanguage(lang: LanguageModel){
+      let language_to_set = this.translate.getDefaultLang();
+  
+      if(lang){
+        language_to_set = lang.code;
+      }
+      this.translate.setDefaultLang(language_to_set);
+      this.translate.use(language_to_set);
     }
  
 }

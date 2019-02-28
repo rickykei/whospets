@@ -168,7 +168,11 @@
   "TITLE_TXT": "標題：例如, 我的寵物有什麼問題？",
   "SELLER" : "賣方",
   "NEWSLETTER" : "更新信息",
-  "BIO" : "Bio"
+  "BIO" : "Bio", 
+  "LOSTPET": "走失的寵物",
+  "ADOPTION": "領養區",
+  "PETFOUND": "待領寵物"
+
 
 
   

@@ -15,6 +15,10 @@ import { NativeStorage } from '@ionic-native/native-storage';
 
 import { ProfileService } from '../profile/profile.service';
 import { LoginModel } from '../profile/profile.model';
+import { LanguageModel } from '../../providers/language/language.model';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../providers/language/language.service';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 @Component({
@@ -31,6 +35,8 @@ export class LoginPage {
  success: string;
  message: string;
  status: string;
+ languages: Array<LanguageModel>;
+ language:LanguageModel;
 
  loginInfo: LoginModel = new LoginModel();
 
@@ -39,8 +45,11 @@ export class LoginPage {
     public facebookLoginService: FacebookLoginService,
 	  public nativeStorage:NativeStorage,
     public profileService: ProfileService,
+    public translate: TranslateService,
+    public languageService: LanguageService,
     public loadingCtrl: LoadingController
   ) {
+    this.languages = this.languageService.getLanguages();
 
     this.main_page = { component: TabsNavigationPage }; 
 
@@ -72,11 +81,12 @@ export class LoginPage {
         this.loginInfo.data.image = data2.data.image;
         this.loginInfo.data.message = data2.data.message;
         this.loginInfo.data.language = data2.data.language;
-
+        this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
 
         this.setEmailUser(this.email.value, this.password.value, '');
         this.setProfileUserId(data2.data.id +'',data2.data.language+'') ;
-        
+        this.setLanguage(this.language);
+
         this.nav.push(TabsNavigationPage);//ProfilePage);
 
       }
@@ -87,6 +97,16 @@ export class LoginPage {
       }
     });
 
+    }
+
+    setLanguage(lang: LanguageModel){
+      let language_to_set = this.translate.getDefaultLang();
+  
+      if(lang){
+        language_to_set = lang.code;
+      }
+      this.translate.setDefaultLang(language_to_set);
+      this.translate.use(language_to_set);
     }
 
     setProfileUserId( _userid : string, _language:string )
@@ -135,8 +155,10 @@ export class LoginPage {
       console.log("data.email:"+data.email);
       console.log("data.userid:"+data.userId);
       console.log("data.name:"+data.name);
+      this.language = (data.language == 'en'? this.languages[0]:this.languages[1]);
 
       this.setProfileUserId(data.userId +'', data.language);
+      this.setLanguage(this.language);
 
        this.setEmailUser(data.email, '', data.userId);
       this.nav.setRoot(this.main_page.component);
