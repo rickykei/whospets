@@ -91,7 +91,7 @@ export class SignupPage {
     
       console.log('-------------------doSignup');
       //http://api.whospets.com/api/users/signup.php?logintype=fb&username=rickykei@yahoo.com.hk&password=1234
-       var url = 'http://api.whospets.com/api/users/signup.php?logintype=fb&username=' + data.email + '&uid='+data.userId ;
+       var url = 'http://api.whospets.com/api/users/signup.php?logintype=fb&username=' + data.email + '&uid='+ data.userId+ '&firstname='+data.firstname+ '&lastname='+data.lastname ;
        console.log(url);
        this.http.get(url).map(res => res.json()).subscribe(data2 => {
  

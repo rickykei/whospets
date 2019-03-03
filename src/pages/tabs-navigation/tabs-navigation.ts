@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { ListingPage } from '../listing/listing';
 import { ProfilePage } from '../profile/profile';
-import { NotificationsPage } from '../notifications/notifications';
+import { DisplayfollowerPage } from '../displayfollower/displayfollower';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -52,7 +52,7 @@ export class TabsNavigationPage {
     ) {
     this.tab1Root = ListingPage;
     this.tab2Root = ProfilePage;
-    this.tab3Root = NotificationsPage;
+    this.tab3Root = DisplayfollowerPage;
     this.languages = this.languageService.getLanguages();
 
   }

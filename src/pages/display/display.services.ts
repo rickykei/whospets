@@ -75,6 +75,16 @@ export class PagesDisplayServiceProvider {
   
   }
 
+  getFollower(user_id:string,limit,offset):Promise<PetModel>
+  {
+    //http://api.whospets.com/api/users/get_user_subscribe_mix_mix.php?user_id=514
+      return this.http.get('http://api.whospets.com/api/users/get_user_subscribe_mix_mix.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) 
+      .toPromise()
+      .then(response => response.json() as PetModel)
+      .catch(this.handleError);
+  
+  }
+
   getSell(user_id:string,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com

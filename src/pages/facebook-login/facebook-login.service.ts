@@ -24,7 +24,7 @@ export class FacebookLoginService {
       //["public_profile"] is the array of permissions, you can add more if you need
       this.fb.login(["public_profile"]).then((response) => {
         //Getting name and gender properties
-        this.fb.api("/me?fields=name,gender,email", [])
+        this.fb.api("/me?fields=name,gender,firstname,lastname,email", [])
         .then((user) => {
           this.setFacebookUserFirebase(user)
           .then((res) => {
@@ -46,6 +46,8 @@ export class FacebookLoginService {
           userId: user.id,
           name: user.name,
           gender: user.gender,
+          firstname : user.firstname,
+          lastname : user.lastname,
           email: user.email,
           image: "https://graph.facebook.com/" + user.id + "/picture?type=large",
           friends: data.friends,
@@ -61,7 +63,7 @@ export class FacebookLoginService {
       //["public_profile"] is the array of permissions, you can add more if you need
       this.fb.login(["public_profile", 'user_friends', "email"]).then((response) => {
         //Getting name and gender properties
-        this.fb.api("/me?fields=name,gender,email", ['public_profile', 'user_friends', 'email'])
+        this.fb.api("/me?fields=name,gender,firstname,lastname,email", ['public_profile', 'user_friends', 'email'])
         .then((user) => {
           //now we have the users info, let's save it in the NativeStorage
           this.setFacebookUser(user)
@@ -118,6 +120,8 @@ export class FacebookLoginService {
             name: user.name,
 	          email: user.email,
             gender: user.gender,
+            lastname: user.lastname,
+            firstname: user.firstname,
             image: "https://graph.facebook.com/" + user.id + "/picture?type=large",
             friends: data.friends,
             photos: data.photos
