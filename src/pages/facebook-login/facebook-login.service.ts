@@ -19,51 +19,54 @@ export class FacebookLoginService {
     // this.fb.browserInit(environment.facebook_app_id, "v2.8");
   }
 
-  doFacebookLoginFirebase(){
-    return new Promise<FacebookUserModel>((resolve, reject) => {
-      //["public_profile"] is the array of permissions, you can add more if you need
-      this.fb.login(["public_profile"]).then((response) => {
-        //Getting name and gender properties
-        this.fb.api("/me?fields=name,gender,firstname,lastname,email", [])
-        .then((user) => {
-          this.setFacebookUserFirebase(user)
-          .then((res) => {
-            resolve(res);
-          });
-        });
-      },(err) => {
-        reject(err);
-      });
-    });
-  }
+  // doFacebookLoginFirebase(){
+  //   return new Promise<FacebookUserModel>((resolve, reject) => {
+  //     //["public_profile"] is the array of permissions, you can add more if you need
+  //     this.fb.login(["public_profile"]).then((response) => {
+  //       //Getting name and gender properties
+  //       this.fb.api("/me?fields=name,gender,firstname,lastname,email", [])
+  //       .then((user) => {
+  //         this.setFacebookUserFirebase(user)
+  //         .then((res) => {
+  //           resolve(res);
+  //         });
+  //       });
+  //     },(err) => {
+  //       reject(err);
+  //     });
+  //   });
+  // }
 
-  setFacebookUserFirebase(user: any)
-  {
-    return new Promise<FacebookUserModel>((resolve, reject) => {
-      this.getFriendsFakeData()
-      .then(data => {
-        resolve({
-          userId: user.id,
-          name: user.name,
-          gender: user.gender,
-          firstname : user.firstname,
-          lastname : user.lastname,
-          email: user.email,
-          image: "https://graph.facebook.com/" + user.id + "/picture?type=large",
-          friends: data.friends,
-          photos: data.photos
-        })
-      });
-    });
-  }
+  // setFacebookUserFirebase(user: any)
+  // {
+  //   return new Promise<FacebookUserModel>((resolve, reject) => {
+  //     this.getFriendsFakeData()
+  //     .then(data => {
+  //       resolve({
+  //         userId: user.id,
+  //         name: user.name,
+  //         gender: user.gender,
+  //         firstname : user.firstname,
+  //         lastname : user.lastname,
+  //         email: user.email,
+  //         image: "https://graph.facebook.com/" + user.id + "/picture?type=large",
+  //         friends: data.friends,
+  //         photos: data.photos
+  //       })
+  //     });
+  //   });
+  // }
 
   doFacebookLogin()
   {
     return new Promise<FacebookUserModel>((resolve, reject) => {
       //["public_profile"] is the array of permissions, you can add more if you need
+
       this.fb.login(["public_profile", 'user_friends', "email"]).then((response) => {
+        var id = response.authResponse.userID;
+
         //Getting name and gender properties
-        this.fb.api("/me?fields=name,gender,firstname,lastname,email", ['public_profile', 'user_friends', 'email'])
+        this.fb.api("/"+id+"/?fields=name,gender,email", []) //first_name,last_name //['public_profile', 'user_friends', 'email']
         .then((user) => {
           //now we have the users info, let's save it in the NativeStorage
           this.setFacebookUser(user)
@@ -85,6 +88,7 @@ export class FacebookLoginService {
         //user logged out so we will remove him from the NativeStorage
         this.nativeStorage.remove('facebook_user');
         this.nativeStorage.remove('email_user');
+        this.nativeStorage.remove('profile_user_id');
 
         resolve();
       }, (err) => {
@@ -120,8 +124,8 @@ export class FacebookLoginService {
             name: user.name,
 	          email: user.email,
             gender: user.gender,
-            lastname: user.lastname,
-            firstname: user.firstname,
+            first_name: user.first_name,
+            last_name: user.last_name,
             image: "https://graph.facebook.com/" + user.id + "/picture?type=large",
             friends: data.friends,
             photos: data.photos

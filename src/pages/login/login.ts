@@ -126,6 +126,7 @@ export class LoginPage {
   
   removeEmailUser(){
     this.nativeStorage.remove('email_user');
+    this.nativeStorage.remove('profile_user_id');
   }
 
   setEmailUser(_email :string, _password:string, _uid : string)
@@ -169,7 +170,7 @@ export class LoginPage {
         this.loading.dismiss();
         this.nav.setRoot(this.main_page.component);
       }, (err) => {
-        console.log("Facebook Login error", err);
+        console.log("Facebook Login error 2 ", err);
       });
     });
   }

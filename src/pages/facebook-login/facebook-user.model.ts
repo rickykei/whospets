@@ -4,8 +4,8 @@ export class FacebookUserModel {
   name: string;
   email: string;
   userId: string;
-  firstname: string;
-  lastname:string;
+  first_name: string;
+  last_name:string;
   friends: Array<string> = [];
   photos: Array<string> = [];
 }

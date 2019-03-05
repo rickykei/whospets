@@ -285,6 +285,10 @@ export class SettingsPage {
     }
 
   logout() {
+    this.nativeStorage.remove('email_user');
+    this.nativeStorage.remove('profile_user_id');
+    this.nativeStorage.remove('facebook_user');
+
     // navigate to the new page if it is not the current page
     this.facebookLoginService.doFacebookLogout()
     .then((res) => {
@@ -292,7 +296,8 @@ export class SettingsPage {
     }, (error) => {
       console.log("Facebook logout error", error);
     });
-    this.nativeStorage.remove('email_user');
+
+    
     this.nav.setRoot(LoginPage);
   }
 
