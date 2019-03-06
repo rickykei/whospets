@@ -14,4 +14,6 @@ export class CommentDetailsModel{
         comment:string;
         product_id:string;
         table_name:string;
+        firstname:string;
+        lastname:string;
 }

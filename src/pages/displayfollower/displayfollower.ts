@@ -56,6 +56,15 @@ export class DisplayfollowerPage {
     this.likevalue = 0;
     this.dislikevalue = 0;
   }
+
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter Displayfollowerpage');
+   
+      if(this.user_id)
+      {
+        this.getContent();
+      }
+    }
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad Displayfollowerpage');

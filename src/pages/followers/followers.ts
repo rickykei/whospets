@@ -16,6 +16,7 @@ export class FollowersPage {
   
   user_id:string;
   status:string;
+  title:string;
 
   loading: any;
 
@@ -34,6 +35,13 @@ export class FollowersPage {
     this.list = this.originallist;
 
     this.type = navParams.get('type');
+    if(this.type=='followers')
+    {
+      this.title = 'FOLLOWERS';
+    }else if(this.type=='following')
+    {
+      this.title = 'FOLLOWING';
+    }
   }
 
   ionViewDidEnter() {
