@@ -57,7 +57,8 @@ export class DisplayfollowerPage {
     this.dislikevalue = 0;
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter()
+  {
     console.log('ionViewDidEnter Displayfollowerpage');
    
       if(this.user_id)
