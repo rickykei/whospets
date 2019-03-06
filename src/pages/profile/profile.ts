@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, App, NavParams, NavController, Events } from 'ionic-angular';
+import { MenuController, App, NavParams, NavController, Events, SegmentButton } from 'ionic-angular';
 import { SettingsPage } from '../settings/settings';
 import { ProfileModel, PetModel, PetDetailsModel } from './profile.model';
 import { ProfileService } from './profile.service';
@@ -99,8 +99,11 @@ export class ProfilePage {
           console.log('..data2 :'+ data2.success);
 
           //this.profile = data2;
-          this.profile.followers = data2.followers;
-          this.profile.following = data2.following;
+          if(data2.followers)
+            this.profile.followers = data2.followers;
+          if(data2.following)
+            this.profile.following = data2.following;
+            
           this.profile.data.fb_uid = data2.data.fb_uid; //image
           this.profile.data.email = data2.data.email;
           this.profile.data.firstname = data2.data.firstname;
@@ -117,12 +120,11 @@ export class ProfilePage {
           this.profile_user_id = data2.data.user_id;
           this.profile.data.language = data2.data.language;
 
+          this.loadData();
 
           this.setProfileUserId(data2.data.user_id +""
           , data2.data.firstname + " " + data2.data.lastname, data2.data.language);
           
-          this.loadData();
-
         }
         else{
           // go to create profile page
@@ -133,6 +135,8 @@ export class ProfilePage {
     }, error => {
       console.log('error : '+ error);
     });
+
+
 
     }
     
@@ -261,6 +265,15 @@ export class ProfilePage {
       }
     });
 
+  }
+
+
+  onSegmentChanged(segmentButton: SegmentButton) {
+     console.log('Segment changed to', segmentButton.value);
+  }
+
+  onSegmentSelected(segmentButton: SegmentButton) {
+     console.log('Segment selected', segmentButton.value);
   }
 
 }

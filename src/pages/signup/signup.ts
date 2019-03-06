@@ -235,13 +235,12 @@ export class SignupPage {
     .then(data => {
     
       this.fbusermodel.email =data.email;
-      this.fbusermodel.first_name = data.first_name;
-      this.fbusermodel.last_name = data.last_name;
+      this.fbusermodel.name = data.name;
       console.log('-------------------doSignup , data.email :' + data.email);
-      console.log('-------------------doSignup , data.firstname :' + data.first_name);
-      console.log('-------------------doSignup , data.lastname :' + data.last_name);
+      console.log('-------------------doSignup , data.firstname :' + data.name);
+      console.log('-------------------doSignup , data.lastname :' + '');
 
-      this.goSignup('fb',data.email,data.userId,data.password,data.first_name,data.last_name);
+      this.goSignup('fb',data.email,data.userId,data.password,data.name,'');
       
     }, function(error){
       //we don't have the user data so we will ask him to log in
