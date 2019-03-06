@@ -59,16 +59,7 @@ export class DisplayfollowerPage {
 
   ionViewWillEnter()
   {
-    console.log('ionViewDidEnter Displayfollowerpage');
-   
-      if(this.user_id)
-      {
-        this.getContent();
-      }
-    }
-  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Displayfollowerpage');
+    console.log('ionViewWillEnter Displayfollowerpage');
    
     this.nativeStorage.getItem('profile_user_id')
     .then(data => {
@@ -76,6 +67,12 @@ export class DisplayfollowerPage {
          console.log(data.profile_user_id);   
          this.getContent();
       });
+    }
+  
+  ionViewDidLoad() {
+   // console.log('ionViewDidLoad Displayfollowerpage');
+   
+    
     }
 
     getContent()
