@@ -65,9 +65,9 @@ export class SetQnaPage {
   getPhoto() {
     let options = {
       maximumImagesCount: 1,
-      quality: 50,
-      width: 512,
-      height: 512,
+      quality: 80,
+      width: 800,
+      height: 800,
       outputType: 1
     };
 

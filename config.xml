@@ -32,7 +32,7 @@
     <preference name="FadeSplashScreenDuration" value="500" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#00e9d5" />
+    <preference name="StatusBarBackgroundColor" value="#4ac4fa" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <platform name="android">
