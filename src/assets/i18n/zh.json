@@ -63,9 +63,9 @@
   "LAYOUTS": "佈局",
   "LIST_BIG": "List Big",
   "LIST_MINI": "List Mini",
-  "POPULAR": "18區寵物巨星",
+  "POPULAR": "18區最受歡迎寵物",
   "BROWSE_CATEGORIES": "選項",
-  "BROWSE_LOCATION":"18區寵物巨星",
+  "BROWSE_LOCATION":"18區最受歡迎寵物",
   "SIGN_IN": "登錄",
   "LOG_IN": "登錄",
   "SIGN_UP!": "註冊!",
@@ -87,7 +87,7 @@
   "SIGN_UP_WITH_FACEBOOK": "Facebook註冊",
   "SIGN_UP_WITH_GOOGLE": "Google註冊",
   "SIGN_UP_WITH_TWITTER": "Twitter註冊",
-  "AGREEMENT_TEXT": "創建一個您同意我們的帳戶",
+  "AGREEMENT_TEXT": "創建一個Whospets的帳戶",
   "AND": "和",
   "NOT_LOGGED_TWITTER": "您尚未關聯自己的Twitter帳戶",
   "TWITTER": "Twitter",
@@ -164,7 +164,7 @@
   "DOG" : "狗",
   "WRITE_DESCRIPTION" : "描述你的寵物...",
   "MOBILE_PHONE" : "手機號碼",
-  "LAST_SEEN_MSG" : "您的寵物在失踪之前的最後時刻和地點？包括盡可能多的細節以幫助其他人找到您的寵物。",
+  "LAST_SEEN_MSG" : "最後一次見面: 您的寵物在失踪之前的最後時刻和地點？包括盡可能多的細節以幫助其他人找到您的寵物",
   "DONE_BTN" : "完成!",
   "TITLE_TXT": "標題：例如, 我的寵物有什麼問題？",
   "SELLER" : "賣方",
@@ -172,7 +172,18 @@
   "BIO" : "Bio", 
   "LOSTPET": "走失的寵物",
   "ADOPTION": "領養區",
-  "PETFOUND": "待領寵物"
+  "PETFOUND": "待領寵物",
+  "FIRSTNAME": "名字",
+  "LASTNAME": "姓氏",
+  "CITY" : "城市",
+  "STREET" : "街道",
+  "ABOUT": "關於你或你的寵物協會",
+  "BIRTHDAY":"生日",
+ 
+  "ACTIVE": "養育中",
+  "INACTIVE": "彩虹橋",
+  "DATE_LOST" : "走失日期",
+  "petinfo": "寵物資料" 
 
 
 

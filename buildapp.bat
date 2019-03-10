@@ -4,7 +4,7 @@
 
 
 ionic cordova build android --release
-
+ionic cordova build android --prod --release
 
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore com.whospets.aos.keystore D:\GitHub\whospets\platforms\android\build\outputs\apk\android-release-unsigned.apk com.whospets.aos
 globetrf
