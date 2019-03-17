@@ -107,7 +107,7 @@ export class SettingsPage {
     this.profileService.getSubCountryCode()
     .then(zone => {
       this.subcountry = zone;
-      this.zone = this.subcountry.zone;
+   //   this.zone = this.subcountry.zone;
     });
 
     this.nativeStorage.getItem('email_user')
@@ -173,9 +173,9 @@ export class SettingsPage {
           gender: this.profile.data.gender,
           language: (data2.data.language == 'en'? this.languages[0]:this.languages[1]),
           bio : (data2.data.bio=='1'? true:false),
-          birthday : this.profile.data.birthday ,
           countryId : this.profile.data.country_id ,
-          subCountryId : this.profile.data.sub_country_id ,
+          subCountryId : this.profile.data.sub_country_id,
+          birthday : this.profile.data.birthday 
         });
   
         
@@ -193,6 +193,10 @@ export class SettingsPage {
         });
 
       }
+
+      // init get subcountry if setting form got country
+      this.onCountryChange();
+
     });
     }, error => {
       console.log('error : '+ error);
@@ -202,23 +206,23 @@ export class SettingsPage {
 
   }
 
-  onCountryChange(event)
-  {
-    console.info(this.settingsForm.value.countryId);
-    this.zone = new Array();
-
-    for(var i = 0; i < this.subcountry.zone.length; i++)
+  onCountryChange()
     {
-        if(this.subcountry.zone[i].parent_id === this.settingsForm.value.countryId)
-        {
-          this.zone.push(this.subcountry.zone[i]);
-        }
+      console.info(this.settingsForm.value.countryId);
+      this.zone = new Array();
+
+      for(var i = 0; i < this.subcountry.zone.length; i++)
+      {
+          if(this.subcountry.zone[i].parent_id === this.settingsForm.value.countryId)
+          {
+            this.zone.push(this.subcountry.zone[i]);
+          }
+      }
+
+      this.checkEnable();
     }
 
-    this.checkEnable();
-  }
-
-  checkEnable()
+    checkEnable()
     {
       console.info('this.zone.length: ' + this.zone.length);
       if(this.zone.length>0)

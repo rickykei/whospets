@@ -72,12 +72,12 @@
       </ion-item>
     </ion-list>
 
-    <ion-list class="switchers-list">
+    <!-- <ion-list class="switchers-list">
       <ion-item class="switcher-item">
         <ion-label>{{ 'BIO' | translate }}</ion-label>
         <ion-toggle formControlName="bio" ></ion-toggle>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
 
     <ion-list class="switchers-list">
       <ion-item class="switcher-item">
@@ -86,7 +86,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-list class="switchers-list">
+    <!-- <ion-list class="switchers-list">
         <ion-item class="switcher-item">
           <ion-label>{{'NEWSLETTER' | translate}}</ion-label>
           <ion-toggle formControlName="newsletter" ></ion-toggle>
@@ -98,7 +98,7 @@
             <ion-label>{{'SELLER' | translate}}</ion-label>
             <ion-toggle formControlName="seller" ></ion-toggle>
           </ion-item>
-        </ion-list>
+        </ion-list> -->
 
           <ion-item>
             <ion-label>{{'GENDER' | translate}}</ion-label>
@@ -108,17 +108,30 @@
             </ion-select>
           </ion-item>
 
-          <ion-item>
-            <ion-label>{{'COUNTRY' | translate}}</ion-label>
-            <ion-select formControlName="countryId" (ionChange)="onCountryChange($event)"><ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
-
-          </ion-item>
-     
-          <ion-item>
-            <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
-            <ion-select [disabled]="!isEnabled" formControlName="subCountryId"> <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
-          </ion-item>
-
+          <ion-row no-padding class="multi-input-row">
+              <ion-col no-padding >
+  
+            <ion-item>
+              <ion-label>{{'COUNTRY' | translate}}</ion-label>
+              <ion-select formControlName="countryId" (ionChange)="onCountryChange()">
+                <ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> 
+              </ion-select>
+            </ion-item>
+  
+            </ion-col>
+        </ion-row>
+      
+            <ion-row no-padding class="multi-input-row">
+                <ion-col no-padding >
+                    <ion-item>
+                  <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+                  <ion-select [disabled]="!isEnable" formControlName="subCountryId"> 
+                    <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+                </ion-item>
+      
+            </ion-col>
+            </ion-row>
+  
   </form>
 
   <!-- <button class="alt-button rate-app-button" ion-button full (click)="rateApp()">{{'RATE_APP' | translate}}</button>
