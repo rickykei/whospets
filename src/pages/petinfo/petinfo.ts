@@ -125,7 +125,7 @@ export class PetinfoPage {
     }
     else if(this.pet.pet_status==3)
     {
-      this.pet.pet_Status_string = 'found & at home';
+      this.pet.pet_Status_string = 'Pet found';
     }
     else if(this.pet.pet_status==4)
     {

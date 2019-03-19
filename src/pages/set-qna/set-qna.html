@@ -22,7 +22,6 @@
  <div class="user-details">
     <div class="post-example-view">
       <form class="sample-form post-form" [formGroup]="post_form" (ngSubmit)="createPost()">
-        
         <h2 class="section-title">{{'ADD_QNA' | translate}}</h2>
 
         <section class="form-section">
@@ -57,7 +56,7 @@
           </ion-text>
 
         <section class="form-section">
-          <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!post_form.valid" (click)="addPost()">Post!</button>
+          <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!post_form.valid" (click)="addPost()">{{'DONE_BTN' | translate}}</button>
         </section>
       </form>
     </div>

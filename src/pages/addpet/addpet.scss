@@ -7,6 +7,13 @@ page-addpet {
          {           
 			@include basic-select-style(color($colors, background, base), $theme-color-3, $white-d);
 		 }
+		 
+		 .section-title
+            {
+                // margin-top: 40px;
+                // margin-bottom: 30px;
+                padding-left: 1ch;
+            }
 
 		.user-preferences-row
 		{

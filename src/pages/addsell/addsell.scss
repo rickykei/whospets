@@ -3,15 +3,17 @@ page-addsell {
         {
             background-color: white;
 
-            // .addsell-form
-            // {           
-            //     margin-bottom: 20px;
-            // }
+            .section-title
+            {
+                // margin-top: 40px;
+                // margin-bottom: 30px;
+                padding-left: 1ch;
+            }
     
             .user-preferences-row
             {
                 margin: 0px 0px 7px;
-                padding: 0px 7px;
+                padding: 7px 7px;
                 @include element-shadow();
     
                 .radio-tags-label
