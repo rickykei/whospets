@@ -9,6 +9,9 @@
   <ion-navbar>
     <ion-title>petinfo</ion-title>
     <ion-buttons end> 
+        <button *ngIf="showDelbtn" ion-button (click)="editPost(pet)"> 
+          {{ 'EDIT' | translate }}
+      </button> 
       <button *ngIf="showDelbtn" ion-button (click)="deletePost()"> 
         {{ 'DELETE' | translate }}
     </button> 

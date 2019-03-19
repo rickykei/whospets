@@ -9,6 +9,7 @@ import { CommentpetPage } from '../commentpet/commentpet';
 import { PetDetailsService } from '../add-page/addlayout.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile/profile.service';
+import { AddpetPage } from '../addpet/addpet';
 
 
 /**
@@ -206,6 +207,11 @@ export class PetinfoPage {
   commentPost(post)
  {
    this.navCtrl.push( CommentpetPage, {product_id:post.product_id})
+ }
+
+ editPost(post)
+ {
+  this.navCtrl.push( AddpetPage, {post:post})
  }
 
  checkCountryZone()

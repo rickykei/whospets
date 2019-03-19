@@ -3,7 +3,7 @@ import { NavController, NavParams , AlertController, LoadingController, Events} 
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { ProfileService } from '../profile/profile.service';
-import { PetModel, CountryIdModel, UserModel, ResponseModel, ZoneModel } from '../profile/profile.model';
+import { PetModel, CountryIdModel, UserModel, ResponseModel, ZoneModel, PetDetailsModel } from '../profile/profile.model';
 import { PetDetailsService } from '../add-page/addlayout.service';
 import { PetBreedModel, PetColorModel, PetStatusModel, BreedModel } from '../add-page/addlayout.model';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
@@ -30,12 +30,16 @@ export class AddpetPage {
   user_id:string;
   petowner:string;
 
+  isEdit : boolean = false;
+
   loading: any;
   postResponse:ResponseModel;
 
   isEnable:boolean = false;
   isEnableBreed: boolean = false;
   
+  post: PetDetailsModel = new PetDetailsModel();
+
   pet: PetModel = new PetModel();
   petdetail: PetBreedModel = new PetBreedModel();
   petColor: PetColorModel = new PetColorModel();
@@ -87,6 +91,14 @@ export class AddpetPage {
         subCountryId: new FormControl('') 
 		 
       });
+
+      this.post = this.navParams.get('post');
+
+      if(this.post)
+      {
+        this.isEdit = true;
+      }
+
   }
 
   
@@ -126,11 +138,6 @@ export class AddpetPage {
 	this.nativeStorage.getItem('email_user')
     .then(data => {
      this.email = data.email;   
-    
-    //  this.profileService.getPet(data.email)
-     //then(response => {
-      // this.pet = response;
-     ///});
  
    });
      
@@ -168,6 +175,43 @@ export class AddpetPage {
      });
      
      console.log("add sell , user id: " + this.user_id);
+
+     this.addPetForm.patchValue({
+
+      id : this.post.pet_id,
+      name_of_pet: this.post.name_of_pet,
+      petbreed: this.post.category_id,
+      description: this.post.description,
+      phone: this.post.contact,
+      gender: this.post.gender,
+      weight: this.post.weight,
+      height: this.post.height,
+      rewards: this.post.price,
+      size: this.post.size,
+      born_date: this.post.date_born,
+      lost_date: this.post.date_lost ,
+      found_date: this.post.count_down_end_date,
+      typeofpet: this.post.sub_category,
+      countryId: this.post.country_id,
+      color: this.post.color,
+      petstatus: this.post.pet_status,
+      lastseen :this.post.last_seen_appearance,
+      status: this.post.status,
+      subCountryId: this.post.sub_country_id,
+      imgPreview:this.post.image
+    });
+
+    if(this.addPetForm.value.petbreed)
+    {
+      this.isEnableBreed = true;
+      this.changePetType(this.addPetForm.value.petbreed);
+    }
+
+    if(this.addPetForm.value.countryId)
+    {
+      this.isEnable = true;
+      this.onCountryChange(this.addPetForm.value.countryId);
+    }
   }
 
   changePetType(event)
@@ -252,8 +296,20 @@ export class AddpetPage {
 
   addPet() {
 
-    if(this.checkField())
+    if(this.checkField() || this.isEdit)
     {
+      var url;
+
+      if(this.isEdit)
+      {
+        url = "http://api.whospets.com/api/users/update_user_pets.php";
+      }else
+      {
+        url = "http://api.whospets.com/api/users/set_user_pets.php";
+      }
+
+      console.log('url : ' + url);
+    
         this.showLoader();
       
         let postdata = this.addPetForm.value;
@@ -277,7 +333,7 @@ export class AddpetPage {
         , banner_b:'', banner_c:''
         , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
         , language:'', specifications:'', style_code:'', created:'', country:'',avatar:this.regData.avatar});
-        this.http.post("http://api.whospets.com/api/users/set_user_pets.php",data, { headers: headers })
+        this.http.post(url,data, { headers: headers })
         .subscribe((res:ResponseModel) => { 
           this.postResponse = res; 
         
