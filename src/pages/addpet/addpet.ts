@@ -136,38 +136,10 @@ export class AddpetPage {
 
 
   ionViewDidLoad() {
-	  
-	this.nativeStorage.getItem('email_user')
-    .then(data => {
-     this.email = data.email;   
- 
-   });
-     
-   
 
-    this.petdetailservice.getColorData()
-    .then(data2 => {
-      this.petColor = data2;
-    });
-
-   
-
-    this.petdetailservice.getStatusData()
-    .then(data2 => {
-      this.petStatus = data2;
-    });
-
-    this.nativeStorage.getItem('profile_user_id')
-   .then(data => {
-       this.user_id = data.profile_user_id;
-      this.petowner = data.profile_user_name;
-        console.log(data.profile_user_id);
-        console.log(data.profile_user_name);
-     });
-     
-     console.log("add sell , user id: " + this.user_id);
-
-     this.addPetForm.patchValue({
+    if(this.isEdit)
+    {
+    this.addPetForm.patchValue({
 
       id : this.post.pet_id,
       name_of_pet: this.post.name_of_pet,
@@ -192,11 +164,19 @@ export class AddpetPage {
       imgPreview:this.post.image
     });
 
-    this.petdetailservice.getData()
+  }
+
+	this.nativeStorage.getItem('email_user')
+    .then(data => {
+     this.email = data.email;   
+ 
+   });
+
+   this.petdetailservice.getData()
     .then(data2 => {
       this.petdetail = data2;
       
-      if(this.addPetForm.value.petbreed)
+      if(this.isEdit)
     {
       this.isEnableBreed = true;
       this.changePetType(this.addPetForm.value.petbreed);
@@ -212,12 +192,35 @@ export class AddpetPage {
     .then(zone => {
       this.subcountry = zone;
 
-      if(this.addPetForm.value.countryId)
+      if(this.isEdit)
     {
       this.isEnable = true;
       this.onCountryChange(this.addPetForm.value.countryId);
     }
     });
+
+    this.petdetailservice.getColorData()
+    .then(data2 => {
+      this.petColor = data2;
+    });
+
+    this.petdetailservice.getStatusData()
+    .then(data2 => {
+      this.petStatus = data2;
+    });
+
+    this.nativeStorage.getItem('profile_user_id')
+   .then(data => {
+       this.user_id = data.profile_user_id;
+      this.petowner = data.profile_user_name;
+        console.log(data.profile_user_id);
+        console.log(data.profile_user_name);
+     });
+     
+     console.log("add sell , user id: " + this.user_id);
+
+     
+    
     
   }
 
