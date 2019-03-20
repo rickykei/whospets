@@ -54,7 +54,7 @@
               <ion-item >                  
               <ion-label>{{'PET_BREED' | translate}}</ion-label>
               <ion-select [disabled]="!isEnableBreed"  formControlName="petbreed"> 
-              <ion-option  *ngFor="let breed of petbreed">{{breed.title}}</ion-option> 
+              <ion-option  *ngFor="let breed of petbreed" [value]="breed.category_id">{{breed.title}}</ion-option> 
               </ion-select>
             </ion-item>             
         </ion-row>

@@ -52,6 +52,7 @@ export class AddpetPage {
   profile: UserModel= new UserModel();
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
+  updateimg:number = 0;
   
   constructor(
     public navCtrl: NavController, 
@@ -97,6 +98,7 @@ export class AddpetPage {
       if(this.post)
       {
         this.isEdit = true;
+        this.updateimg = 0;
       }
 
   }
@@ -141,25 +143,14 @@ export class AddpetPage {
  
    });
      
-   this.petdetailservice.getData()
-    .then(data2 => {
-      this.petdetail = data2;
-    });
+   
 
     this.petdetailservice.getColorData()
     .then(data2 => {
       this.petColor = data2;
     });
 
-    this.profileService.getCountryCode()
-    .then(zone => {
-      this.country = zone;
-    });
-
-    this.profileService.getSubCountryCode()
-    .then(zone => {
-      this.subcountry = zone;
-    });
+   
 
     this.petdetailservice.getStatusData()
     .then(data2 => {
@@ -201,23 +192,40 @@ export class AddpetPage {
       imgPreview:this.post.image
     });
 
-    if(this.addPetForm.value.petbreed)
+    this.petdetailservice.getData()
+    .then(data2 => {
+      this.petdetail = data2;
+      
+      if(this.addPetForm.value.petbreed)
     {
       this.isEnableBreed = true;
       this.changePetType(this.addPetForm.value.petbreed);
     }
+    });
 
-    if(this.addPetForm.value.countryId)
+    this.profileService.getCountryCode()
+    .then(zone => {
+      this.country = zone;
+    });
+
+    this.profileService.getSubCountryCode()
+    .then(zone => {
+      this.subcountry = zone;
+
+      if(this.addPetForm.value.countryId)
     {
       this.isEnable = true;
       this.onCountryChange(this.addPetForm.value.countryId);
     }
+    });
+    
   }
 
   changePetType(event)
   {
     console.log(event);
     this.petbreed = new Array();
+    console.log('this.petdetail.pet.length: ' + this.petdetail.pet.length);
 
     for(var i = 0; i < this.petdetail.pet.length; i++)
     {
@@ -284,6 +292,7 @@ export class AddpetPage {
     for (var i = 0; i < results.length; i++) {
       this.imgPreview = 'data:image/jpeg;base64,' + results[i];
       this.regData.avatar = this.imgPreview;
+      this.updateimg = 1;
         // this.imgPreview = results[i];
         // this.base64.encodeFile(results[i]).then((base64File: string) => {
         //   this.regData.avatar = base64File;
@@ -331,7 +340,7 @@ export class AddpetPage {
         , price:postdata.rewards, last_seen_appearance:postdata.lastseen, status:postdata.status
         , tax_id:'', quantity:'', condition:'', feature_date:'', gallery_date:'', banner_a:''
         , banner_b:'', banner_c:''
-        , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
+        , todays_deal:'', discount:'', questions:'', descriptionDisplay:'', updateimg :this.updateimg
         , language:'', specifications:'', style_code:'', created:'', country:'',avatar:this.regData.avatar});
         this.http.post(url,data, { headers: headers })
         .subscribe((res:ResponseModel) => { 
@@ -378,7 +387,7 @@ export class AddpetPage {
 
     checkField()
   {
-    if(!this.regData.avatar)
+    if(!this.regData.avatar && !this.isEdit)
     {
       alert('Missing petId or image.');
       return false;
