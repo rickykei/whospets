@@ -134,7 +134,9 @@
 
             <ion-item>
               <ion-label>{{'PET_STATUS' | translate}}</ion-label>
-              <ion-select formControlName="petstatus"> <ion-option  *ngFor="let status of petStatus.pet_status" [value]="status.id">{{status.status}}</ion-option> </ion-select>
+              <ion-select formControlName="petstatus" (ionChange)="changePetStatus($event)"> 
+                <ion-option  *ngFor="let status of petStatus.pet_status" [value]="status.id"  >{{status.status}}</ion-option> 
+              </ion-select>
             </ion-item>
 
             </ion-col>
@@ -188,7 +190,7 @@
           </ion-row>
 
 
-        <ion-row no-padding class="multi-input-row">
+        <ion-row *ngIf="isLostPet" no-padding class="multi-input-row">
           <ion-col no-padding >
             <ion-item class="multi-input time-item">
               <ion-label floating>{{'LOSTDATE' | translate}}</ion-label>
@@ -198,7 +200,7 @@
           </ion-row>
 
 
-          <ion-row no-padding class="multi-input-row">
+          <ion-row *ngIf="isLostPet" no-padding class="multi-input-row">
           <ion-col no-padding >
             <ion-item class="range-item">
               <ion-label>
@@ -210,7 +212,7 @@
             </ion-col>
         </ion-row>
 
-        <ion-row no-padding class="multi-input-row">
+        <ion-row *ngIf="isLostPet" no-padding class="multi-input-row">
           <ion-col no-padding >
             <ion-item class="multi-input time-item">
               <ion-label floating>{{'FOUNDDATE' | translate}}</ion-label>
@@ -219,13 +221,13 @@
           </ion-col>
         </ion-row>
 
-        <ion-row no-padding class="multi-input-row">
+        <ion-row *ngIf="isLostPet" no-padding class="multi-input-row">
           <ion-col no-padding>
-      <ion-item>
-          <ion-textarea rows="7" placeholder="{{'LAST_SEEN_MSG' | translate}}" formControlName="lastseen"></ion-textarea>
-        </ion-item>
-      </ion-col>
-      </ion-row>
+            <ion-item>
+              <ion-textarea rows="7" placeholder="{{'LAST_SEEN_MSG' | translate}}" formControlName="lastseen"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
       <ion-row no-padding class="user-preferences-row">
         <span class="radio-tags-label">{{'STATUS' | translate}}</span>

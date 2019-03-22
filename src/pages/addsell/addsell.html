@@ -23,7 +23,7 @@
     <form class="addsell-form" [formGroup]="sell_form" >
       <h2 class="section-title">{{'ADD_A_SELL' | translate}}</h2>
 
-      <ion-item>
+          <ion-item>
               <ion-input type="text" placeholder="{{'TITLE_TXT' | translate}}" formControlName="title"></ion-input>
             </ion-item>
            
@@ -32,11 +32,12 @@
           </ion-item>
 
           <ion-item class="range-item">
-            <ion-label>
+            <!-- <ion-label>
               <h2 class="range-label">{{'PRICE' | translate}}</h2>
               <h3 class="range-value">$ {{sell_form.controls.price.value}} </h3>
             </ion-label>
-            <ion-range formControlName="price" min="0" max="10000" step="500" snaps="true" pin="false"></ion-range>
+            <ion-range formControlName="price" min="0" max="10000" step="500" snaps="true" pin="false"></ion-range> -->
+            <ion-input type="number" placeholder="{{'PRICE' | translate}}" formControlName="title"></ion-input>
           </ion-item>
 
           <ion-row no-padding class="multi-input-row">

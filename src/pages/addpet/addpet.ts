@@ -37,6 +37,7 @@ export class AddpetPage {
 
   isEnable:boolean = false;
   isEnableBreed: boolean = false;
+  isLostPet: boolean = false;
   
   post: PetDetailsModel = new PetDetailsModel();
 
@@ -218,6 +219,19 @@ export class AddpetPage {
      });
      
      console.log("add sell , user id: " + this.user_id);    
+  }
+
+  changePetStatus(event)
+  {
+    console.log(event);
+    if(event==1)
+    {
+      this.isLostPet = true;
+    }
+    else
+    {
+      this.isLostPet = false;
+    }
   }
 
   changePetType(event)
