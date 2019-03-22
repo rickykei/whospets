@@ -25,16 +25,12 @@
           <ion-input type="text" placeholder="{{'PET_ID' | translate}}" formControlName="id"></ion-input>
         </ion-item>
 
-      <ion-row no-padding class="multi-input-row">
-        <ion-col no-padding >
-          <ion-item class="multi-input time-item">
-            <ion-label floating>{{'DATE_OF_BORN' | translate}}</ion-label>
-            <ion-datetime formControlName="born_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+      <ion-item>
+         <ion-label floating>{{'DATE_OF_BORN' | translate}}</ion-label>
+         <ion-datetime formControlName="born_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
+      </ion-item>
 
-      <ion-row no-padding class="user-preferences-row">
+      <ion-row class="user-preferences-row">
           <span class="radio-tags-label">{{'TYPE_OF_PET' | translate}}</span>
           <ion-list class="radio-tags" radio-group formControlName="typeofpet" (ionChange)="changePetType($event)">
             <ion-item class="radio-tag">
@@ -50,7 +46,7 @@
           </ion-list>
         </ion-row>
 
-        <ion-row no-padding class="user-preferences-row">
+        <ion-row>
               <ion-item >                  
               <ion-label>{{'PET_BREED' | translate}}</ion-label>
               <ion-select [disabled]="!isEnableBreed"  formControlName="petbreed"> 
@@ -59,7 +55,7 @@
             </ion-item>             
         </ion-row>
 
-        <ion-row no-padding class="user-preferences-row">
+        <ion-row  class="user-preferences-row">
             <span class="radio-tags-label">{{'GENDER' | translate}}</span>
             <ion-list class="radio-tags" radio-group formControlName="gender">
               <ion-item class="radio-tag">
@@ -75,7 +71,7 @@
             </ion-list>
           </ion-row>
 
-          <ion-row no-padding class="user-preferences-row">
+          <ion-row  class="user-preferences-row">
             <span class="radio-tags-label">{{'SIZE' | translate}}</span>
             <ion-list class="radio-tags" radio-group formControlName="size">
               <ion-item class="radio-tag">
@@ -95,8 +91,8 @@
             </ion-list>
           </ion-row>
 
-          <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding width-50>
+          <ion-row  class="multi-input-row">
+            <ion-col  width-50>
           <ion-item class="range-item">
             <ion-label>
               <h2 class="range-label">{{'PET_WEIGHT' | translate}}</h2>
@@ -105,7 +101,7 @@
             <ion-range formControlName="weight" min="0" max="80" step="1" snaps="true" pin="false"></ion-range>
           </ion-item>
           </ion-col>
-          <ion-col no-padding width-50>
+          <ion-col  width-50>
             <ion-item class="range-item">
               <ion-label>
                 <h2 class="range-label">{{'PET_HEIGHT' | translate}}</h2>
@@ -118,8 +114,8 @@
           </ion-row>
 
          
-          <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding >
+          <ion-row  class="multi-input-row">
+            <ion-col  >
 
             <ion-item>
               <ion-label>{{'PET_COLOR' | translate}}</ion-label>
@@ -129,8 +125,8 @@
             </ion-col>
           </ion-row>
 
-          <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding >
+          <ion-row  class="multi-input-row">
+            <ion-col  >
 
             <ion-item>
               <ion-label>{{'PET_STATUS' | translate}}</ion-label>
@@ -142,8 +138,8 @@
             </ion-col>
           </ion-row>
 
-          <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding >
+          <ion-row  class="multi-input-row">
+            <ion-col  >
 
           <ion-item>
             <ion-label>{{'COUNTRY' | translate}}</ion-label>
@@ -155,8 +151,8 @@
           </ion-col>
       </ion-row>
 	  
-          <ion-row no-padding class="multi-input-row">
-              <ion-col no-padding >
+          <ion-row  class="multi-input-row">
+              <ion-col  >
                   <ion-item>
                 <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
                 <ion-select [disabled]="!isEnable" formControlName="subCountryId"> 
@@ -166,21 +162,21 @@
           </ion-col>
           </ion-row>
 
-        <ion-row no-padding class="multi-input-row">
-            <ion-col no-padding>
+        <ion-row  class="multi-input-row">
+            <ion-col >
         <ion-item>
             <ion-textarea rows="7" placeholder="{{'WRITE_DESCRIPTION' | translate}}" formControlName="description"></ion-textarea>
           </ion-item>
         </ion-col>
         </ion-row>
 
-        <ion-row no-padding class="multi-input-row">
+        <ion-row  class="multi-input-row">
           <ion-item>
             <ion-input type="text" placeholder="{{'MOBILE_PHONE' | translate}}" formControlName="phone"></ion-input>
           </ion-item>
         </ion-row>
 
-         <ion-row no-padding class="multi-input-row">
+         <ion-row  class="multi-input-row">
               <ion-item>
         <ion-label >{{'UPLOAD_AN_IMAGE' | translate}}</ion-label>
         <ion-avatar item-end>
@@ -190,8 +186,8 @@
           </ion-row>
 
 
-        <ion-row *ngIf="isLostPet" no-padding class="multi-input-row">
-          <ion-col no-padding >
+        <ion-row *ngIf="isLostPet"  class="multi-input-row">
+          <ion-col  >
             <ion-item class="multi-input time-item">
               <ion-label floating>{{'LOSTDATE' | translate}}</ion-label>
               <ion-datetime formControlName="lost_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
@@ -200,8 +196,8 @@
           </ion-row>
 
 
-          <ion-row *ngIf="isLostPet" no-padding class="multi-input-row">
-          <ion-col no-padding >
+          <ion-row *ngIf="isLostPet"  class="multi-input-row">
+          <ion-col  >
             <ion-item class="range-item">
               <ion-label>
                 <h2 class="range-label">{{'REWARDS' | translate}}</h2>
@@ -212,8 +208,8 @@
             </ion-col>
         </ion-row>
 
-        <ion-row *ngIf="isLostPet" no-padding class="multi-input-row">
-          <ion-col no-padding >
+        <ion-row *ngIf="isLostPet"  class="multi-input-row">
+          <ion-col  >
             <ion-item class="multi-input time-item">
               <ion-label floating>{{'FOUNDDATE' | translate}}</ion-label>
               <ion-datetime formControlName="found_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
@@ -221,15 +217,15 @@
           </ion-col>
         </ion-row>
 
-        <ion-row *ngIf="isLostPet" no-padding class="multi-input-row">
-          <ion-col no-padding>
+        <ion-row *ngIf="isLostPet"  class="multi-input-row">
+          <ion-col >
             <ion-item>
               <ion-textarea rows="7" placeholder="{{'LAST_SEEN_MSG' | translate}}" formControlName="lastseen"></ion-textarea>
             </ion-item>
           </ion-col>
         </ion-row>
 
-      <ion-row no-padding class="user-preferences-row">
+      <ion-row  class="user-preferences-row">
         <span class="radio-tags-label">{{'STATUS' | translate}}</span>
         <ion-list class="radio-tags" radio-group formControlName="status">
           <ion-item class="radio-tag">
