@@ -179,7 +179,7 @@ export class AddpetPage {
       if(this.isEdit)
     {
       this.isEnableBreed = true;
-      this.changePetType(this.addPetForm.value.petbreed);
+      this.changePetType(this.addPetForm.value.typeofpet);
     }
     });
 
@@ -217,11 +217,7 @@ export class AddpetPage {
         console.log(data.profile_user_name);
      });
      
-     console.log("add sell , user id: " + this.user_id);
-
-     
-    
-    
+     console.log("add sell , user id: " + this.user_id);    
   }
 
   changePetType(event)
