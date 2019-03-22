@@ -55,6 +55,7 @@ import { CommentPage } from '../pages/comment/comment';
 import { CommentpetPage } from '../pages/commentpet/commentpet';
 import { Dist18Page } from '../pages/18dist/18dist';
 import {DisplayfollowerPage} from '../pages/displayfollower/displayfollower';
+import { SearchPage } from '../pages/search/search';
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -183,6 +184,8 @@ export function createTranslateLoader(http: HttpClient) {
     CommentpetPage,
     Dist18Page,
     DisplayfollowerPage,
+    SearchPage,
+
     //functionalities
     MapsPage,
     FunctionalitiesPage,
@@ -192,7 +195,7 @@ export function createTranslateLoader(http: HttpClient) {
     TwitterLoginPage,
 		AdsPage,
 		FormValidationsPage,
-		VideoPlaylistPage,
+    VideoPlaylistPage,
 
     //firebase integration
     FirebaseFeedPage,
@@ -295,6 +298,8 @@ export function createTranslateLoader(http: HttpClient) {
     CommentpetPage,
     Dist18Page,
     DisplayfollowerPage,
+    SearchPage,
+
     //firebase integration
     FirebaseFeedPage,
     FirebaseNewUserModalPage,

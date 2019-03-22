@@ -183,7 +183,8 @@
   "ACTIVE": "Alive",
   "INACTIVE": "RIP",
   "DATE_LOST" : "Lost Date",
-  "petinfo": "Pet Profile" 
+  "petinfo": "Pet Profile" ,
+  "SEARCH" :"Search"
 
   
 }

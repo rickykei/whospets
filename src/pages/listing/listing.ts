@@ -11,6 +11,7 @@ import { DisplayPage } from '../display/display';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { QnaPage } from '../qna/qna';
 import { Dist18Page } from '../18dist/18dist';
+import { SearchPage } from '../search/search';
 
 @Component({
   selector: 'listing-page',
@@ -113,6 +114,12 @@ export class ListingPage {
   click18dist(popular: ListingItemModel)
   {
     this.nav.push( Dist18Page, {popular: popular});
+  }
+
+  goSearch()
+  {
+    this.nav.push(SearchPage);
+
   }
 
 }
