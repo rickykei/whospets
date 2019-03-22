@@ -98,7 +98,7 @@
                 <b> {{'SUBCOUNTRY' | translate}}</b> :  {{pet.subcountry_title}}
               </p>
           </ion-card-content>
-          <ion-card-content [disabled]="!isPetLost" >
+          <ion-card-content *ngIf="isPetLost" >
             <p class="item-text">
                 <b> {{'DATE_LOST' | translate}}</b> :  {{pet.date_lost}}
              </p>
