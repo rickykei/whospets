@@ -39,6 +39,8 @@ export class PetinfoPage {
  showDelbtn:boolean = false;
   commentcnt:number;
   _temp:number;
+
+  isPetLost:boolean = false;
   
   constructor(
     public navCtrl: NavController, 
@@ -119,6 +121,7 @@ export class PetinfoPage {
     if(this.pet.pet_status==1)
     {
       this.pet.pet_Status_string = 'Pet Lost';
+      this.isPetLost = true;
     }
     else if(this.pet.pet_status==2)
     {

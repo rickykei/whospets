@@ -71,48 +71,50 @@
 
          <ion-card-content>
             <p class="item-text">
-                {{'PET_ID' | translate}} :  {{pet.pet_id}}
+                <b> {{'PET_ID' | translate}}</b> :  {{pet.pet_id}}
               </p>
             <p class="item-text">
-                {{'GENDER' | translate}} : {{pet.gender}}
-            </p>
-            <p class="item-text">
-              {{'DATE_LOST' | translate}} :  {{pet.date_lost}}
-            </p>
-            <p class="item-text">
-                {{'DATE_OF_BORN' | translate}} : {{pet.date_born}}
+                <b> {{'GENDER' | translate}}</b> : {{pet.gender}}
             </p>           
             <p class="item-text">
-              {{'PET_COLOR' | translate}} :  {{pet.color}}
+                <b> {{'DATE_OF_BORN' | translate}}</b> : {{pet.date_born}}
+            </p>           
+            <p class="item-text">
+                <b> {{'PET_COLOR' | translate}}</b> :  {{pet.color}}
             </p>
             <p class="item-text">
-              {{'SIZE' | translate}} :  {{pet.size}}
+                <b> {{'SIZE' | translate}}</b> :  {{pet.size}}
             </p>
             <p class="item-text">
-              {{'PET_WEIGHT' | translate}} :  {{pet.weight}}
+                <b> {{'PET_WEIGHT' | translate}}</b> :  {{pet.weight}}
             </p>
             <p class="item-text">
-              {{'PET_WEIGHT' | translate}} :  {{pet.height}}
+                <b> {{'PET_HEIGHT' | translate}}</b> :  {{pet.height}}
             </p>
             <p class="item-text">
-              {{'COUNTRY' | translate}} :  {{pet.country_title}}
+                <b> {{'COUNTRY' | translate}}</b> :  {{pet.country_title}}
             </p>
             <p class="item-text">
-                {{'SUBCOUNTRY' | translate}} :  {{pet.subcountry_title}}
+                <b> {{'SUBCOUNTRY' | translate}}</b> :  {{pet.subcountry_title}}
               </p>
-            <p class="item-text">
-              {{'LAST_SEEN_MSG' | translate}} :  {{pet.last_seen_appearance}}
-            </p>
-            <p class="item-text">
-              {{'REWARDS' | translate}} :  {{pet.price}}
-            </p>
-            <p class="item-text">
-              {{'PET_STATUS' | translate}} :  {{pet.pet_Status_string}}
-            </p>
-           
-
           </ion-card-content>
-
+          <ion-card-content [disabled]="!isPetLost" >
+            <p class="item-text">
+                <b> {{'DATE_LOST' | translate}}</b> :  {{pet.date_lost}}
+             </p>
+            <p class="item-text">
+                <b> {{'LAST_SEEN_MSG' | translate}}</b> :  {{pet.last_seen_appearance}}
+            </p>
+            <p class="item-text">
+                <b> {{'REWARDS' | translate}}</b> :  {{pet.price}}
+            </p>
+          </ion-card-content>
+          <ion-card-content>
+            <p class="item-text-highlight">
+                <b> {{'PET_STATUS' | translate}}</b> :  {{pet.pet_Status_string}}
+            </p>
+          </ion-card-content>
+          
    </ion-card>
 </div>
 
