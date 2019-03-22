@@ -18,13 +18,13 @@ page-addpet {
 		.user-preferences-row
 		{
 			margin: 0px 0px 7px;
-			margin-left: 10px;
+			margin-left: 1ch;
 			padding: 0px 7px;
 			@include element-shadow();
 
 			.radio-tags-label
 			{
-				font-size: 1.4rem;
+				font-size: 1.8rem;
 				letter-spacing: 0.2px;
 				color: $white-d;
 				flex: 1;
