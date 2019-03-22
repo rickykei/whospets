@@ -25,6 +25,23 @@ page-addsell {
                     align-self: center;
                 }
             }
+
+            .user-preferences-radio-row
+            {
+                margin: 0px 0px 7px;
+                padding: 7px 7px;
+                margin-left: 1ch;
+                @include element-shadow();
+    
+                .radio-tags-label
+                {
+                    font-size: 1.8rem;
+                    letter-spacing: 0.2px;
+                    color: $white-d;
+                    flex: 1;
+                    align-self: center;
+                }
+            }
     
             @include radio-tags-styles($white, $theme-color-1, $white);
     
@@ -35,7 +52,7 @@ page-addsell {
                 justify-content: flex-end;
                 padding: 0px;
                 margin: 0px;
-                  margin-right: -5px;
+                 // margin-right: -5px;
     
                 .radio-tag
                 {
@@ -77,6 +94,13 @@ page-addsell {
                     }
                 }
             }
+
+            .form-action-button
+			{
+				margin: 0px;
+                margin-top: 20px;
+                padding: 2ch;
+			}
             
             
         }

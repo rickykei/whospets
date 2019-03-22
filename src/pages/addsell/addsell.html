@@ -75,7 +75,7 @@
             <ion-range formControlName="weight" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
           </ion-item>
 
-            <ion-row class="user-preferences-row">
+            <ion-row class="user-preferences-radio-row">
               <span class="radio-tags-label">{{'SIZE' | translate}}</span>
               <ion-list class="radio-tags" radio-group formControlName="size">
                 <ion-item class="radio-tag">
@@ -104,10 +104,11 @@
             </ion-item>
         </ion-row>
 
+      <ion-item>
         <ion-text>
             <p  color="danger"> {{'ALL_REQUIRED' | translate}}</p>
         </ion-text>
-
+      </ion-item>
             <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!sell_form.valid" (click)="addSell()">{{'DONE_BTN' | translate}}</button>
         </form>
       </div>

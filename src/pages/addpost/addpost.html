@@ -55,9 +55,11 @@
       </button>
       </section>
 
-      <ion-text >
-          <p  color="danger"> {{'ALL_REQUIRED' | translate}}</p>
-      </ion-text>
+      <ion-item>
+        <ion-text >
+            <p  color="danger"> {{'ALL_REQUIRED' | translate}}</p>
+        </ion-text>
+      </ion-item>
       
       <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!post_form.valid" (click)="addPost()">{{'DONE_BTN' | translate}}</button>
  
