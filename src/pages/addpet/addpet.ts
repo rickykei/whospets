@@ -54,6 +54,8 @@ export class AddpetPage {
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
   updateimg:number = 0;
+
+  addpettitle:string;
   
   constructor(
     public navCtrl: NavController, 
@@ -95,11 +97,12 @@ export class AddpetPage {
       });
 
       this.post = this.navParams.get('post');
-
+      this.addpettitle = 'ADD_A_PET'
       if(this.post)
       {
         this.isEdit = true;
         this.updateimg = 0;
+        this.addpettitle = 'EDIT_A_PET'
       }
 
   }

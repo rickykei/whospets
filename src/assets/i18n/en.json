@@ -184,7 +184,9 @@
   "INACTIVE": "RIP",
   "DATE_LOST" : "Lost Date",
   "petinfo": "Pet Profile" ,
-  "SEARCH" :"Search"
+  "SEARCH" :"Search",
+  "EDIT_A_PET": "Edit a pet"
+
 
   
 }
