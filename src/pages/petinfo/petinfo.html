@@ -71,6 +71,12 @@
 
          <ion-card-content>
             <p class="item-text">
+                <b> {{'NAME' | translate}}</b> :  {{pet.name_of_pet}}
+              </p>
+              <p class="item-text">
+                  <b> {{'NAME' | translate}}</b> :  {{pet.name}}
+                </p>  
+            <p class="item-text">
                 <b> {{'PET_ID' | translate}}</b> :  {{pet.pet_id}}
               </p>
             <p class="item-text">
@@ -78,7 +84,10 @@
             </p>           
             <p class="item-text">
                 <b> {{'DATE_OF_BORN' | translate}}</b> : {{pet.date_born}}
-            </p>           
+            </p> 
+            <p class="item-text">
+              <b> {{'AGE' | translate}}</b> : {{age}}
+          </p>                   
             <p class="item-text">
                 <b> {{'PET_COLOR' | translate}}</b> :  {{pet.color}}
             </p>

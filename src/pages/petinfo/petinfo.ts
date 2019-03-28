@@ -28,6 +28,7 @@ export class PetinfoPage {
   pet: PetDetailsModel = new PetDetailsModel();
  uid:string;
  user_id:string;
+ age:any;
  //petStatus: PetStatusModel = new PetStatusModel();
 
  country: CountryIdModel = new CountryIdModel();
@@ -241,5 +242,14 @@ export class PetinfoPage {
           this.pet.subcountry_title_zh = this.subcountry.zone[i].title_zh;
         }
     }
+  }
+
+  getAge()
+  {
+    var borndate:any;
+    borndate = this.pet.date_born;
+
+      var timeDiff = Math.abs(Date.now() - borndate);
+      this.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
   }
 }
