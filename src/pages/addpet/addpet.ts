@@ -81,8 +81,8 @@ export class AddpetPage {
         description: new FormControl(''),
         phone: new FormControl(''),
         gender: new FormControl(''),
-        weight: new FormControl(0),
-        height: new FormControl(0),
+        weight: new FormControl(''),
+        height: new FormControl(''),
         rewards: new FormControl(0),
         size: new FormControl(''),
         born_date: new FormControl(''),
@@ -341,11 +341,6 @@ export class AddpetPage {
 
         let postdata = this.addPetForm.value;
 
-        if(postdata.lastseen===this.translate.get['LAST_SEEN_MSG'])
-        {
-          postdata.lastseen='';
-        }
-        
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         headers.append('Access-Control-Allow-Origin' , '*');
