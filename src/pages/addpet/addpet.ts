@@ -91,7 +91,7 @@ export class AddpetPage {
         typeofpet: new FormControl(''),
         countryId: new FormControl(''),
         color:new FormControl(''),
-        petstatus:new FormControl(''),
+        petstatus:new FormControl('',Validators.required),
         lastseen :new FormControl(''),
         status:new FormControl(''),
         subCountryId: new FormControl('') 
