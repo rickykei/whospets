@@ -29,8 +29,8 @@ export class FeedPostModel {
   date_lost:Date;
   date_born:Date;
   sub_category:string;
-  weight:string;
-  height:string;
+  weight:number=0;
+  height:number=0;
   name_of_pet:string;
   country:string;
   contact:string;

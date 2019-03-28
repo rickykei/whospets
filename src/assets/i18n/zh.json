@@ -165,6 +165,7 @@
   "WRITE_DESCRIPTION" : "描述你的寵物...",
   "MOBILE_PHONE" : "手機號碼",
   "LAST_SEEN_MSG" : "最後一次見面: 您的寵物在失踪之前的最後時刻和地點？包括盡可能多的細節以幫助其他人找到您的寵物",
+  "LAST_SEEN" : "最後一次見面",
   "DONE_BTN" : "完成!",
   "TITLE_TXT": "標題：例如, 我的寵物有什麼問題？",
   "SELLER" : "賣方",

@@ -141,8 +141,8 @@ export class PetDetailsModel{
         date_lost:DateTime;
         date_born:DateTime;
         sub_category:number;
-        weight:number;
-        height:number;
+        weight:number=0;
+        height:number=0;
         name_of_pet:string;
         country:string;
         contact:string;
