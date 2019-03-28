@@ -137,13 +137,13 @@
             "title": "ADOPTION",
             "image": "./assets/images/listing/200x200petadoptionchi.png",
             "image_en": "./assets/images/listing/200x200petadoption.png",
-			"catid": "4"
+			"catid": "3"
         },
         {
             "title": "PETFOUND",
             "image": "./assets/images/listing/200x200petfoundchi.png",
             "image_en": "./assets/images/listing/200x200petfound.png",
-			"catid": "3"
+			"catid": "2"
         },
         {
             "title": "Second Hand",

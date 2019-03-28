@@ -124,19 +124,19 @@ export class PetinfoPage {
       this.pet.pet_Status_string = 'Pet Lost';
       this.isPetLost = true;
     }
-    else if(this.pet.pet_status==2)
+    else if(this.pet.pet_status==0)
     {
       this.pet.pet_Status_string = 'At Home';
     }
-    else if(this.pet.pet_status==3)
+    else if(this.pet.pet_status==2)
     {
       this.pet.pet_Status_string = 'Pet found';
     }
-    else if(this.pet.pet_status==4)
+    else if(this.pet.pet_status==3)
     {
       this.pet.pet_Status_string = 'Pet adoption';
     }
-    else if(this.pet.pet_status==5)
+    else if(this.pet.pet_status==4)
     {
       this.pet.pet_Status_string = 'Pet boarding required';
     }
