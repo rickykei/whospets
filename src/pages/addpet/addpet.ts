@@ -10,6 +10,7 @@ import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/h
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import { ApiProvider } from '../../providers/api/api';
+import { TranslateService } from '../../../node_modules/@ngx-translate/core';
 
 /**
  * Generated class for the AddpetPage page.
@@ -68,6 +69,7 @@ export class AddpetPage {
 	public alertCtrl: AlertController,
   public api: ApiProvider,
   private imagePicker: ImagePicker,
+  public translate: TranslateService,
     private base64: Base64,
     public event: Events) {
 
@@ -336,9 +338,14 @@ export class AddpetPage {
       console.log('url : ' + url);
     
         this.showLoader();
-      
+
         let postdata = this.addPetForm.value;
 
+        if(postdata.lastseen===this.translate.get['LAST_SEEN_MSG'])
+        {
+          postdata.lastseen='';
+        }
+        
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         headers.append('Access-Control-Allow-Origin' , '*');
