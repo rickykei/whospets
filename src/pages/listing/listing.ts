@@ -95,15 +95,15 @@ export class ListingPage {
   goToFeed(category: any) {
     console.log("Clicked goToFeed", category);
     this.categories  = category;
-    if(this.categories.catid == '4')
+    if(this.categories.catid == '5')
     {
       this.nav.push(DisplaySellPage, {display:this.user_id, getall:true});
     }
-    else     if(this.categories.catid == '5')
+    else     if(this.categories.catid == '6')
     {
       this.nav.push(QnaPage, {display:this.user_id, getall:true});
 
-    }else     if(this.categories.catid == '6')
+    }else     if(this.categories.catid == '7')
     {
       this.nav.push(DisplayPage, {display:this.user_id, getall:true});
     }else{

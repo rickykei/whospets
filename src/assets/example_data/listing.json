@@ -137,32 +137,32 @@
             "title": "ADOPTION",
             "image": "./assets/images/listing/200x200petadoptionchi.png",
             "image_en": "./assets/images/listing/200x200petadoption.png",
-			"catid": "3"
+			"catid": "4"
         },
         {
             "title": "PETFOUND",
             "image": "./assets/images/listing/200x200petfoundchi.png",
             "image_en": "./assets/images/listing/200x200petfound.png",
-			"catid": "2"
+			"catid": "3"
         },
         {
             "title": "Second Hand",
             "image": "./assets/images/listing/200x200sellchi.png",
             "image_en": "./assets/images/listing/200x200sell.png",
-            "catid": "4"
+            "catid": "5"
 
         },
         {
             "title": "Q&A",
             "image": "./assets/images/listing/200x200qnachi.png",
             "image_en": "./assets/images/listing/200x200qna.png",
-            "catid": "5"
+            "catid": "6"
         },
         {
             "title": "Lifestyle",
             "image": "./assets/images/listing/200x200petlifestylechi.png",
             "image_en": "./assets/images/listing/200x200petlifestyle.png",
-            "catid": "6"
+            "catid": "7"
         }
 
     ]
