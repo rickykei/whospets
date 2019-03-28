@@ -249,6 +249,8 @@ export class PetinfoPage {
     var borndate:any;
     borndate = this.pet.date_born;
 
+    
+
       var timeDiff = Math.abs(Date.now() - borndate);
       this.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
   }
