@@ -1,6 +1,6 @@
 export class FeedPostModel {
   id: string;
-		product_id:string;
+	product_id:string;
   category_id:string;
   status:string;
   store_id:string;

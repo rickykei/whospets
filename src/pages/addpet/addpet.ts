@@ -51,6 +51,8 @@ export class AddpetPage {
   zone: Array<ZoneModel> = new Array();
   petbreed: Array<BreedModel> = new Array();
 
+  product_id: string;
+
   profile: UserModel= new UserModel();
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
@@ -145,6 +147,8 @@ export class AddpetPage {
 
     if(this.isEdit)
     {
+      this.product_id = this.post.product_id
+
     this.addPetForm.patchValue({
 
       id : this.post.pet_id,
@@ -347,7 +351,7 @@ export class AddpetPage {
         headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
               
         let data=JSON.stringify({user_id:this.user_id,email:this.email,username:this.email
-          , title:postdata.name_of_pet
+          , title:postdata.name_of_pet, product_id:this.product_id
           , description:postdata.description , name_of_pet:postdata.name_of_pet
         , pet_id:postdata.id, category_id:postdata.petbreed, sub_category:postdata.typeofpet
         , gender:postdata.gender, date_born:postdata.born_date, color:postdata.color
@@ -358,7 +362,7 @@ export class AddpetPage {
         , price:postdata.rewards, last_seen_appearance:postdata.lastseen, status:postdata.status
         , tax_id:'', quantity:'', condition:'', feature_date:'', gallery_date:'', banner_a:''
         , banner_b:'', banner_c:''
-        , todays_deal:'', discount:'', questions:'', descriptionDisplay:'', updateimg :this.updateimg
+        , todays_deal:'', discount:'', questions:'', descriptionDisplay:''
         , language:'', specifications:'', style_code:'', created:'', country:'',avatar:this.regData.avatar});
         this.http.post(url,data, { headers: headers })
         .subscribe((res:ResponseModel) => { 
