@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {  NavController, NavParams, Events } from 'ionic-angular';
-import { PetDetailsModel, CountryIdModel } from '../profile/profile.model';
+import { PetDetailsModel, CountryIdModel, PetModel } from '../profile/profile.model';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { PagesDisplayServiceProvider } from '../display/display.services';
@@ -26,9 +26,12 @@ import { AddpetPage } from '../addpet/addpet';
 export class PetinfoPage {
 
   pet: PetDetailsModel = new PetDetailsModel();
+  petmodel: PetModel = new PetModel();
+
  uid:string;
  user_id:string;
  age:any;
+ email:string;
  //petStatus: PetStatusModel = new PetStatusModel();
 
  country: CountryIdModel = new CountryIdModel();
@@ -66,6 +69,28 @@ export class PetinfoPage {
       this.commentcnt = this.pet.commentcnt*1 + this._temp*1;
       this.pet.commentcnt = this.commentcnt;
     });
+
+    events.subscribe('user:back' ,() =>
+    {    
+      this.profileService.getSpecPet(this.email, this.user_id, this.pet.product_id)
+           .then(response => {
+             this.petmodel = response;
+             this.pet = this.petmodel.data[0];
+             this.checkPetStatus();
+
+             this.profileService.getCountryCode()
+            .then(zone => {
+              this.country = zone;
+              this.checkCountryZone();
+            });
+
+            this.profileService.getSubCountryCode()
+            .then(zone => {
+              this.subcountry = zone;
+              this.checkSubCountryZone();
+            });
+           });
+    });
   }
 
   ionViewDidLoad() {
@@ -76,37 +101,41 @@ export class PetinfoPage {
     .then(data => {
       if(data.uid=='')
       {   
-        this.uid='100001704123828';  
+        this.uid='100001704123828'; 
+        this.email = data.email; 
       }
       else{
         this.uid=data.uid;
+        this.email = data.email; 
       }
+
+      this.nativeStorage.getItem('profile_user_id')
+      .then(data2 => {
+          this.user_id = data2.profile_user_id;
+           console.log(data2.profile_user_id);
+           this.checkDelButton(data2.profile_user_id);
+
+
+           this.profileService.getSpecPet(this.email, this.user_id, this.pet.product_id)
+           .then(response => {
+             this.petmodel = response;
+             this.pet = this.petmodel.data[0];
+             this.checkPetStatus();
+
+             this.profileService.getCountryCode()
+            .then(zone => {
+              this.country = zone;
+              this.checkCountryZone();
+            });
+
+            this.profileService.getSubCountryCode()
+            .then(zone => {
+              this.subcountry = zone;
+              this.checkSubCountryZone();
+            });
+           });
+        });
     });
-
-    this.checkPetStatus();
-  
-    this.nativeStorage.getItem('profile_user_id')
-    .then(data => {
-        this.user_id = data.profile_user_id;
-         console.log(data.profile_user_id);
-         this.checkDelButton(data.profile_user_id);
-      });
-
-   this.profileService.getCountryCode()
-   .then(zone => {
-     this.country = zone;
-
-     this.checkCountryZone();
-
-   });
-
-   this.profileService.getSubCountryCode()
-   .then(zone => {
-     this.subcountry = zone;
-
-     this.checkSubCountryZone();
-  
-   });
   }
 
   checkDelButton(user_id:string)
