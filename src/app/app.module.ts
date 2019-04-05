@@ -1,5 +1,5 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -39,7 +39,23 @@ import { GoogleLoginPage } from '../pages/google-login/google-login';
 import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
 import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
-import { LostPetPage } from '../pages/lostpet/lostpet';
+//import { LostPetPage } from '../pages/lostpet/lostpet';
+import { PetinfoPage } from '../pages/petinfo/petinfo';
+//import { AddLayoutPage } from '../pages/add-page/add-layout';
+import { DisplayPage } from '../pages/display/display';
+import { DisplaySellPage} from '../pages/display-sell/display-sell';
+import { QnaPage} from '../pages/qna/qna';
+import { SetQnaPage} from '../pages/set-qna/set-qna';
+import { PostInfoPage} from '../pages/post-info/post-info';
+import { AddpostPage} from '../pages/addpost/addpost';
+import { AddpetPage} from '../pages/addpet/addpet';
+import { AddsellPage} from '../pages/addsell/addsell';
+import { TabsAllsetpostPage} from '../pages/tabs-allsetpost/tabs-allsetpost';
+import { CommentPage } from '../pages/comment/comment';
+import { CommentpetPage } from '../pages/commentpet/commentpet';
+import { Dist18Page } from '../pages/18dist/18dist';
+import {DisplayfollowerPage} from '../pages/displayfollower/displayfollower';
+import { SearchPage } from '../pages/search/search';
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -54,9 +70,9 @@ import { FirebaseTabsNavigationPage } from '../pages/firebase-integration/fireba
 import { BlogFeedPage } from '../pages/wordpress-integration/blog-feed/blog-feed';
 import { BlogPostPage } from '../pages/wordpress-integration/blog-post/blog-post';
 import { BlogCustomPagesPage } from '../pages/wordpress-integration/blog-custom-pages/blog-custom-pages';
+import { WordpressLoginPage } from '../pages/wordpress-integration/wordpress-login/wordpress-login';
 import { BlogCustomPagePage } from '../pages/wordpress-integration/blog-custom-page/blog-custom-page';
 import { BlogCategoriesPage } from '../pages/wordpress-integration/blog-categories/blog-categories';
-import { WordpressLoginPage } from '../pages/wordpress-integration/wordpress-login/wordpress-login';
 import { WordpressMenuPage } from '../pages/wordpress-integration/wordpress-menu/wordpress-menu';
 
 //custom components
@@ -88,7 +104,10 @@ import { FirebaseService } from '../pages/firebase-integration/firebase-integrat
 import { FirebaseAuthService } from '../pages/firebase-integration/firebase-auth.service';
 import { WordpressService } from '../pages/wordpress-integration/wordpress-integration.service';
 import { LanguageService } from '../providers/language/language.service';
-import { LostPetServices} from '../pages/lostpet/lostpet.service';
+//import { LostPetServices} from '../pages/lostpet/lostpet.service';
+import { PetDetailsService} from '../pages/add-page/addlayout.service';
+
+
 
 // Ionic Native Plugins
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -106,11 +125,19 @@ import { AppRate } from '@ionic-native/app-rate';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { Base64 } from '@ionic-native/base64';
+
 
 //Angular Fire
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
+// upload image 
+//import { Camera } from '@ionic-native/camera';
+//import { FileTransfer } from '@ionic-native/file-transfer';
+import { PagesDisplayServiceProvider } from '../pages/display/display.services';
+import { ApiProvider } from '../providers/api/api';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -141,7 +168,23 @@ export function createTranslateLoader(http: HttpClient) {
     FiltersPage,
     TermsOfServicePage,
     PrivacyPolicyPage,
-    LostPetPage,
+   // LostPetPage,
+    PetinfoPage,
+   // AddLayoutPage,
+    DisplayPage,
+    DisplaySellPage,
+    QnaPage,
+    SetQnaPage,
+    PostInfoPage,
+    AddpostPage,
+    AddpetPage,
+    AddsellPage,
+    TabsAllsetpostPage,
+    CommentPage,
+    CommentpetPage,
+    Dist18Page,
+    DisplayfollowerPage,
+    SearchPage,
 
     //functionalities
     MapsPage,
@@ -152,7 +195,7 @@ export function createTranslateLoader(http: HttpClient) {
     TwitterLoginPage,
 		AdsPage,
 		FormValidationsPage,
-		VideoPlaylistPage,
+    VideoPlaylistPage,
 
     //firebase integration
     FirebaseFeedPage,
@@ -239,7 +282,24 @@ export function createTranslateLoader(http: HttpClient) {
 		AdsPage,
 		FormValidationsPage,
     VideoPlaylistPage,
-    LostPetPage,
+   // LostPetPage,
+    PetinfoPage,
+   // AddLayoutPage,
+    DisplayPage,
+    DisplaySellPage,
+    QnaPage,
+    SetQnaPage,
+    PostInfoPage,
+    AddpetPage,
+    AddpostPage,
+    AddsellPage,
+    TabsAllsetpostPage,
+    CommentPage,
+    CommentpetPage,
+    Dist18Page,
+    DisplayfollowerPage,
+    SearchPage,
+
     //firebase integration
     FirebaseFeedPage,
     FirebaseNewUserModalPage,
@@ -267,7 +327,8 @@ export function createTranslateLoader(http: HttpClient) {
     List2Service,
     ScheduleService,
     TabsNavigationService,
-    LostPetServices,
+  //  LostPetServices,
+    PetDetailsService,
     //functionalities
     FacebookLoginService,
     GoogleLoginService,
@@ -292,7 +353,16 @@ export function createTranslateLoader(http: HttpClient) {
 		AppRate,
 		ImagePicker,
 		Crop,
-		EmailComposer
+    EmailComposer,
+  //  Camera,
+   // FileTransfer,
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PagesDisplayServiceProvider,
+	ImagePicker,
+	Base64,
+    ApiProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

@@ -11,13 +11,14 @@ import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-
-// import { GoogleLoginService } from '../google-login/google-login.service';
-// import { TwitterLoginService } from '../twitter-login/twitter-login.service';
-
 import { NativeStorage } from '@ionic-native/native-storage';
 
-import { ProfilePage } from '../profile/profile';
+import { ProfileService } from '../profile/profile.service';
+import { LoginModel } from '../profile/profile.model';
+import { LanguageModel } from '../../providers/language/language.model';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../providers/language/language.service';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 @Component({
@@ -30,26 +31,31 @@ export class LoginPage {
   loading: any;
   email : AbstractControl;
   password : AbstractControl;
+  userId :string;
  success: string;
  message: string;
+ status: string;
+ languages: Array<LanguageModel>;
+ language:LanguageModel;
+
+ loginInfo: LoginModel = new LoginModel();
 
   constructor(
     public nav: NavController,
     public facebookLoginService: FacebookLoginService,
-	public nativeStorage:NativeStorage,
-    //public googleLoginService: GoogleLoginService,
-    //public twitterLoginService: TwitterLoginService,
-	private http: Http,
+	  public nativeStorage:NativeStorage,
+    public profileService: ProfileService,
+    public translate: TranslateService,
+    public languageService: LanguageService,
     public loadingCtrl: LoadingController
   ) {
+    this.languages = this.languageService.getLanguages();
 
-    this.main_page = { component: ProfilePage }; //TabsNavigationPage };
-
-
+    this.main_page = { component: TabsNavigationPage }; 
 
     this.login = new FormGroup({
-      email: new FormControl('rickykei@yahoo.com', Validators.required),
-      password: new FormControl('1234', Validators.required)
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
     });
 
     this.email = this.login.controls['email'];
@@ -63,33 +69,64 @@ export class LoginPage {
     var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password ;
     console.log(url);
 
-	 this.http.get(url).map(res => res.json()).subscribe(data2 => {
+    this.profileService.getLoginData(url)
+    .then(data2 => {
+      console.log('..data2 :'+ data2.success);
 
-
-    console.log(data2.success);
-
-      this.success = data2.success;
-      console.log(this.success);
-
-      if(this.success=='true')
+      this.status = data2.success;
+      if(this.status=='true')
       {
-        console.log('inside true');
+        this.loginInfo.data.id = data2.data.id; 
+        this.loginInfo.data.username = data2.data.username;
+        this.loginInfo.data.image = data2.data.image;
+        this.loginInfo.data.message = data2.data.message;
+        this.loginInfo.data.language = data2.data.language;
+        this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
 
         this.setEmailUser(this.email.value, this.password.value, '');
-        this.nav.setRoot(ProfilePage);
-      }
-      else
-      {
-        console.log('inside false');
+        this.setProfileUserId(data2.data.id +'',data2.data.language+'') ;
+        this.setLanguage(this.language);
 
+        this.nav.push(TabsNavigationPage);//ProfilePage);
+
+      }
+      else{
         this.removeEmailUser();
-        this.nav.setRoot(SignupPage);
+         //this.nav.setRoot(SignupPage);
+         alert("Email/Password Fail!");
       }
     });
-  }
 
+    }
+
+    setLanguage(lang: LanguageModel){
+      let language_to_set = this.translate.getDefaultLang();
+  
+      if(lang){
+        language_to_set = lang.code;
+      }
+      this.translate.setDefaultLang(language_to_set);
+      this.translate.use(language_to_set);
+    }
+
+    setProfileUserId( _userid : string, _language:string )
+    {
+      console.log('profile_user_id :' + _userid);
+
+      this.nativeStorage.setItem('profile_user_id',
+      {
+        profile_user_id : _userid,
+        profile_language: _language
+      })
+      .then(
+        () =>  console.log('profile_user_id ： Stored item!'),
+        error => console.error('profile_user_id : Error storing item')
+      );
+    }
+  
   removeEmailUser(){
     this.nativeStorage.remove('email_user');
+    this.nativeStorage.remove('profile_user_id');
   }
 
   setEmailUser(_email :string, _password:string, _uid : string)
@@ -119,6 +156,10 @@ export class LoginPage {
       console.log("data.email:"+data.email);
       console.log("data.userid:"+data.userId);
       console.log("data.name:"+data.name);
+      this.language = (data.language == 'en'? this.languages[0]:this.languages[1]);
+
+      this.setProfileUserId(data.userId +'', data.language);
+      this.setLanguage(this.language);
 
        this.setEmailUser(data.email, '', data.userId);
       this.nav.setRoot(this.main_page.component);
@@ -129,7 +170,7 @@ export class LoginPage {
         this.loading.dismiss();
         this.nav.setRoot(this.main_page.component);
       }, (err) => {
-        console.log("Facebook Login error", err);
+        console.log("Facebook Login error 2 ", err);
       });
     });
   }

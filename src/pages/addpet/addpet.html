@@ -1,0 +1,248 @@
+<!--
+  Generated template for the AddpetPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{addpettitle | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="addpet-content">
+  <form [formGroup]="addPetForm" class="addpet-form">
+      <h2 class="section-title">{{'ADD_A_PET' | translate}}</h2>
+      <ion-item>
+        <ion-input type="text" placeholder="{{'PET_NAME' | translate}} {{'REQUIRED' | translate}}" formControlName="name_of_pet"></ion-input> 
+      </ion-item>
+      
+      <ion-item>
+          <ion-input type="text" placeholder="{{'PET_ID' | translate}}" formControlName="id"></ion-input>
+        </ion-item>
+
+      <ion-item>
+         <ion-label floating>{{'DATE_OF_BORN' | translate}}</ion-label>
+         <ion-datetime formControlName="born_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
+      </ion-item>
+
+      <ion-row class="user-preferences-row">
+          <span class="radio-tags-label">{{'TYPE_OF_PET' | translate}}</span>
+          <ion-list class="radio-tags" radio-group formControlName="typeofpet" (ionChange)="changePetType($event)">
+            <ion-item class="radio-tag">
+              <ion-label>{{'CAT' | translate}}</ion-label>
+              <ion-radio value="2"></ion-radio>
+            </ion-item>
+            <ion-item class="radio-tag">
+              <ion-label>
+                <span>{{'DOG' | translate}}</span>
+              </ion-label>
+              <ion-radio value="1"></ion-radio>
+            </ion-item>
+          </ion-list>
+        </ion-row>
+
+        <ion-row>
+              <ion-item >                  
+              <ion-label>{{'PET_BREED' | translate}}</ion-label>
+              <ion-select [disabled]="!isEnableBreed"  formControlName="petbreed"> 
+              <ion-option  *ngFor="let breed of petbreed" [value]="breed.category_id">{{breed.title}}</ion-option> 
+              </ion-select>
+            </ion-item>             
+        </ion-row>
+
+        <ion-row  class="user-preferences-row">
+            <span class="radio-tags-label">{{'GENDER' | translate}}</span>
+            <ion-list class="radio-tags" radio-group formControlName="gender">
+              <ion-item class="radio-tag">
+                <ion-label>M</ion-label>
+                <ion-radio value="m"></ion-radio>
+              </ion-item>
+              <ion-item class="radio-tag">
+                <ion-label>
+                  <span>F</span>
+                </ion-label>
+                <ion-radio value="f"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+
+          <ion-row  class="user-preferences-row">
+            <span class="radio-tags-label">{{'SIZE' | translate}}</span>
+            <ion-list class="radio-tags" radio-group formControlName="size">
+              <ion-item class="radio-tag">
+                <ion-label>L</ion-label>
+                <ion-radio value="L"></ion-radio>
+              </ion-item>
+              <ion-item class="radio-tag">
+                <ion-label>
+                  <span>M</span>
+                </ion-label>
+                <ion-radio value="M"></ion-radio>
+              </ion-item>
+              <ion-item class="radio-tag">
+                <ion-label>S</ion-label>
+                <ion-radio value="S"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+
+          <ion-row  class="multi-input-row">
+            <ion-col  width-50>
+          <ion-item class="range-item">
+            <ion-label>
+              <h2 class="range-label">{{'PET_WEIGHT' | translate}}</h2>
+              <h3 class="range-value">{{addPetForm.controls.weight.value}} kg</h3>
+            </ion-label>
+            <ion-range formControlName="weight" min="0" max="80" step="1" snaps="true" pin="false"></ion-range>
+          </ion-item>
+          </ion-col>
+          <ion-col  width-50>
+            <ion-item class="range-item">
+              <ion-label>
+                <h2 class="range-label">{{'PET_HEIGHT' | translate}}</h2>
+                <h3 class="range-value">{{addPetForm.controls.height.value}} cm</h3>
+              </ion-label>
+              <ion-range formControlName="height" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
+            </ion-item>
+
+            </ion-col>
+          </ion-row>
+
+         
+          <ion-row  class="multi-input-row">
+            <ion-col  >
+
+            <ion-item>
+              <ion-label>{{'PET_COLOR' | translate}}</ion-label>
+              <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color" >{{color.color}}</ion-option> </ion-select>
+            </ion-item>
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row  class="multi-input-row">
+            <ion-col  >
+
+            <ion-item>
+              <ion-label>{{'PET_STATUS' | translate}}</ion-label>
+              <ion-select formControlName="petstatus" (ionChange)="changePetStatus($event)"> 
+                <ion-option  *ngFor="let status of petStatus.pet_status" [value]="status.id"  >{{status.status}}</ion-option> 
+              </ion-select>
+            </ion-item>
+            <p> {{'REQUIRED' | translate}}</p>
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row  class="multi-input-row">
+            <ion-col  >
+
+          <ion-item>
+            <ion-label>{{'COUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="countryId" (ionChange)="onCountryChange($event)">
+              <ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> 
+            </ion-select>
+          </ion-item>
+
+          </ion-col>
+      </ion-row>
+	  
+          <ion-row  class="multi-input-row">
+              <ion-col  >
+                  <ion-item>
+                <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+                <ion-select [disabled]="!isEnable" formControlName="subCountryId"> 
+                  <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+              </ion-item>
+    
+          </ion-col>
+          </ion-row>
+
+        <ion-row  class="multi-input-row">
+            <ion-col >
+        <ion-item>
+            <ion-textarea rows="7" placeholder="{{'WRITE_DESCRIPTION' | translate}}" formControlName="description"></ion-textarea>
+          </ion-item>
+        </ion-col>
+        </ion-row>
+
+        <ion-row  class="multi-input-row">
+          <ion-item>
+            <ion-input type="text" placeholder="{{'MOBILE_PHONE' | translate}}" formControlName="phone"></ion-input>
+          </ion-item>
+        </ion-row>
+
+         <ion-row  class="multi-input-row">
+              <ion-item>
+        <ion-label >{{'UPLOAD_AN_IMAGE' | translate}}</ion-label>
+        <ion-avatar item-end>
+          <img src="{{imgPreview}}" (click)="getPhoto()">
+        </ion-avatar>
+      </ion-item>
+          </ion-row>
+
+
+        <ion-row *ngIf="isLostPet"  class="multi-input-row">
+          <ion-col  >
+            <ion-item class="multi-input time-item">
+              <ion-label floating>{{'LOSTDATE' | translate}}</ion-label>
+              <ion-datetime formControlName="lost_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
+            </ion-item>
+          </ion-col>
+          </ion-row>
+
+
+          <ion-row *ngIf="isLostPet"  class="multi-input-row">
+          <ion-col  >
+            <ion-item class="range-item">
+              <ion-label>
+                <h2 class="range-label">{{'REWARDS' | translate}}</h2>
+                <h3 class="range-value">$ {{addPetForm.controls.rewards.value}} </h3>
+              </ion-label>
+              <ion-range formControlName="rewards" min="0" max="10000" step="500" snaps="true" pin="false"></ion-range>
+            </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="isLostPet"  class="multi-input-row">
+          <ion-col  >
+            <ion-item class="multi-input time-item">
+              <ion-label floating>{{'FOUNDDATE' | translate}}</ion-label>
+              <ion-datetime formControlName="found_date" displayFormat="DD/MM/YY" pickerFormat="DD-MM-YYYY"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="isLostPet"  class="multi-input-row">
+          <ion-col >
+            <ion-item>
+              <ion-textarea rows="7" placeholder="{{'LAST_SEEN_MSG' | translate}}" formControlName="lastseen"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+      <ion-row  class="user-preferences-row">
+        <span class="radio-tags-label">{{'STATUS' | translate}}</span>
+        <ion-list class="radio-tags" radio-group formControlName="status">
+          <ion-item class="radio-tag">
+            <ion-label>Active</ion-label>
+            <ion-radio value="1"></ion-radio>
+          </ion-item>
+          <ion-item class="radio-tag">
+            <ion-label>
+              <span>InActive</span>
+            </ion-label>
+            <ion-radio value="0"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-row>
+
+      <button ion-button block class="form-action-button create-event-button" type="submit" [disabled]="!addPetForm.valid" (click)="addPet()" >{{'DONE_BTN' | translate}}</button>
+  </form>
+  </div>
+</ion-content>

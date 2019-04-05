@@ -3,37 +3,166 @@
     "banner_title": "Location",
     "populars": [
         {
+            "title": "Central and Western",
+            "image": "./assets/images/listing/area001.png",
+            "image_en": "./assets/images/listing/area001en.png",
+            "group_ids":["322", "332", "331", "334", "339"]
+        },
+        {
+            "title": "Eastern",
+            "image": "./assets/images/listing/area002.png",
+            "image_en": "./assets/images/listing/area002en.png",
+            "group_ids":["323", "329", "330", "336", "337"]
+        },
+        {
+            "title": "Southern",
+            "image": "./assets/images/listing/area003.png",             
+            "image_en": "./assets/images/listing/area003en.png",
+            "group_ids":["324", "325", "335", "338"]
+
+        },
+        {
+            "title": "Wan Chai",
+            "image": "./assets/images/listing/area004.png",
+            "image_en": "./assets/images/listing/area004en.png",
+            "group_ids":["327", "328", "333"]
+
+        },
+        {
+            "title": "Sham Shui Po",
+            "image": "./assets/images/listing/area005.png",
+            "image_en": "./assets/images/listing/area005en.png",
+            "group_ids":["351", "352", "353", "355", "356", "358"]
+
+        },
+        {
+            "title": "Kowloon City",
+            "image": "./assets/images/listing/area006.png",
+            "image_en": "./assets/images/listing/area006en.png",
+            "group_ids":["350", "359", "360", "363", "364"]
+
+        },
+        {
+            "title": "Kwun Tong",
+            "image": "./assets/images/listing/area007.png",
+            "image_en": "./assets/images/listing/area007en.png",
+            "group_ids":["346", "354", "357", "358", "365"]
+
+        },
+        {
+            "title": "Wong Tai Sin",
+            "image": "./assets/images/listing/area008.png",
+            "image_en": "./assets/images/listing/area008en.png",
+            "group_ids":["344", "345", "348", "362", "367", "369"]
+
+        },
+        {
+            "title": "Yau Tsim Mong",
+            "image": "./assets/images/listing/area009.png",
+            "image_en": "./assets/images/listing/area009en.png",
+            "group_ids":["343", "347", "349", "361", "366"]
+
+        },
+        {
+            "title": "Islands",
+            "image": "./assets/images/listing/area010.png",
+            "image_en": "./assets/images/listing/area010en.png",
+            "group_ids":["318", "319", "320", "321", "341", "342"]
+
+        },
+        {
+            "title": "Kwai Tsing",
+            "image": "./assets/images/listing/area011.png",
+            "image_en": "./assets/images/listing/area011en.png",
+            "group_ids":["309", "311", "312"]
+
+        },
+        {
+            "title": "North",
+            "image": "./assets/images/listing/area012.png",
+            "image_en": "./assets/images/listing/area012en.png",
+            "group_ids":["306", "315"]
+
+        },
+        {
+            "title": "Sai Kung",
+            "image": "./assets/images/listing/area013.png",
+            "image_en": "./assets/images/listing/area013en.png",
+            "group_ids":["302", "313"]
+
+        },
+        {
             "title": "Shatin",
-            "image": "./assets/images/listing/district368.png"
+            "image": "./assets/images/listing/area014.png",
+            "image_en": "./assets/images/listing/area014en.png",
+            "group_ids":["307", "310","314", "316"]
+
+        },
+        {
+            "title": "Tai Po",
+            "image": "./assets/images/listing/area015.png",
+            "image_en": "./assets/images/listing/area015en.png",
+            "group_ids":["305", "317"]
+
+        },
+        {
+            "title": "Tsuen Wan",
+            "image": "./assets/images/listing/area016.png",
+            "image_en": "./assets/images/listing/area016en.png",
+            "group_ids":["308", "340"]
+
+        },
+        {
+            "title": "Tuen Mun",
+            "image": "./assets/images/listing/area017.png",
+            "image_en": "./assets/images/listing/area017en.png",
+            "group_ids":["303"]
+
+        },
+        {
+            "title": "Yuen Long",
+            "image": "./assets/images/listing/area018.png",
+            "image_en": "./assets/images/listing/area018en.png",
+            "group_ids":["301", "304"]
         }
     ],
     "categories": [
         {
-            "title": "Lost Pet",
-            "image": "./assets/images/listing/200x200lostpet.png",
+            "title": "LOSTPET",
+            "image": "./assets/images/listing/200x200lostpetchi.png",
+            "image_en": "./assets/images/listing/200x200lostpet.png",
 			"catid": "1"
         },
         {
-            "title": "Adoption ",
-            "image": "./assets/images/listing/200x200petadoption.png",
+            "title": "ADOPTION",
+            "image": "./assets/images/listing/200x200petadoptionchi.png",
+            "image_en": "./assets/images/listing/200x200petadoption.png",
 			"catid": "3"
         },
         {
-            "title": "Pet Found",
-            "image": "./assets/images/listing/200x200petfound.png",
+            "title": "PETFOUND",
+            "image": "./assets/images/listing/200x200petfoundchi.png",
+            "image_en": "./assets/images/listing/200x200petfound.png",
 			"catid": "2"
         },
         {
             "title": "Second Hand",
-            "image": "./assets/images/listing/200x200sell.png"
+            "image": "./assets/images/listing/200x200sellchi.png",
+            "image_en": "./assets/images/listing/200x200sell.png",
+            "catid": "5"
+
         },
         {
             "title": "Q&A",
-            "image": "./assets/images/listing/200x200qna.png"
+            "image": "./assets/images/listing/200x200qnachi.png",
+            "image_en": "./assets/images/listing/200x200qna.png",
+            "catid": "6"
         },
         {
             "title": "Lifestyle",
-            "image": "./assets/images/listing/200x200petlifestyle.png"
+            "image": "./assets/images/listing/200x200petlifestylechi.png",
+            "image_en": "./assets/images/listing/200x200petlifestyle.png",
+            "catid": "7"
         }
 
     ]

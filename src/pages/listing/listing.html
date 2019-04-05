@@ -8,49 +8,31 @@
         <preload-image [ratio]="{w:583, h:100}" src="./assets/images/header_logo_white.png"></preload-image>
       </div>
     </ion-title>
+    <ion-buttons end> 
+      <button ion-button (click)="goSearch()"> 
+          <ion-icon name="search"></ion-icon>
+      </button> 
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="listing-content">
-<!--  <!-- <background-image class="image-heading" [src]="listing.banner_image">  
-    <ion-row class="heading-row">
-      <ion-col no-padding offset-100>
-        <!-- <h2 class="main-title">{{listing.banner_title}}</h2> 
-        <ion-searchbar [(ngModel)]="searchTerm"></ion-searchbar>
-      </ion-col>
-    </ion-row>
-  <!-- </background-image>  -->  
+<ion-content text-center class="listing-content">
 
-  <h4 class="categories-title">{{'POPULAR' | translate}}</h4>
+  <h2 class="categories-title">{{'BROWSE_LOCATION' | translate}}</h2>
   <ion-scroll scrollX="true" class="horizontal-categories">
     <ion-row class="categories-row">
       <ion-col width-30 class="horizontal-item"  *ngFor="let popular of listing.populars">
-        <preload-image [ratio]="{w:1, h:1}" [src]="popular.image" title="popular.title"></preload-image>
+        <preload-image *ngIf="isChi"  [ratio]="{w:1, h:1}" [src]="popular.image" title="popular.title" (click)="click18dist(popular)"></preload-image>
+        <preload-image *ngIf="!isChi"  [ratio]="{w:1, h:1}" [src]="popular.image_en" title="popular.title" (click)="click18dist(popular)"></preload-image>
       </ion-col>
     </ion-row>
   </ion-scroll>
-  <h4 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}</h4>
+  <h2 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}</h2>
   <ion-row class="grid-categories">
-  
-
-   <!--  <ion-col width-50 class="category-item" >
-        <background-image tappable class="category-heading" src="./assets/images/listing/200x200boxeo.png" (click)="goToLostPet()">
-          <ion-row class="heading-row">
-            <ion-col no-padding width-100>
-              <h2 class="category-title">{{'LOST_PET' | translate}}</h2>
-            </ion-col>
-          </ion-row>
-        </background-image>
-      </ion-col> -->
  
         <ion-col width-50 class="category-item" *ngFor="let category of listing.categories">
-      <background-image tappable class="category-heading" [src]="category.image" (click)="goToFeed(category)">
-        <ion-row class="heading-row">
-          <ion-col no-padding width-100>
-            <h2 class="category-title">{{category.title}}</h2>
-          </ion-col>
-        </ion-row>
-      </background-image>
+        <preload-image *ngIf="isChi"  [ratio]="{w:1, h:1}" [src]="category.image" (click)="goToFeed(category)"></preload-image>
+        <preload-image *ngIf="!isChi" [ratio]="{w:1, h:1}" [src]="category.image_en" (click)="goToFeed(category)"></preload-image>
     </ion-col>
   </ion-row>
 </ion-content>

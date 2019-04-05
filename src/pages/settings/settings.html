@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ 'SETTINGS' | translate }}</ion-title>
-    <ion-buttons end [hidden]="!settingsForm.dirty">
+    <ion-buttons end > <!--[hidden]="!settingsForm.dirty"-->
       <button ion-button  (click)="saveProfile()">
         {{ 'SAVE' | translate }}
       </button>
@@ -13,12 +13,15 @@
   <div class="user-image-content">
     <ion-row no-padding class="user-image-row">
       <ion-col no-padding width-40>
-        <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="profile.data.fb_uid" alt="this is the image" title="IMAGE!"></preload-image>
+        <ion-avatar item-end>
+          <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="profile.data.fb_uid" alt="this is the image" title="IMAGE!"></preload-image>
+        </ion-avatar>
       </ion-col>
     </ion-row>
     <ion-row no-padding class="user-image-row">
       <ion-col no-padding width-60>
-        <button class="image-action-button" ion-button outline block small (click)="openImagePicker()">{{ 'CHANGE_PROFILE_PICTURE' | translate}}</button>
+      <button class="image-action-button" ion-button outline block small (click)="getPhoto()">{{ 'CHANGE_PROFILE_PICTURE' | translate}}</button>
+       
       </ion-col>
     </ion-row>
   </div>
@@ -39,7 +42,7 @@
       </ion-item>
       <ion-item>
           <ion-label stacked>{{ 'EMAIL' | translate }}</ion-label>
-          <ion-input type="text" formControlName="email"></ion-input>
+          <ion-input type="text" readonly="{{isReadonly}}" formControlName="email"></ion-input>
         </ion-item>
       <ion-item>
           <ion-label stacked>{{ 'CITY' | translate }}</ion-label>
@@ -54,52 +57,11 @@
         <ion-textarea formControlName="about" rows="5" placeholder="Your description here..."></ion-textarea>
       </ion-item>
       <ion-item>
-        <ion-label>stacked>{{ 'BIRTHDAY' | translate }}</ion-label>
+        <ion-label stacked>{{ 'BIRTHDAY' | translate }}</ion-label>
         <ion-datetime displayFormat="MM/DD/YYYY" formControlName="birthday"></ion-datetime>
       </ion-item>
     </ion-list>
   
-
-    <!-- <ion-row class="user-preferences-row">
-      <span class="radio-tags-label">{{'CURRENCY' | translate}}</span>
-      <ion-list class="radio-tags" radio-group formControlName="currency">
-        <ion-item class="radio-tag">
-          <ion-label>&#36;</ion-label>
-          <ion-radio value="dollar"></ion-radio>
-        </ion-item>
-        <ion-item class="radio-tag">
-          <ion-label>
-            <span>&euro;</span>
-          </ion-label>
-          <ion-radio value="euro"></ion-radio>
-        </ion-item>
-        <ion-item class="radio-tag">
-          <ion-label>
-            <span>&pound;</span>
-          </ion-label>
-          <ion-radio value="pound"></ion-radio>
-        </ion-item>
-      </ion-list>
-    </ion-row>
-
-    <ion-row class="user-preferences-row">
-      <span class="radio-tags-label">{{'WEATHER' | translate}}</span>
-      <ion-list class="radio-tags" radio-group formControlName="weather">
-        <ion-item class="radio-tag">
-          <ion-label>&deg;C</ion-label>
-          <ion-radio value="celsius"></ion-radio>
-        </ion-item>
-        <ion-item class="radio-tag">
-          <ion-label>
-            <span>&deg;F</span>
-          </ion-label>
-          <ion-radio value="fahrenheit"></ion-radio>
-        </ion-item>
-      </ion-list>
-    </ion-row> -->
-
-    
-
     <ion-list class="user-data-content">
     <!-- <ion-list class="user-preferences-row"> -->
       <ion-item>
@@ -110,33 +72,33 @@
       </ion-item>
     </ion-list>
 
-    <ion-list class="switchers-list">
+    <!-- <ion-list class="switchers-list">
       <ion-item class="switcher-item">
         <ion-label>{{ 'BIO' | translate }}</ion-label>
-        <ion-toggle formControlName="bio"></ion-toggle>
+        <ion-toggle formControlName="bio" ></ion-toggle>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
 
     <ion-list class="switchers-list">
       <ion-item class="switcher-item">
         <ion-label>{{'NOTIFICATIONS' | translate}}</ion-label>
-        <ion-toggle formControlName="notifications"></ion-toggle>
+        <ion-toggle formControlName="notifications" ></ion-toggle>
       </ion-item>
     </ion-list>
 
-    <ion-list class="switchers-list">
+    <!-- <ion-list class="switchers-list">
         <ion-item class="switcher-item">
           <ion-label>{{'NEWSLETTER' | translate}}</ion-label>
-          <ion-toggle formControlName="newsletter"></ion-toggle>
+          <ion-toggle formControlName="newsletter" ></ion-toggle>
         </ion-item>
       </ion-list>
 
       <ion-list class="switchers-list">
           <ion-item class="switcher-item">
             <ion-label>{{'SELLER' | translate}}</ion-label>
-            <ion-toggle formControlName="seller"></ion-toggle>
+            <ion-toggle formControlName="seller" ></ion-toggle>
           </ion-item>
-        </ion-list>
+        </ion-list> -->
 
           <ion-item>
             <ion-label>{{'GENDER' | translate}}</ion-label>
@@ -146,37 +108,37 @@
             </ion-select>
           </ion-item>
 
-          <ion-item>
-            <ion-label>{{'COUNTRY' | translate}}</ion-label>
-            <ion-select formControlName="countryId" multiple="true">
-              <ion-option>Hong Kong</ion-option>
-              <ion-option>Black Olives</ion-option>
-              <ion-option>Extra Cheese</ion-option>
-              <ion-option>Mushrooms</ion-option>
-              <ion-option>Pepperoni</ion-option>
-              <ion-option>Sausage</ion-option>
-            </ion-select>
-          </ion-item>
-     
-          <ion-item>
-            <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
-            <ion-select formControlName="subCountryId" multiple="true">
-              <ion-option>Hong Kong</ion-option>
-              <ion-option>Black Olives</ion-option>
-              <ion-option>Extra Cheese</ion-option>
-              <ion-option>Mushrooms</ion-option>
-              <ion-option>Pepperoni</ion-option>
-              <ion-option>Sausage</ion-option>
-            </ion-select>
-          </ion-item>
-
+          <ion-row no-padding class="multi-input-row">
+              <ion-col no-padding >
+  
+            <ion-item>
+              <ion-label>{{'COUNTRY' | translate}}</ion-label>
+              <ion-select formControlName="countryId" (ionChange)="onCountryChange()">
+                <ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> 
+              </ion-select>
+            </ion-item>
+  
+            </ion-col>
+        </ion-row>
+      
+            <ion-row no-padding class="multi-input-row">
+                <ion-col no-padding >
+                    <ion-item>
+                  <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+                  <ion-select [disabled]="!isEnable" formControlName="subCountryId"> 
+                    <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+                </ion-item>
+      
+            </ion-col>
+            </ion-row>
+  
   </form>
 
-  <button class="alt-button rate-app-button" ion-button full (click)="rateApp()">{{'RATE_APP' | translate}}</button>
+  <!-- <button class="alt-button rate-app-button" ion-button full (click)="rateApp()">{{'RATE_APP' | translate}}</button>
 
   <button class="alt-button" ion-button full (click)="showPrivacyModal()">{{'PRIVACY_POLICY' | translate}}</button>
 
-  <button class="alt-button" ion-button full (click)="showTermsModal()">{{'TERMS_OF_USE' | translate }}</button>
+  <button class="alt-button" ion-button full (click)="showTermsModal()">{{'TERMS_OF_USE' | translate }}</button> -->
 
   <button class="alt-button logout-button" ion-button full icon-start (click)="logout()">
     <ion-icon name="log-out"></ion-icon>

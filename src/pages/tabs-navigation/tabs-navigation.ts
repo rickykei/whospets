@@ -1,22 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { ListingPage } from '../listing/listing';
 import { ProfilePage } from '../profile/profile';
-import { NotificationsPage } from '../notifications/notifications';
+import { DisplayfollowerPage } from '../displayfollower/displayfollower';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { LoginPage } from '../login/login';
-import { NavController } from 'ionic-angular';
-
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
+import { NavController, NavParams, Tabs } from 'ionic-angular';
 
 import { LoginModel, LoginContentModel } from './tabs-navigation.model';
 import { TabsNavigationService } from './tabs-navigation.service';
 
 import 'rxjs/Rx';
 import { WalkthroughPage } from '../walkthrough/walkthrough';
+import { UserModel } from '../profile/profile.model';
+import { LanguageModel } from '../../providers/language/language.model';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../providers/language/language.service';
 
 
 
@@ -28,76 +29,55 @@ export class TabsNavigationPage {
   tab1Root: any;
   tab2Root: any;
   tab3Root: any;
+  languages: Array<LanguageModel>;
+  language:LanguageModel;
 
+  @ViewChild('myTab') tabRef: Tabs;
  
   posts: LoginModel = new LoginModel();
   logindata : LoginContentModel = new LoginContentModel();
+  profile: UserModel= new UserModel();
 
   login : boolean;
+  tabs: number;
 
   constructor(    
     public nav: NavController,
     public tabsNavigationService: TabsNavigationService,
     public nativeStorage:NativeStorage,
-    public facebookLoginService: FacebookLoginService
+    public translate: TranslateService,
+    public languageService: LanguageService,
+    public facebookLoginService: FacebookLoginService,
+    public navParams: NavParams
     ) {
     this.tab1Root = ListingPage;
     this.tab2Root = ProfilePage;
-    this.tab3Root = NotificationsPage;
+    this.tab3Root = DisplayfollowerPage;
+    this.languages = this.languageService.getLanguages();
 
-  }
-
- 
-   // 1st log into this page, check is it logged user before
-   ionViewWillEnter() {    
-    if(!this.isLogged()){
-     // this.nav.setRoot(LoginPage);
-    }
-  }
-
-  isLogged(){
-
-    //debugging
-   // return true;      
- 
-   this.nativeStorage.getItem('email_user')
-   .then(function (data) {
-       
-    console.log(data.email);
-    //http://api.whospets.com/api/users/login.php?username=rickykei@yahoo.com&logintype=normal&password=1234
-
-
-    var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
-    console.log(url);
-
-    this.http.get(url).subscribe(data => {
-      console.log(data);
-    });
-
-    return true;
-  });
   }
  
   ionViewDidLoad() {
+    this.nativeStorage.getItem('1stLogin')
+      .then(data => {
+        // if there is not 1st login, do nothings
+        this.checkLogged();
+       }, error =>
+       {
+        this.nav.setRoot(WalkthroughPage);
 
-    // this.nativeStorage.getItem('1stLogin')
-    //   .then(data => {
-    //     // if there is not 1st login, do nothings
-    //     this.checkLogged();
-    //    }, error =>
-    //    {
-    //     this.nav.setRoot(WalkthroughPage);
-  
-    //     this.nativeStorage.setItem('1stLogin',
-    //     {       
-    //       login: true,
-    //     })
-    //     .then(
-    //       () =>  console.log('1sr login , Stored item!'),
-    //       error => console.error('Error storing item')
-    //     );
-    //     });
+        this.nativeStorage.setItem('1stLogin',
+        {       
+          login: true,
+        })
+        .then(
+          () =>  console.log('1sr login , Stored item!'),
+          error => console.error('Error storing item')
+        );
+        });             
+     //   this.tabRef.select(0);
   }
+
 
   checkLogged(){
 
@@ -112,17 +92,31 @@ export class TabsNavigationPage {
       console.log('thislogindata : ' + this.logindata.email);
 
       this.checkNormalLogin(this.logindata.email, this.logindata.password , this.logindata.uid);
+
      }, error =>
      {
        console.log(error);
        this.nav.setRoot(LoginPage);    
       });
   }
+ 
+  setProfileUserId( _userid : string , _language:string)
+  {
+    console.log('profile_user_id :' + _userid);
+
+    this.nativeStorage.setItem('profile_user_id',
+    {
+      profile_user_id : _userid,
+      profile_language: _language
+
+    })
+    .then(
+      () =>  console.log('profile_user_id ： Stored item!'),
+      error => console.error('profile_user_id : Error storing item')
+    );
+  }
 
   checkNormalLogin(email :string, password: string, uid :string) {
-
-
-
     console.log('1'+ email);
      console.log('1' + password);
      console.log('1' + uid);
@@ -136,6 +130,10 @@ export class TabsNavigationPage {
         this.posts.success = data2.success;
       if(this.posts.success=='true')
       {
+        this.profile = data2.data;
+        this.setProfileUserId(data2.data.id+"", data2.data.language);
+        this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
+        this.setLanguage(this.language);
 
       }
       else
@@ -156,7 +154,11 @@ export class TabsNavigationPage {
         this.posts.success = data2.success;
       if(this.posts.success=='true')
       {
+        this.profile = data2.data;
+        this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
 
+        this.setProfileUserId(data2.data.id+"", data2.data.language);
+        this.setLanguage(this.language);
       }
       else
       {
@@ -170,99 +172,41 @@ export class TabsNavigationPage {
     
     }
 
-
-
-
-
-  // is1stLogin(){
-
-  //   this.nativeStorage.getItem('1stLogin')
-  //   .then(data => {
-  //     // if there is not 1st login, do nothings
-  //     return false;
-  //    }, error =>
-  //    {
-  //     this.nav.setRoot(WalkthroughPage);
-
-  //     this.nativeStorage.setItem('1stLogin',
-  //     {       
-  //       login: true,
-  //     })
-  //     .then(
-  //       () =>  console.log('Stored item!'),
-  //       error => console.error('Error storing item')
-  //     );
-  //     });
-  //     return true;
-  //   }
+    setLanguage(lang: LanguageModel){
+      let language_to_set = this.translate.getDefaultLang();
+  
+      if(lang){
+        language_to_set = lang.code;
+      }
+      this.translate.setDefaultLang(language_to_set);
+      this.translate.use(language_to_set);
+    }
+ 
+}
   
 
 
+ 
    // 1st log into this page, check is it logged user before
   //  ionViewWillEnter() {    
   //   if(!this.isLogged()){
-  //     this.nav.setRoot(LoginPage);
+  //    // this.nav.setRoot(LoginPage);
   //   }
   // }
 
   // isLogged(){
-
-  //   //debugging
-  //  // return true;      
- 
+     
   //  this.nativeStorage.getItem('email_user')
   //  .then(function (data) {
        
   //   console.log(data.email);
-  //   //http://api.whospets.com/api/users/login.php?username=rickykei@yahoo.com&logintype=normal&password=1234
-
-
-  //   //var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
-  //   var url ='https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22nome%2C%20ak%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
+  //   var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
   //   console.log(url);
 
   //   this.http.get(url).subscribe(data => {
   //     console.log(data);
   //   });
 
-  //   return false;
+  //   return true;
   // });
   // }
- 
-}
-  
-
-  //   var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
-  //   console.log(url);
-  //   var response = this.http.get(url).map(res => res.json());
-  //   console.log(response);
-
-  //   response.subscribe(data => {
-  //     this.posts = data.data;
-  //     if(this.posts == 'true')
-  //             return true;
-  //     else
-  //       return false;
-  //   });
-  //  }, function (error) {
-  //      console.log(error);
-  //      return false;
-  //  });
-   
-    //  this.facebookLoginService.getFacebookUser().then((data) => {
-    //   var url = 'http://api.whospets.com/api/users/login.php?logintype=fb&username=' + data.email;
-    //   console.log(url);
-    //   var response2 = this.http.get(url).map(res => res.json());
-    //   response2.subscribe(data => {
-    //       this.posts = data.data;
-    //       console.log(data.data);
-    //       if(this.posts == 'true')
-    //       return true;
-    //     else
-    //       return false;
-    //   });
-    // }, function(error)
-    // {
-    //   console.log(error);
-    //   return false;
-    // });

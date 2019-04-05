@@ -1,0 +1,115 @@
+<!--
+  Generated template for the AddsellPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goToDisplay()">
+              <ion-icon name="arrow-back"></ion-icon>
+            </button>
+          </ion-buttons>
+    <ion-title>{{'ADD_A_SELL' | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="addsell-content">
+    <form class="addsell-form" [formGroup]="sell_form" >
+      <h2 class="section-title">{{'ADD_A_SELL' | translate}}</h2>
+
+          <ion-item>
+              <ion-input type="text" placeholder="{{'TITLE_TXT' | translate}}" formControlName="title"></ion-input>
+            </ion-item>
+           
+          <ion-item>
+            <ion-textarea rows="7" placeholder="{{'WRITE_DESCRIPTION' | translate}}" formControlName="description"></ion-textarea>
+          </ion-item>
+
+          <ion-item class="range-item">
+            <!-- <ion-label>
+              <h2 class="range-label">{{'PRICE' | translate}}</h2>
+              <h3 class="range-value">$ {{sell_form.controls.price.value}} </h3>
+            </ion-label>
+            <ion-range formControlName="price" min="0" max="10000" step="500" snaps="true" pin="false"></ion-range> -->
+            <ion-input type="number" placeholder="{{'PRICE' | translate}}" formControlName="price"></ion-input>
+          </ion-item>
+
+          <ion-row no-padding class="multi-input-row">
+            <ion-col no-padding >
+
+          <ion-item>
+            <ion-label>{{'COUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="countryId" (ionChange)="onCountryChange($event)"><ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+          </ion-item>
+
+          </ion-col>
+          </ion-row>
+     
+          
+          <ion-row no-padding class="multi-input-row">
+          <ion-col no-padding >
+              <ion-item>
+            <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+            <ion-select [disabled]="!isEnable" formControlName="subCountryId"> <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title}}</ion-option> </ion-select>
+          </ion-item>
+
+          </ion-col>
+          </ion-row>
+
+          <ion-item>
+            <ion-label>{{'COlOR' | translate}}</ion-label>
+            <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color" >{{color.color}}</ion-option> </ion-select>
+          </ion-item>
+
+          <ion-item class="range-item">
+            <ion-label>
+              <h2 class="range-label">{{'WEIGHT' | translate}}</h2>
+              <h3 class="range-value">{{sell_form.controls.weight.value}} kg</h3>
+            </ion-label>
+            <ion-range formControlName="weight" min="0" max="100" step="1" snaps="true" pin="false"></ion-range>
+          </ion-item>
+
+            <ion-row class="user-preferences-radio-row">
+              <span class="radio-tags-label">{{'SIZE' | translate}}</span>
+              <ion-list class="radio-tags" radio-group formControlName="size">
+                <ion-item class="radio-tag">
+                  <ion-label>L</ion-label>
+                  <ion-radio value="L"></ion-radio>
+                </ion-item>
+                <ion-item class="radio-tag">
+                  <ion-label>
+                    <span>M</span>
+                  </ion-label>
+                  <ion-radio value="M"></ion-radio>
+                </ion-item>
+                <ion-item class="radio-tag">
+                  <ion-label>S</ion-label>
+                  <ion-radio value="S"></ion-radio>
+                </ion-item>
+              </ion-list>
+            </ion-row>
+
+          <ion-row no-padding class="multi-input-row">
+            <ion-item>
+            <ion-label >{{'UPLOAD_AN_IMAGE' | translate}}</ion-label>
+            <ion-avatar item-end>
+              <img src="{{imgPreview}}" (click)="getPhoto()">
+            </ion-avatar>
+            </ion-item>
+        </ion-row>
+
+      <ion-item>
+        <ion-text>
+            <p  color="danger"> {{'ALL_REQUIRED' | translate}}</p>
+        </ion-text>
+      </ion-item>
+            <button ion-button block class="form-action-button create-post-button" type="submit" [disabled]="!sell_form.valid" (click)="addSell()">{{'DONE_BTN' | translate}}</button>
+        </form>
+      </div>
+</ion-content>

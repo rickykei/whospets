@@ -9,4 +9,5 @@ export class ListingItemModel {
   title: string;
   image: string;
   catid: string;
+  group_ids: string[];
 }

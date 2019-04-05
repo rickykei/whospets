@@ -5,18 +5,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Observable } from 'rxjs/Observable';
 
 import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
-import { FormsPage } from '../pages/forms/forms';
-import { LayoutsPage } from '../pages/layouts/layouts';
 //import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SettingsPage } from '../pages/settings/settings';
-import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
-import { FirebaseLoginPage } from '../pages/firebase-integration/firebase-login/firebase-login';
-import { WordpressMenuPage } from '../pages/wordpress-integration/wordpress-menu/wordpress-menu';
 
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { LoginPage } from '../pages/login/login';
-import { ProfilePage } from '../pages/profile/profile';
-import { LostPetPage } from '../pages/lostpet/lostpet';
 //import { LoginPage } from '../pages/login/login';
 
 @Component({

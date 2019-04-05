@@ -1,0 +1,27 @@
+page-petinfo {
+    .profile-content
+	{
+		background-color: color($colors, background, base);
+
+		.user-details
+		{
+			@include basic-card-styles($white-d);
+
+			.item-title
+			{
+				margin: 0px;
+				margin-bottom: 12px;
+				padding: 0px;
+				letter-spacing: 1.1px;
+				color: $theme-color-2;
+			}
+		}
+	}
+
+	.item-text-highlight
+	{
+		line-height: 1.6;
+		color: $theme-color-1;
+		margin: 0px;
+	}
+}

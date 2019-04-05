@@ -52,7 +52,7 @@ listing-page {
 
 				.main-title
 				{
-					@include categories-title-style($white);
+					@include categories-title-style($black-a);
 					font-size: 10vw;
 				}
 			}
@@ -60,10 +60,10 @@ listing-page {
 
 		.categories-title
 		{
-			font-size: 1.2rem;
-			font-weight: 400;
-			letter-spacing: 0.7px;
-			color: $white-d;
+			font-size: 1.6rem;
+			font-weight: 600;
+			letter-spacing: 0.8px;
+			color: $black-a;
 			margin: 8px 16px 16px;
 		}
 
@@ -139,7 +139,7 @@ listing-page {
 
 						.category-title
 						{
-							@include categories-title-style($white);
+							@include categories-title-style($black-a);
 						}
 					}
 				}

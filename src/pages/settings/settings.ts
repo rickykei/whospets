@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, LoadingController, Platform, normalizeURL } from 'ionic-angular';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { TermsOfServicePage } from '../terms-of-service/terms-of-service';
 import { PrivacyPolicyPage } from '../privacy-policy/privacy-policy';
@@ -9,7 +9,7 @@ import { WalkthroughPage } from '../walkthrough/walkthrough';
 
 import 'rxjs/Rx';
 
-import { ProfileModel } from '../profile/profile.model';
+import { ProfileModel, CountryIdModel, ZoneModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -25,8 +25,11 @@ import { FacebookUserModel } from '../facebook-login/facebook-user.model';
 import { FacebookLoginService } from '../facebook-login//facebook-login.service';
 
 
-import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Base64 } from '../../../node_modules/@ionic-native/base64';
+import { HttpHeaders, HttpClient} from '@angular/common/http';
+
+
 
 @Component({
   selector: 'settings-page',
@@ -42,8 +45,15 @@ export class SettingsPage {
   profile: ProfileModel = new ProfileModel();
   languages: Array<LanguageModel>;
 
+  country: CountryIdModel = new CountryIdModel();
+  subcountry: CountryIdModel = new CountryIdModel();
+  zone: Array<ZoneModel> = new Array();
+  
   user: FacebookUserModel = new FacebookUserModel();
+  regData = { avatar:'', email: '', password: '', fullname: '' };
+  imgPreview = './assets/images/blank-avatar.jpg';
 
+  isEnable:boolean = false;
 
   constructor(
     public nav: NavController,
@@ -57,8 +67,9 @@ export class SettingsPage {
     public cropService: Crop,
     public nativeStorage:NativeStorage,
     public facebookLoginService: FacebookLoginService,
-    private http: Http,
-    public platform: Platform
+    private http: HttpClient,
+    public platform: Platform,
+      private base64: Base64
   ) {
 
     this.loading = this.loadingCtrl.create();
@@ -66,10 +77,10 @@ export class SettingsPage {
     this.languages = this.languageService.getLanguages();
 
     this.settingsForm = new FormGroup({
-      username: new FormControl(),
-      firstname: new FormControl(),
-      lastname: new FormControl(),
-      email: new FormControl(),
+      username: new FormControl('', Validators.required),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
       city: new FormControl(),
       street: new FormControl(),
       notifications: new FormControl(),
@@ -87,6 +98,17 @@ export class SettingsPage {
   }
 
   ionViewDidLoad() {
+
+    this.profileService.getCountryCode()
+    .then(zone => {
+      this.country = zone;
+    });
+
+    this.profileService.getSubCountryCode()
+    .then(zone => {
+      this.subcountry = zone;
+   //   this.zone = this.subcountry.zone;
+    });
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
@@ -122,11 +144,11 @@ export class SettingsPage {
           this.profile.data.street = data2.data.street;
           this.profile.data.city = data2.data.city;
           this.profile.data.about = data2.data.about;
-          this.profile.data.newsletter = (data2.data.newsletter=='1'? 'true':'false');
-          this.profile.data.seller = (data2.data.seller=='1'? 'true':'false');
-          this.profile.data.notification = (data2.data.notification=='1'? 'true':'false');
+          this.profile.data.newsletter = data2.data.newsletter;
+          this.profile.data.seller = data2.data.seller;
+          this.profile.data.notification = data2.data.notification;
           this.profile.data.gender = data2.data.gender;
-          this.profile.data.bio = (data2.data.bio=='1'? 'true':'false');
+          this.profile.data.bio = data2.data.bio;
           this.profile.data.birthday = data2.data.birthday;
           this.profile.data.country_id = data2.data.country_id;
           this.profile.data.sub_country_id = data2.data.sub_country_id;
@@ -134,34 +156,47 @@ export class SettingsPage {
         // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
         // More info: https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#populate-the-form-model-with-_setvalue_-and-_patchvalue_
   
-        let currentLang = this.translate.currentLang;
-  
+       // let currentLang = data2.data.language;//this.translate.currentLang; //
+      
         this.settingsForm.patchValue({
 
-          username: this.profile.data.email,
+          username: data.email,
           firstname: this.profile.data.firstname,
           lastname: this.profile.data.lastname,
-          email: this.profile.data.email,
+          email: data.email,
           city: this.profile.data.city,
           street: this.profile.data.street,
           about: this.profile.data.about,
-          notifications: this.profile.data.notification,
-          newsletter: this.profile.data.newsletter,
-          seller: this.profile.data.seller,
+          notifications: (data2.data.notification=='1'? true:false),
+          newsletter: (data2.data.newsletter=='1'? true:false),
+          seller: (data2.data.seller=='1'? true:false),
           gender: this.profile.data.gender,
-          language: this.languages.filter(x => x.code == currentLang),
-          bio : this.profile.data.bio,
-          birthday : this.profile.data.birthday ,
+          language: (data2.data.language == 'en'? this.languages[0]:this.languages[1]),
+          bio : (data2.data.bio=='1'? true:false),
           countryId : this.profile.data.country_id ,
-          subCountryId : this.profile.data.sub_country_id ,
+          subCountryId : this.profile.data.sub_country_id,
+          birthday : this.profile.data.birthday 
         });
   
         
   
         this.settingsForm.get('language').valueChanges.subscribe((lang) => {
           this.setLanguage(lang);
+          this.setProfileUserId(lang.code);
         });
       }
+      else{
+        this.settingsForm.patchValue({
+
+          username: data.email,
+          email: data.email,
+        });
+
+      }
+
+      // init get subcountry if setting form got country
+      this.onCountryChange();
+
     });
     }, error => {
       console.log('error : '+ error);
@@ -171,29 +206,93 @@ export class SettingsPage {
 
   }
 
+  onCountryChange()
+    {
+      console.info(this.settingsForm.value.countryId);
+      this.zone = new Array();
+
+      for(var i = 0; i < this.subcountry.zone.length; i++)
+      {
+          if(this.subcountry.zone[i].parent_id === this.settingsForm.value.countryId)
+          {
+            this.zone.push(this.subcountry.zone[i]);
+          }
+      }
+
+      this.checkEnable();
+    }
+
+    checkEnable()
+    {
+      console.info('this.zone.length: ' + this.zone.length);
+      if(this.zone.length>0)
+      {
+        this.isEnable = true;
+      }
+      else
+      {
+        this.isEnable = false;
+      }
+    }
+
   saveProfile()
   {
-    let data = this.settingsForm.value;
+
+     this.showLoader();
+
+    let postdata = this.settingsForm.value;
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    //let options = new RequestOptions({ headers: headers });
     
- 
-    console.log('-------------------update profile');
+    let data=JSON.stringify({email:postdata.email,username:postdata.email
+      , firstname:postdata.firstname, lastname:postdata.lastname , city:postdata.city
+    , street:postdata.street,about:postdata.about, notification:(postdata.notifications?'1':'0' )
+    ,newsletter:(postdata.newsletter?'1':'0'), seller:(postdata.seller?'1':'0' ),
+    gender:postdata.gender, birthday:postdata.birthday, bio:(postdata.bio?'1':'0') ,language:postdata.language.code,
+    country_id:postdata.countryId, sub_country_id:postdata.subCountryId,avatar:this.regData.avatar});
+    this.http.post("http://api.whospets.com/api/users/createprofile.php",data, { headers: headers })
+    // .map(res => res.json(data))
+    .subscribe((res) => { 
+      this.nav.pop();
+      this.loading.dismiss();
+    }, (err) => {
+      this.loading.dismiss();
 
-    console.log('-----data notification' + data.notifications);
+    alert("failed");
+    });
+    }
 
-    //http://api.whospets.com/api/users/createprofile.php?username=rickykei@yahoo.com.hk&street=street
-     var url = 'http://api.whospets.com/api/users/createprofile.php?username=' + data.email + '&email='+data.email + '&firstname='+data.firstname + '&lastname='+data.lastname+ '&city='+data.city + '&street='+data.street + '&about='+data.about + '&notification='+ (data.notifications ==false?'0':'1' )    + '&newsletter='+ (data.newsletter ==false?'0':'1') + '&seller='+ (data.seller==false?'0':'1' ) + '&gender='+data.gender   + '&birthday='+data.birthday+ '&bio='+ (data.bio ==false?'0':'1') + '&country_id='+data.countryId + '&sub_country_id='+data.subCountryId   ;
-     console.log(url);
-    
-    this.http.get(url).map(res => res.json()).subscribe(data2 => {
-      console.log("success to update profile");
+    showLoader(){
+      this.loading = this.loadingCtrl.create({
+        content: 'Submitting...'
+      });
+  
+      this.loading.present();
+    }
 
-     }, error => {
-      console.log("fail to update profile");
+    setProfileUserId(  _language:string)
+    {
 
-     });
-  }
+      this.nativeStorage.setItem('profile_user_id',
+      {
+        profile_language: _language
+
+      })
+      .then(
+        () =>  console.log('profile_user_id ： Stored item!'),
+        error => console.error('profile_user_id : Error storing item')
+      );
+  
+    }
 
   logout() {
+    this.nativeStorage.remove('email_user');
+    this.nativeStorage.remove('profile_user_id');
+    this.nativeStorage.remove('facebook_user');
+
     // navigate to the new page if it is not the current page
     this.facebookLoginService.doFacebookLogout()
     .then((res) => {
@@ -201,6 +300,8 @@ export class SettingsPage {
     }, (error) => {
       console.log("Facebook logout error", error);
     });
+
+    
     this.nav.setRoot(LoginPage);
   }
 
@@ -239,32 +340,59 @@ export class SettingsPage {
     }
   }
 
-  openImagePicker(){
-   this.imagePicker.hasReadPermission().then(
-     (result) => {
-       if(result == false){
-         // no callbacks required as this opens a popup which returns async
-         this.imagePicker.requestReadPermission();
-       }
-       else if(result == true){
-         this.imagePicker.getPictures({ maximumImagesCount: 1 }).then(
-           (results) => {
-             for (var i = 0; i < results.length; i++) {
-               this.cropService.crop(results[i], {quality: 75}).then(
-                 newImage => {
-                   let image  = normalizeURL(newImage);
+  getPhoto() {
+    let options = {
+      maximumImagesCount: 1,
+      // quality: 80,
+      // width: 800,
+      // height: 800,
+      outputType: 1
+    };
+  this.imagePicker.getPictures(options).then((results) => {
+    for (var i = 0; i < results.length; i++) {
+    
+        this.imgPreview = results[i];
+        this.base64.encodeFile(results[i]).then((base64File: string) => {
+          this.regData.avatar = base64File;
+        }, (err) => {
+          console.log(err);
+        }).catch(exception => {
+          console.log(' base64 Exception ' + exception);
+        });
 
-                   this.profileService.setUserImage(image);
-                   this.profile.data.fb_uid = image;
-                 },
-                 error => console.error("Error cropping image", error)
-               );
-             }
-           }, (err) => console.log(err)
-         );
-       }
-     }, (err) => {
-       console.log(err);
-     });
+        // this.imgPreview = 'data:image/jpeg;base64,' + results[i];
+        // this.regData.avatar = this.imgPreview;
+
+        let image  = results[i];
+        this.profileService.setUserImage(image);
+        this.profile.data.fb_uid = image;
+    }
+  }, (err) => { })
+  .catch(exception => {
+    console.log('Exception ' + exception);
+  }); 
+
+  }
+
+  /*
+  .then(
+        response => {
+          console.log('Response ' + response);
+        },
+        error => {
+          console.log('Error: ' + error);
+          this.event.publish('user:back');      
+        }
+      ).catch(exception => {
+        console.log('Exception ' + exception);
+        this.event.publish('user:back');      
+      });;   
+
+      */
+
+  
+  ionViewWillLeave()
+  {
+    this.loading.dismiss();
   }
 }

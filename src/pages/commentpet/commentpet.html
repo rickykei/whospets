@@ -1,0 +1,36 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'COMMENT' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="comment-content">
+  <ion-item-group>
+  <!--   <ion-item-divider class="comment-divider">{{ 'Comment' | translate }}</ion-item-divider>
+   
+     <ion-avatar item-left>
+        <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="comment.image"></preload-image>
+      </ion-avatar>
+    -->
+    <ion-item class="comment-item" *ngFor="let comment of comment">
+      <h2 class="item-title">{{comment.firstname}}</h2>
+      <p class="item-description">{{comment.comment}}</p>
+      <ion-note class="item-time" item-right>{{comment.created_date}}</ion-note>
+    </ion-item>
+  </ion-item-group>
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar>
+     <form [formGroup]="comment_form" no-padding>
+      <ion-item >
+        <ion-input type="text" placeholder="Reply..." formControlName="reply"></ion-input>
+        <button ion-button outline item-end (click)="replyClick()">{{ 'Reply' | translate }}</button>
+      </ion-item>
+    </form>
+    </ion-toolbar>
+  </ion-footer>
+  
+

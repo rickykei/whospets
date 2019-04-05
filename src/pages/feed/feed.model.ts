@@ -1,5 +1,6 @@
 export class FeedPostModel {
-		product_id:string;
+  id: string;
+	product_id:string;
   category_id:string;
   status:string;
   store_id:string;
@@ -41,9 +42,16 @@ export class FeedPostModel {
   gender:string;
   country_id:string;
   sub_country_id:string;
+  image:string;
   filename:string;
-	//comments: number = 0;
-	//liked: boolean = false;
+	likecnt: number = 0;
+  ownlike: number = 0;
+  commentcnt: number = 0;
+  app_table: string;
+  country_title: string;
+  subcountry_title :string;
+  country_title_zh: string;
+  subcountry_title_zh :string;
 }
 
  export class DataModel {
