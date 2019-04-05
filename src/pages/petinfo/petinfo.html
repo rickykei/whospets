@@ -10,10 +10,13 @@
     <ion-title>petinfo</ion-title>
     <ion-buttons end> 
         <button *ngIf="showDelbtn" ion-button (click)="editPost(pet)"> 
-          {{ 'EDIT' | translate }}
+            <ion-icon name="custom-edit"></ion-icon>
+
+          <!-- {{ 'EDIT' | translate }} -->
       </button> 
       <button *ngIf="showDelbtn" ion-button (click)="deletePost()"> 
-        {{ 'DELETE' | translate }}
+          <ion-icon name="custom-delete"></ion-icon>
+        <!-- {{ 'DELETE' | translate }} -->
     </button> 
     </ion-buttons>
   </ion-navbar>
