@@ -4,8 +4,8 @@ ion-icon {
        mask-position: 50% 50%;
        mask-repeat: no-repeat;
        background: currentColor;
-       width: 1em;
-       height: 1em;
+       width: 2em;
+       height: 2em;
     }
     &[class*="custom-edit"] {
        mask-image: url(../assets/images/icons/custom-edit-icon.svg);
