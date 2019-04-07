@@ -156,6 +156,7 @@ export class PetDetailsModel{
         country_id:string;
         sub_country_id:string;
         image:string;
+        image_large:string;
         filename:string;
         likecnt: number = 0;
         ownlike: number = 0;
@@ -165,4 +166,7 @@ export class PetDetailsModel{
         subcountry_title :string;
         country_title_zh: string;
         subcountry_title_zh :string;
+        product_title:string;
+        owner_pet_id:string;
+        
 }

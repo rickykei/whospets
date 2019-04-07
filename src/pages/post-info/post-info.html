@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>Post Details</ion-title>
+      <ion-title>{{title}}</ion-title>
       <ion-buttons end> 
         <button *ngIf="showDelbtn" ion-button (click)="deletePost()"> 
             <ion-icon name="custom-delete"></ion-icon>
@@ -22,7 +22,7 @@
       <div class="user-details">
        <ion-card>
 
-           <preload-image [ratio]="{w:1, h:1}" src="{{post.image}}"  title="post.title"></preload-image>
+           <preload-image [ratio]="{w:1, h:1}" src="{{post.image_large}}"  title="post.title"></preload-image>
 
            <ion-card-content>
              <ion-card-title class="item-title">
@@ -75,6 +75,19 @@
                     {{'SIZE' | translate}} :  {{post.size}}
                 </p>
              </ion-card-content>
+
+             <ion-card-content *ngIf="tablename == 'app_post'">
+                <p class="item-text">
+                    {{'PET' | translate}} :  {{post.product_title}}
+                </p>
+             </ion-card-content>
+
+             <ion-card-content *ngIf="tablename == 'app_qna'">
+                <p class="item-text">
+                    {{'PET' | translate}} :  {{post.product_title}}
+                </p>
+             </ion-card-content>
+             
             
 
        </ion-card>

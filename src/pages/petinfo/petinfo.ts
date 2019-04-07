@@ -75,7 +75,8 @@ export class PetinfoPage {
       this.profileService.getSpecPet(this.email, this.user_id, this.pet.product_id)
            .then(response => {
              this.petmodel = response;
-             this.pet = this.petmodel.data[0];
+             if(this.petmodel.success==='true')
+              this.pet = this.petmodel.data[0];
              this.checkPetStatus();
 
              this.profileService.getCountryCode()
@@ -119,7 +120,8 @@ export class PetinfoPage {
            this.profileService.getSpecPet(this.email, this.user_id, this.pet.product_id)
            .then(response => {
              this.petmodel = response;
-             this.pet = this.petmodel.data[0];
+             if(this.petmodel.success==='true')
+              this.pet = this.petmodel.data[0];
              this.checkPetStatus();
 
              this.profileService.getCountryCode()

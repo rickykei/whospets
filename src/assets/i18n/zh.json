@@ -186,9 +186,12 @@
   "DATE_LOST" : "走失日期",
   "petinfo": "寵物資料" ,
   "SEARCH" : "找尋",
-  "EDIT_A_PET": "更改寵物"
+  "EDIT_A_PET": "更改寵物",
 
-
+  "LIFESTYLE_DETAIL" : "開心分享",
+  "SELL_DETAIL" : "二手物品",
+  "QNA_DETAIL" : "有問必答",
+  "PET": "寵物"
 
   
 }

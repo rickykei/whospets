@@ -7,6 +7,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { CommentPage } from '../comment/comment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile/profile.service';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Generated class for the PostInfoPage page.
@@ -25,6 +26,7 @@ export class PostInfoPage {
   user_id:string;
   tablename:string;
   table_type:string;
+  title:string;
   
   likevalue : number;
   dislikevalue : number;
@@ -44,11 +46,13 @@ export class PostInfoPage {
      public socialSharing: SocialSharing,
      public nativeStorage: NativeStorage,
      public profileService: ProfileService,
+     public translate: TranslateService,
      public events:Events
     ) {
 
     this.post = navParams.get('post'); 
     this.tablename  =  navParams.get('tablename');
+
     
     this.likevalue = 0;
     this.dislikevalue = 0;
@@ -74,18 +78,17 @@ export class PostInfoPage {
          console.log('this.user_id : ' + data.profile_user_id);
          this.getContent(data.profile_user_id);
          this.checkDelButton(data.profile_user_id);
+
+         this.profileService.getCountryCode()
+         .then(zone => {
+           this.country = zone;
+         });
+      
+         this.profileService.getSubCountryCode()
+         .then(zone => {
+           this.subcountry = zone;
+         });
       });
-
-    this.profileService.getCountryCode()
-   .then(zone => {
-     this.country = zone;
-   });
-
-   this.profileService.getSubCountryCode()
-   .then(zone => {
-     this.subcountry = zone;
-   });
-
   }
 
   checkCountryZone()
@@ -130,19 +133,27 @@ export class PostInfoPage {
       url = 'http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id+'&content_id='+this.post.id;
       this.table_type ='sell';
       this.tablename ='app_sell';
+      this.translate.get("SELL_DETAIL").subscribe((result: string) => {
+        this.title = result;
+      });
     }
     else if(this.post.app_table==='LIFESTYLE' || this.tablename === 'app_post') 
     {
       url ='http://api.whospets.com/api/users/get_user_lifestyles.php?user_id='+user_id+'&content_id='+this.post.id;
       this.table_type ='lifestyle';
       this.tablename = 'app_post';
-
+      this.translate.get("LIFESTYLE_DETAIL").subscribe((result: string) => {
+        this.title = result;
+      });
     }
     else if(this.post.app_table==='QNA' || this.tablename === 'app_qna')
     {
       url='http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id+'&content_id='+this.post.id;
       this.table_type ='qna';
       this.tablename = 'app_qna';
+      this.translate.get("QNA_DETAIL").subscribe((result: string) => {
+        this.title = result;
+      });
     }
 
     //http://api.whospets.com/api/users/get_user_qnas.php?user_id=501&content_id=23
