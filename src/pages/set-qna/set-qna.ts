@@ -4,7 +4,7 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
-import { UserModel, PetModel, ResponseModel } from '../profile/profile.model';
+import { UserModel, PetModel, ResponseModel, PetDetailsModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { ImagePicker } from '../../../node_modules/@ionic-native/image-picker';
 import { Base64 } from '../../../node_modules/@ionic-native/base64';
@@ -37,6 +37,11 @@ export class SetQnaPage {
   //image
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
+
+  post: PetDetailsModel = new PetDetailsModel();
+  addposttitle:string;  
+  isEdit : boolean = false;
+  product_id :string;
   
   constructor(public navCtrl: NavController,
     public nativeStorage:NativeStorage,
@@ -53,12 +58,14 @@ export class SetQnaPage {
         description: new FormControl('', Validators.required),      
       });
 
-      // this.user_id = navParams.get('user_id'); 
-      // this.profile = navParams.get('display'); 
-      // if( this.profile)
-      // {       
-      //   this.user_id = this.profile.user_id;
-      // }       
+      this.post = this.navParams.get('post');
+      this.addposttitle = 'ADD_A_QNA'
+
+      if(this.post)
+      {
+        this.isEdit = true;
+        this.addposttitle = 'EDIT_A_QNA'
+      }
   }
 
 
@@ -92,6 +99,17 @@ export class SetQnaPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SetQnaPage');
+
+    if(this.isEdit)
+    {
+      this.product_id = this.post.id;
+      this.choosepetid = this.post.owner_pet_id;
+      
+      this.post_form.patchValue({
+        title: this.post.title,
+        description: this.post.description
+      });
+    }
 
     this.nativeStorage.getItem('email_user')
     .then(data => {
@@ -151,7 +169,15 @@ export class SetQnaPage {
 
     if(this.checkField())
     {
-
+      var url;
+  
+      if(this.isEdit)
+      {
+        url = "http://api.whospets.com/api/users/update_user_qnas.php";
+      }else
+      {
+        url = "http://api.whospets.com/api/users/set_user_qnas.php";
+      }
       this.showLoader();
       
       let postdata = this.post_form.value;
@@ -163,10 +189,10 @@ export class SetQnaPage {
       
       console.info('this.choosepetid : ' + this.choosepetid);
       
-      let data=JSON.stringify({user_id:this.user_id,email:this.email
+      let data=JSON.stringify({user_id:this.user_id,email:this.email, id:this.product_id
         , title:postdata.title, description:postdata.description
         , owner_pet_id:this.choosepetid ,avatar:this.regData.avatar});
-      this.http.post("http://api.whospets.com/api/users/set_user_qnas.php",data, { headers: headers })
+      this.http.post(url,data, { headers: headers })
       .subscribe((res:ResponseModel) => { 
         this.postResponse = res; 
       
@@ -244,7 +270,7 @@ export class SetQnaPage {
 
   checkField()
   {
-    if(!this.choosepetid || !this.regData.avatar)
+    if((!this.choosepetid || !this.regData.avatar) && !this.isEdit)
     {
       alert('Missing petId or image.');
       return false;

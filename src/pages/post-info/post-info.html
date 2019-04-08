@@ -9,6 +9,9 @@
     <ion-navbar>
       <ion-title>{{title}}</ion-title>
       <ion-buttons end> 
+          <button *ngIf="showDelbtn" ion-button (click)="editPost(post)"> 
+              <ion-icon name="custom-edit"></ion-icon>
+        </button> 
         <button *ngIf="showDelbtn" ion-button (click)="deletePost()"> 
             <ion-icon name="custom-delete"></ion-icon>
           </button> 

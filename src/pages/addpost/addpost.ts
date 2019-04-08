@@ -3,7 +3,7 @@ import { NavController, NavParams, AlertController, Events, LoadingController } 
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
-import { PetModel, ResponseModel } from '../profile/profile.model';
+import { PetModel, ResponseModel, PetDetailsModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 //image
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -39,6 +39,11 @@ export class AddpostPage {
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
 
+  post: PetDetailsModel = new PetDetailsModel();
+  addposttitle:string;  
+  isEdit : boolean = false;
+  product_id :string;
+
   constructor(
     public navCtrl: NavController, 
     public alertCtrl: AlertController,
@@ -53,14 +58,35 @@ export class AddpostPage {
     {
       this.post_form = new FormGroup({
         title: new FormControl('',Validators.required),
-        description: new FormControl('',Validators.required)      
+        description: new FormControl('',Validators.required)
       });
 
       this.isTab = navParams.get('onTab'); 
       console.log('this.isTab ' + this.isTab);
+
+      this.post = this.navParams.get('post');
+      this.addposttitle = 'ADD_A_POST'
+
+      if(this.post)
+      {
+        this.isEdit = true;
+        this.addposttitle = 'EDIT_A_POST'
+      }
     }
 
   ionViewDidLoad() {
+
+    if(this.isEdit)
+    {
+      this.product_id = this.post.id;
+      this.choosepetid = this.post.owner_pet_id;
+      
+      this.post_form.patchValue({
+        title: this.post.title,
+        description: this.post.description
+      });
+    }
+
     console.log('ionViewDidLoad AddpostPage');
 
     this.nativeStorage.getItem('profile_user_id')
@@ -141,6 +167,18 @@ export class AddpostPage {
 
     if(this.checkField())
     {
+        var url;
+  
+        if(this.isEdit)
+        {
+          url = "http://api.whospets.com/api/users/update_user_lifestyles.php";
+        }else
+        {
+          url = "http://api.whospets.com/api/users/set_user_lifestyles.php";
+        }
+  
+        console.log('url : ' + url);
+
         this.showLoader();
 
         let postdata = this.post_form.value;
@@ -151,10 +189,10 @@ export class AddpostPage {
         //let options = new RequestOptions({ headers: headers });
         
         
-        let data=JSON.stringify({user_id:this.user_id,email:this.email
+        let data=JSON.stringify({user_id:this.user_id,email:this.email, id:this.product_id
           , title:postdata.title, description:postdata.description , name_of_pet:this.choosepet
         , pet_id:this.choosepetid,owner_pet_id:this.choosepetid,avatar:this.regData.avatar});
-        this.http.post("http://api.whospets.com/api/users/set_user_posts.php",data, { headers: headers })
+        this.http.post(url,data, { headers: headers })
         .subscribe((res:ResponseModel) => { 
           this.postResponse = res; 
         
@@ -220,7 +258,7 @@ export class AddpostPage {
 
     checkField()
   {
-    if(!this.choosepetid || !this.regData.avatar)
+    if((!this.choosepetid || !this.regData.avatar) && !this.isEdit)
     {
       alert('Missing petId or image.');
       return false;

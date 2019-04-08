@@ -187,6 +187,9 @@
   "petinfo": "寵物資料" ,
   "SEARCH" : "找尋",
   "EDIT_A_PET": "更改寵物",
+  "EDIT_A_POST": "更改開心分享",
+  "EDIT_A_SELL": "更改二手物品",
+  "EDIT_A_QNA": "更改有問必答",
 
   "LIFESTYLE_DETAIL" : "開心分享",
   "SELL_DETAIL" : "二手物品",

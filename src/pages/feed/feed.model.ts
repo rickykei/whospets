@@ -54,7 +54,7 @@ export class FeedPostModel {
   country_title_zh: string;
   subcountry_title_zh :string;
   product_title:string;
-  owner_pet_id:string;
+  owner_pet_id:number;
 }
 
  export class DataModel {

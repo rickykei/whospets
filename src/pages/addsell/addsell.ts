@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { HttpHeaders, HttpClient } from '../../../node_modules/@angular/common/http';
-import { PetModel, CountryIdModel, ResponseModel, ZoneModel } from '../profile/profile.model';
+import { PetModel, CountryIdModel, ResponseModel, ZoneModel, PetDetailsModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PetColorModel } from '../add-page/addlayout.model';
@@ -43,6 +43,12 @@ export class AddsellPage {
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = './assets/images/blank-avatar.jpg';
 
+  post: PetDetailsModel = new PetDetailsModel();
+  addposttitle:string;  
+  isEdit : boolean = false;
+  product_id :string;
+
+
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     public profileService: ProfileService,
@@ -64,11 +70,38 @@ export class AddsellPage {
         weight: new FormControl(0,Validators.required),
         size: new FormControl(0,Validators.required)
       });
+
+
+      this.post = this.navParams.get('post');
+      this.addposttitle = 'ADD_A_SELL'
+
+      if(this.post)
+      {
+        this.isEdit = true;
+        this.addposttitle = 'EDIT_A_SELL'
+      }
   
   }
 
   ionViewDidLoad() {
+    
     console.log('ionViewDidLoad AddsellPage');
+
+    if(this.isEdit)
+    {
+      this.product_id = this.post.id;
+      
+      this.sell_form.patchValue({
+        title: this.post.title,
+        description: this.post.description,
+        price: this.post.price,
+        countryId: this.post.country_id,
+        subCountryId: this.post.sub_country_id,
+        color:this.post.color,
+        weight: this.post.weight,
+        size: this.post.size
+      });
+    }
     
     this.nativeStorage.getItem('email_user')
     .then(data => {
@@ -96,6 +129,12 @@ export class AddsellPage {
    this.profileService.getSubCountryCode()
    .then(zone => {
      this.subcountry = zone;
+
+     if(this.isEdit)
+     {
+       this.isEnable = true;
+       this.onCountryChange(this.sell_form.value.countryId);
+     }
    });
 
    this.petdetailservice.getColorData()
@@ -132,6 +171,19 @@ export class AddsellPage {
 
     if(this.checkField())
     {
+        var url;
+  
+        if(this.isEdit)
+        {
+          url = "http://api.whospets.com/api/users/update_user_sells.php";
+        }else
+        {
+          url = "http://api.whospets.com/api/users/set_user_sells.php";
+        }
+  
+        console.log('url : ' + url);
+
+      
         this.showLoader();
 
         let postdata = this.sell_form.value;
@@ -143,11 +195,11 @@ export class AddsellPage {
         //let options = new RequestOptions({ headers: headers });
         
         
-        let data=JSON.stringify({user_id:this.user_id,email:this.email
+        let data=JSON.stringify({user_id:this.user_id,email:this.email, id: this.product_id
           , title:postdata.title, description:postdata.description , price:postdata.price
           , size:postdata.size, country_id:postdata.countryId, sub_country_id:postdata.subCountryId
           , color:postdata.color, weight:postdata.weight,avatar:this.regData.avatar});
-        this.http.post("http://api.whospets.com/api/users/set_user_sells.php",data, { headers: headers })
+        this.http.post(url,data, { headers: headers })
         // .map(res => res.json(data))
         //.subscribe(res => {
           .subscribe((res:ResponseModel) => { 
@@ -231,7 +283,7 @@ export class AddsellPage {
 
     checkField()
     {
-      if(!this.regData.avatar)
+      if(!this.regData.avatar && !this.isEdit)
       {
         alert('Missing image.');
         return false;

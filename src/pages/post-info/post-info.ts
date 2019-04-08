@@ -8,6 +8,9 @@ import { CommentPage } from '../comment/comment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile/profile.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AddsellPage } from '../addsell/addsell';
+import { AddpostPage } from '../addpost/addpost';
+import { SetQnaPage } from '../set-qna/set-qna';
 
 /**
  * Generated class for the PostInfoPage page.
@@ -67,6 +70,10 @@ export class PostInfoPage {
       this.post.commentcnt = this.commentcnt;
     });
     
+    events.subscribe('user:back' ,() =>
+    {  
+      this.getContent(this.user_id);
+    });
   }
 
   ionViewDidLoad() {
@@ -241,5 +248,23 @@ export class PostInfoPage {
   commentPost(post)
   {
     this.navCtrl.push( CommentPage, {content_id:post.id, table_name:this.tablename})
+  }
+
+  editPost(post)
+  {
+    console.log(this.tablename);
+    if( this.tablename ==='app_sell')
+    {
+      this.navCtrl.push( AddsellPage, {post:post})
+    }
+    else if( this.tablename === 'app_post') 
+    {
+      this.navCtrl.push( AddpostPage, {post:post})
+    }
+    else if(this.tablename === 'app_qna')
+    {
+      this.navCtrl.push( SetQnaPage, {post:post})
+    }
+   
   }
 }
