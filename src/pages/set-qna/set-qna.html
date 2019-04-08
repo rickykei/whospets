@@ -12,7 +12,7 @@
               <ion-icon name="arrow-back"></ion-icon>
             </button>
           </ion-buttons>
-    <ion-title>{{addposttitle}}</ion-title>
+    <ion-title>{{addpettitle | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,7 +22,7 @@
  <div class="user-details auth-content">
     <div class="post-example-view">
       <form class="sample-form post-form" [formGroup]="post_form" (ngSubmit)="createPost()">
-        <h2 class="section-title">{{addposttitle}}</h2>
+        <h2 class="section-title">{{addpettitle | translate}}</h2>
 
         <section class="form-section">
           <ion-item>

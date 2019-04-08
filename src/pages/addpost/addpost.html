@@ -12,7 +12,7 @@
             <ion-icon name="arrow-back"></ion-icon>
           </button>
         </ion-buttons>
-    <ion-title>{{addposttitle}}</ion-title>
+    <ion-title>{{addpettitle | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,7 +22,7 @@
     <div class="addpost-content auth-content">
 
   <form [formGroup]="post_form" class="addpost-form">
-    <h2 class="section-title">{{addposttitle}}</h2>
+    <h2 class="section-title">{{addpettitle | translate}}</h2>
 
         <ion-item>
         <ion-input type="text" placeholder="{{'TITLE_TXT' | translate}}" formControlName="title"></ion-input>
