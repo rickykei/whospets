@@ -183,7 +183,7 @@ export class SettingsPage {
         birthday : this.profile.data.birthday 
       });
 
-      
+      this.imgPreview = this.profile.data.fb_uid;
 
       this.settingsForm.get('language').valueChanges.subscribe((lang) => {
         this.setLanguage(lang);
