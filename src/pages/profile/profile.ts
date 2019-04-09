@@ -45,8 +45,10 @@ export class ProfilePage {
       events.subscribe('user:back', () =>
     {    
       console.log('user:back');   
+      this.getProfileData();
       this.loadData();
     });
+    
     this.display = "grid";
   }
 
@@ -69,75 +71,78 @@ export class ProfilePage {
   }
 
 
-  ionViewDidLoad() { 
+  ionViewDidLoad() 
+  {
+    this.getProfileData();
+  }
 
-    this.nativeStorage.getItem('email_user')
-    .then(data => {
-      console.log('..data :'+ data.email);
-
-      var url ;
-      if(data.uid=='')
-      {   
-        // normal
-        url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
-     }
-      else{
-         //fb
-         url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;
-      
-          }
-     
-      console.log('..url :'+ url);
-
-      this.profileService.getData(url)
-      .then(data2 => {
-        console.log('..data2 :'+ data2.success);
-
-        this.status = data2.success;
-        if(this.status=='true')
-        {
-          console.log('..data2 :'+ data2.success);
-
-          //this.profile = data2;
-          if(data2.followers)
-            this.profile.followers = data2.followers;
-          if(data2.following)
-            this.profile.following = data2.following;
-            
-          this.profile.data.fb_uid = data2.data.fb_uid; //image
-          this.profile.data.email = data2.data.email;
-          this.profile.data.firstname = data2.data.firstname;
-          this.profile.data.lastname = data2.data.lastname;
-          this.profile.data.message = data2.data.message;
-          this.profile.data.street = data2.data.street;
-          this.profile.data.city = data2.data.city;
-          this.profile.data.about = data2.data.about;
-          this.profile.data.newsletter = data2.data.newsletter;
-          this.profile.data.seller = data2.data.seller;
-          this.profile.data.country_id = data2.data.country_id;
-          this.profile.data.sub_country_id = data2.data.sub_country_id;
-          this.profile.data.user_id = data2.data.user_id;
-          this.profile_user_id = data2.data.user_id;
-          this.profile.data.language = data2.data.language;
-
-          this.loadData();
-
-          this.setProfileUserId(data2.data.user_id +""
-          , data2.data.firstname + " " + data2.data.lastname, data2.data.language);
-          
-        }
+    getProfileData()
+    {
+      this.nativeStorage.getItem('email_user')
+      .then(data => {
+        console.log('..data :'+ data.email);
+  
+        var url ;
+        if(data.uid=='')
+        {   
+          // normal
+          url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
+       }
         else{
-          // go to create profile page
-          this.app.getRootNav().push(SettingsPage);
-        }
-
+           //fb
+           url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;
+        
+            }
+       
+        console.log('..url :'+ url);
+  
+        this.profileService.getData(url)
+        .then(data2 => {
+          console.log('..data2 :'+ data2.success);
+  
+          this.status = data2.success;
+          if(this.status=='true')
+          {
+            console.log('..data2 :'+ data2.success);
+  
+            //this.profile = data2;
+            if(data2.followers)
+              this.profile.followers = data2.followers;
+            if(data2.following)
+              this.profile.following = data2.following;
+              
+            this.profile.data.fb_uid = data2.data.fb_uid; //image
+            this.profile.data.email = data2.data.email;
+            this.profile.data.firstname = data2.data.firstname;
+            this.profile.data.lastname = data2.data.lastname;
+            this.profile.data.message = data2.data.message;
+            this.profile.data.street = data2.data.street;
+            this.profile.data.city = data2.data.city;
+            this.profile.data.about = data2.data.about;
+            this.profile.data.newsletter = data2.data.newsletter;
+            this.profile.data.seller = data2.data.seller;
+            this.profile.data.country_id = data2.data.country_id;
+            this.profile.data.sub_country_id = data2.data.sub_country_id;
+            this.profile.data.user_id = data2.data.user_id;
+            this.profile_user_id = data2.data.user_id;
+            this.profile.data.language = data2.data.language;
+  
+            this.loadData();
+  
+            this.setProfileUserId(data2.data.user_id +""
+            , data2.data.firstname + " " + data2.data.lastname, data2.data.language);
+            
+          }
+          else{
+            // go to create profile page
+            this.app.getRootNav().push(SettingsPage);
+          }
+  
+        });
+      }, error => {
+        console.log('error : '+ error);
       });
-    }, error => {
-      console.log('error : '+ error);
-    });
-
-
-
+  
     }
     
 
