@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, LoadingController, Platform, normalizeURL } from 'ionic-angular';
+import { NavController, ModalController, LoadingController, Platform, normalizeURL, Events } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { TermsOfServicePage } from '../terms-of-service/terms-of-service';
@@ -9,7 +9,7 @@ import { WalkthroughPage } from '../walkthrough/walkthrough';
 
 import 'rxjs/Rx';
 
-import { ProfileModel, CountryIdModel, ZoneModel } from '../profile/profile.model';
+import { ProfileModel, CountryIdModel, ZoneModel, ResponseModel } from '../profile/profile.model';
 import { ProfileService } from '../profile/profile.service';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -54,6 +54,7 @@ export class SettingsPage {
   imgPreview = './assets/images/blank-avatar.jpg';
 
   isEnable:boolean = false;
+  postResponse:ResponseModel;
 
   constructor(
     public nav: NavController,
@@ -69,7 +70,8 @@ export class SettingsPage {
     public facebookLoginService: FacebookLoginService,
     private http: HttpClient,
     public platform: Platform,
-      private base64: Base64
+      private base64: Base64,
+      public event: Events
   ) {
 
     this.loading = this.loadingCtrl.create();
@@ -110,99 +112,104 @@ export class SettingsPage {
    //   this.zone = this.subcountry.zone;
     });
 
+    this.getProfileData();
+  }
+
+  getProfileData()
+  {
     this.nativeStorage.getItem('email_user')
     .then(data => {
       var url ;
-      if(data.uid=='')
-      {   
+        if(data.uid=='')
+        {   
         // normal
         url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
-     }
-      else{
+        }
+        else{
          //fb
          url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;
       
           }
      
-    // var url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;;
-
-    //  var url = './assets/example_data/profile.json';
       console.log('..url :'+ url);
 
-      this.profileService.getData(url)
-      .then(data2 => {
-        console.log('..data2 :'+ data2.success);
+    this.profileService.getData(url)
+    .then(data2 => {
+      console.log('..data2 :'+ data2.success);
 
-        this.status = data2.success;
-        if(this.status=='true')
-        {
-          this.profile.data.fb_uid = data2.data.fb_uid; //image
-          this.profile.data.email = data2.data.email;
-          this.profile.data.firstname = data2.data.firstname;
-          this.profile.data.lastname = data2.data.lastname;
-          this.profile.data.message = data2.data.message;
-          this.profile.data.street = data2.data.street;
-          this.profile.data.city = data2.data.city;
-          this.profile.data.about = data2.data.about;
-          this.profile.data.newsletter = data2.data.newsletter;
-          this.profile.data.seller = data2.data.seller;
-          this.profile.data.notification = data2.data.notification;
-          this.profile.data.gender = data2.data.gender;
-          this.profile.data.bio = data2.data.bio;
-          this.profile.data.birthday = data2.data.birthday;
-          this.profile.data.country_id = data2.data.country_id;
-          this.profile.data.sub_country_id = data2.data.sub_country_id;
-        // setValue: With setValue, you assign every form control value at once by passing in a data object whose properties exactly match the form model behind the FormGroup.
-        // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
-        // More info: https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#populate-the-form-model-with-_setvalue_-and-_patchvalue_
-  
-       // let currentLang = data2.data.language;//this.translate.currentLang; //
-      
-        this.settingsForm.patchValue({
-
-          username: data.email,
-          firstname: this.profile.data.firstname,
-          lastname: this.profile.data.lastname,
-          email: data.email,
-          city: this.profile.data.city,
-          street: this.profile.data.street,
-          about: this.profile.data.about,
-          notifications: (data2.data.notification=='1'? true:false),
-          newsletter: (data2.data.newsletter=='1'? true:false),
-          seller: (data2.data.seller=='1'? true:false),
-          gender: this.profile.data.gender,
-          language: (data2.data.language == 'en'? this.languages[0]:this.languages[1]),
-          bio : (data2.data.bio=='1'? true:false),
-          countryId : this.profile.data.country_id ,
-          subCountryId : this.profile.data.sub_country_id,
-          birthday : this.profile.data.birthday 
-        });
-  
+      this.status = data2.success;
+      if(this.status=='true')
+      {
+        this.profile.data.fb_uid = data2.data.fb_uid; //image
+        this.profile.data.email = data2.data.email;
+        this.profile.data.firstname = data2.data.firstname;
+        this.profile.data.lastname = data2.data.lastname;
+        this.profile.data.message = data2.data.message;
+        this.profile.data.street = data2.data.street;
+        this.profile.data.city = data2.data.city;
+        this.profile.data.about = data2.data.about;
+        this.profile.data.newsletter = data2.data.newsletter;
+        this.profile.data.seller = data2.data.seller;
+        this.profile.data.notification = data2.data.notification;
+        this.profile.data.gender = data2.data.gender;
+        this.profile.data.bio = data2.data.bio;
+        this.profile.data.birthday = data2.data.birthday;
+        this.profile.data.country_id = data2.data.country_id;
+        this.profile.data.sub_country_id = data2.data.sub_country_id;
         
-  
-        this.settingsForm.get('language').valueChanges.subscribe((lang) => {
-          this.setLanguage(lang);
-          this.setProfileUserId(lang.code);
-        });
-      }
-      else{
-        this.settingsForm.patchValue({
+      // setValue: With setValue, you assign every form control value at once by passing in a data object whose properties exactly match the form model behind the FormGroup.
+      // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
+      // More info: https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#populate-the-form-model-with-_setvalue_-and-_patchvalue_
 
-          username: data.email,
-          email: data.email,
-        });
+     // let currentLang = data2.data.language;//this.translate.currentLang; //
+    
+      this.settingsForm.patchValue({
 
-      }
+        username: data.email,
+        firstname: this.profile.data.firstname,
+        lastname: this.profile.data.lastname,
+        email: data.email,
+        city: this.profile.data.city,
+        street: this.profile.data.street,
+        about: this.profile.data.about,
+        notifications: (data2.data.notification=='1'? true:false),
+        newsletter: (data2.data.newsletter=='1'? true:false),
+        seller: (data2.data.seller=='1'? true:false),
+        gender: this.profile.data.gender,
+        language: (data2.data.language == 'en'? this.languages[0]:this.languages[1]),
+        bio : (data2.data.bio=='1'? true:false),
+        countryId : this.profile.data.country_id ,
+        subCountryId : this.profile.data.sub_country_id,
+        birthday : this.profile.data.birthday 
+      });
 
-      // init get subcountry if setting form got country
-      this.onCountryChange();
+      
 
-    });
-    }, error => {
-      console.log('error : '+ error);
-    });
+      this.settingsForm.get('language').valueChanges.subscribe((lang) => {
+        this.setLanguage(lang);
+        this.setProfileUserId(lang.code);
+      });
+    }
+    else{
+      this.settingsForm.patchValue({
 
-    this.loading.dismiss();
+        username: data.email,
+        email: data.email,
+      });
+
+    }
+
+    // init get subcountry if setting form got country
+    this.onCountryChange();
+
+  });
+
+   
+}, error => {
+  console.log('error : '+ error);
+});
+
+this.loading.dismiss();
 
   }
 
@@ -254,15 +261,36 @@ export class SettingsPage {
     gender:postdata.gender, birthday:postdata.birthday, bio:(postdata.bio?'1':'0') ,language:postdata.language.code,
     country_id:postdata.countryId, sub_country_id:postdata.subCountryId,avatar:this.regData.avatar});
     this.http.post("http://api.whospets.com/api/users/createprofile.php",data, { headers: headers })
-    // .map(res => res.json(data))
-    .subscribe((res) => { 
+    .subscribe((res:ResponseModel) => { 
+      this.postResponse = res;     
+      console.log("VALUE RECEIVED: "+res);
+      this.loading.dismiss();
+
+        if(this.postResponse.success==='true')
+        {
+          this.event.publish('user:back');
+          this.nav.pop();
+        }  else
+        {
+          alert("Fail to add, missing contents.")
+        }
+
+      }, (err) => {
+        this.loading.dismiss();
+        alert("Fail to add, please try it later.")
+      }, () =>
+      {
+        this.loading.dismiss();
+      });
+  /*  .subscribe((res) => { 
+      this.event.publish('user:back');
       this.nav.pop();
       this.loading.dismiss();
     }, (err) => {
       this.loading.dismiss();
 
     alert("failed");
-    });
+    });*/
     }
 
     showLoader(){
@@ -343,29 +371,17 @@ export class SettingsPage {
   getPhoto() {
     let options = {
       maximumImagesCount: 1,
-      // quality: 80,
-      // width: 800,
-      // height: 800,
+      quality: 80,
+      width: 800,
+      height: 800,
       outputType: 1
     };
   this.imagePicker.getPictures(options).then((results) => {
     for (var i = 0; i < results.length; i++) {
     
-        this.imgPreview = results[i];
-        this.base64.encodeFile(results[i]).then((base64File: string) => {
-          this.regData.avatar = base64File;
-        }, (err) => {
-          console.log(err);
-        }).catch(exception => {
-          console.log(' base64 Exception ' + exception);
-        });
-
-        // this.imgPreview = 'data:image/jpeg;base64,' + results[i];
-        // this.regData.avatar = this.imgPreview;
-
-        let image  = results[i];
-        this.profileService.setUserImage(image);
-        this.profile.data.fb_uid = image;
+      this.imgPreview = 'data:image/jpeg;base64,' + results[i];
+      this.regData.avatar = this.imgPreview;
+      this.profile.data.fb_uid = results[i];
     }
   }, (err) => { })
   .catch(exception => {
