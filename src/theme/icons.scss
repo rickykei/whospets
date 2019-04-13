@@ -14,4 +14,11 @@ ion-icon {
     &[class*="custom-delete"] {
        mask-image: url(../assets/images/icons/custom-delete-icon.svg);
     }
+    &[class*="custom-add"] {
+        mask-image: url(../assets/images/icons/custom-add-icon.svg);
+        
+     }
+     &[class*="custom-search"] {
+        mask-image: url(../assets/images/icons/custom-search-icon.svg);
+     }
  }
