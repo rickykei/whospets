@@ -1,2 +1,12 @@
 <?xml version="1.0"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 31.444 31.444" style="enable-background:new 0 0 31.444 31.444;" xml:space="preserve" width="512px" height="512px" class=""><g><path d="M1.119,16.841c-0.619,0-1.111-0.508-1.111-1.127c0-0.619,0.492-1.111,1.111-1.111h13.475V1.127  C14.595,0.508,15.103,0,15.722,0c0.619,0,1.111,0.508,1.111,1.127v13.476h13.475c0.619,0,1.127,0.492,1.127,1.111  c0,0.619-0.508,1.127-1.127,1.127H16.833v13.476c0,0.619-0.492,1.127-1.111,1.127c-0.619,0-1.127-0.508-1.127-1.127V16.841H1.119z" data-original="#1E201D" class="active-path" data-old_color="#F3F4F3" fill="#F6F8F6"/></g> </svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 44.238 44.238" style="enable-background:new 0 0 44.238 44.238;" xml:space="preserve"><g transform="matrix(0.960596 0 0 0.960596 0.871576 0.871576)"><g>
+	<g>
+		<path d="M22.119,44.237C9.922,44.237,0,34.315,0,22.12C0,9.924,9.922,0.001,22.119,0.001S44.238,9.923,44.238,22.12    S34.314,44.237,22.119,44.237z M22.119,1.501C10.75,1.501,1.5,10.751,1.5,22.12s9.25,20.619,20.619,20.619    s20.619-9.25,20.619-20.619S33.488,1.501,22.119,1.501z" data-original="#000000" class="active-path" data-old_color="#F8F7F7" fill="#F9F9F9"/>
+		<g>
+			<path d="M31.434,22.869H12.805c-0.414,0-0.75-0.336-0.75-0.75s0.336-0.75,0.75-0.75h18.628c0.414,0,0.75,0.336,0.75,0.75     S31.848,22.869,31.434,22.869z" data-original="#000000" class="active-path" data-old_color="#F8F7F7" fill="#F9F9F9"/>
+		</g>
+		<g>
+			<path d="M22.119,32.183c-0.414,0-0.75-0.336-0.75-0.75V12.806c0-0.414,0.336-0.75,0.75-0.75s0.75,0.336,0.75,0.75v18.626     C22.869,31.847,22.533,32.183,22.119,32.183z" data-original="#000000" class="active-path" data-old_color="#F8F7F7" fill="#F9F9F9"/>
+		</g>
+	</g>
+</g></g> </svg>
