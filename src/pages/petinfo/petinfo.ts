@@ -10,6 +10,9 @@ import { PetDetailsService } from '../add-page/addlayout.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile/profile.service';
 import { AddpetPage } from '../addpet/addpet';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { PetBreedModel } from '../add-page/addlayout.model';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 
 /**
@@ -27,6 +30,7 @@ export class PetinfoPage {
 
   pet: PetDetailsModel = new PetDetailsModel();
   petmodel: PetModel = new PetModel();
+  petbreedmodel: PetBreedModel = new PetBreedModel();
 
  uid:string;
  user_id:string;
@@ -45,7 +49,9 @@ export class PetinfoPage {
   _temp:number;
 
   isPetLost:boolean = false;
-  
+  language :string;
+  isChi : boolean = false;
+
   constructor(
     public navCtrl: NavController, 
     public nativeStorage:NativeStorage,
@@ -94,6 +100,36 @@ export class PetinfoPage {
     });
   }
 
+  ionViewWillEnter()
+  {
+    this.nativeStorage.getItem('profile_user_id')
+    .then(data => {
+        this.user_id = data.profile_user_id;
+        this.language = data.profile_language;
+        console.log('data.profile_language : ' + data.profile_language);
+        if(data.profile_language==="zh")
+        {
+          this.isChi = true;
+        }
+        else
+        {
+          this.isChi = false;
+        }
+      });
+  }
+
+  getPetType()
+  {
+    for(var i = 0; i < this.petbreedmodel.pet.length; i++)
+    {
+        if(this.petbreedmodel.pet[i].category_id === this.pet.category_id)
+        {
+          this.pet.petbreed = this.petbreedmodel.pet[i].title;
+          this.pet.petbreed_zh = this.petbreedmodel.pet[i].title_zh;
+        }
+    }
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad PetinfoPage');
     console.log(this.pet.name_of_pet);
@@ -110,6 +146,8 @@ export class PetinfoPage {
         this.email = data.email; 
       }
 
+      
+
       this.nativeStorage.getItem('profile_user_id')
       .then(data2 => {
           this.user_id = data2.profile_user_id;
@@ -123,6 +161,13 @@ export class PetinfoPage {
              if(this.petmodel.success==='true')
               this.pet = this.petmodel.data[0];
              this.checkPetStatus();
+
+
+             this.petdetailservice.getData()
+              .then(data2 => {
+                this.petbreedmodel = data2;
+                this.getPetType();
+              });
 
              this.profileService.getCountryCode()
             .then(zone => {

@@ -114,6 +114,8 @@ export class PetDetailsModel{
         user_id:string;
         product_id:string;
         category_id:string;
+        petbreed:string;
+        petbreed_zh:string;
         status:string;
         store_id:string;
         tax_id:string;
