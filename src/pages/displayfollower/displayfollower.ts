@@ -80,7 +80,7 @@ export class DisplayfollowerPage {
    
     this.showLoader();
 
-      this.PagesDisplayServiceProvider.getFollower(this.user_id,10,0)
+      this.PagesDisplayServiceProvider.getFollower(this.user_id,100,0)
       .then(response => {
         this.details = response.data;
         this.dismissLoading();
@@ -129,7 +129,7 @@ export class DisplayfollowerPage {
 
     setTimeout(() => {
   
-      this.PagesDisplayServiceProvider.getFollower(this.user_id,10,this.details.length)
+      this.PagesDisplayServiceProvider.getFollower(this.user_id,100,this.details.length)
       .then(response => {
         this.petModel = response; 
         if(response.success==='true'){

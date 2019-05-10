@@ -99,7 +99,7 @@ export class QnaPage {
     this.showLoader();
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllQnA(10,0)
+      this.PagesDisplayServiceProvider.getAllQnA(100,0)
       .then(response => {
         this.details = response.data;
       //   for(let i=0; i<response.data.length; i++) {
@@ -111,7 +111,7 @@ export class QnaPage {
     }
     else
     {
-      this.PagesDisplayServiceProvider.getQnA(this.user_id,10,0)
+      this.PagesDisplayServiceProvider.getQnA(this.user_id,100,0)
       .then(response => {
       //   for(let i=0; i<response.data.length; i++) {
 			// console.log('postdata looop'+i); 
@@ -139,7 +139,7 @@ export class QnaPage {
     setTimeout(() => {
      if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllQnA(10,this.details.length)
+      this.PagesDisplayServiceProvider.getAllQnA(100,this.details.length)
       .then(response => {
         if(response.success==='true')
         {
@@ -152,7 +152,7 @@ export class QnaPage {
     }
     else
     {
-       this.PagesDisplayServiceProvider.getQnA(this.user_id,10,this.details.length)
+       this.PagesDisplayServiceProvider.getQnA(this.user_id,100,this.details.length)
        .then(response => {
         if(response.success==='true')
         {

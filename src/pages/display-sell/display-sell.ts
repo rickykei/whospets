@@ -98,7 +98,7 @@ export class DisplaySellPage{
     this.showLoader();
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllSell(10,0)
+      this.PagesDisplayServiceProvider.getAllSell(100,0)
       .then(response => {
        this.details = response.data;
        this.dismissLoading();
@@ -107,7 +107,7 @@ export class DisplaySellPage{
     }
     else
     {
-      this.PagesDisplayServiceProvider.getSell(this.user_id,10,0)
+      this.PagesDisplayServiceProvider.getSell(this.user_id,100,0)
       .then(response => {
         this.details = response.data;
         this.dismissLoading();
@@ -134,7 +134,7 @@ export class DisplaySellPage{
     setTimeout(() => {
      if(this.getall===true)
       {
-        this.PagesDisplayServiceProvider.getAllSell(10,this.details.length)
+        this.PagesDisplayServiceProvider.getAllSell(100,this.details.length)
         .then(response => {
           //this.petModel = response; 
           if(response.success==='true')
@@ -148,7 +148,7 @@ export class DisplaySellPage{
       }
       else
       {
-          this.PagesDisplayServiceProvider.getSell(this.user_id,10,this.details.length)
+          this.PagesDisplayServiceProvider.getSell(this.user_id,100,this.details.length)
           .then(response => {
             this.petModel = response; 
             if(response.success==='true'){
