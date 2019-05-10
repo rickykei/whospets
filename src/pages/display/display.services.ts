@@ -46,10 +46,10 @@ export class PagesDisplayServiceProvider {
     .catch(this.handleError);
   }
 
-  getMixPost(user_id:string):Promise<PetModel>
+  getMixPost(user_id:string,limit,offset):Promise<PetModel>
   {
     //http://api.whospets.com/api/categories/get_all_mix.php?user_id=514
-    return this.http.get('http://api.whospets.com/api/categories/get_all_mix.php?user_id='+user_id) //('./assets/example_data/mypet.json')
+    return this.http.get('http://api.whospets.com/api/categories/get_all_mix.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
     .toPromise()
     .then(response => response.json() as PetModel)
     .catch(this.handleError);

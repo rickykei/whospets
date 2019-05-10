@@ -152,14 +152,14 @@ export class ProfilePage {
       
       this.nativeStorage.getItem('email_user')
     .then(data => {
-      this.profileService.getPet(data.email, this.profile_user_id)
+      this.profileService.getPet(data.email, this.profile_user_id,100,0)
       .then(response => {
         this.pet = response;
       });
       });
 
   console.log('..data2 user_id getMixPost:'+  this.profile.data.user_id);
-  this.PagesDisplayServiceProvider.getMixPost( this.profile_user_id)
+  this.PagesDisplayServiceProvider.getMixPost( this.profile_user_id,100,0)
       .then(response => {
       this.petModel = response; 
       this.details = response.data;    

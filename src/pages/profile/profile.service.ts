@@ -54,9 +54,9 @@ export class ProfileService {
     .catch(this.handleError);
   }
 
-  getPet(_email:string, user_id:string):Promise<PetModel>
+  getPet(_email:string, user_id:string,limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/users/get_user_pets.php?username='+_email+'&user_id='+user_id) //('./assets/example_data/mypet.json')
+      return this.http.get('http://api.whospets.com/api/users/get_user_pets.php?username='+_email+'&user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);

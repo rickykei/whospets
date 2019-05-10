@@ -120,7 +120,7 @@ export class SetQnaPage {
          this.user_id = data2.profile_user_id;
           console.log(data2.profile_user_id);
 
-          this.profileService.getPet(this.email, this.user_id)
+          this.profileService.getPet(this.email, this.user_id,100,0)
           .then(response => {
             this.pet = response;
           });

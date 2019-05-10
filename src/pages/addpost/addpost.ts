@@ -98,7 +98,7 @@ export class AddpostPage {
          .then(data2 => {
           this.email = data2.email;   
 
-          this.profileService.getPet(data2.email, data.profile_user_id)
+          this.profileService.getPet(data2.email, data.profile_user_id, 100,0)
           .then(response => {
             this.pet = response;
           });

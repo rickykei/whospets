@@ -107,7 +107,7 @@ export class AddsellPage {
     .then(data => {
      this.email = data.email;   
 
-     this.profileService.getPet(data.email, this.user_id)
+     this.profileService.getPet(data.email, this.user_id, 100,0)
      .then(response => {
        this.pet = response;
      });
