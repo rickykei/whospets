@@ -9,7 +9,11 @@ import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
 import { SettingsPage } from '../pages/settings/settings';
 
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { FcmProvider } from '../providers/fcm/fcm';
+import { tap } from 'rxjs/operators';
+
 //import { LoginPage } from '../pages/login/login';
+
 
 @Component({
   selector: 'app-root',
@@ -34,7 +38,8 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public statusBar: StatusBar,
     public translate: TranslateService,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    fcm: FcmProvider
   ) {
     translate.setDefaultLang('en');
     translate.use('en');
@@ -44,6 +49,25 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.splashScreen.hide();
       this.statusBar.styleDefault();
+
+      //fcm:
+      // Get a FCM token
+      fcm.getToken()
+
+      // Listen to incoming messages
+      fcm.listenToNotifications().pipe(
+        tap(msg => {
+          // show a toast
+          const toast = toastCtrl.create({
+            message: msg.body,
+            duration: 3000
+          });
+          toast.present();
+        })
+      )
+      .subscribe()
+    
+
     });
 
     this.translate.onLangChange.subscribe((event: LangChangeEvent) =>

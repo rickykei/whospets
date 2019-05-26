@@ -7,7 +7,7 @@ import { DisplayfollowerPage } from '../displayfollower/displayfollower';
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { LoginPage } from '../login/login';
-import { NavController, NavParams, Tabs } from 'ionic-angular';
+import { NavController, NavParams, Tabs, ToastController } from 'ionic-angular';
 
 import { LoginModel, LoginContentModel } from './tabs-navigation.model';
 import { TabsNavigationService } from './tabs-navigation.service';
@@ -18,7 +18,8 @@ import { UserModel } from '../profile/profile.model';
 import { LanguageModel } from '../../providers/language/language.model';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../providers/language/language.service';
-
+import { FcmProvider } from '../../providers/fcm/fcm';
+import { tap } from 'rxjs/operators';
 
 
 @Component({
@@ -49,6 +50,8 @@ export class TabsNavigationPage {
     public languageService: LanguageService,
     public facebookLoginService: FacebookLoginService,
     public navParams: NavParams
+    , public fcm :FcmProvider
+    , public toastCtrl: ToastController
     ) {
     this.tab1Root = ListingPage;
     this.tab2Root = ProfilePage;
@@ -76,6 +79,18 @@ export class TabsNavigationPage {
         );
         });             
      //   this.tabRef.select(0);
+
+     //FCM
+     this.fcm.getToken();
+     this.fcm.listenToNotifications().pipe(
+       tap(msg => {
+        const toast = this.toastCtrl.create({
+          message: msg.body,
+          duration:3000
+        });
+        toast.present();
+       })
+     ).subscribe();
   }
 
 

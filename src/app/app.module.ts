@@ -126,6 +126,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { Base64 } from '@ionic-native/base64';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 
 //Angular Fire
@@ -138,6 +139,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 //import { FileTransfer } from '@ionic-native/file-transfer';
 import { PagesDisplayServiceProvider } from '../pages/display/display.services';
 import { ApiProvider } from '../providers/api/api';
+import { FcmProvider } from '../providers/fcm/fcm';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -361,9 +363,11 @@ export function createTranslateLoader(http: HttpClient) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PagesDisplayServiceProvider,
 	ImagePicker,
-	Base64,
-    ApiProvider
-  ],
+  Base64,
+  Firebase,
+    ApiProvider,
+    FcmProvider
+    ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}
