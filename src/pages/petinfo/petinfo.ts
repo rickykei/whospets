@@ -61,7 +61,8 @@ export class PetinfoPage {
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public socialSharing: SocialSharing,
     public profileService: ProfileService,
-    public events:Events
+    public events:Events,
+    public translate: TranslateService
   ) {
     
     this.pet = navParams.get('pet');
@@ -126,6 +127,7 @@ export class PetinfoPage {
         {
           this.pet.petbreed = this.petbreedmodel.pet[i].title;
           this.pet.petbreed_zh = this.petbreedmodel.pet[i].title_zh;
+          this.pet.pet_type = this.petbreedmodel.pet[i].parent_id;  
         }
     }
   }

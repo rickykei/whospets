@@ -88,6 +88,14 @@
             <!-- <p class="item-text">
               <b> {{'AGE' | translate}}</b> : {{age}}
           </p>                    -->
+
+          <p class="item-text" *ngIf="pet.pet_type=='1'">
+            <b> {{'TYPE_OF_PET' | translate}}</b> :  {{'DOG' | translate}}
+          </p>
+
+          <p class="item-text" *ngIf="pet.pet_type=='2'">
+            <b> {{'TYPE_OF_PET' | translate}}</b> :  {{'CAT' | translate}}
+          </p>
           
             <p class="item-text" *ngIf="!isChi">
               <b> {{'PET_BREED' | translate}}</b> :  {{pet.petbreed}}

@@ -62,42 +62,42 @@ export class LoginPage {
     this.password = this.login.controls['password'];
   }
 
-  doLogin(){
-	  let data = this.login.value;
+  // doLogin(){
+	//   let data = this.login.value;
 
-   console.log('-------------------doLogin');
-    var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password ;
-    console.log(url);
+  //  console.log('-------------------doLogin');
+  //   var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password ;
+  //   console.log(url);
 
-    this.profileService.getLoginData(url)
-    .then(data2 => {
-      console.log('..data2 :'+ data2.success);
+  //   this.profileService.getLoginData(url)
+  //   .then(data2 => {
+  //     console.log('..data2 :'+ data2.success);
 
-      this.status = data2.success;
-      if(this.status=='true')
-      {
-        this.loginInfo.data.id = data2.data.id; 
-        this.loginInfo.data.username = data2.data.username;
-        this.loginInfo.data.image = data2.data.image;
-        this.loginInfo.data.message = data2.data.message;
-        this.loginInfo.data.language = data2.data.language;
-        this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
+  //     this.status = data2.success;
+  //     if(this.status=='true')
+  //     {
+  //       this.loginInfo.data.id = data2.data.id; 
+  //       this.loginInfo.data.username = data2.data.username;
+  //       this.loginInfo.data.image = data2.data.image;
+  //       this.loginInfo.data.message = data2.data.message;
+  //       this.loginInfo.data.language = data2.data.language;
+  //       this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
 
-        this.setEmailUser(this.email.value, this.password.value, '');
-        this.setProfileUserId(data2.data.id +'',data2.data.language+'') ;
-        this.setLanguage(this.language);
+  //       this.setEmailUser(this.email.value, this.password.value, '');
+  //       this.setProfileUserId(data2.data.id +'',data2.data.language+'') ;
+  //       this.setLanguage(this.language);
 
-        this.nav.push(TabsNavigationPage);//ProfilePage);
+  //       this.nav.push(TabsNavigationPage);//ProfilePage);
 
-      }
-      else{
-        this.removeEmailUser();
-         //this.nav.setRoot(SignupPage);
-         alert("Email/Password Fail!");
-      }
-    });
+  //     }
+  //     else{
+  //       this.removeEmailUser();
+  //        //this.nav.setRoot(SignupPage);
+  //        alert("Email/Password Fail!");
+  //     }
+  //   });
 
-    }
+  //   }
 
     setLanguage(lang: LanguageModel){
       let language_to_set = this.translate.getDefaultLang();

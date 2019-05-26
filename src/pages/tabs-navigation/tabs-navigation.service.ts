@@ -8,8 +8,8 @@ import { LoginModel } from './tabs-navigation.model';
 export class TabsNavigationService {
   constructor(public http: Http) {}
 
-  getData(email: string, password:string): Promise<LoginModel> {
-      var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + email + '&password='+password ;
+  getData(email: string, password:string, token:string): Promise<LoginModel> {
+      var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + email + '&password='+password  + '&device_id='+token;
     console.log(url);
     
     return this.http.get(url)
@@ -19,8 +19,8 @@ export class TabsNavigationService {
   }
 
 
-  getFBData(email: string, uid:string): Promise<LoginModel> {
-    var url = 'http://api.whospets.com/api/users/login.php?logintype=fb&username=' + email  +'&fb_uid=' + uid;
+  getFBData(email: string, uid:string, token: string): Promise<LoginModel> {
+    var url = 'http://api.whospets.com/api/users/login.php?logintype=fb&username=' + email  +'&fb_uid=' + uid+ '&device_id='+token;
   console.log(url);
   return this.http.get(url)
    .toPromise()

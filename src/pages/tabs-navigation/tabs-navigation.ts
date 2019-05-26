@@ -41,6 +41,7 @@ export class TabsNavigationPage {
 
   login : boolean;
   tabs: number;
+  token : string;
 
   constructor(    
     public nav: NavController,
@@ -81,7 +82,7 @@ export class TabsNavigationPage {
      //   this.tabRef.select(0);
 
      //FCM
-     this.fcm.getToken();
+     this.fcm.getToken()
      this.fcm.listenToNotifications().pipe(
        tap(msg => {
         const toast = this.toastCtrl.create({
@@ -136,10 +137,15 @@ export class TabsNavigationPage {
      console.log('1' + password);
      console.log('1' + uid);
 
+     this.nativeStorage.getItem('firebase_token')
+     .then(data => {
+        this.token = data.token;
+     });
+
      if(password=='')
      {
       this.tabsNavigationService
-      .getFBData(email, uid)
+      .getFBData(email, uid, this.token)
       .then(data2 => {
         console.log(data2.success);
         this.posts.success = data2.success;
@@ -163,7 +169,7 @@ export class TabsNavigationPage {
     else
     {
       this.tabsNavigationService
-      .getData(email, password)
+      .getData(email, password, this.token)
       .then(data2 => {
         console.log(data2.success);
         this.posts.success = data2.success;
@@ -198,30 +204,3 @@ export class TabsNavigationPage {
     }
  
 }
-  
-
-
- 
-   // 1st log into this page, check is it logged user before
-  //  ionViewWillEnter() {    
-  //   if(!this.isLogged()){
-  //    // this.nav.setRoot(LoginPage);
-  //   }
-  // }
-
-  // isLogged(){
-     
-  //  this.nativeStorage.getItem('email_user')
-  //  .then(function (data) {
-       
-  //   console.log(data.email);
-  //   var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&login&password='+data.password ;
-  //   console.log(url);
-
-  //   this.http.get(url).subscribe(data => {
-  //     console.log(data);
-  //   });
-
-  //   return true;
-  // });
-  // }
