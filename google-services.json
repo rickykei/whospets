@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "599906333523",
+    "firebase_url": "https://whospets-65e90.firebaseio.com",
+    "project_id": "whospets-65e90",
+    "storage_bucket": "whospets-65e90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599906333523:android:49c42939abe1dd81",
+        "android_client_info": {
+          "package_name": "com.whospets.aos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599906333523-r1a0n6e0fsbdshi9v1t0gtbnt4k7d727.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whospets.aos",
+            "certificate_hash": "4066f0ddc6d1af4ea499d5ca04a07c1e2d55829f"
+          }
+        },
+        {
+          "client_id": "599906333523-vqa066sutsjged7a3s992bmhc5itojl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCISOetzGpavjTZ5NzB8_6wtXt9bG9qtnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599906333523-vqa066sutsjged7a3s992bmhc5itojl7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "599906333523-dufnmb5mgvim747mmddlmg0k572u0alm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whospets.ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
