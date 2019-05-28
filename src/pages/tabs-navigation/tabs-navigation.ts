@@ -81,17 +81,6 @@ export class TabsNavigationPage {
         });             
      //   this.tabRef.select(0);
 
-     //FCM
-     this.fcm.getToken()
-     this.fcm.listenToNotifications().pipe(
-       tap(msg => {
-        const toast = this.toastCtrl.create({
-          message: msg.body,
-          duration:3000
-        });
-        toast.present();
-       })
-     ).subscribe();
   }
 
 
@@ -140,7 +129,7 @@ export class TabsNavigationPage {
      this.nativeStorage.getItem('firebase_token')
      .then(data => {
         this.token = data.token;
-     });
+     
 
      if(password=='')
      {
@@ -190,6 +179,7 @@ export class TabsNavigationPage {
         console.log(error);
       });
     }
+  });
     
     }
 

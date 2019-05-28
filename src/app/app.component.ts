@@ -52,7 +52,12 @@ export class MyApp {
 
       //fcm:
       // Get a FCM token
+      fcm.getToken();  
+
       fcm.getToken()
+        .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
+        .catch(error => console.error('Error getting token', error));
+     
 
       // Listen to incoming messages
       fcm.listenToNotifications().pipe(
@@ -65,7 +70,7 @@ export class MyApp {
           toast.present();
         })
       )
-      .subscribe()
+      .subscribe();
     
 
     });
