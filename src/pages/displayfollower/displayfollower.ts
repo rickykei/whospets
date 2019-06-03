@@ -7,6 +7,7 @@ import { AddsellPage } from '../addsell/addsell';
 import { PostInfoPage } from '../post-info/post-info';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { CommentPage } from '../comment/comment';
+import { PetinfoPage } from '../petinfo/petinfo';
 
 /**
  * Generated class for the DisplayfollowerPage page.
@@ -147,7 +148,17 @@ export class DisplayfollowerPage {
   detailPost(post)
   {        
     this.getAppTable(post);
-    this.navCtrl.push(PostInfoPage, {post:post, tablename:this.table_name});  
+
+    if(this.table_name === 'shop_products')
+    {
+      console.log('pet:' + post.product_id);
+      post.product_id = post.id;
+      this.navCtrl.push(PetinfoPage, {pet:post, tablename:this.table_name});  
+    }
+    else
+    {
+      this.navCtrl.push(PostInfoPage, {post:post, tablename:this.table_name});  
+    }
   }
 
   likePost(post)

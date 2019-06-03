@@ -11,6 +11,9 @@ import { SettingsPage } from '../pages/settings/settings';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { tap } from 'rxjs/operators';
+import { PetinfoPage } from '../pages/petinfo/petinfo';
+import { PostInfoPage } from '../pages/post-info/post-info';
+import { PetDetailsModel } from '../pages/profile/profile.model';
 
 //import { LoginPage } from '../pages/login/login';
 
@@ -30,6 +33,8 @@ export class MyApp {
 
   pages: Array<{title: any, icon: string, component: any}>;
   pushPages: Array<{title: any, icon: string, component: any}>;
+
+  post: PetDetailsModel = new PetDetailsModel();
 
   constructor(
     platform: Platform,
@@ -63,11 +68,37 @@ export class MyApp {
       fcm.listenToNotifications().pipe(
         tap(msg => {
           // show a toast
+          // const toast = toastCtrl.create({
+          //   message: msg.body,
+          //   duration: 3000
+          // });
+          // toast.present();
+          console.log(msg.body);
+          console.log(msg.title);
+          console.log(msg.content_id);
+
           const toast = toastCtrl.create({
-            message: msg.body,
-            duration: 3000
-          });
-          toast.present();
+              message: msg.body+ ",title: " + msg.title+", content_id: "+ msg.content_id,
+              duration: 3000
+            });
+            toast.present();
+
+          if(msg.app_table === 'shop_products')
+          {
+            this.post.app_table = msg.app_table;
+            this.post.product_id = msg.content_id;
+            this.post.id = msg.content_id;
+            console.log('pet:' + this.post.product_id);
+            this.app.getRootNav().push(PetinfoPage, {pet:this.post, tablename:this.post.app_table}); 
+          }
+          else
+          {
+            this.post.app_table = msg.app_table;
+            this.post.product_id = msg.content_id;
+            this.post.id = msg.content_id;
+            console.log('post:' + this.post.id);
+            this.app.getRootNav().push(PostInfoPage, {post:this.post, tablename:this.post.app_table});  
+          }
         })
       )
       .subscribe();

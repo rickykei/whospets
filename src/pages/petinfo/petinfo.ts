@@ -79,7 +79,8 @@ export class PetinfoPage {
 
     events.subscribe('user:back' ,() =>
     {    
-      this.profileService.getSpecPet(this.email, this.user_id, this.pet.product_id)
+     // this.profileService.getSpecPet(this.email, this.user_id, this.pet.product_id)
+     this.profileService.getSpecPost(this.pet.product_id,'shop_products')
            .then(response => {
              this.petmodel = response;
              if(this.petmodel.success==='true')
@@ -157,7 +158,8 @@ export class PetinfoPage {
            this.checkDelButton(data2.profile_user_id);
 
 
-           this.profileService.getSpecPet(this.email, this.user_id, this.pet.product_id)
+          // this.profileService.getSpecPet(this.email, this.user_id, this.pet.product_id)
+          this.profileService.getSpecPost(this.pet.product_id,'shop_products')
            .then(response => {
              this.petmodel = response;
              if(this.petmodel.success==='true')

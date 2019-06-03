@@ -62,12 +62,20 @@ export class ProfileService {
       .catch(this.handleError);
   }
 
-  getSpecPet(_email:string, user_id:string, product_id:string):Promise<PetModel>
+  // getSpecPet(_email:string, user_id:string, product_id:string):Promise<PetModel>
+  // {
+  //     return this.http.get('http://api.whospets.com/api/users/get_user_pets.php?username='+_email+'&user_id='+user_id+'&product_id='+product_id) //('./assets/example_data/mypet.json')
+  //     .toPromise()
+  //     .then(response => response.json() as PetModel)
+  //     .catch(this.handleError);
+  // }
+
+  getSpecPost(content_id:string, app_table:string):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/users/get_user_pets.php?username='+_email+'&user_id='+user_id+'&product_id='+product_id) //('./assets/example_data/mypet.json')
-      .toPromise()
-      .then(response => response.json() as PetModel)
-      .catch(this.handleError);
+    return this.http.get('http://api.whospets.com/api/users/get_mix_detail.php?content_id='+content_id+'&app_table='+app_table)
+    .toPromise()
+    .then(response => response.json() as PetModel)
+    .catch(this.handleError);
   }
 
   //http://api.whospets.com/api/users/get_user_pets.php?username=rickykei@yahoo.com.hk&user_id=514&product_id=568
