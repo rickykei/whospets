@@ -157,6 +157,7 @@ export class DisplayfollowerPage {
     }
     else
     {
+      post.content_id = post.id;
       this.navCtrl.push(PostInfoPage, {post:post, tablename:this.table_name});  
     }
   }

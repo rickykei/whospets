@@ -134,10 +134,11 @@ export class PostInfoPage {
   getContent(user_id:string)
   {
     var url =''
+   
 
     if( this.post.app_table==='SELL' || this.tablename ==='app_sell')
     {
-      url = 'http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id+'&content_id='+this.post.id;
+      //url = 'http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id+'&content_id='+this.post.id;
       this.table_type ='sell';
       this.tablename ='app_sell';
       this.translate.get("SELL_DETAIL").subscribe((result: string) => {
@@ -146,7 +147,7 @@ export class PostInfoPage {
     }
     else if(this.post.app_table==='LIFESTYLE' || this.tablename === 'app_post') 
     {
-      url ='http://api.whospets.com/api/users/get_user_lifestyles.php?user_id='+user_id+'&content_id='+this.post.id;
+     // url ='http://api.whospets.com/api/users/get_user_lifestyles.php?user_id='+user_id+'&content_id='+this.post.id;
       this.table_type ='lifestyle';
       this.tablename = 'app_post';
       this.translate.get("LIFESTYLE_DETAIL").subscribe((result: string) => {
@@ -155,16 +156,19 @@ export class PostInfoPage {
     }
     else if(this.post.app_table==='QNA' || this.tablename === 'app_qna')
     {
-      url='http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id+'&content_id='+this.post.id;
+     // url='http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id+'&content_id='+this.post.id;
       this.table_type ='qna';
       this.tablename = 'app_qna';
       this.translate.get("QNA_DETAIL").subscribe((result: string) => {
         this.title = result;
       });
     }
+    // update to use this get content
+    //url = 'http://api.whospets.com/api/users/get_mix_detail.php?content_id='+this.post.id+'&app_table='+this.tablename
+    console.log('post id:'+this.post.id);
+    console.log('tablename:'+this.tablename);
 
-    //http://api.whospets.com/api/users/get_user_qnas.php?user_id=501&content_id=23
-    this.PagesDisplayServiceProvider.getSpecPost(url)
+    this.profileService.getSpecPost(this.post.id,this.tablename)//getSpecPost(url)
     .then(data => {
       if(data.success==='true')
       {
