@@ -29,7 +29,6 @@ export class Dist18Page {
   user_name: string;
   likevalue : number;
   dislikevalue : number;
-  title:string;
 
   
   constructor(public nav: NavController
@@ -42,7 +41,7 @@ export class Dist18Page {
     this._popular = this.navParams.get('popular');
     console.log("array1: "+ this._popular.group_ids[0]);
     console.log("array1 , length: "+ this._popular.group_ids.length);
-      this.title = this._popular.title;
+
   }
 
   ionViewDidLoad() {
