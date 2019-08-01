@@ -131,13 +131,15 @@
     <allow-navigation href="http://192.168.1.109:8100" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
-    <plugin name="cordova-android-support-gradle-release" spec="^1.4.5">
-        <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
-    </plugin>
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="com.synconset.imagepicker" spec="^2.1.10">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="your usage message" />
     </plugin>
-    <plugin name="cordova-plugin-firebase" spec="^2.0.5" />
-    <engine name="android" spec="6.4.0" />
+    <plugin name="cordova-android-support-gradle-release" spec="^1.4.7">
+        <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
+    </plugin>
+    <plugin name="cordova-plugin-androidx-adapter" spec="^1.1.0" />
+    <plugin name="cordova-plugin-androidx" spec="^1.0.2" />
+    <engine name="ios" spec="4.5.5" />
+    <engine name="android" spec="8.0.0" />
 </widget>
