@@ -69,6 +69,7 @@
     "cordova-plugin-facebook4": "^1.10.1",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-file-opener2": "^2.2.1",
+    "cordova-plugin-firebase": "~2.0.5",
     "cordova-plugin-geolocation": "^2.4.3",
     "cordova-plugin-globalization": "^1.11.0",
     "cordova-plugin-googleplus": "^5.3.2",
@@ -177,7 +178,8 @@
         "ANDROID_SUPPORT_VERSION": "27.+"
       },
       "cordova-plugin-androidx": {},
-      "cordova-plugin-androidx-adapter": {}
+      "cordova-plugin-androidx-adapter": {},
+      "cordova-plugin-firebase": {}
     }
   }
 }
