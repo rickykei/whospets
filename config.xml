@@ -141,6 +141,7 @@
     <plugin name="cordova-plugin-androidx-adapter" spec="^1.1.0" />
     <plugin name="cordova-plugin-androidx" spec="^1.0.2" />
     <plugin name="cordova-plugin-firebase" spec="~2.0.5" />
+    <hook src="copy_build_extra.js" type="before_build" />
     <engine name="ios" spec="4.5.5" />
     <engine name="android" spec="8.0.0" />
 </widget>
