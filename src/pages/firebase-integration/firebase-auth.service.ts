@@ -5,7 +5,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { AngularFirestore } from 'angularfire2/firestore';
 // import { environment } from '../../environment/environment';
 
@@ -18,7 +17,6 @@ export class FirebaseAuthService {
     public afAuth: AngularFireAuth,
     public googlePlus: GooglePlus,
     public fb: Facebook,
-    public tw : TwitterConnect,
     public platform: Platform,
     public afs: AngularFirestore
 
@@ -192,40 +190,4 @@ export class FirebaseAuthService {
       }
     })
   }
-
-  doTwitterLogin(){
-        return new Promise<any>((resolve, reject) => {
-          if (this.platform.is('cordova')) {
-            this.tw.login().then((response) => {
-              const twitterCredential = firebase.auth.TwitterAuthProvider.credential(response.token, response.secret);
-              firebase.auth().signInWithCredential(twitterCredential)
-              .then(
-                (user) => {
-                  resolve({
-                    name: user.displayName,
-                    image: user.photoURL,
-                    provider: ""
-                  })
-                },
-                (error) => {
-                  reject(error);
-                });
-            },(err) => {
-              reject(err);
-            });
-          }
-          else{
-            this.afAuth.auth
-            .signInWithPopup(new firebase.auth.TwitterAuthProvider())
-            .then((user) => {
-              resolve({
-                name: user.displayName,
-                image: user.photoURL,
-                provider: ""
-              })
-           })
-         }
-       })
-     }
-
 }

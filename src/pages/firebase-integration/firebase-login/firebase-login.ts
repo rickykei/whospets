@@ -54,16 +54,6 @@ export class FirebaseLoginPage {
     });
   }
 
-  doTwitterLogin(){
-    this.loading = this.loadingCtrl.create();
-    this.fAuthService.doTwitterLogin()
-    .then((data) => {
-      this.nav.push(FirebaseTabsNavigationPage);
-      this.loading.dismiss();
-    }, (err) => {
-      this.errorMessage = err.message;
-    });
-  }
 
   goToSignup() {
     this.nav.push(FirebaseSignupPage);

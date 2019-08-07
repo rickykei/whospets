@@ -9,7 +9,6 @@ import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import { GoogleLoginService } from '../google-login/google-login.service';
-import { TwitterLoginService } from '../twitter-login/twitter-login.service';
 
 
 import {Http} from '@angular/http';
@@ -42,7 +41,6 @@ export class SignupPage {
     public facebookLoginService: FacebookLoginService,
     public nativeStorage: NativeStorage,
     public googleLoginService: GoogleLoginService,
-    public twitterLoginService: TwitterLoginService,
     public http: HttpClient,  
     public loadingCtrl: LoadingController
   ) {

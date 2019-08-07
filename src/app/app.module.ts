@@ -36,7 +36,6 @@ import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
 import { MapsPage } from '../pages/maps/maps';
 import { FacebookLoginPage } from '../pages/facebook-login/facebook-login';
 import { GoogleLoginPage } from '../pages/google-login/google-login';
-import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
 import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
 //import { LostPetPage } from '../pages/lostpet/lostpet';
@@ -98,7 +97,6 @@ import { ScheduleService } from '../pages/schedule/schedule.service';
 import { TabsNavigationService} from '../pages/tabs-navigation/tabs-navigation.service';
 import { FacebookLoginService } from '../pages/facebook-login/facebook-login.service';
 import { GoogleLoginService } from '../pages/google-login/google-login.service';
-import { TwitterLoginService } from '../pages/twitter-login/twitter-login.service';
 import { GoogleMapsService } from '../pages/maps/maps.service';
 import { FirebaseService } from '../pages/firebase-integration/firebase-integration.service';
 import { FirebaseAuthService } from '../pages/firebase-integration/firebase-auth.service';
@@ -194,8 +192,7 @@ export function createTranslateLoader(http: HttpClient) {
     FacebookLoginPage,
     GoogleLoginPage,
     ContactCardPage,
-    TwitterLoginPage,
-		AdsPage,
+    AdsPage,
 		FormValidationsPage,
     VideoPlaylistPage,
 
@@ -280,7 +277,6 @@ export function createTranslateLoader(http: HttpClient) {
     FacebookLoginPage,
     GoogleLoginPage,
     ContactCardPage,
-    TwitterLoginPage,
 		AdsPage,
 		FormValidationsPage,
     VideoPlaylistPage,
@@ -334,7 +330,6 @@ export function createTranslateLoader(http: HttpClient) {
     //functionalities
     FacebookLoginService,
     GoogleLoginService,
-    TwitterLoginService,
     GoogleMapsService,
 		LanguageService,
 		WordpressService,
