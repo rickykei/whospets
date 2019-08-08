@@ -38,7 +38,7 @@ export class MyApp {
 
   constructor(
     platform: Platform,
-    public menu: MenuController,
+   // public menu: MenuController,
     public app: App,
     public splashScreen: SplashScreen,
     public statusBar: StatusBar,
@@ -106,6 +106,7 @@ export class MyApp {
 
     });
 
+    /*
     this.translate.onLangChange.subscribe((event: LangChangeEvent) =>
       {
         if(event.lang == 'ar')
@@ -140,9 +141,11 @@ export class MyApp {
         });
       });
 
+      */
+
   }
 
-
+/*
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
@@ -156,4 +159,6 @@ export class MyApp {
     // rootNav is now deprecated (since beta 11) (https://forum.ionicframework.com/t/cant-access-rootnav-after-upgrade-to-beta-11/59889)
     this.app.getRootNav().push(page.component);
   }
+
+  */
 }
