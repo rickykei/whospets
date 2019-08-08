@@ -61,23 +61,23 @@
 
       <div *ngSwitchCase="'gridpost'" class="grid-view">
           <ion-row wrap class="grid-row">
+            <ion-col width-33 class="grid-item" >
+                <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addAllPost()"></preload-image>
+            </ion-col>
             <ion-col width-33 class="grid-item" *ngFor="let post of petModel.data">
                 <preload-image [ratio]="{w:1, h:1}" src="{{post.image}}"  title="title"  (click)="goPostDetail(post)"></preload-image>
-            </ion-col>
-            <ion-col width-33 class="grid-item" >
-              <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addAllPost()"></preload-image>
-            </ion-col>
-          </ion-row>
-    
+            </ion-col>         
+          </ion-row>    
         </div>
+        
 		  <div *ngSwitchCase="'grid'" class="grid-view">
       <ion-row wrap class="grid-row">
-        <ion-col width-33 class="grid-item" *ngFor="let pet of pet.data">
-            <preload-image [ratio]="{w:1, h:1}" src="{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
-        </ion-col>
         <ion-col width-33 class="grid-item" >
             <preload-image [ratio]="{w:1, h:1}" src="./assets/images/profile/add.jpg" (click)="addPet()"></preload-image>
         </ion-col>
+        <ion-col width-33 class="grid-item" *ngFor="let pet of pet.data">
+            <preload-image [ratio]="{w:1, h:1}" src="{{pet.image}}"  title="title"  (click)="goPetDetail(pet)"></preload-image>
+        </ion-col>      
       </ion-row>
 
     </div>
