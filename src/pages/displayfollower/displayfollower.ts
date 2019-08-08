@@ -8,6 +8,7 @@ import { PostInfoPage } from '../post-info/post-info';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { CommentPage } from '../comment/comment';
 import { PetinfoPage } from '../petinfo/petinfo';
+import { CommentpetPage } from '../commentpet/commentpet';
 
 /**
  * Generated class for the DisplayfollowerPage page.
@@ -208,8 +209,15 @@ export class DisplayfollowerPage {
 
   commentPost(post)
   {
-    this.getAppTable(post);
-    this.navCtrl.push( CommentPage, {content_id:post.id, table_name:this.table_name})
+    this.getAppTable(post);  
+    if(post.app_table=='shop_product')
+    {
+      this.navCtrl.push( CommentpetPage, {product_id:post.id});
+    }
+    else
+    {
+      this.navCtrl.push( CommentPage, {content_id:post.id, table_name:this.table_name});
+    }
   }
   
   showLoader(){
