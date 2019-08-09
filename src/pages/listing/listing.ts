@@ -55,7 +55,7 @@ export class ListingPage {
         this.listing.banner_image = data.banner_image;
         this.listing.banner_title = data.banner_title;
         this.listing.populars = data.populars;
-        this.listing.categories = data.categories;
+        this.listing.categories = data.categories;      
 
       });
 
@@ -113,7 +113,15 @@ export class ListingPage {
 
   click18dist(popular: ListingItemModel)
   {
-    this.nav.push( Dist18Page, {popular: popular});
+    if(this.isChi)
+    {
+      this.nav.push( Dist18Page, {popular: popular, title:popular.title_zh});
+    }
+    else
+    {
+      this.nav.push( Dist18Page, {popular: popular, title:popular.title});
+    }
+
   }
 
   goSearch()

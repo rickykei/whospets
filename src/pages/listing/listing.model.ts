@@ -7,6 +7,7 @@ export class ListingModel {
 
 export class ListingItemModel {
   title: string;
+  title_zh: string;
   image: string;
   catid: string;
   group_ids: string[];
