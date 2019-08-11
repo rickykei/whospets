@@ -4,18 +4,21 @@
     "populars": [
         {
             "title": "Central and Western",
+            "title_zh": "中西區",
             "image": "./assets/images/listing/area001.png",
             "image_en": "./assets/images/listing/area001en.png",
             "group_ids":["322", "332", "331", "334", "339"]
         },
         {
             "title": "Eastern",
+            "title_zh": "東區",
             "image": "./assets/images/listing/area002.png",
             "image_en": "./assets/images/listing/area002en.png",
             "group_ids":["323", "329", "330", "336", "337"]
         },
         {
             "title": "Southern",
+            "title_zh": "南區",
             "image": "./assets/images/listing/area003.png",             
             "image_en": "./assets/images/listing/area003en.png",
             "group_ids":["324", "325", "335", "338"]
@@ -23,6 +26,7 @@
         },
         {
             "title": "Wan Chai",
+            "title_zh": "灣仔區",
             "image": "./assets/images/listing/area004.png",
             "image_en": "./assets/images/listing/area004en.png",
             "group_ids":["327", "328", "333"]
@@ -30,6 +34,7 @@
         },
         {
             "title": "Sham Shui Po",
+            "title_zh": "深水埗區",
             "image": "./assets/images/listing/area005.png",
             "image_en": "./assets/images/listing/area005en.png",
             "group_ids":["351", "352", "353", "355", "356", "358"]
@@ -37,6 +42,7 @@
         },
         {
             "title": "Kowloon City",
+            "title_zh": "九龍城區",
             "image": "./assets/images/listing/area006.png",
             "image_en": "./assets/images/listing/area006en.png",
             "group_ids":["350", "359", "360", "363", "364"]
@@ -44,6 +50,7 @@
         },
         {
             "title": "Kwun Tong",
+            "title_zh": "觀塘區",
             "image": "./assets/images/listing/area007.png",
             "image_en": "./assets/images/listing/area007en.png",
             "group_ids":["346", "354", "357", "358", "365"]
@@ -51,6 +58,7 @@
         },
         {
             "title": "Wong Tai Sin",
+            "title_zh": "黃大仙區",
             "image": "./assets/images/listing/area008.png",
             "image_en": "./assets/images/listing/area008en.png",
             "group_ids":["344", "345", "348", "362", "367", "369"]
@@ -58,6 +66,7 @@
         },
         {
             "title": "Yau Tsim Mong",
+            "title_zh": "油尖旺區",
             "image": "./assets/images/listing/area009.png",
             "image_en": "./assets/images/listing/area009en.png",
             "group_ids":["343", "347", "349", "361", "366"]
@@ -65,6 +74,7 @@
         },
         {
             "title": "Islands",
+            "title_zh": "離島區",
             "image": "./assets/images/listing/area010.png",
             "image_en": "./assets/images/listing/area010en.png",
             "group_ids":["318", "319", "320", "321", "341", "342"]
@@ -72,6 +82,7 @@
         },
         {
             "title": "Kwai Tsing",
+            "title_zh": "葵青區",
             "image": "./assets/images/listing/area011.png",
             "image_en": "./assets/images/listing/area011en.png",
             "group_ids":["309", "311", "312"]
@@ -79,6 +90,7 @@
         },
         {
             "title": "North",
+            "title_zh": "北區",
             "image": "./assets/images/listing/area012.png",
             "image_en": "./assets/images/listing/area012en.png",
             "group_ids":["306", "315"]
@@ -86,6 +98,7 @@
         },
         {
             "title": "Sai Kung",
+            "title_zh": "西貢區",
             "image": "./assets/images/listing/area013.png",
             "image_en": "./assets/images/listing/area013en.png",
             "group_ids":["302", "313"]
@@ -93,6 +106,7 @@
         },
         {
             "title": "Shatin",
+            "title_zh": "沙田區",
             "image": "./assets/images/listing/area014.png",
             "image_en": "./assets/images/listing/area014en.png",
             "group_ids":["307", "310","314", "316"]
@@ -100,6 +114,7 @@
         },
         {
             "title": "Tai Po",
+            "title_zh": "大埔區",
             "image": "./assets/images/listing/area015.png",
             "image_en": "./assets/images/listing/area015en.png",
             "group_ids":["305", "317"]
@@ -107,6 +122,7 @@
         },
         {
             "title": "Tsuen Wan",
+            "title_zh": "荃灣區",
             "image": "./assets/images/listing/area016.png",
             "image_en": "./assets/images/listing/area016en.png",
             "group_ids":["308", "340"]
@@ -114,6 +130,7 @@
         },
         {
             "title": "Tuen Mun",
+            "title_zh": "屯門區",
             "image": "./assets/images/listing/area017.png",
             "image_en": "./assets/images/listing/area017en.png",
             "group_ids":["303"]
@@ -121,6 +138,7 @@
         },
         {
             "title": "Yuen Long",
+            "title_zh": "元朗區",
             "image": "./assets/images/listing/area018.png",
             "image_en": "./assets/images/listing/area018en.png",
             "group_ids":["301", "304"]

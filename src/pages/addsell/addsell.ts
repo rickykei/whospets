@@ -65,7 +65,7 @@ export class AddsellPage {
         description: new FormControl('',Validators.required),  
         price:new FormControl('',Validators.required),
         countryId: new FormControl('',Validators.required),
-        subCountryId: new FormControl('',Validators.required),
+        subCountryId: new FormControl(''),
         color:new FormControl('',Validators.required),
         weight: new FormControl(0,Validators.required),
         size: new FormControl(0,Validators.required)
