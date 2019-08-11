@@ -20,7 +20,7 @@
     <preference name="orientation" value="portrait" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="19" />
-    <preference name="android-targetSdkVersion" value="26" />
+    <preference name="android-targetSdkVersion" value="28" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="BackupWebStorage" value="none" />
@@ -143,4 +143,5 @@
     <plugin name="cordova-plugin-firebase" spec="~2.0.5" />
     <hook src="copy_build_extra.js" type="before_build" />
     <engine name="ios" spec="4.5.5" />
+    <engine name="android" spec="8.0.0" />
 </widget>
