@@ -16,8 +16,8 @@ export const environment = {
       storageBucket: "whospets-65e90.appspot.com",
       messagingSenderId: "599906333523"  
   },
- // google_web_client_id: "1092390853283-i98feg7fb1dlsm92kkcbim62855pepi8.apps.googleusercontent.com",
+  google_web_client_id: "1092390853283-i98feg7fb1dlsm92kkcbim62855pepi8.apps.googleusercontent.com",
   facebook_app_id: 1205825196113953,
-//  wordpress_url: 'https://wordpress.startapplabs.com/blog/',
-//  wordpress_rest_api_url: 'https://wordpress.startapplabs.com/blog/wp-json/wp/v2/'
+  wordpress_url: 'https://wordpress.startapplabs.com/blog/',
+  wordpress_rest_api_url: 'https://wordpress.startapplabs.com/blog/wp-json/wp/v2/'
 };
