@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>petinfo</ion-title>
+    <ion-title>{{title}}</ion-title>
     <ion-buttons end> 
         <button *ngIf="showDelbtn" ion-button (click)="editPost(pet)"> 
             <ion-icon name="custom-edit"></ion-icon>
@@ -149,9 +149,8 @@
           </ion-card-content>
           
    </ion-card>
-</div>
 
-<button ion-button block class="form-action-button" type="submit" (click)="commentPost(pet)">{{'COMMENTS' | translate}}</button>
- 
+   <button ion-button block class="form-action-button" type="submit" (click)="commentPost(pet)">{{'COMMENTS' | translate}}</button>
+  </div>
 </ion-content>
 

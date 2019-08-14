@@ -19,7 +19,7 @@
       </ion-avatar>
     -->
     <ion-item class="comment-item" *ngFor="let comment of comment">
-      <h2 class="item-title">{{comment.firstname}}</h2>
+      <h2 class="item-title">{{comment.firstname}} {{comment.lastname}}</h2>
       <p class="item-description">{{comment.comment}}</p>
       <ion-note class="item-time" item-right>{{comment.created_date}}</ion-note>
     </ion-item>

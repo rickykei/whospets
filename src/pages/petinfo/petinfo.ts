@@ -51,6 +51,7 @@ export class PetinfoPage {
   isPetLost:boolean = false;
   language :string;
   isChi : boolean = false;
+  title:string;
 
   constructor(
     public navCtrl: NavController, 
@@ -68,7 +69,9 @@ export class PetinfoPage {
     this.pet = navParams.get('pet');
     this.likevalue = 0;
     this.dislikevalue = 0; 
-
+    this.translate.get("petinfo").subscribe((result: string) => {
+      this.title = result;
+    });
  
     events.subscribe('user:back', (commentcount) =>
     {    
