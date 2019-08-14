@@ -6,7 +6,9 @@ page-post-info {
 		.user-details
 		{
 			@include basic-card-styles($white-d);
-
+			margin-left: 20px;
+			margin-right: 20px;
+			
 			.item-title
 			{
 				margin: 0px;
