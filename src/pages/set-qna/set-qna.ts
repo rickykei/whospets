@@ -197,7 +197,7 @@ export class SetQnaPage {
         this.postResponse = res; 
       
       console.log("VALUE RECEIVED: "+res);
-      this.dismissLoading();
+      this.loading.dismiss();//显示多久消失
 
       if(this.postResponse.success==='true')
       {
@@ -210,11 +210,11 @@ export class SetQnaPage {
       }
 
     }, (err) => {
-      this.dismissLoading();
+      this.loading.dismiss();//显示多久消失
       alert("Fail to add, please try it later.")
     }, () =>
     {
-      this.dismissLoading();
+      this.loading.dismiss();//显示多久消失
     });
 
   }

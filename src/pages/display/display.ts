@@ -94,7 +94,7 @@ export class DisplayPage {
       .then(response => {
         //this.petModel = response; 
         this.details = response.data;  
-        this.dismissLoading();
+        this.loading.dismiss();//显示多久消失
       });
       
     }
@@ -104,7 +104,7 @@ export class DisplayPage {
         .then(response => {
           //this.petModel = response; 
           this.details = response.data;  
-          this.dismissLoading();
+          this.loading.dismiss();//显示多久消失
         });
          
       }

@@ -106,7 +106,7 @@ export class QnaPage {
 			// console.log('postdata looop'+i); 
 			// this.details.push(response.data[i]);
       // };   
-      this.dismissLoading();
+      this.loading.dismiss();//显示多久消失
     });
     }
     else
@@ -118,7 +118,7 @@ export class QnaPage {
       // this.details.push(response.data[i]);     
       // };   
       this.details = response.data;
-      this.dismissLoading();
+      this.loading.dismiss();//显示多久消失
     });
       }
   }

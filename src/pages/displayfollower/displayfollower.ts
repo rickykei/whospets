@@ -85,7 +85,7 @@ export class DisplayfollowerPage {
       this.PagesDisplayServiceProvider.getFollower(this.user_id,100,0)
       .then(response => {
         this.details = response.data;
-        this.dismissLoading();
+        this.loading.dismiss();//显示多久消失
       });
       
     

@@ -96,7 +96,7 @@ export class FeedPage {
   .getPosts(this.feed.category.catid,this.user_id,100,0)
   .then(response => {
   this.details = response.data.pets;
-  this.dismissLoading();
+  this.loading.dismiss();//显示多久消失
 
   });
   
