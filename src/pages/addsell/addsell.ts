@@ -157,6 +157,10 @@ export class AddsellPage {
       for (var i = 0; i < results.length; i++) {
         this.imgPreview = 'data:image/jpeg;base64,' + results[i];
         this.regData.avatar = this.imgPreview;
+
+        // console.log('Image : ' + this.imgPreview);
+        // console.log('this.regData.avatar : ' + this.regData.avatar);
+
           // this.imgPreview = results[i];
           // this.base64.encodeFile(results[i]).then((base64File: string) => {
           //   this.regData.avatar = base64File;
@@ -283,10 +287,14 @@ export class AddsellPage {
 
     checkField()
     {
+
       if(!this.regData.avatar && !this.isEdit)
       {
         alert('Missing image.');
         return false;
+      }
+      else{
+        console.log('have image');        
       }
      
       return true;
