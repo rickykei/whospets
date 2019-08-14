@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.whospets.aos" version="1.4.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.whospets.aos" version="1.4.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>whospets</name>
     <description>whospets</description>
     <author email="hi@ionicthemes.com" href="https://ionicthemes.com/">Ionic Themes</author>
@@ -145,7 +145,7 @@
     <engine name="ios" spec="4.5.5" />
     <engine name="android" spec="8.0.0" />
     <platform name="android">
-        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:usesCleartextTraffic="true" />
         </edit-config>
     </platform>
