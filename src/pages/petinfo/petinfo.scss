@@ -6,6 +6,9 @@ page-petinfo {
 		.user-details
 		{
 			@include basic-card-styles($white-d);
+			// add margin for smaller comment button
+			margin-left: 20px;
+			margin-right: 20px;
 
 			.item-title
 			{
