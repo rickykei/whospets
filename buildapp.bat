@@ -10,7 +10,8 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore com.whospets.ao
 globetrf
 -- joanne:
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore C:\Users\joanne.wong\Desktop\Joanne-Github\whospets\com.whospets.aos.keystore C:\Users\joanne.wong\Desktop\Joanne-Github\whospets\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk com.whospets.aos
-
+-- joanne macbook:
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore com.whospets.aos.keystore platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk com.whospets.aos
 
 cd D:\GitHub\whospets\platforms\android\build\outputs\apk
 zipalign -v 4 android-release-unsigned.apk whospets.apk
