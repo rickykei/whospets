@@ -89,7 +89,7 @@ export class QnaPage {
 
    setQna()
    {
-     this.navCtrl.push(SetQnaPage, {user_id:this.user_id} );
+     this.navCtrl.push(SetQnaPage);
    //  this.details = new Array<PetDetailsModel>();
    }
 

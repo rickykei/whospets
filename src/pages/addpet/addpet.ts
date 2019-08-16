@@ -101,7 +101,8 @@ export class AddpetPage {
       });
 
       this.post = this.navParams.get('post');
-      this.addpettitle = 'ADD_A_PET'
+      this.addpettitle = 'ADD_A_PET';
+      
       if(this.post)
       {
         this.isEdit = true;

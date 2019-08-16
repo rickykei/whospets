@@ -65,7 +65,7 @@ export class AddpostPage {
       console.log('this.isTab ' + this.isTab);
 
       this.post = this.navParams.get('post');
-      this.addposttitle = 'ADD_A_POST'
+      this.addposttitle = 'ADD_A_POST';
 
       if(this.post)
       {

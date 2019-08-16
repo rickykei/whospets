@@ -59,7 +59,7 @@ export class SetQnaPage {
       });
 
       this.post = this.navParams.get('post');
-      this.addposttitle = 'ADD_A_QNA'
+      this.addposttitle = 'ADD_A_QNA';
 
       if(this.post)
       {
