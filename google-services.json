@@ -1,50 +1,43 @@
 {
   "project_info": {
-    "project_number": "599906333523",
-    "firebase_url": "https://whospets-65e90.firebaseio.com",
-    "project_id": "whospets-65e90",
-    "storage_bucket": "whospets-65e90.appspot.com"
+    "project_number": "838679390214",
+    "firebase_url": "https://nfstouchwhospets.firebaseio.com",
+    "project_id": "nfstouchwhospets",
+    "storage_bucket": "nfstouchwhospets.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:599906333523:android:49c42939abe1dd81",
+        "mobilesdk_app_id": "1:838679390214:android:42bbdd984c4b7bbb",
         "android_client_info": {
-          "package_name": "com.whospets.aos"
+          "package_name": "com.nfctouch.whospets.aos"
         }
       },
       "oauth_client": [
         {
-          "client_id": "599906333523-r1a0n6e0fsbdshi9v1t0gtbnt4k7d727.apps.googleusercontent.com",
+          "client_id": "838679390214-h9chq62c70ca56spbfcf4ub45bbe7888.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.whospets.aos",
+            "package_name": "com.nfctouch.whospets.aos",
             "certificate_hash": "4066f0ddc6d1af4ea499d5ca04a07c1e2d55829f"
           }
         },
         {
-          "client_id": "599906333523-vqa066sutsjged7a3s992bmhc5itojl7.apps.googleusercontent.com",
+          "client_id": "838679390214-79igv4o3eci8m8rd2mgq0fviqhmlm137.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCISOetzGpavjTZ5NzB8_6wtXt9bG9qtnQ"
+          "current_key": "AIzaSyDC9xsJLUMCXQ5m3D0DY9lPwni_gYOOVHY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "599906333523-vqa066sutsjged7a3s992bmhc5itojl7.apps.googleusercontent.com",
+              "client_id": "838679390214-79igv4o3eci8m8rd2mgq0fviqhmlm137.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "599906333523-dufnmb5mgvim747mmddlmg0k572u0alm.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.whospets.ios"
-              }
             }
           ]
         }
