@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>838679390214-p10iir7339448t2nhj3mpi92b8ne9557.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.838679390214-p10iir7339448t2nhj3mpi92b8ne9557</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>838679390214-h9chq62c70ca56spbfcf4ub45bbe7888.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDuzFNZA5HvxQZfxAxl5Owj9ltqBjuOyGI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>838679390214</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.whospets.ios</string>
+	<key>PROJECT_ID</key>
+	<string>nfstouchwhospets</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nfstouchwhospets.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:838679390214:ios:130a28898ab6b502</string>
+	<key>DATABASE_URL</key>
+	<string>https://nfstouchwhospets.firebaseio.com</string>
+</dict>
+</plist>
