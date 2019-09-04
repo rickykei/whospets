@@ -15,7 +15,14 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore com.whospets.ao
 
 cd D:\GitHub\whospets\platforms\android\build\outputs\apk
 zipalign -v 4 android-release-unsigned.apk whospets.apk
---joanne
+--joanne:
 C:\sdk-tools-windows\build-tools\28.0.3\zipalign.exe -v 4 android-release-unsigned.apk whospets.apk
+-- joanne macbook:
+/Users/joannewong/Library/Android/sdk/build-tools/28.0.3/zipalign  -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk whospets.apk
+
 cd d:\GitHub\whospets
 pause
+
+mac os:
+find ~/Library/Android/sdk/build-tools -name "zipalign"
+/Users/joannewong/Library/Android/sdk/build-tools/28.0.3/zipalign
