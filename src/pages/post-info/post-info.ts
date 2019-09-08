@@ -139,7 +139,7 @@ export class PostInfoPage {
     if( this.post.app_table==='SELL' || this.tablename ==='app_sell')
     {
       //url = 'http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id+'&content_id='+this.post.id;
-      this.table_type ='sell';
+      this.table_type ='sells';
       this.tablename ='app_sell';
       this.translate.get("SELL_DETAIL").subscribe((result: string) => {
         this.title = result;
@@ -148,7 +148,7 @@ export class PostInfoPage {
     else if(this.post.app_table==='LIFESTYLE' || this.tablename === 'app_post') 
     {
      // url ='http://api.whospets.com/api/users/get_user_lifestyles.php?user_id='+user_id+'&content_id='+this.post.id;
-      this.table_type ='lifestyle';
+      this.table_type ='lifestyles';
       this.tablename = 'app_post';
       this.translate.get("LIFESTYLE_DETAIL").subscribe((result: string) => {
         this.title = result;
@@ -157,7 +157,7 @@ export class PostInfoPage {
     else if(this.post.app_table==='QNA' || this.tablename === 'app_qna')
     {
      // url='http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id+'&content_id='+this.post.id;
-      this.table_type ='qna';
+      this.table_type ='qnas';
       this.tablename = 'app_qna';
       this.translate.get("QNA_DETAIL").subscribe((result: string) => {
         this.title = result;
@@ -195,7 +195,7 @@ export class PostInfoPage {
   deletePost() {
     var url;
     if(this.table_type!='')
-      url = 'http://api.whospets.com/api/users/del_user_'+this.table_type+'s.php';
+      url = 'http://api.whospets.com/api/users/del_user_'+this.table_type+'.php';
     else
       console.log('error with table_type');
 

@@ -95,17 +95,17 @@ export class DisplayfollowerPage {
     {
       if( post.app_table==='SELL')
       {
-        this.table_type ='sell';
+        this.table_type ='sells';
         this.table_name ='app_sell';
       }
       else if(post.app_table==='LIFESTYLE') 
       {
-        this.table_type ='lifestyle';
+        this.table_type ='lifestyles';
         this.table_name = 'app_post';
       }
       else if(post.app_table==='QNA')
       {
-        this.table_type ='qna';
+        this.table_type ='qnas';
         this.table_name = 'app_qna';
       }
       else if(post.app_table=='shop_product')

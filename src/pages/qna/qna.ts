@@ -206,7 +206,7 @@ export class QnaPage {
   sharePost(post) {
     //this code is to use the social sharing plugin
     // message, subject, file, url
-    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/qna/'+post.id)
+    this.socialSharing.share(post.description, post.title, '', 'https://whospets.com/zh/shop/qnas/'+post.id)
     .then(() => {
       console.log('Success!');
     })
