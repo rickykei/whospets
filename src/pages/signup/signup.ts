@@ -60,7 +60,7 @@ export class SignupPage {
   doSignup()
   {
     let data = this.signup.value;
-    this.goSignup('normal',data.email,'',data.password,'','');
+    this.goSignup('normal',data.email,'',data.password,'','','');
   }
 
   // doFacebookSignup() {
@@ -89,7 +89,7 @@ export class SignupPage {
   //         });
   //   }
  
-  goSignup(_logintype:string, email:string, userId:string, password:string, firstname:string, lastname:string) {
+  goSignup(_logintype:string, email:string, userId:string, password:string, firstname:string, lastname:string, fb_uid:string) {
 
     this.loading = this.loadingCtrl.create();
 
@@ -100,7 +100,7 @@ export class SignupPage {
         headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
               
         let data=JSON.stringify({logintype:_logintype,username:email,uid:userId,password:password,
-          firstname:firstname,lastname:lastname});
+          firstname:firstname,lastname:lastname,fb_uid:fb_uid});
          
         this.http.post("http://api.whospets.com/api/users/signup.php",data, { headers: headers })
         .subscribe((res:ResponseModel) => { 
@@ -234,11 +234,13 @@ export class SignupPage {
     
       this.fbusermodel.email =data.email;
       this.fbusermodel.name = data.name;
+      this.fbusermodel.userId = data.userId;
       console.log('-------------------doSignup , data.email :' + data.email);
       console.log('-------------------doSignup , data.firstname :' + data.name);
       console.log('-------------------doSignup , data.lastname :' + '');
+      console.log('-------------------doSignup , data.userId :' + data.userId);
 
-      this.goSignup('fb',data.email,data.userId,data.password,data.name,'');
+      this.goSignup('fb',data.email,data.userId,data.password,data.name,'', data.userId);
       
     }, function(error){
       //we don't have the user data so we will ask him to log in
