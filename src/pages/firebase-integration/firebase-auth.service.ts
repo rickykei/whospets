@@ -172,7 +172,7 @@ export class FirebaseAuthService {
               userId: user.id,
               name: user.name,
               gender: user.gender,
-              image: "https://graph.facebook.com/" + user.id + "/picture?type=large"
+              image: "http://graph.facebook.com/" + user.id + "/picture?type=large"
             })
           });
         },(err) => {

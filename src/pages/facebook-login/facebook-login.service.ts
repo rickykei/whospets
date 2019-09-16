@@ -126,7 +126,7 @@ export class FacebookLoginService {
             gender: user.gender,
             first_name: user.first_name,
             last_name: user.last_name,
-            image: "https://graph.facebook.com/" + user.id + "/picture?type=large",
+            image: "http://graph.facebook.com/" + user.id + "/picture?type=large",
             friends: data.friends,
             photos: data.photos
           })
