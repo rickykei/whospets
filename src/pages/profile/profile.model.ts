@@ -21,7 +21,7 @@ export class UserModel {
   bio:string;
   country_id:number =0;
   sub_country_id:number=0;
-  fb_uid: string ='http://graph.facebook.com/100001704123828/picture';
+  fb_uid: string ='https://graph.facebook.com/100001704123828/picture';
   owndogs:number;
   owncats:number;
 }
@@ -74,7 +74,7 @@ export class LoginUserModel{
   bio:string;
   country_id:number =0;
   sub_country_id:number=0;
-  fb_uid: string ='http://graph.facebook.com/100001704123828/picture';
+  fb_uid: string ='https://graph.facebook.com/100001704123828/picture';
 
 }
 
