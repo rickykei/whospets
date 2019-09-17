@@ -180,8 +180,8 @@
   "ABOUT": "About you or Your Pet Association",
   "BIRTHDAY":"Birthday",
  
-  "ACTIVE": "Alive",
-  "INACTIVE": "RIP",
+  "ACTIVE": "Active",
+  "INACTIVE": "Inactive",
   "DATE_LOST" : "Lost Date",
   "petinfo": "Pet Profile" ,
   "SEARCH" :"Search",
