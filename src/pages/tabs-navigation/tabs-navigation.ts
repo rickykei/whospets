@@ -133,27 +133,29 @@ export class TabsNavigationPage {
 
      if(password=='')
      {
-      this.tabsNavigationService
-      .getFBData(email, uid, this.token)
-      .then(data2 => {
-        console.log(data2.success);
-        this.posts.success = data2.success;
-      if(this.posts.success=='true')
-      {
-        this.profile = data2.data;
-        this.setProfileUserId(data2.data.id+"", data2.data.language);
-        this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
-        this.setLanguage(this.language);
+        this.tabsNavigationService
+        .getFBData(email, uid, this.token)
+        .then(data2 => {
+          console.log(data2.success);
+          this.posts.success = data2.success;
+            if(this.posts.success=='true')
+            {
+              this.profile = data2.data;
+              this.setProfileUserId(data2.data.id+"", data2.data.language);
+              this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
+              this.setLanguage(this.language);
 
-      }
-      else
-      {
-        this.nav.setRoot(LoginPage);
-      }  
-      }, error =>
-      {
-        console.log(error);
-      });
+            }
+            else
+            {
+              alert("Login failed, please ensure you have sign up already.");
+              this.nav.setRoot(LoginPage);
+            }  
+        }, error =>
+        {
+          alert("Login failed");
+          console.log(error);
+        });
      }
     else
     {
@@ -172,10 +174,12 @@ export class TabsNavigationPage {
       }
       else
       {
+        alert("Login failed, wrong username/password.");
         this.nav.setRoot(LoginPage);
       }  
       }, error =>
       {
+        alert("Login failed");
         console.log(error);
       });
     }
