@@ -61,7 +61,7 @@ export class Dist18Page {
   getContent()
  {
 
-   this.profileService.getPopularData(this._popular.group_ids, this._popular.group_ids.length,100,0,this.user_id)
+   this.profileService.getPopularData(this._popular.group_ids, this._popular.group_ids.length,10,0,this.user_id)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);
 
@@ -95,7 +95,7 @@ export class Dist18Page {
     console.log('Begin async operation');
 
     setTimeout(() => {
-      this.profileService.getPopularData(this._popular.group_ids,this._popular.group_ids.length,100,this.details.length,this.user_id)
+      this.profileService.getPopularData(this._popular.group_ids,this._popular.group_ids.length,10,this.details.length,this.user_id)
 	  .then(posts => {
 		console.log('feed.ts.getpost');
 		console.log(posts.data.pets.length);
