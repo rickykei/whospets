@@ -46,14 +46,23 @@
           </ion-list>
         </ion-row>
 
-        <ion-row>
+        <ion-row *ngIf="isChi">
               <ion-item >                  
               <ion-label>{{'PET_BREED' | translate}}</ion-label>
               <ion-select [disabled]="!isEnableBreed"  formControlName="petbreed"> 
-              <ion-option  *ngFor="let breed of petbreed" [value]="breed.category_id">{{breed.title}}</ion-option> 
+              <ion-option  *ngFor="let breed of petbreed" [value]="breed.category_id">{{breed.title_zh}}</ion-option> 
               </ion-select>
             </ion-item>             
         </ion-row>
+
+        <ion-row *ngIf="!isChi">
+            <ion-item >                  
+            <ion-label>{{'PET_BREED' | translate}}</ion-label>
+            <ion-select [disabled]="!isEnableBreed"  formControlName="petbreed"> 
+            <ion-option  *ngFor="let breed of petbreed" [value]="breed.category_id">{{breed.title}}</ion-option> 
+            </ion-select>
+          </ion-item>             
+      </ion-row>
 
         <ion-row  class="user-preferences-row">
             <span class="radio-tags-label">{{'GENDER' | translate}}</span>
@@ -113,33 +122,69 @@
             </ion-col>
           </ion-row>
 
-         
-          <ion-row  class="multi-input-row">
+          <ion-row *ngIf="isChi" class="multi-input-row">
             <ion-col  >
 
             <ion-item>
               <ion-label>{{'PET_COLOR' | translate}}</ion-label>
-              <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color" >{{color.color}}</ion-option> </ion-select>
+              <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color" >{{color.color_zh}}</ion-option> </ion-select>
             </ion-item>
 
             </ion-col>
           </ion-row>
 
-          <ion-row  class="multi-input-row">
+          <ion-row *ngIf="!isChi" class="multi-input-row">
+              <ion-col  >
+  
+              <ion-item>
+                <ion-label>{{'PET_COLOR' | translate}}</ion-label>
+                <ion-select formControlName="color"> <ion-option  *ngFor="let color of petColor.pet_color" >{{color.color}}</ion-option> </ion-select>
+              </ion-item>
+  
+              </ion-col>
+            </ion-row>
+
+          <ion-row *ngIf="isChi" class="multi-input-row">
             <ion-col  >
 
             <ion-item>
               <ion-label>{{'PET_STATUS' | translate}}</ion-label>
               <ion-select formControlName="petstatus" (ionChange)="changePetStatus($event)"> 
-                <ion-option  *ngFor="let status of petStatus.pet_status" [value]="status.id"  >{{status.status}}</ion-option> 
+                <ion-option  *ngFor="let status of petStatus.pet_status" [value]="status.id"  >{{status.status_zh}}</ion-option> 
               </ion-select>
             </ion-item>
             <p> {{'REQUIRED' | translate}}</p>
 
             </ion-col>
           </ion-row>
+          <ion-row *ngIf="!isChi" class="multi-input-row">
+              <ion-col  >
+  
+              <ion-item>
+                <ion-label>{{'PET_STATUS' | translate}}</ion-label>
+                <ion-select formControlName="petstatus" (ionChange)="changePetStatus($event)"> 
+                  <ion-option  *ngFor="let status of petStatus.pet_status" [value]="status.id"  >{{status.status}}</ion-option> 
+                </ion-select>
+              </ion-item>
+              <p> {{'REQUIRED' | translate}}</p>
+  
+              </ion-col>
+            </ion-row>
 
-          <ion-row  class="multi-input-row">
+          <ion-row   *ngIf="isChi" class="multi-input-row">
+            <ion-col  >
+
+          <ion-item>
+            <ion-label>{{'COUNTRY' | translate}}</ion-label>
+            <ion-select formControlName="countryId" (ionChange)="onCountryChange($event)">
+              <ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title_zh}}</ion-option> 
+            </ion-select>
+          </ion-item>
+
+          </ion-col>
+        </ion-row>
+
+        <ion-row   *ngIf="!isChi" class="multi-input-row">
             <ion-col  >
 
           <ion-item>
@@ -150,9 +195,21 @@
           </ion-item>
 
           </ion-col>
-      </ion-row>
+        </ion-row>
 	  
-          <ion-row  class="multi-input-row">
+	  
+          <ion-row *ngIf="isChi" class="multi-input-row">
+              <ion-col  >
+                  <ion-item>
+                <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>
+                <ion-select [disabled]="!isEnable" formControlName="subCountryId"> 
+                  <ion-option *ngFor="let zone of zone" [value]="zone.country_id">{{zone.title_zh}}</ion-option> </ion-select>
+              </ion-item>
+    
+          </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="!isChi" class="multi-input-row">
               <ion-col  >
                   <ion-item>
                 <ion-label>{{'SUBCOUNTRY' | translate}}</ion-label>

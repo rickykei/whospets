@@ -32,6 +32,8 @@ export class AddpetPage {
   petowner:string;
 
   isEdit : boolean = false;
+  isChi : boolean = false;
+  language :string;
 
   loading: any;
   postResponse:ResponseModel;
@@ -223,9 +225,19 @@ export class AddpetPage {
     this.nativeStorage.getItem('profile_user_id')
    .then(data => {
        this.user_id = data.profile_user_id;
-      this.petowner = data.profile_user_name;
+       this.petowner = data.profile_user_name;
         console.log(data.profile_user_id);
         console.log(data.profile_user_name);
+        this.language = data.profile_language;
+     //   console.log('data.profile_language : ' + data.profile_language);
+        if(data.profile_language==="zh")
+        {
+          this.isChi = true;
+        }
+        else
+        {
+          this.isChi = false;
+        }
      });
      
      console.log("add sell , user id: " + this.user_id);    
@@ -248,7 +260,7 @@ export class AddpetPage {
   {
     console.log(event);
     this.petbreed = new Array();
-    console.log('this.petdetail.pet.length: ' + this.petdetail.pet.length);
+ //   console.log('this.petdetail.pet.length: ' + this.petdetail.pet.length);
 
     for(var i = 0; i < this.petdetail.pet.length; i++)
     {

@@ -143,8 +143,8 @@ export class PetinfoPage {
   {
     for(var i = 0; i < this.color.pet_color.length; i++)
     {
-      console.log("this.pet.color : " + this.pet.color);
-      console.log("this.color.pet_color[i].color : " + this.color.pet_color[i].color);
+    //  console.log("this.pet.color : " + this.pet.color);
+   //   console.log("this.color.pet_color[i].color : " + this.color.pet_color[i].color);
 
         if(this.color.pet_color[i].color === this.pet.color)
         {

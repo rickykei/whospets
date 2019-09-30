@@ -1,9 +1,9 @@
 {
     "pet_status": [
-        {"status":"Pet Lost","id":"1"},
-        {"status":"At Home","id":"0"}, 
-        {"status":"Pet Found","id":"2"}, 
-        {"status":"Pet for adoption","id":"3"}, 
-        {"status":"Pet boarding required","id":"4"}
+        {"status":"Pet Lost","status_zh":"走失了","id":"1"},
+        {"status":"At Home","status_zh":"在家中","id":"0"}, 
+        {"status":"Pet Found","status_zh":"已回家","id":"2"}, 
+        {"status":"Pet for adoption","status_zh":"求領養","id":"3"}, 
+        {"status":"Pet boarding required","status_zh":"等暫託","id":"4"}
     ]
 }
