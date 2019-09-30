@@ -117,7 +117,8 @@ export class SignupPage {
         }
         else
         {
-          alert("Fail to sign up.")
+          alert(this.postResponse.data.message);
+         // alert("Fail to sign up.")
           this.loading.dismiss();
         }
 

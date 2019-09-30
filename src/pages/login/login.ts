@@ -99,7 +99,8 @@ export class LoginPage {
       else{
         this.removeEmailUser();
          //this.nav.setRoot(SignupPage);
-         alert("Email/Password Fail!");
+         //alert("Email/Password Fail!");
+         alert(data2.data.message);
       }
     });
   

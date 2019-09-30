@@ -44,6 +44,7 @@ export class FollowerModel {
 
 export class ResponseModel {
   success : string;
+  data: LoginUserModel = new LoginUserModel();
 }
 
 export class LoginModel {

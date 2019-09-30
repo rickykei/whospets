@@ -148,7 +148,8 @@ export class TabsNavigationPage {
             }
             else
             {
-              alert("Login failed, please ensure you have sign up already.");
+              //alert("Login failed, please ensure you have sign up already.");
+              alert(data2.data.message);
               this.nav.setRoot(LoginPage);
             }  
         }, error =>
@@ -174,7 +175,8 @@ export class TabsNavigationPage {
       }
       else
       {
-        alert("Login failed, wrong username/password.");
+        //alert("Login failed, wrong username/password.");
+        alert(data2.data.message);
         this.nav.setRoot(LoginPage);
       }  
       }, error =>
