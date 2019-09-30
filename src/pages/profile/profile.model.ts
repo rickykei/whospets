@@ -129,6 +129,7 @@ export class PetDetailsModel{
         specifications:string;
         style_code:string;
         color:string;
+        color_zh:string;
         condition:string;
         size:string;
         quantity:number;

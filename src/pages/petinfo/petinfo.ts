@@ -11,7 +11,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ProfileService } from '../profile/profile.service';
 import { AddpetPage } from '../addpet/addpet';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { PetBreedModel } from '../add-page/addlayout.model';
+import { PetBreedModel, PetColorModel } from '../add-page/addlayout.model';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 
@@ -21,7 +21,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+ 
 @Component({
   selector: 'page-petinfo',
   templateUrl: 'petinfo.html',
@@ -31,6 +31,7 @@ export class PetinfoPage {
   pet: PetDetailsModel = new PetDetailsModel();
   petmodel: PetModel = new PetModel();
   petbreedmodel: PetBreedModel = new PetBreedModel();
+  color: PetColorModel = new PetColorModel();
 
  uid:string;
  user_id:string;
@@ -100,8 +101,10 @@ export class PetinfoPage {
             .then(zone => {
               this.subcountry = zone;
               this.checkSubCountryZone();
-            });
-           });
+            });        
+
+          
+          });
     });
   }
 
@@ -132,6 +135,21 @@ export class PetinfoPage {
           this.pet.petbreed = this.petbreedmodel.pet[i].title;
           this.pet.petbreed_zh = this.petbreedmodel.pet[i].title_zh;
           this.pet.pet_type = this.petbreedmodel.pet[i].parent_id;  
+        }
+    }
+  }
+
+  getPetColor()
+  {
+    for(var i = 0; i < this.color.pet_color.length; i++)
+    {
+      console.log("this.pet.color : " + this.pet.color);
+      console.log("this.color.pet_color[i].color : " + this.color.pet_color[i].color);
+
+        if(this.color.pet_color[i].color === this.pet.color)
+        {
+          this.pet.color = this.color.pet_color[i].color;
+          this.pet.color_zh = this.color.pet_color[i].color_zh;
         }
     }
   }
@@ -176,6 +194,12 @@ export class PetinfoPage {
                 this.getPetType();
               });
 
+              this.profileService.getColorCode()
+              .then(colorCode => {
+                this.color = colorCode;
+                this.getPetColor();
+              });
+
              this.profileService.getCountryCode()
             .then(zone => {
               this.country = zone;
@@ -204,24 +228,40 @@ export class PetinfoPage {
   {
     if(this.pet.pet_status==1)
     {
-      this.pet.pet_Status_string = 'Pet Lost';
+      if(this.isChi)
+        this.pet.pet_Status_string = '走失了';
+      else
+        this.pet.pet_Status_string = 'Pet Lost';
+
       this.isPetLost = true;
     }
     else if(this.pet.pet_status==0)
     {
-      this.pet.pet_Status_string = 'At Home';
+      if(this.isChi)
+        this.pet.pet_Status_string = '在家中';
+      else
+        this.pet.pet_Status_string = 'At Home';
     }
     else if(this.pet.pet_status==2)
     {
-      this.pet.pet_Status_string = 'Pet found';
+      if(this.isChi)
+        this.pet.pet_Status_string = '已回家';
+      else
+        this.pet.pet_Status_string = 'Pet found';
     }
     else if(this.pet.pet_status==3)
     {
-      this.pet.pet_Status_string = 'Pet adoption';
+      if(this.isChi)
+        this.pet.pet_Status_string = '求領養';
+      else
+        this.pet.pet_Status_string = 'Pet adoption';
     }
     else if(this.pet.pet_status==4)
     {
-      this.pet.pet_Status_string = 'Pet boarding required';
+      if(this.isChi)
+        this.pet.pet_Status_string = '等暫託';
+      else
+        this.pet.pet_Status_string = 'Pet boarding required';
     }
 
   }
@@ -327,12 +367,11 @@ export class PetinfoPage {
     }
   }
 
+
   getAge()
   {
     var borndate:any;
     borndate = this.pet.date_born;
-
-    
 
       var timeDiff = Math.abs(Date.now() - borndate);
       this.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);

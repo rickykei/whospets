@@ -7,6 +7,7 @@ import { ProfileModel, CountryIdModel, PetModel, LoginModel, SearchUserModel } f
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import { FeedModel } from "../feed/feed.model";
+import { PetColorModel } from "../add-page/addlayout.model";
 
 
 @Injectable()
@@ -36,6 +37,14 @@ export class ProfileService {
      .toPromise()
      .then(response => response.json() as LoginModel)
      .catch(this.handleError);
+  }
+
+  getColorCode():Promise<PetColorModel>
+  {
+    return this.http.get('./assets/example_data/petcolor.json')
+    .toPromise()
+    .then(response => response.json() as PetColorModel)
+    .catch(this.handleError);
   }
 
   getSubCountryCode():Promise<CountryIdModel>

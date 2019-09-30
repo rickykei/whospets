@@ -105,9 +105,14 @@
               <b> {{'PET_BREED' | translate}}</b> :  {{pet.petbreed_zh}}
             </p>
 
-            <p class="item-text">
-                <b> {{'PET_COLOR' | translate}}</b> :  {{pet.color}}
+            <p class="item-text" *ngIf="!isChi">
+            <b> {{'PET_COLOR' | translate}}</b> :  {{pet.color}}
             </p>
+
+            <p class="item-text" *ngIf="isChi">
+                <b> {{'PET_COLOR' | translate}}</b> :  {{pet.color_zh}}
+            </p>
+            
             <p class="item-text">
                 <b> {{'SIZE' | translate}}</b> :  {{pet.size}}
             </p>
