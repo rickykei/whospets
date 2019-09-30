@@ -56,6 +56,10 @@ export class SettingsPage {
   isEnable:boolean = false;
   postResponse:ResponseModel;
 
+  isFBuser : boolean = false;
+  nullUser : string = 'https://graph.facebook.com//picture';
+
+
   constructor(
     public nav: NavController,
     public modal: ModalController,
@@ -183,7 +187,16 @@ export class SettingsPage {
         birthday : this.profile.data.birthday 
       });
 
-      this.imgPreview = this.profile.data.fb_uid;
+      if(data2.data.fb_uid.includes(this.nullUser))
+      {
+        this.isFBuser = false;
+      }
+      else
+      {
+        this.isFBuser = true;
+        this.imgPreview = this.profile.data.fb_uid;
+      }
+
 
       this.settingsForm.get('language').valueChanges.subscribe((lang) => {
         this.setLanguage(lang);

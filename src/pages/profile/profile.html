@@ -7,9 +7,12 @@
 <ion-content class="profile-content">
   <div class="user-details">
     <ion-row class="user-main-data-row">
-      <ion-col no-padding width-25>
-        <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.data.fb_uid" alt="profile.data.firstname" title="profile.data.firstname"></preload-image>
-      </ion-col>
+          <ion-col *ngIf="isFBuser" no-padding width-25>
+            <preload-image class="user-image" [ratio]="{w:1, h:1}" [(src)]="profile.data.fb_uid" alt="profile.data.firstname" title="profile.data.firstname"></preload-image>
+          </ion-col>
+          <ion-col *ngIf="!isFBuser" no-padding width-25>
+            <preload-image class="user-image" [ratio]="{w:1, h:1}" src="./assets/images/profile/default.jpg" alt="profile.data.firstname" title="profile.data.firstname"></preload-image>
+          </ion-col>
       <ion-col no-padding>
            <ion-row class="social-presence-row">
           <ion-col width-50 class="social-presence-item">

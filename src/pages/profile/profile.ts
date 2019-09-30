@@ -30,6 +30,8 @@ export class ProfilePage {
   profile_user_id: string;
   petModel: PetModel = new PetModel();
   details: Array<PetDetailsModel>;
+  isFBuser: boolean = false;
+  nullUser : string = 'https://graph.facebook.com//picture';
 
   constructor(
     public menu: MenuController,
@@ -131,6 +133,16 @@ export class ProfilePage {
   
             this.setProfileUserId(data2.data.user_id +""
             , data2.data.firstname + " " + data2.data.lastname, data2.data.language);
+
+            console.log("data2.data.fb_uid : " + data2.data.fb_uid);
+            if(data2.data.fb_uid.includes(this.nullUser))
+            {
+              this.isFBuser = false;
+            }
+            else
+            {
+              this.isFBuser = true;
+            }
             
           }
           else{

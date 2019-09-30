@@ -13,9 +13,11 @@
   <div class="user-image-content">
     <ion-row no-padding class="user-image-row">
       <ion-col no-padding width-40>
-        
-        <ion-avatar item-end>
+        <ion-avatar *ngIf="isFBuser" item-end>
           <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="profile.data.fb_uid" alt="this is the image" title="IMAGE!"></preload-image>
+        </ion-avatar>      
+        <ion-avatar *ngIf="!isFBuser" item-end>
+          <preload-image class="user-image" [ratio]="{w:1, h:1}" src="./assets/images/profile/default.jpg" alt="this is the image" title="IMAGE!"></preload-image>
         </ion-avatar>
         
         <!-- <ion-avatar>
