@@ -48,6 +48,8 @@ export class AddsellPage {
   isEdit : boolean = false;
   product_id :string;
 
+  isChi : boolean = false;
+  language :string;
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -117,6 +119,16 @@ export class AddsellPage {
    .then(data => {
        this.user_id = data.profile_user_id;
         console.log(data.profile_user_id);
+
+        if(data.profile_language==="zh")
+        {
+          this.isChi = true;
+        }
+        else
+        {
+          this.isChi = false;
+        }
+        
      });
      
      console.log("add sell , user id: " + this.user_id);

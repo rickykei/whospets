@@ -192,6 +192,10 @@
   "LIFESTYLE_DETAIL" : "Lifestyle Detail",
   "SELL_DETAIL" : "Sell Detail",
   "QNA_DETAIL" : "Q&A Detail",
-  "PET": "Pet"
-  
+  "PET": "Pet",
+  "GENDER_M":"M",
+  "GENDER_F":"F",
+  "SIZE_S":"S",
+  "SIZE_M":"M",
+  "SIZE_L":"L"
 }

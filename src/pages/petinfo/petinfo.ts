@@ -91,6 +91,18 @@ export class PetinfoPage {
               this.pet = this.petmodel.data[0];
              this.checkPetStatus();
 
+             this.petdetailservice.getData()
+             .then(data2 => {
+               this.petbreedmodel = data2;
+               this.getPetType();
+             });
+
+             this.profileService.getColorCode()
+             .then(colorCode => {
+               this.color = colorCode;
+               this.getPetColor();
+             });
+
              this.profileService.getCountryCode()
             .then(zone => {
               this.country = zone;
@@ -103,6 +115,7 @@ export class PetinfoPage {
               this.checkSubCountryZone();
             });        
 
+            this.getPetSizeAndSex();
           
           });
     });
@@ -126,6 +139,35 @@ export class PetinfoPage {
       });
   }
 
+  getPetSizeAndSex()
+  {
+    if(this.isChi)
+    {
+      if(this.pet.size=='S')
+      {
+        this.pet.size='細';
+      }
+      else if(this.pet.size=='M')
+      {
+        this.pet.size='中';
+      }
+      else if(this.pet.size=='L')
+      {
+        this.pet.size='大';
+      }
+
+      if(this.pet.gender=='f')
+      {
+        this.pet.gender='女';
+      }
+      else if(this.pet.gender=='m')
+      {
+        this.pet.gender='男';
+      }
+    }
+
+  }
+
   getPetType()
   {
     for(var i = 0; i < this.petbreedmodel.pet.length; i++)
@@ -143,11 +185,15 @@ export class PetinfoPage {
   {
     for(var i = 0; i < this.color.pet_color.length; i++)
     {
-    //  console.log("this.pet.color : " + this.pet.color);
-   //   console.log("this.color.pet_color[i].color : " + this.color.pet_color[i].color);
-
         if(this.color.pet_color[i].color === this.pet.color)
         {
+          this.pet.color = this.color.pet_color[i].color;
+          this.pet.color_zh = this.color.pet_color[i].color_zh;
+        }
+
+        //isChi wording
+        if(this.color.pet_color[i].color_zh === this.pet.color)
+        {    
           this.pet.color = this.color.pet_color[i].color;
           this.pet.color_zh = this.color.pet_color[i].color_zh;
         }
@@ -211,6 +257,9 @@ export class PetinfoPage {
               this.subcountry = zone;
               this.checkSubCountryZone();
             });
+
+            this.getPetSizeAndSex();
+
            });
         });
     });

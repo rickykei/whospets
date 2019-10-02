@@ -194,7 +194,12 @@
   "LIFESTYLE_DETAIL" : "開心分享",
   "SELL_DETAIL" : "二手物品",
   "QNA_DETAIL" : "有問必答",
-  "PET": "寵物"
+  "PET": "寵物",
+  "GENDER_M":"男",
+  "GENDER_F":"女",
+  "SIZE_S":"細",
+  "SIZE_M":"中",
+  "SIZE_L":"大"
 
   
 }

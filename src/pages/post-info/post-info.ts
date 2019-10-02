@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AddsellPage } from '../addsell/addsell';
 import { AddpostPage } from '../addpost/addpost';
 import { SetQnaPage } from '../set-qna/set-qna';
+import { PetColorModel } from '../add-page/addlayout.model';
 
 /**
  * Generated class for the PostInfoPage page.
@@ -38,9 +39,13 @@ export class PostInfoPage {
 
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
+  color: PetColorModel = new PetColorModel();
 
   commentcnt: number;
   _temp:number;
+
+  language :string;
+  isChi : boolean = false;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -56,7 +61,6 @@ export class PostInfoPage {
     this.post = navParams.get('post'); 
     this.tablename  =  navParams.get('tablename');
 
-    
     this.likevalue = 0;
     this.dislikevalue = 0;
     this.commentcnt = 0;
@@ -83,6 +87,16 @@ export class PostInfoPage {
     .then(data => {
         this.user_id = data.profile_user_id;
          console.log('this.user_id : ' + data.profile_user_id);
+         console.log('data.profile_language : ' + data.profile_language);
+         if(data.profile_language==="zh")
+         {
+           this.isChi = true;
+         }
+         else
+         {
+           this.isChi = false;
+         }
+
          this.getContent(data.profile_user_id);
          this.checkDelButton(data.profile_user_id);
 
@@ -95,6 +109,14 @@ export class PostInfoPage {
          .then(zone => {
            this.subcountry = zone;
          });
+
+         this.profileService.getColorCode()
+         .then(colorCode => {
+           this.color = colorCode;
+           this.getPetColor();
+         });
+
+         this.getPostSize();
       });
   }
 
@@ -109,6 +131,11 @@ export class PostInfoPage {
           this.post.country_title_zh = this.country.zone[i].title_zh;
         }
     }
+
+    if(this.isChi)
+    {
+      this.post.country_title = this.post.country_title_zh;
+    }
   }
   checkSubCountryZone()
   {
@@ -119,6 +146,57 @@ export class PostInfoPage {
           this.post.subcountry_title = this.subcountry.zone[i].title;
           this.post.subcountry_title_zh = this.subcountry.zone[i].title_zh;
         }
+    }
+
+    if(this.isChi)
+    {
+      this.post.subcountry_title = this.post.subcountry_title_zh;
+    }
+  }
+
+  getPostSize()
+  {
+    if(this.isChi)
+    {
+      if(this.post.size=='S')
+      {
+        this.post.size='細';
+      }
+      else if(this.post.size=='M')
+      {
+        this.post.size='中';
+      }
+      else if(this.post.size=='L')
+      {
+        this.post.size='大';
+      }
+    }
+  }
+
+  getPetColor()
+  {
+    for(var i = 0; i < this.color.pet_color.length; i++)
+    {
+   //   console.log("this.pet.color : " + this.pet.color);
+   //   console.log("this.color.pet_color[i].color : " + this.color.pet_color[i].color);
+
+        if(this.color.pet_color[i].color === this.post.color)
+        {
+          this.post.color = this.color.pet_color[i].color;
+          this.post.color_zh = this.color.pet_color[i].color_zh;
+        }
+
+        //isChi wording
+        if(this.color.pet_color[i].color_zh === this.post.color)
+        {    
+          this.post.color = this.color.pet_color[i].color;
+          this.post.color_zh = this.color.pet_color[i].color_zh;
+        }
+    }
+    
+    if(this.isChi)
+    {
+      this.post.color = this.post.color_zh;
     }
   }
 

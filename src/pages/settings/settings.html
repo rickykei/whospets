@@ -110,12 +110,12 @@
           <ion-item>
             <ion-label>{{'GENDER' | translate}}</ion-label>
             <ion-select formControlName="gender">
-              <ion-option value="f">Female</ion-option>
-              <ion-option value="m">Male</ion-option>
+              <ion-option value="f">{{'GENDER_F' | translate}}</ion-option>
+              <ion-option value="m">{{'GENDER_M' | translate}}</ion-option>
             </ion-select>
           </ion-item>
 
-          <ion-row no-padding class="multi-input-row">
+          <ion-row *ngIf="!isChi" no-padding class="multi-input-row">
               <ion-col no-padding >
   
             <ion-item>
@@ -125,6 +125,19 @@
               </ion-select>
             </ion-item>
   
+            </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="isChi" no-padding class="multi-input-row">
+           <ion-col no-padding >
+
+            <ion-item>
+              <ion-label>{{'COUNTRY' | translate}}</ion-label>
+              <ion-select formControlName="countryId" (ionChange)="onCountryChange()">
+                <ion-option *ngFor="let zone of country.zone" [value]="zone.country_id">{{zone.title_zh}}</ion-option> 
+              </ion-select>
+            </ion-item>
+
             </ion-col>
         </ion-row>
       

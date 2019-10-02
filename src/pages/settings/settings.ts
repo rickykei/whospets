@@ -44,6 +44,7 @@ export class SettingsPage {
 
   profile: ProfileModel = new ProfileModel();
   languages: Array<LanguageModel>;
+  isChi : boolean = false;
 
   country: CountryIdModel = new CountryIdModel();
   subcountry: CountryIdModel = new CountryIdModel();
@@ -201,6 +202,14 @@ export class SettingsPage {
       this.settingsForm.get('language').valueChanges.subscribe((lang) => {
         this.setLanguage(lang);
         this.setProfileUserId(lang.code);
+        if(lang==="zh")
+        {
+          this.isChi = true;
+        }
+        else
+        {
+          this.isChi = false;
+        }
       });
     }
     else{
