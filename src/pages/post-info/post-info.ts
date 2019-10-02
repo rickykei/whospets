@@ -96,9 +96,9 @@ export class PostInfoPage {
          {
            this.isChi = false;
          }
-
          this.getContent(data.profile_user_id);
          this.checkDelButton(data.profile_user_id);
+         this.getPostSize();
 
          this.profileService.getCountryCode()
          .then(zone => {
@@ -116,7 +116,6 @@ export class PostInfoPage {
            this.getPetColor();
          });
 
-         this.getPostSize();
       });
   }
 
@@ -185,19 +184,12 @@ export class PostInfoPage {
           this.post.color = this.color.pet_color[i].color;
           this.post.color_zh = this.color.pet_color[i].color_zh;
         }
-
-        //isChi wording
-        if(this.color.pet_color[i].color_zh === this.post.color)
+        else if(this.color.pet_color[i].color_zh === this.post.color)
         {    
           this.post.color = this.color.pet_color[i].color;
           this.post.color_zh = this.color.pet_color[i].color_zh;
-        }
-    }
-    
-    if(this.isChi)
-    {
-      this.post.color = this.post.color_zh;
-    }
+        }       
+    }    
   }
 
   checkDelButton(user_id:string)

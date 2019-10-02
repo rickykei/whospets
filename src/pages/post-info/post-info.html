@@ -68,9 +68,17 @@
                 <p class="item-text">
                     {{'PRICE' | translate}} :  {{post.price}}
                 </p>
-                <p class="item-text">
+                <!-- <p class="item-text">
                     {{'COLOR' | translate}} :  {{post.color}}
+                </p> -->
+                <p class="item-text" *ngIf="!isChi">
+                  <b> {{'COLOR' | translate}}</b> :  {{pet.color}}
                 </p>
+    
+                <p class="item-text" *ngIf="isChi">
+                    <b> {{'COLOR' | translate}}</b> :  {{pet.color_zh}}
+                </p>
+                
                 <p class="item-text">
                     {{'WEIGHT' | translate}} :  {{post.weight}}
                 </p>
