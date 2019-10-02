@@ -96,9 +96,9 @@ export class PostInfoPage {
          {
            this.isChi = false;
          }
+
          this.getContent(data.profile_user_id);
          this.checkDelButton(data.profile_user_id);
-         this.getPostSize();
 
          this.profileService.getCountryCode()
          .then(zone => {
@@ -115,6 +115,8 @@ export class PostInfoPage {
            this.color = colorCode;
            this.getPetColor();
          });
+
+         this.getPostSize();
 
       });
   }
@@ -157,15 +159,15 @@ export class PostInfoPage {
   {
     if(this.isChi)
     {
-      if(this.post.size=='S')
+      if(this.post.size=='S'|| this.post.size=='s')
       {
         this.post.size='細';
       }
-      else if(this.post.size=='M')
+      else if(this.post.size=='M' || this.post.size=='m')
       {
         this.post.size='中';
       }
-      else if(this.post.size=='L')
+      else if(this.post.size=='L'|| this.post.size=='l')
       {
         this.post.size='大';
       }
@@ -174,6 +176,9 @@ export class PostInfoPage {
 
   getPetColor()
   {
+    //init color_zh
+    this.post.color_zh = this.post.color;     
+
     for(var i = 0; i < this.color.pet_color.length; i++)
     {
    //   console.log("this.pet.color : " + this.pet.color);
@@ -184,12 +189,18 @@ export class PostInfoPage {
           this.post.color = this.color.pet_color[i].color;
           this.post.color_zh = this.color.pet_color[i].color_zh;
         }
-        else if(this.color.pet_color[i].color_zh === this.post.color)
+
+        if(this.color.pet_color[i].color_zh === this.post.color)
         {    
           this.post.color = this.color.pet_color[i].color;
           this.post.color_zh = this.color.pet_color[i].color_zh;
         }       
-    }    
+    }   
+
+    if(this.isChi)
+    {
+      this.post.color =  this.post.color_zh;
+    }
   }
 
   checkDelButton(user_id:string)
@@ -247,6 +258,9 @@ export class PostInfoPage {
 
         this.checkCountryZone();
         this.checkSubCountryZone();
+
+        this.getPetColor();
+        this.getPostSize();
       }
     });
   }

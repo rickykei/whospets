@@ -81,7 +81,7 @@ export class SettingsPage {
 
     this.loading = this.loadingCtrl.create();
 
-    this.languages = this.languageService.getLanguages();
+    this.languages = this.languageService.getLanguages();    
 
     this.settingsForm = new FormGroup({
       username: new FormControl('', Validators.required),
@@ -161,6 +161,15 @@ export class SettingsPage {
         this.profile.data.birthday = data2.data.birthday;
         this.profile.data.country_id = data2.data.country_id;
         this.profile.data.sub_country_id = data2.data.sub_country_id;
+
+        if(data2.data.language==="zh")
+        {
+          this.isChi = true;
+        }
+        else
+        {
+          this.isChi = false;
+        }
         
       // setValue: With setValue, you assign every form control value at once by passing in a data object whose properties exactly match the form model behind the FormGroup.
       // patchValue: With patchValue, you can assign values to specific controls in a FormGroup by supplying an object of key/value pairs for just the controls of interest.
@@ -201,15 +210,7 @@ export class SettingsPage {
 
       this.settingsForm.get('language').valueChanges.subscribe((lang) => {
         this.setLanguage(lang);
-        this.setProfileUserId(lang.code);
-        if(lang==="zh")
-        {
-          this.isChi = true;
-        }
-        else
-        {
-          this.isChi = false;
-        }
+        this.setProfileUserId(lang.code);       
       });
     }
     else{

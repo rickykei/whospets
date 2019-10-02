@@ -143,24 +143,24 @@ export class PetinfoPage {
   {
     if(this.isChi)
     {
-      if(this.pet.size=='S')
+      if(this.pet.size=='S'|| this.pet.size=='s')
       {
         this.pet.size='細';
       }
-      else if(this.pet.size=='M')
+      else if(this.pet.size=='M' || this.pet.size=='m')
       {
         this.pet.size='中';
       }
-      else if(this.pet.size=='L')
+      else if(this.pet.size=='L'|| this.pet.size=='l')
       {
         this.pet.size='大';
       }
 
-      if(this.pet.gender=='f')
+      if(this.pet.gender=='f' || this.pet.gender=='F')
       {
         this.pet.gender='女';
       }
-      else if(this.pet.gender=='m')
+      else if(this.pet.gender=='m'|| this.pet.gender=='M')
       {
         this.pet.gender='男';
       }
