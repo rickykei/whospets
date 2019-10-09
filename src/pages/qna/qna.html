@@ -33,6 +33,27 @@
 
   <ion-card class="user-details" *ngFor="let pet of details" >
     
+      <ion-row>
+          <ion-col width-80>
+            <ion-item>
+                <ion-avatar item-start>
+                  <img src="./assets/images/profile/default48.jpg">
+                  <!-- <img src=src="{{pet.postuserimage}}"> -->
+                </ion-avatar>
+                <h2>Marty McFly</h2>
+                <!-- <h2>{{pet.postusername}}</h2> -->
+                <!--<p>November 5, 1955</p>             -->
+              </ion-item>
+          </ion-col>
+          <ion-col width-20>
+              <ion-item >
+                  <ion-button icon-only (click)="showReactions($event)" >
+                      <ion-icon name='more'></ion-icon>
+                  </ion-button>
+                </ion-item>
+          </ion-col>           
+        </ion-row>
+
 
        <preload-image [ratio]="{w:3, h:2}" src="{{pet.image}}"  title="pet.title"  (click)="detailPost(pet)"></preload-image>
 

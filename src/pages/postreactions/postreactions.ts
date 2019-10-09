@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, Events } from 'ionic-angular';
 
 /**
  * Generated class for the PostreactionsPage page.
@@ -14,7 +14,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 })
 export class PostreactionsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,  private viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,  private viewCtrl: ViewController, public event: Events) {
   }
 
   ionViewDidLoad() {
@@ -22,6 +22,7 @@ export class PostreactionsPage {
   }
 
   report(){
+    this.event.publish('user:back');
     this.viewCtrl.dismiss();
   }
 

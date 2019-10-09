@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, PopoverController } from 'ionic-angular';
 
 import { ProfilePage } from '../profile/profile';
 import 'rxjs/Rx';
@@ -12,6 +12,7 @@ import { NativeStorage } from '../../../node_modules/@ionic-native/native-storag
 import { PetinfoPage } from '../petinfo/petinfo';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { CommentpetPage } from '../commentpet/commentpet';
+import { PostreactionsPage } from '../postreactions/postreactions';
 
 @Component({
   selector: 'feed-page',
@@ -34,7 +35,8 @@ export class FeedPage {
     public navParams: NavParams,
     public PagesDisplayServiceProvider:PagesDisplayServiceProvider,
     public socialSharing: SocialSharing,
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController,    
+    private popoverCtrl: PopoverController,
     public events:Events) {   
      
       events.subscribe('user:back', () =>
@@ -195,5 +197,14 @@ export class FeedPage {
 //   {
 //     this.loading.dismiss();
 //   }
+
+showReactions(ev){
+  let reactions = this.popoverCtrl.create(PostreactionsPage);
+
+  reactions.present({
+      ev: ev
+  });
+}
+
   
 }

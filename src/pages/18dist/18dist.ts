@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, Events } from 'ionic-angular';
 import { ListingItemModel } from '../listing/listing.model';
 import { ProfileService } from '../profile/profile.service';
 import { FeedPostModel } from '../feed/feed.model';
@@ -8,6 +8,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { PetinfoPage } from '../petinfo/petinfo';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { CommentpetPage } from '../commentpet/commentpet';
+import { PostreactionsPage } from '../postreactions/postreactions';
 
 /**
  * Generated class for the 18distPage page.
@@ -37,8 +38,16 @@ export class Dist18Page {
     , public profileService: ProfileService
     ,public PagesDisplayServiceProvider:PagesDisplayServiceProvider
     ,public socialSharing: SocialSharing
-    ,public nativeStorage:NativeStorage
-    ) {
+    ,public nativeStorage:NativeStorage,
+    private popoverCtrl: PopoverController,
+    public events:Events) {   
+     
+      events.subscribe('user:back', () =>
+    {    
+      console.log('user:back');   
+      this.getContent();
+    });
+
     this._popular = this.navParams.get('popular');
     console.log("array1: "+ this._popular.group_ids[0]);
     console.log("array1 , length: "+ this._popular.group_ids.length);
@@ -164,5 +173,13 @@ export class Dist18Page {
 //   {
 //     this.loading.dismiss();
 //   }
+
+  showReactions(ev){
+    let reactions = this.popoverCtrl.create(PostreactionsPage);
+
+    reactions.present({
+        ev: ev
+    });
+  }
 
 }

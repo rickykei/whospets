@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, PopoverController } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { SetQnaPage } from '../set-qna/set-qna';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
@@ -7,6 +7,7 @@ import { PagesDisplayServiceProvider } from '../display/display.services';
 import { PostInfoPage } from '../post-info/post-info';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { CommentPage } from '../comment/comment';
+import { PostreactionsPage } from '../postreactions/postreactions';
 
 /**
  * Generated class for the QnaPage page.
@@ -41,6 +42,7 @@ export class QnaPage {
    public navParams: NavParams,
    public socialSharing: SocialSharing,
    public loadingCtrl: LoadingController,
+   private popoverCtrl: PopoverController,
    public events:Events) {   
     
      events.subscribe('user:back', () =>
@@ -238,5 +240,14 @@ export class QnaPage {
   // {
   //   this.loading.dismiss();
   // }
+
+  showReactions(ev){
+    let reactions = this.popoverCtrl.create(PostreactionsPage);
+
+    reactions.present({
+        ev: ev
+    });
+  }
+
   
 }

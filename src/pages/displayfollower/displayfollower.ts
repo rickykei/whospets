@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, PopoverController } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { PagesDisplayServiceProvider } from '../display/display.services';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
@@ -9,6 +9,7 @@ import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharin
 import { CommentPage } from '../comment/comment';
 import { PetinfoPage } from '../petinfo/petinfo';
 import { CommentpetPage } from '../commentpet/commentpet';
+import { PostreactionsPage } from '../postreactions/postreactions';
 
 /**
  * Generated class for the DisplayfollowerPage page.
@@ -43,6 +44,7 @@ export class DisplayfollowerPage {
     public navParams: NavParams,
     public socialSharing: SocialSharing,
     public loadingCtrl: LoadingController,
+    private popoverCtrl: PopoverController,
     public events:Events) {   
      
       events.subscribe('user:back', () =>
@@ -232,6 +234,14 @@ export class DisplayfollowerPage {
     setTimeout(() => {
       this.loading.dismiss();//显示多久消失
   }, 2000);
+  }
+
+  showReactions(ev){
+    let reactions = this.popoverCtrl.create(PostreactionsPage);
+  
+    reactions.present({
+        ev: ev
+    });
   }
 
 }
