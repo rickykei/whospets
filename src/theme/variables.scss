@@ -113,3 +113,21 @@ $colors: (
 $ionicons-font-path: "../assets/fonts";
 @import "ionic.ionicons";
 $app-direction: multi; 
+
+
+//------------------------
+// Reactions
+//------------------------
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+$popover-ios-width: 25%;
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+
+$popover-md-width: 25%;
+

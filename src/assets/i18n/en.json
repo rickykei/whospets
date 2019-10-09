@@ -197,5 +197,6 @@
   "GENDER_F":"F",
   "SIZE_S":"S",
   "SIZE_M":"M",
-  "SIZE_L":"L"
+  "SIZE_L":"L",
+  "REPORT":"Report ..."
 }

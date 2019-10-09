@@ -15,6 +15,23 @@ page-display {
 				letter-spacing: 1.1px;
 				color: $theme-color-2;
 			}
+
+			.topbanner
+			{
+				margin: 2px;
+				margin-bottom: 2px;
+				padding: 0px;
+				letter-spacing: 1.1px;
+				color: $theme-color-2;
+			}
+
+			.user-image
+			{
+				border-radius: 50%;
+			}
+
 		}
-	}
+
+		
+	}	
 }

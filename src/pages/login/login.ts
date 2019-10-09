@@ -90,8 +90,9 @@ export class LoginPage {
         this.language = (data2.data.language == 'en'? this.languages[0]:this.languages[1]);
 
         this.setEmailUser(this.email.value, this.password.value, '');
-        this.setProfileUserId(data2.data.id +'',data2.data.language+'') ;
+        this.setProfileUserId(data2.data.id +'',data2.data.language+'', false) ;
         this.setLanguage(this.language);
+        
 
         this.nav.push(TabsNavigationPage);//ProfilePage);
 
@@ -119,14 +120,15 @@ export class LoginPage {
       this.translate.use(language_to_set);
     }
 
-    setProfileUserId( _userid : string, _language:string )
+    setProfileUserId( _userid : string, _language:string, isFBLogin:boolean )
     {
       console.log('profile_user_id :' + _userid);
 
       this.nativeStorage.setItem('profile_user_id',
       {
         profile_user_id : _userid,
-        profile_language: _language
+        profile_language: _language,
+        profile_isFBuser : isFBLogin
       })
       .then(
         () =>  console.log('profile_user_id ： Stored item!'),
@@ -168,7 +170,7 @@ export class LoginPage {
       console.log("data.name:"+data.name);
       this.language = (data.language == 'en'? this.languages[0]:this.languages[1]);
 
-      this.setProfileUserId(data.userId +'', data.language);
+      this.setProfileUserId(data.userId +'', data.language, true);
       this.setLanguage(this.language);
 
        this.setEmailUser(data.email, '', data.userId);

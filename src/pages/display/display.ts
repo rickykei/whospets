@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, PopoverController } from 'ionic-angular';
 import { PetDetailsModel, PetModel } from '../profile/profile.model';
 import { NativeStorage } from '../../../node_modules/@ionic-native/native-storage';
 import { PagesDisplayServiceProvider } from './display.services';
@@ -7,6 +7,7 @@ import { AddpostPage } from '../addpost/addpost';
 import { PostInfoPage } from '../post-info/post-info';
 import { SocialSharing } from '../../../node_modules/@ionic-native/social-sharing';
 import { CommentPage } from '../comment/comment';
+import { PostreactionsPage } from '../postreactions/postreactions';
 
 /**
  * Generated class for the DisplayPage page.
@@ -32,6 +33,8 @@ export class DisplayPage {
   likevalue : number;
   dislikevalue : number;
   //totalpost:number;
+  isFBuser: boolean = false;
+  user_name: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -40,6 +43,7 @@ export class DisplayPage {
     public navParams: NavParams,
     public socialSharing: SocialSharing,
     public loadingCtrl: LoadingController,
+    private popoverCtrl: PopoverController,
     public events:Events) {   
      
       events.subscribe('user:back', () =>
@@ -80,6 +84,8 @@ export class DisplayPage {
   .then(data => {
       this.user_id = data.profile_user_id;
        console.log(data.profile_user_id);   
+       this.isFBuser = data.profile_isFBuser;   
+       this.user_name = data.profile_user_name;   
     });
   } 
 
@@ -234,6 +240,14 @@ export class DisplayPage {
     setTimeout(() => {
       this.loading.dismiss();//显示多久消失
   }, 2000);
+  }
+
+  showReactions(ev){
+    let reactions = this.popoverCtrl.create(PostreactionsPage);
+
+    reactions.present({
+        ev: ev
+    });
   }
 
   
