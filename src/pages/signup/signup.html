@@ -35,12 +35,9 @@
   <ion-row>      
      <p class="legal-stuff">
         <ion-checkbox color="secondary" [checked]="isToggled" (ionChange)="notify()"></ion-checkbox>         
-        {{'AGREEMENT_TEXT' | translate}} <a class="legal-action" (click)="showPrivacyModal()" >{{'PRIVACY_POLICY' | translate}}</a> {{'AND' | translate}} <a class="legal-action" (click)="showTermsModal()">{{'TERMS_OF_USE' | translate}}</a>
+        {{'AGREEMENT_TEXT' | translate}} <a class="legal-action" (click)="showTermsModal()">{{'TERMS_OF_USE' | translate}}</a>
+        <!--<a class="legal-action" (click)="showPrivacyModal()" >{{'PRIVACY_POLICY' | translate}}</a> {{'AND' | translate}}-->
       </p>
-     <!-- <ion-item class="legal-stuff">
-          <ion-label class="legal-stuff">I accept the conditions of use</ion-label> 
-          <ion-toggle color="secondary" [checked]="isToggled" (ionChange)="notify()"></ion-toggle>         
-     </ion-item> -->
   </ion-row>
 
   
