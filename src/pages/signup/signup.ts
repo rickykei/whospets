@@ -35,6 +35,8 @@ export class SignupPage {
   username: AbstractControl;
   fbusermodel: FacebookUserModel = new FacebookUserModel();
 
+  isToggled: boolean = false;
+
   constructor(
     public nav: NavController,
     public modal: ModalController,
@@ -143,7 +145,9 @@ export class SignupPage {
   }
 
 
-
+  notify() {
+    this.isToggled = !this.isToggled;
+  }  
 
 
  // doSignup(){

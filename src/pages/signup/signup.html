@@ -5,6 +5,8 @@
 </ion-header>
 
 <ion-content class="signup-content auth-content">
+
+
   <h2 class="auth-title">{{'CREATE_AN_ACCOUNT' | translate}}</h2>
   <form class="signup-form auth-form" [formGroup]="signup" (ngSubmit)="doSignup()">
       <ion-item>
@@ -23,13 +25,23 @@
         <ion-input type="password" placeholder="Confirm password" formControlName="confirm_password" show-hide-input></ion-input>
       </ion-item>
     </show-hide-container>
-    <button ion-button block class="auth-action-button signup-button" type="submit" [disabled]="!signup.valid">{{'SIGN_UP' | translate}}</button>
+    <button ion-button block class="auth-action-button signup-button" type="submit" [disabled]="!signup.valid && !isToggled">{{'SIGN_UP' | translate}}</button>
   </form>
+
   <p class="auth-divider">
     Or
   </p>
-  <button ion-button block class="facebook-auth-button" (click)="doFacebookSignup()">{{'SIGN_UP_WITH_FACEBOOK' | translate}}</button>
-  <p class="legal-stuff">
-    {{'AGREEMENT_TEXT' | translate}} <a class="legal-action" (click)="showPrivacyModal()">{{'PRIVACY_POLICY' | translate}}</a> {{'AND' | translate}} <a class="legal-action" (click)="showTermsModal()">{{'TERMS_OF_USE' | translate}}</a>
-  </p>
+  <button ion-button block class="facebook-auth-button" (click)="doFacebookSignup()" [disabled]="!isToggled">{{'SIGN_UP_WITH_FACEBOOK' | translate}}</button>
+  <ion-row>      
+     <p class="legal-stuff">
+        <ion-checkbox color="secondary" [checked]="isToggled" (ionChange)="notify()"></ion-checkbox>         
+        {{'AGREEMENT_TEXT' | translate}} <a class="legal-action" (click)="showPrivacyModal()" >{{'PRIVACY_POLICY' | translate}}</a> {{'AND' | translate}} <a class="legal-action" (click)="showTermsModal()">{{'TERMS_OF_USE' | translate}}</a>
+      </p>
+     <!-- <ion-item class="legal-stuff">
+          <ion-label class="legal-stuff">I accept the conditions of use</ion-label> 
+          <ion-toggle color="secondary" [checked]="isToggled" (ionChange)="notify()"></ion-toggle>         
+     </ion-item> -->
+  </ion-row>
+
+  
 </ion-content>
