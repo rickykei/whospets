@@ -79,9 +79,12 @@
             <p class="item-text">
                 <b> {{'PET_ID' | translate}}</b> :  {{pet.pet_id}}
               </p>
-            <p class="item-text">
+            <p class="item-text" *ngIf="!isChi">
                 <b> {{'GENDER' | translate}}</b> : {{pet.gender}}
-            </p>           
+            </p>    
+            <p class="item-text" *ngIf="isChi">
+              <b> {{'GENDER' | translate}}</b> : {{pet.gender_zh}}
+          </p>           
             <p class="item-text">
                 <b> {{'DATE_OF_BORN' | translate}}</b> : {{pet.date_born}}
             </p> 
@@ -113,12 +116,18 @@
                 <b> {{'PET_COLOR' | translate}}</b> :  {{pet.color_zh}}
             </p>
             
-            <p class="item-text">
+            <p class="item-text"  *ngIf="!isChi">
                 <b> {{'SIZE' | translate}}</b> :  {{pet.size}}
             </p>
-            <p class="item-text">
+            <p class="item-text"  *ngIf="isChi">
+              <b> {{'SIZE' | translate}}</b> :  {{pet.size_zh}}
+            </p>
+
+            <p class="item-text" >
                 <b> {{'PET_WEIGHT' | translate}}</b> :  {{pet.weight}}
             </p>
+
+           
             <p class="item-text">
                 <b> {{'PET_HEIGHT' | translate}}</b> :  {{pet.height}}
             </p>
