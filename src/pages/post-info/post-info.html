@@ -59,11 +59,24 @@
 
             
              <ion-card-content *ngIf="tablename == 'app_sell'">
-                <p class="item-text">
+                <!-- <p class="item-text">
                     {{'COUNTRY' | translate}} :  {{post.country_title}}
                 </p>
                 <p class="item-text">
                     {{'SUBCOUNTRY' | translate}} :  {{post.subcountry_title}}
+                </p> -->
+                <p class="item-text" *ngIf="!isChi">
+                  <b> {{'COUNTRY' | translate}}</b> :  {{post.country_title}}
+              </p>
+              <p class="item-text" *ngIf="!isChi">
+                <b> {{'SUBCOUNTRY' | translate}}</b> :  {{post.subcountry_title}}
+                </p>
+  
+                <p class="item-text" *ngIf="isChi">
+                  <b> {{'COUNTRY' | translate}}</b> :  {{post.country_title_zh}}
+              </p>
+              <p class="item-text" *ngIf="isChi">
+                <b> {{'SUBCOUNTRY' | translate}}</b> :  {{post.subcountry_title_zh}}
                 </p>
                 <p class="item-text">
                     {{'PRICE' | translate}} :  {{post.price}}
