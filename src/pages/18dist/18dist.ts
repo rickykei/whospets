@@ -177,7 +177,7 @@ export class Dist18Page {
 //   }
 
   showReactions(ev, post){  
-    let reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.product_id, app_table:'shop_products', block_user_id:post.postuserid});
+    let reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.product_id, app_table:'shop_products', block_user_id:post.user_id});
     reactions.present({
         ev: ev
     });
