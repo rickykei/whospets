@@ -199,5 +199,7 @@
   "SIZE_M":"M",
   "SIZE_L":"L",
   "REPORT":"Report...",
-  "BLACKLIST" : "Blocked"
+  "BLACKLIST" : "Blocked",
+  "BLACKLISTBTN" : "Block"
+
 }
