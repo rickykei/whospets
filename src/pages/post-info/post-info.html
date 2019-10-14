@@ -87,9 +87,13 @@
                 <p class="item-text">
                     {{'WEIGHT' | translate}} :  {{post.weight}}
                 </p>
-                <p class="item-text">
+                <p class="item-text" *ngIf="!isChi">
                     {{'SIZE' | translate}} :  {{post.size}}
                 </p>
+                <p class="item-text" *ngIf="isChi">
+                  {{'SIZE' | translate}} :  {{post.size_zh}}
+              </p>
+
              </ion-card-content>
 
              <ion-card-content *ngIf="tablename == 'app_post'">

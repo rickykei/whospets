@@ -161,15 +161,15 @@ export class PostInfoPage {
     {
       if(this.post.size=='S'|| this.post.size=='s')
       {
-        this.post.size='細';
+        this.post.size_zh='細';
       }
       else if(this.post.size=='M' || this.post.size=='m')
       {
-        this.post.size='中';
+        this.post.size_zh='中';
       }
       else if(this.post.size=='L'|| this.post.size=='l')
       {
-        this.post.size='大';
+        this.post.size_zh='大';
       }
     }
   }

@@ -132,6 +132,7 @@ export class PetDetailsModel{
         color_zh:string;
         condition:string;
         size:string;
+        size_zh:string;
         quantity:number;
         view:string;
         created:DateTime;
@@ -157,6 +158,7 @@ export class PetDetailsModel{
         questions:string;
         pet_id:string;
         gender:string;
+        gender_zh:string;
         country_id:string;
         sub_country_id:string;
         image:string;
