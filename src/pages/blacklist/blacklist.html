@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'BLACKLIST' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="followers-content">
+  <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
+  <!-- <ion-searchbar placeholder="Search" [showCancelButton]="true" cancelButtonText="Cancel" (search)="onSearch($event)" (ionCancel)="onCancel($event)" (ionClear)="clearSearch($event)"></ion-searchbar> -->
+
+  <ion-list class="followers-list">
+    <ion-item class="list-item" *ngFor="let item of list">
+      <ion-thumbnail item-left>
+        <preload-image [ratio]="{w:1, h:1}" [src]="item.image" alt="item.username" title="item.username"></preload-image>
+      </ion-thumbnail>
+     <h2 class="item-title">{{item.username}}</h2>
+      <!-- <p class="item-description" rows="2">{{item.about}}</p> -->
+      <button class="relation-button" ion-button clear icon-only item-right (click)="removeBlacklist(item)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

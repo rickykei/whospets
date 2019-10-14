@@ -15,6 +15,7 @@ import { PagesDisplayServiceProvider } from '../display/display.services';
 import { AddpetPage } from '../addpet/addpet';
 import { TabsAllsetpostPage } from '../tabs-allsetpost/tabs-allsetpost';
 import { FollowersPage } from '../followers/followers';
+import { BlacklistPage } from '../blacklist/blacklist';
 
 
 @Component({
@@ -252,6 +253,12 @@ export class ProfilePage {
     this.navCtrl.push(FollowersPage, {
       list: this.profile.following, type:'following'
     });
+  }
+
+  goToBlackList()
+  {
+    this.menu.close();
+    this.navCtrl.push(BlacklistPage);
   }
 
   getfollowers(){

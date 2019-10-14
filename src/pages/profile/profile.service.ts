@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { ProfileModel, CountryIdModel, PetModel, LoginModel, SearchUserModel } from './profile.model';
+import { ProfileModel, CountryIdModel, PetModel, LoginModel, SearchUserModel, SearchBlacklistModel } from './profile.model';
 
 import { FacebookLoginService } from '../facebook-login/facebook-login.service';
 import { FeedModel } from "../feed/feed.model";
@@ -31,6 +31,15 @@ export class ProfileService {
      .then(response => response.json() as SearchUserModel)
      .catch(this.handleError);
   }
+
+  getBlacklistPostUserData(url:string): Promise<SearchBlacklistModel> {
+    return this.http.get(url)//('./assets/example_data/profile.json')
+     .toPromise()
+     .then(response => response.json() as SearchBlacklistModel)
+     .catch(this.handleError);
+  }
+
+  
 
   getLoginData(url:string):Promise<LoginModel> {
     return this.http.get(url)

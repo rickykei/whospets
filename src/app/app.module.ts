@@ -56,6 +56,7 @@ import { Dist18Page } from '../pages/18dist/18dist';
 import {DisplayfollowerPage} from '../pages/displayfollower/displayfollower';
 import { SearchPage } from '../pages/search/search';
 import {PostreactionsPage} from '../pages/postreactions/postreactions';
+import {BlacklistPage} from '../pages/blacklist/blacklist';
 
 //firebase integration
 import { FirebaseFeedPage } from '../pages/firebase-integration/firebase-feed/firebase-feed';
@@ -187,6 +188,7 @@ export function createTranslateLoader(http: HttpClient) {
     DisplayfollowerPage,
     SearchPage,
     PostreactionsPage,
+    BlacklistPage,
 
     //functionalities
     MapsPage,
@@ -300,6 +302,7 @@ export function createTranslateLoader(http: HttpClient) {
     DisplayfollowerPage,
     SearchPage,
     PostreactionsPage,
+    BlacklistPage,
 
     //firebase integration
     FirebaseFeedPage,

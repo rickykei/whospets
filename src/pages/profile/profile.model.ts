@@ -34,12 +34,14 @@ export class FollowerModel {
   followed:string;
   image: string;
   isfollowed:boolean;
-  // location: string;
-  // about: string;
-  // email: string;
-  // phone: string;
-  // name: string;
-  // website: string;
+}
+
+export class BlacklistModel {
+  block_user_id: string;
+  firstname:string;
+  lastname:string;
+  fb_id:string;
+  image: string;
 }
 
 export class ResponseModel {
@@ -89,6 +91,11 @@ export class ProfileModel {
 export class SearchUserModel {
   success : string;
   data: Array<FollowerModel> = [];
+}
+
+export class SearchBlacklistModel {
+  success : string;
+  data: Array<BlacklistModel> = [];
 }
 
 export class CountryIdModel{
