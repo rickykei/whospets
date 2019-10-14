@@ -96,7 +96,7 @@ export class DisplayPage {
 
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllPost(100,0)
+      this.PagesDisplayServiceProvider.getAllPost(this.user_id,100,0)
       .then(response => {
         //this.petModel = response; 
         this.details = response.data;  
@@ -141,7 +141,7 @@ export class DisplayPage {
     setTimeout(() => {
        if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllPost(100,this.details.length)//this.totalpost)
+      this.PagesDisplayServiceProvider.getAllPost(this.user_id,100,this.details.length)//this.totalpost)
       .then(response => {
         //this.petModel = response; 
         if(response.success==='true')

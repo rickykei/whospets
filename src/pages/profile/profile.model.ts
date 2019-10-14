@@ -37,6 +37,7 @@ export class FollowerModel {
 }
 
 export class BlacklistModel {
+  username:string;
   block_user_id: string;
   firstname:string;
   lastname:string;

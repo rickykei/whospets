@@ -100,7 +100,7 @@ export class DisplaySellPage{
     this.showLoader();
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllSell(100,0)
+      this.PagesDisplayServiceProvider.getAllSell(this.user_id,100,0)
       .then(response => {
        this.details = response.data;
        this.loading.dismiss();//显示多久消失
@@ -136,7 +136,7 @@ export class DisplaySellPage{
     setTimeout(() => {
      if(this.getall===true)
       {
-        this.PagesDisplayServiceProvider.getAllSell(100,this.details.length)
+        this.PagesDisplayServiceProvider.getAllSell(this.user_id,100,this.details.length)
         .then(response => {
           //this.petModel = response; 
           if(response.success==='true')

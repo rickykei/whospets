@@ -101,7 +101,7 @@ export class QnaPage {
     this.showLoader();
     if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllQnA(100,0)
+      this.PagesDisplayServiceProvider.getAllQnA(this.user_id,100,0)
       .then(response => {
         this.details = response.data;
       //   for(let i=0; i<response.data.length; i++) {
@@ -141,7 +141,7 @@ export class QnaPage {
     setTimeout(() => {
      if(this.getall===true)
     {
-      this.PagesDisplayServiceProvider.getAllQnA(100,this.details.length)
+      this.PagesDisplayServiceProvider.getAllQnA(this.user_id,100,this.details.length)
       .then(response => {
         if(response.success==='true')
         {

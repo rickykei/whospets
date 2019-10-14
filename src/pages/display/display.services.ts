@@ -107,27 +107,27 @@ export class PagesDisplayServiceProvider {
   
   }
 
-  getAllPost(limit,offset):Promise<PetModel>
+  getAllPost(user_id:string,limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_lifestyles.php?limit='+limit+'&offset='+offset)
+      return this.http.get('http://api.whospets.com/api/categories/get_all_lifestyles.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
   
   }
 
-  getAllSell(limit,offset):Promise<PetModel>
+  getAllSell(user_id:string,limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_sells.php?limit='+limit+'&offset='+offset)
+      return this.http.get('http://api.whospets.com/api/categories/get_all_sells.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
   
   }
 
-  getAllQnA(limit,offset):Promise<PetModel>
+  getAllQnA(user_id:string,limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_qnas.php?limit='+limit+'&offset='+offset)
+      return this.http.get('http://api.whospets.com/api/categories/get_all_qnas.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
