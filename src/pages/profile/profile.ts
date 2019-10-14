@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController, App, NavParams, NavController, Events, SegmentButton } from 'ionic-angular';
 import { SettingsPage } from '../settings/settings';
-import { ProfileModel, PetModel, PetDetailsModel } from './profile.model';
+import { ProfileModel, PetModel, PetDetailsModel, BlacklistModel } from './profile.model';
 import { ProfileService } from './profile.service';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -25,6 +25,8 @@ import { BlacklistPage } from '../blacklist/blacklist';
 export class ProfilePage {
   display: string;
   profile: ProfileModel = new ProfileModel();
+  blacklist: Array<BlacklistModel> = [];
+
   status:string;
   pet: PetModel = new PetModel();
   petstatus:string;
@@ -58,8 +60,8 @@ export class ProfilePage {
   ionViewDidEnter()
   {
     console.log('ionViewDidEnter');
-
   }
+
   ionViewWillEnter()
   {
     console.log('ionViewWillEnter');
@@ -70,6 +72,7 @@ export class ProfilePage {
        // this.loadData();
        this.getfollowers();
        this.getfollowing();
+       this.getBlackList();
       });
   }
 
@@ -157,6 +160,25 @@ export class ProfilePage {
       });
   
     }
+
+    getBlackList(){
+
+      var url ='http://api.whospets.com/api/users/get_filter_user.php?user_id='+this.profile_user_id;
+      this.profileService.getBlacklistPostUserData(url)
+      .then(data2 => {
+        console.log('..data2 :'+ data2.success);
+        this.status = data2.success;
+        if(this.status=='true')
+        {
+          this.blacklist =  data2.data;      
+        }
+        else
+        {
+          this.blacklist =  [];
+        }
+      });
+  
+    }
     
 
     loadData()
@@ -171,13 +193,16 @@ export class ProfilePage {
       });
       });
 
-  console.log('..data2 user_id getMixPost:'+  this.profile.data.user_id);
-  this.PagesDisplayServiceProvider.getMixPost( this.profile_user_id,100,0)
+    console.log('..data2 user_id getMixPost:'+  this.profile.data.user_id);
+    this.PagesDisplayServiceProvider.getMixPost( this.profile_user_id,100,0)
       .then(response => {
       this.petModel = response; 
       this.details = response.data;    
                    
       });
+
+      this.getBlackList();
+
     }
 
     setProfileUserId( _userid : string, _user_name :string , _language:string)

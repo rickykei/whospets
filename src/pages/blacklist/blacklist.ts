@@ -53,6 +53,10 @@ export class BlacklistPage {
       {
         this.list =  data2.data;      
       }
+      else
+      {
+        this.list =  [];
+      }
     });
 
   }

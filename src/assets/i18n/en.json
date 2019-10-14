@@ -32,7 +32,7 @@
   "ADD_&_SUBTRACT": "Add & subtract",
   "RATING": "Rating",
   "COLOR": "Color",
-  "FOLLOWERS": "Followers",
+  "FOLLOWERS": "Follower",
   "FORGOT_PASSWORD?": "Forgot password?",
   "RECOVER_YOUR_PASSWORD": "Recover your password",
   "RECOVER_MESSAGE": "Please enter your email address and we'll send you an email to reset your password.",
@@ -199,5 +199,5 @@
   "SIZE_M":"M",
   "SIZE_L":"L",
   "REPORT":"Report...",
-  "BLACKLIST" : "BLACKLIST"
+  "BLACKLIST" : "Blocked"
 }
