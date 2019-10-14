@@ -55,6 +55,7 @@ export class FeedPostModel {
   subcountry_title_zh :string;
   product_title:string;
   owner_pet_id:number;
+  postuserid:string;
   postusername:string;
   postuserimage:string;
 }

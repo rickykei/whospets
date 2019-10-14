@@ -236,16 +236,8 @@ export class DisplaySellPage{
   }, 2000);
   }
 
-  // showReactions(ev){
-  //   let reactions = this.popoverCtrl.create(PostreactionsPage);
-
-  //   reactions.present({
-  //       ev: ev
-  //   });
-  // }
-
   showReactions(ev, post){  
-    let reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.id, app_table:'app_sell'});
+    let reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.id, app_table:'app_sell', block_user_id:post.postuserid});
     reactions.present({
         ev: ev
     });

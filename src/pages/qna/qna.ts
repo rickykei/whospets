@@ -34,6 +34,7 @@ export class QnaPage {
 
   likevalue : number;
   dislikevalue : number;
+  postuserid: string;
 
  constructor(
    public navCtrl: NavController, 
@@ -241,16 +242,8 @@ export class QnaPage {
   //   this.loading.dismiss();
   // }
 
-  // showReactions(ev){
-  //   let reactions = this.popoverCtrl.create(PostreactionsPage);
-
-  //   reactions.present({
-  //       ev: ev
-  //   });
-  // }
-
   showReactions(ev, post){  
-    let reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.id, app_table:'app_qna'});
+    let reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.id, app_table:'app_qna', block_user_id:post.postuserid});
     reactions.present({
         ev: ev
     });

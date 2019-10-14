@@ -174,6 +174,7 @@ export class PetDetailsModel{
         owner_pet_id:number;
         pet_type:string;
         pet_type_zh:String;
+        postuserid:string;
         postusername:string;
         postuserimage:string;
         

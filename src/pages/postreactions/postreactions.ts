@@ -21,6 +21,7 @@ export class PostreactionsPage {
   user_id:String;
   content_id:String;
   app_table:String;
+  block_user_id:String;
 
 
   constructor(
@@ -34,6 +35,7 @@ export class PostreactionsPage {
       this.user_id = this.navParams.get('user_id');
       this.content_id = this.navParams.get('content_id');
       this.app_table = this.navParams.get('app_table');
+      this.block_user_id = this.navParams.get('block_user_id');
 
     }
 
@@ -43,8 +45,10 @@ export class PostreactionsPage {
 
   report(){
     this.addReport();
-    // this.event.publish('user:back');
-    // this.viewCtrl.dismiss();
+  }
+
+  blacklist(){
+    this.addBlackList();
   }
 
   addReport() {
@@ -90,6 +94,47 @@ export class PostreactionsPage {
     });
   }
 
+  addBlackList() {
+
+   
+    var url;
+    url = "http://api.whospets.com/api/users/set_filter_user.php";       
+
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    //let options = new RequestOptions({ headers: headers });
+    
+    let data=JSON.stringify({user_id:this.user_id,block_user_id:this.block_user_id
+    });
+
+    this.http.post(url,data, { headers: headers })
+    // .map(res => res.json(data))
+    //.subscribe(res => {
+      .subscribe((res:ResponseModel) => { 
+        this.postResponse = res; 
+      
+      console.log("VALUE RECEIVED: "+res);
+      if(this.postResponse.success==='true')
+      {
+        this.event.publish('user:back');
+        this.viewCtrl.dismiss();
+      }
+      else
+      {
+        alert("Fail to report : " + this.postResponse.data.message)
+        this.viewCtrl.dismiss();
+      }
+
+    }, (err) => {
+      this.viewCtrl.dismiss();
+      alert("Fail to report, please try it later.")
+    }, () =>
+    {
+      this.viewCtrl.dismiss();
+    });
+  }
 
  
 }

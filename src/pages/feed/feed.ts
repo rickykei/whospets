@@ -199,7 +199,7 @@ export class FeedPage {
 //   }
 
 showReactions(ev, post){  
-  let reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.product_id, app_table:'shop_products'});
+  let reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.product_id, app_table:'shop_products', block_user_id:post.postuserid});
   reactions.present({
       ev: ev
   });

@@ -239,7 +239,7 @@ export class DisplayfollowerPage {
   showReactions(ev, post){  
     this.getAppTable(post);
     let reactions;
-    reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.id, app_table:this.table_name});
+    reactions = this.popoverCtrl.create(PostreactionsPage,  {user_id:this.user_id, content_id:post.id, app_table:this.table_name, block_user_id:post.postuserid});
 
     reactions.present({
         ev: ev
