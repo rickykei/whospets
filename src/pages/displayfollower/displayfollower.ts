@@ -65,17 +65,17 @@ export class DisplayfollowerPage {
   {
     console.log('ionViewWillEnter Displayfollowerpage');
    
-    this.nativeStorage.getItem('profile_user_id')
-    .then(data => {
-        this.user_id = data.profile_user_id;
-         console.log(data.profile_user_id);   
-         this.getContent();
-      });
+    
     }
   
   ionViewDidLoad() {
    // console.log('ionViewDidLoad Displayfollowerpage');
-   
+    this.nativeStorage.getItem('profile_user_id')
+      .then(data => {
+          this.user_id = data.profile_user_id;
+          console.log(data.profile_user_id);   
+          this.getContent();
+        });
     
     }
 

@@ -69,7 +69,6 @@ export class ProfilePage {
     this.nativeStorage.getItem('profile_user_id')
     .then(data => {
         this.profile_user_id = data.profile_user_id;
-       // this.loadData();
        this.getfollowers();
        this.getfollowing();
        this.getBlackList();
