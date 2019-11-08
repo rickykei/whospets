@@ -22,17 +22,16 @@
   <ion-scroll scrollX="true" class="horizontal-categories">
     <ion-row class="categories-row">
       <ion-col width-30 class="horizontal-item"  *ngFor="let popular of listing.populars">
-        <preload-image *ngIf="isChi"  [ratio]="{w:1, h:1}" [src]="popular.image" title="popular.title" (click)="click18dist(popular)"></preload-image>
-        <preload-image *ngIf="!isChi"  [ratio]="{w:1, h:1}" [src]="popular.image_en" title="popular.title" (click)="click18dist(popular)"></preload-image>
+        <preload-image tappable *ngIf="isChi"  [ratio]="{w:1, h:1}" [src]="popular.image" title="popular.title" (click)="click18dist(popular)"></preload-image>
+        <preload-image tappable *ngIf="!isChi"  [ratio]="{w:1, h:1}" [src]="popular.image_en" title="popular.title" (click)="click18dist(popular)"></preload-image>
       </ion-col>
     </ion-row>
   </ion-scroll>
   <h2 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}</h2>
   <ion-row class="grid-categories">
- 
         <ion-col width-50 class="category-item" *ngFor="let category of listing.categories">
-        <preload-image *ngIf="isChi"  [ratio]="{w:1, h:1}" [src]="category.image" (click)="goToFeed(category)"></preload-image>
-        <preload-image *ngIf="!isChi" [ratio]="{w:1, h:1}" [src]="category.image_en" (click)="goToFeed(category)"></preload-image>
+        <preload-image tappable *ngIf="isChi"  [ratio]="{w:1, h:1}" [src]="category.image" (click)="goToFeed(category)"></preload-image>
+        <preload-image tappable *ngIf="!isChi" [ratio]="{w:1, h:1}" [src]="category.image_en" (click)="goToFeed(category)"></preload-image>
     </ion-col>
   </ion-row>
 </ion-content>
