@@ -1,3 +1,27 @@
+$comment-description-font-size: 16px;
+$comment-timez-font-size: 12px;
+
 page-comment {
 
+    .comment-content
+    {
+        .comment-item{
+
+            .item-description
+            {
+                letter-spacing: 0.2px;
+                color: $black-c;
+                font-size: $comment-description-font-size;
+            }
+
+            .item-time
+            {
+                letter-spacing: 0.2px;
+                color: $white-d;
+                font-size: $comment-timez-font-size;
+                float:right;
+            }
+        }
+    }
+   
 }

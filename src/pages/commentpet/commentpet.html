@@ -13,10 +13,21 @@
         <preload-image class="user-image" [ratio]="{w:1, h:1}" [src]="comment.image"></preload-image>
       </ion-avatar>
     -->
-    <ion-item class="comment-item" *ngFor="let comment of comment">
-      <h2 class="item-title">{{comment.firstname}} {{comment.lastname}} </h2>
-      <p class="item-description">{{comment.comment}}</p>
-      <ion-note class="item-time" item-right>{{comment.created_date}}</ion-note>
+    <ion-item text-wrap class="comment-item" *ngFor="let comment of comment">
+      <!-- <h2 class="item-title">{{comment.firstname}} {{comment.lastname}} </h2>
+      <p class="item-description" >{{comment.comment}}</p>
+      <ion-note class="item-time" item-right>{{comment.created_date}}</ion-note> -->
+      <div >      
+        <div class="item-title">
+          {{comment.firstname}} {{comment.lastname}}
+        </div>
+        <div class="item-description" >
+          {{comment.comment}}
+          
+          <div class="item-time"  >
+            {{comment.created_date}}
+          </div>
+        </div>
     </ion-item>
   </ion-item-group>
 </ion-content>
