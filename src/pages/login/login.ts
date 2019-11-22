@@ -75,6 +75,22 @@ export class LoginPage {
     var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password + '&device_id='+this.token;
     console.log(url);
 
+      this.doLoginLogic(url);
+    //get token end;
+    }, err =>
+    {
+      console.log('------------------- no firebase token , doLogin , ');
+      var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password + '&device_id=null';
+      console.log(url);
+        this.doLoginLogic(url);
+      }
+    );
+
+    }
+
+    doLoginLogic(url:string)
+    {
+      
     this.profileService.getLoginData(url)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);
@@ -104,10 +120,6 @@ export class LoginPage {
          alert(data2.data.message);
       }
     });
-  
-    //get token end;
-    });
-
     }
 
     setLanguage(lang: LanguageModel){
