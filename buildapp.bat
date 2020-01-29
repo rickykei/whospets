@@ -1,6 +1,7 @@
 #stephen@nfctouch.com.hk, password: pengate213
 
 #$ keytool -genkey -v -keystore com.whospets.aos.keystore -alias com.whospets.aos -keyalg RSA -keysize 2048 -validity 10000
+#$ cordova plugin add cordova-plugin-facebook4 --save --variable APP_ID="1205825196113953" --variable APP_NAME="whospets"
 
 
 ionic cordova build android --release
