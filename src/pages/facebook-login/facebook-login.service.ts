@@ -62,7 +62,7 @@ export class FacebookLoginService {
     return new Promise<FacebookUserModel>((resolve, reject) => {
       //["public_profile"] is the array of permissions, you can add more if you need
 
-      this.fb.login(["public_profile", 'user_friends', "email"]).then((response) => {
+      this.fb.login(["public_profile", "email"]).then((response) => {
         var id = response.authResponse.userID;
 
         //Getting name and gender properties

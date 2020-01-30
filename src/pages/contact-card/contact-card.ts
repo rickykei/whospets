@@ -19,13 +19,6 @@ export class ContactCardPage {
   ) {
   }
 
-  //Note: we commented this method because the Call Number plugin was unstable and causing lots of errors. If you want to use it please go: https://ionicframework.com/docs/native/call-number/
-  // call(number: string){
-  //   this.callNumber.callNumber(number, true)
-  //   .then(() => console.log('Launched dialer!'))
-  //   .catch(() => console.log('Error launching dialer'));
-  // }
-
   sendMail(){
     //for more option please go here: http://ionicframework.com/docs/native/email-composer/
      let email = {
