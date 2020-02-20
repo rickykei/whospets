@@ -44,3 +44,5 @@ ion2FullApp-ELITE-version.zip
 *.zip
 config.xml
 config.xml
+.bak
+.keystore
