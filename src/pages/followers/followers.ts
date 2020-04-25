@@ -75,7 +75,7 @@ export class FollowersPage {
     this.showLoader();
 
     console.info(event.target.value);
-    var url ='http://api.whospets.com/api/users/get_username.php?user_id='+this.user_id+'&username='+event.target.value;
+    var url ='https://api.whospets.com/api/users/get_username.php?user_id='+this.user_id+'&username='+event.target.value;
     this.profileService.getSearchUserData(url)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);
@@ -135,7 +135,7 @@ export class FollowersPage {
 
   getfollowers(){
 
-    var url ='http://api.whospets.com/api/users/get_user_follower.php?user_id='+this.user_id;
+    var url ='https://api.whospets.com/api/users/get_user_follower.php?user_id='+this.user_id;
     this.profileService.getSearchUserData(url)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);
@@ -152,7 +152,7 @@ export class FollowersPage {
 
   getfollowing(){
 
-    var url ='http://api.whospets.com/api/users/get_user_subscribe.php?user_id='+this.user_id;
+    var url ='https://api.whospets.com/api/users/get_user_subscribe.php?user_id='+this.user_id;
     this.profileService.getSearchUserData(url)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);
@@ -193,7 +193,7 @@ export class FollowersPage {
     
     
     let data=JSON.stringify({user_id:this.user_id,subscribe_user_id:item.id});
-    this.http.post("http://api.whospets.com/api/users/set_user_subscribe.php",data, { headers: headers })
+    this.http.post("https://api.whospets.com/api/users/set_user_subscribe.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
      // this.loading.dismiss();
@@ -219,7 +219,7 @@ export class FollowersPage {
       
       
       let data=JSON.stringify({user_id:this.user_id,subscribe_user_id:item.id});
-      this.http.post("http://api.whospets.com/api/users/unset_user_subscribe.php",data, { headers: headers })
+      this.http.post("https://api.whospets.com/api/users/unset_user_subscribe.php",data, { headers: headers })
       // .map(res => res.json(data))
       .subscribe(res => {
        // this.loading.dismiss();

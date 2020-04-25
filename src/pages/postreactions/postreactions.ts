@@ -55,7 +55,7 @@ export class PostreactionsPage {
 
    
     var url;
-    url = "http://api.whospets.com/api/users/set_filter_content.php";       
+    url = "https://api.whospets.com/api/users/set_filter_content.php";       
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -98,7 +98,7 @@ export class PostreactionsPage {
 
    
     var url;
-    url = "http://api.whospets.com/api/users/set_filter_user.php";       
+    url = "https://api.whospets.com/api/users/set_filter_user.php";       
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

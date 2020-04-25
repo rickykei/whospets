@@ -346,10 +346,10 @@ export class AddpetPage {
 
       if(this.isEdit)
       {
-        url = "http://api.whospets.com/api/users/update_user_pets.php";
+        url = "https://api.whospets.com/api/users/update_user_pets.php";
       }else
       {
-        url = "http://api.whospets.com/api/users/set_user_pets.php";
+        url = "https://api.whospets.com/api/users/set_user_pets.php";
       }
 
       console.log('url : ' + url);

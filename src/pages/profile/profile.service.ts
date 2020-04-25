@@ -74,7 +74,7 @@ export class ProfileService {
 
   getPet(_email:string, user_id:string,limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/users/get_user_pets.php?username='+_email+'&user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
+      return this.http.get('https://api.whospets.com/api/users/get_user_pets.php?username='+_email+'&user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
@@ -82,7 +82,7 @@ export class ProfileService {
 
   // getSpecPet(_email:string, user_id:string, product_id:string):Promise<PetModel>
   // {
-  //     return this.http.get('http://api.whospets.com/api/users/get_user_pets.php?username='+_email+'&user_id='+user_id+'&product_id='+product_id) //('./assets/example_data/mypet.json')
+  //     return this.http.get('https://api.whospets.com/api/users/get_user_pets.php?username='+_email+'&user_id='+user_id+'&product_id='+product_id) //('./assets/example_data/mypet.json')
   //     .toPromise()
   //     .then(response => response.json() as PetModel)
   //     .catch(this.handleError);
@@ -90,13 +90,13 @@ export class ProfileService {
 
   getSpecPost(content_id:string, app_table:string):Promise<PetModel>
   {
-    return this.http.get('http://api.whospets.com/api/users/get_mix_detail.php?content_id='+content_id+'&app_table='+app_table)
+    return this.http.get('https://api.whospets.com/api/users/get_mix_detail.php?content_id='+content_id+'&app_table='+app_table)
     .toPromise()
     .then(response => response.json() as PetModel)
     .catch(this.handleError);
   }
 
-  //http://api.whospets.com/api/users/get_user_pets.php?username=rickykei@yahoo.com.hk&user_id=514&product_id=568
+  //https://api.whospets.com/api/users/get_user_pets.php?username=rickykei@yahoo.com.hk&user_id=514&product_id=568
 
   getPopularData(group_ids:string[],length,limit,offset,user_id:string): Promise<FeedModel> {
 
@@ -109,7 +109,7 @@ export class ProfileService {
         _tmpQ = _tmpQ + '&sub_country_id_array[]=' + group_ids[i];
     }
 
-    return this.http.get('http://api.whospets.com/api/categories/get_pets.php'+_tmpQ+'&limit='+limit+'&offset='+offset+'&user_id='+user_id)
+    return this.http.get('https://api.whospets.com/api/categories/get_pets.php'+_tmpQ+'&limit='+limit+'&offset='+offset+'&user_id='+user_id)
     .toPromise()
      .then(response => response.json() as FeedModel)
      .catch(this.handleError);

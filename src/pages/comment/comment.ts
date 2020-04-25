@@ -88,7 +88,7 @@ export class CommentPage {
     
     let data=JSON.stringify({user_id:this.user_id,content_id:this.content_id
       , comment:postdata.reply, table_name:this.table_name});
-    this.http.post("http://api.whospets.com/api/users/set_user_comments.php",data, { headers: headers })
+    this.http.post("https://api.whospets.com/api/users/set_user_comments.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
       this.getUserComment();

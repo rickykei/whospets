@@ -104,7 +104,8 @@ export class SignupPage {
         let data=JSON.stringify({logintype:_logintype,username:email,uid:userId,password:password,
           firstname:firstname,lastname:lastname,fb_uid:fb_uid});
          
-        this.http.post("http://api.whospets.com/api/users/signup.php",data, { headers: headers })
+         // console.log("data :" + data.toString());
+        this.http.post("https://api.whospets.com/api/users/signup.php",data, { headers: headers })
         .subscribe((res:ResponseModel) => { 
           this.postResponse = res; 
         
@@ -154,8 +155,8 @@ export class SignupPage {
   //   let data = this.signup.value;
  
   //   console.log('-------------------doSignup');
-  //   //http://api.whospets.com/api/users/signup.php?logintype=fb&username=rickykei@yahoo.com.hk&password=1234
-  //    var url = 'http://api.whospets.com/api/users/signup.php?logintype=normal&username=' + data.email + '&password='+data.password ;
+  //   //https://api.whospets.com/api/users/signup.php?logintype=fb&username=rickykei@yahoo.com.hk&password=1234
+  //    var url = 'https://api.whospets.com/api/users/signup.php?logintype=normal&username=' + data.email + '&password='+data.password ;
   //    console.log(url);
 
   //    this.http.get(url).map(res => res.json()).subscribe(data2 => {
@@ -188,8 +189,8 @@ export class SignupPage {
   //   .then(data => {
     
   //     console.log('-------------------doSignup');
-  //     //http://api.whospets.com/api/users/signup.php?logintype=fb&username=rickykei@yahoo.com.hk&password=1234
-  //      var url = 'http://api.whospets.com/api/users/signup.php?logintype=fb&username=' + data.email + '&uid='+ data.userId+ '&firstname='+data.firstname+ '&lastname='+data.lastname ;
+  //     //https://api.whospets.com/api/users/signup.php?logintype=fb&username=rickykei@yahoo.com.hk&password=1234
+  //      var url = 'https://api.whospets.com/api/users/signup.php?logintype=fb&username=' + data.email + '&uid='+ data.userId+ '&firstname='+data.firstname+ '&lastname='+data.lastname ;
   //      console.log(url);
   //      this.http.get(url).map(res => res.json()).subscribe(data2 => {
  

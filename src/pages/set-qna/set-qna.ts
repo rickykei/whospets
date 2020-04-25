@@ -173,10 +173,10 @@ export class SetQnaPage {
   
       if(this.isEdit)
       {
-        url = "http://api.whospets.com/api/users/update_user_qnas.php";
+        url = "https://api.whospets.com/api/users/update_user_qnas.php";
       }else
       {
-        url = "http://api.whospets.com/api/users/set_user_qnas.php";
+        url = "https://api.whospets.com/api/users/set_user_qnas.php";
       }
       this.showLoader();
       

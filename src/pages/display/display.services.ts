@@ -23,7 +23,7 @@ export class PagesDisplayServiceProvider {
 
   getPetComment(product_id:string):Promise<CommentModel>
   {
-    return this.http.get('http://api.whospets.com/api/users/get_pet_comments.php?product_id='+product_id) //('./assets/example_data/mypet.json')
+    return this.http.get('https://api.whospets.com/api/users/get_pet_comments.php?product_id='+product_id) //('./assets/example_data/mypet.json')
     .toPromise()
     .then(response => response.json() as CommentModel)
     .catch(this.handleError);
@@ -31,7 +31,7 @@ export class PagesDisplayServiceProvider {
  
   getUserComment(content_id:string, table_name:string):Promise<CommentModel>
   {
-    return this.http.get('http://api.whospets.com/api/users/get_user_comments.php?content_id='+content_id+'&table_name='+table_name) //('./assets/example_data/mypet.json')
+    return this.http.get('https://api.whospets.com/api/users/get_user_comments.php?content_id='+content_id+'&table_name='+table_name) //('./assets/example_data/mypet.json')
     .toPromise()
     .then(response => response.json() as CommentModel)
     .catch(this.handleError);
@@ -39,7 +39,7 @@ export class PagesDisplayServiceProvider {
  
   deletePost(url:string):Promise<PetModel>
   {
-  //http://api.whospets.com/api/users/del_user_lifestyles.php?user_id=514&content_id=61
+  //https://api.whospets.com/api/users/del_user_lifestyles.php?user_id=514&content_id=61
     return this.http.get(url) 
     .toPromise()
     .then(response => response.json() as PetModel)
@@ -48,14 +48,14 @@ export class PagesDisplayServiceProvider {
 
   getMixPost(user_id:string,limit,offset):Promise<PetModel>
   {
-    //http://api.whospets.com/api/categories/get_all_mix.php?user_id=514
-    return this.http.get('http://api.whospets.com/api/categories/get_all_mix.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
+    //https://api.whospets.com/api/categories/get_all_mix.php?user_id=514
+    return this.http.get('https://api.whospets.com/api/categories/get_all_mix.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
     .toPromise()
     .then(response => response.json() as PetModel)
     .catch(this.handleError);
   }
 
-    //http://api.whospets.com/api/users/get_user_qnas.php?user_id=501&content_id=23
+    //https://api.whospets.com/api/users/get_user_qnas.php?user_id=501&content_id=23
     getSpecPost(url:string):Promise<PetModel>
     {
       return this.http.get(url) //('./assets/example_data/mypet.json')
@@ -66,9 +66,9 @@ export class PagesDisplayServiceProvider {
 
   getPost(user_id:string,limit,offset):Promise<PetModel>
   {
-    //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
+    //https://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
   
-      return this.http.get('http://api.whospets.com/api/users/get_user_lifestyles.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
+      return this.http.get('https://api.whospets.com/api/users/get_user_lifestyles.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
@@ -77,8 +77,8 @@ export class PagesDisplayServiceProvider {
 
   getFollower(user_id:string,limit,offset):Promise<PetModel>
   {
-    //http://api.whospets.com/api/users/get_user_subscribe_mix_mix.php?user_id=514
-      return this.http.get('http://api.whospets.com/api/users/get_user_subscribe_mix_mix.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) 
+    //https://api.whospets.com/api/users/get_user_subscribe_mix_mix.php?user_id=514
+      return this.http.get('https://api.whospets.com/api/users/get_user_subscribe_mix_mix.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) 
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
@@ -87,9 +87,9 @@ export class PagesDisplayServiceProvider {
 
   getSell(user_id:string,limit,offset):Promise<PetModel>
   {
-    //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
+    //https://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
    
-      return this.http.get('http://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
+      return this.http.get('https://api.whospets.com/api/users/get_user_sells.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
@@ -98,9 +98,9 @@ export class PagesDisplayServiceProvider {
 
   getQnA(user_id:string,limit,offset):Promise<PetModel>
   {
-    //http://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
+    //https://api.whospets.com/api/users/get_user_pets.php?username=stephenfung84@yahoo.com
    
-      return this.http.get('http://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
+      return this.http.get('https://api.whospets.com/api/users/get_user_qnas.php?user_id='+user_id+'&limit='+limit+'&offset='+offset) //('./assets/example_data/mypet.json')
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
@@ -109,7 +109,7 @@ export class PagesDisplayServiceProvider {
 
   getAllPost(user_id:string,limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_lifestyles.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
+      return this.http.get('https://api.whospets.com/api/categories/get_all_lifestyles.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
@@ -118,7 +118,7 @@ export class PagesDisplayServiceProvider {
 
   getAllSell(user_id:string,limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_sells.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
+      return this.http.get('https://api.whospets.com/api/categories/get_all_sells.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
@@ -127,22 +127,22 @@ export class PagesDisplayServiceProvider {
 
   getAllQnA(user_id:string,limit,offset):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/categories/get_all_qnas.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
+      return this.http.get('https://api.whospets.com/api/categories/get_all_qnas.php?user_id='+user_id+'&limit='+limit+'&offset='+offset)
       .toPromise()
       .then(response => response.json() as PetModel)
       .catch(this.handleError);
   }
 
   /*
-  "http://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_post
+  "https://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_post
 
-http://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_sell
+https://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_sell
 
-http://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_qna"*/
+https://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=app_qna"*/
 
   setlike(userId,contentId,tablename):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/users/like.php?user_id='+userId+'&content_id='
+      return this.http.get('https://api.whospets.com/api/users/like.php?user_id='+userId+'&content_id='
               +contentId+'&table_name='+tablename)
       .toPromise()
       .then(response => response.json() as PetModel)
@@ -151,7 +151,7 @@ http://api.whospets.com/api/users/like.php?user_id=73&content_id=1&table_name=ap
 
   setdislike(userId,contentId,tablename):Promise<PetModel>
   {
-      return this.http.get('http://api.whospets.com/api/users/dislike.php?user_id='+userId+'&content_id='
+      return this.http.get('https://api.whospets.com/api/users/dislike.php?user_id='+userId+'&content_id='
               +contentId+'&table_name='+tablename)
       .toPromise()
       .then(response => response.json() as PetModel)

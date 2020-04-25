@@ -44,7 +44,7 @@ export class BlacklistPage {
 
   getBlackList(){
 
-    var url ='http://api.whospets.com/api/users/get_filter_user.php?user_id='+this.user_id;
+    var url ='https://api.whospets.com/api/users/get_filter_user.php?user_id='+this.user_id;
     this.profileService.getBlacklistPostUserData(url)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);
@@ -74,7 +74,7 @@ export class BlacklistPage {
     
     
     let data=JSON.stringify({user_id:this.user_id,block_user_id:item.block_user_id});
-    this.http.post("http://api.whospets.com/api/users/unset_filter_user.php",data, { headers: headers })
+    this.http.post("https://api.whospets.com/api/users/unset_filter_user.php",data, { headers: headers })
     // .map(res => res.json(data))
     .subscribe(res => {
      // this.loading.dismiss();

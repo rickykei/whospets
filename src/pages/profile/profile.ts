@@ -91,11 +91,11 @@ export class ProfilePage {
         if(data.uid=='')
         {   
           // normal
-          url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
+          url = 'https://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
        }
         else{
            //fb
-           url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;
+           url = 'https://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;
         
             }
        
@@ -162,7 +162,7 @@ export class ProfilePage {
 
     getBlackList(){
 
-      var url ='http://api.whospets.com/api/users/get_filter_user.php?user_id='+this.profile_user_id;
+      var url ='https://api.whospets.com/api/users/get_filter_user.php?user_id='+this.profile_user_id;
       this.profileService.getBlacklistPostUserData(url)
       .then(data2 => {
         console.log('..data2 :'+ data2.success);
@@ -287,7 +287,7 @@ export class ProfilePage {
 
   getfollowers(){
 
-    var url ='http://api.whospets.com/api/users/get_user_follower.php?user_id='+this.profile_user_id;
+    var url ='https://api.whospets.com/api/users/get_user_follower.php?user_id='+this.profile_user_id;
     this.profileService.getSearchUserData(url)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);
@@ -302,7 +302,7 @@ export class ProfilePage {
 
   getfollowing(){
 
-    var url ='http://api.whospets.com/api/users/get_user_subscribe.php?user_id='+this.profile_user_id;
+    var url ='https://api.whospets.com/api/users/get_user_subscribe.php?user_id='+this.profile_user_id;
     this.profileService.getSearchUserData(url)
     .then(data2 => {
       console.log('..data2 :'+ data2.success);

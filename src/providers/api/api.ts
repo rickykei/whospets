@@ -10,8 +10,8 @@ import { Injectable } from '@angular/core';
   and Angular DI.
 */
 
-let apiUrl = 'http://api.whospets.com/api/users/set_user_pets.php';
-let apiUrlgetimg = 'http://api.whospets.com/api/users/get_image_by_id.php';
+let apiUrl = 'https://api.whospets.com/api/users/set_user_pets.php';
+let apiUrlgetimg = 'https://api.whospets.com/api/users/get_image_by_id.php';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

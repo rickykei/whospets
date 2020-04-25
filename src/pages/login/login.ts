@@ -72,7 +72,7 @@ export class LoginPage {
        this.token = tokendata.token;
 
    console.log('-------------------doLogin');
-    var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password + '&device_id='+this.token;
+    var url = 'https://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password + '&device_id='+this.token;
     console.log(url);
 
       this.doLoginLogic(url);
@@ -80,7 +80,7 @@ export class LoginPage {
     }, err =>
     {
       console.log('------------------- no firebase token , doLogin , ');
-      var url = 'http://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password + '&device_id=null';
+      var url = 'https://api.whospets.com/api/users/login.php?logintype=normal&username=' + data.email + '&password='+data.password + '&device_id=null';
       console.log(url);
         this.doLoginLogic(url);
       }

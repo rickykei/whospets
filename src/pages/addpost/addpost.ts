@@ -171,10 +171,10 @@ export class AddpostPage {
   
         if(this.isEdit)
         {
-          url = "http://api.whospets.com/api/users/update_user_lifestyles.php";
+          url = "https://api.whospets.com/api/users/update_user_lifestyles.php";
         }else
         {
-          url = "http://api.whospets.com/api/users/set_user_lifestyles.php";
+          url = "https://api.whospets.com/api/users/set_user_lifestyles.php";
         }
   
         console.log('url : ' + url);

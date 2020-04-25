@@ -316,7 +316,7 @@ export class PetinfoPage {
   }
 
   deletePost() {
-    var url = 'http://api.whospets.com/api/users/del_user_pets.php';
+    var url = 'https://api.whospets.com/api/users/del_user_pets.php';
 
   
     let headers = new HttpHeaders();

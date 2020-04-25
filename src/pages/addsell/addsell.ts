@@ -191,10 +191,10 @@ export class AddsellPage {
   
         if(this.isEdit)
         {
-          url = "http://api.whospets.com/api/users/update_user_sells.php";
+          url = "https://api.whospets.com/api/users/update_user_sells.php";
         }else
         {
-          url = "http://api.whospets.com/api/users/set_user_sells.php";
+          url = "https://api.whospets.com/api/users/set_user_sells.php";
         }
   
         console.log('url : ' + url);

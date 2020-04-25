@@ -128,11 +128,11 @@ export class SettingsPage {
         if(data.uid=='')
         {   
         // normal
-        url = 'http://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
+        url = 'https://api.whospets.com/api/users/profile.php?logintype=normal&username='+data.email+'&password='+data.password;  
         }
         else{
          //fb
-         url = 'http://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;
+         url = 'https://api.whospets.com/api/users/profile.php?logintype=fb&username='+data.email+'&fb_uid='+data.uid;
       
           }
      
@@ -283,7 +283,7 @@ this.loading.dismiss();
     ,newsletter:(postdata.newsletter?'1':'0'), seller:(postdata.seller?'1':'0' ),
     gender:postdata.gender, birthday:postdata.birthday, bio:(postdata.bio?'1':'0') ,language:postdata.language.code,
     country_id:postdata.countryId, sub_country_id:postdata.subCountryId,avatar:this.regData.avatar});
-    this.http.post("http://api.whospets.com/api/users/createprofile.php",data, { headers: headers })
+    this.http.post("https://api.whospets.com/api/users/createprofile.php",data, { headers: headers })
     .subscribe((res:ResponseModel) => { 
       this.postResponse = res;     
       console.log("VALUE RECEIVED: "+res);

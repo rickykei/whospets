@@ -51,7 +51,7 @@ export class SearchPage {
 
   onSearch(event){
     console.info(event.target.value);
-    var url ='http://api.whospets.com/api/categories/get_pets.php?keyword='+event.target.value;
+    var url ='https://api.whospets.com/api/categories/get_pets.php?keyword='+event.target.value;
     this.getContent(url);
   }
 
